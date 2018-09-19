@@ -1,0 +1,12 @@
+[package]
+name = "improve_ntfs_with_osm"
+version = "0.1.0"
+authors = ["David Quintanel <david.quintanel@kisio.org>"]
+
+[dependencies]
+navitia_model = { git = "https://github.com/CanalTP/navitia_model" }
+structopt = "0.2.10"
+env_logger = "0.5.13"
+log = "0.4.5"
+
+[workspace]
