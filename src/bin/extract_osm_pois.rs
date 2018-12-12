@@ -17,25 +17,30 @@
 #[macro_use]
 extern crate log;
 
+use failure::ResultExt;
 use osm_tools::Result;
+use osm_utils::make_osm_reader;
+use osm_utils::poi::{pois, PoiConfig};
 use std::path::PathBuf;
 use structopt::StructOpt;
 
 #[derive(Debug, StructOpt)]
 #[structopt(
     name = "extract_osm_pois",
-    about = "Extract POIs from OSM."
+    about = "Extract POIs from OSM.",
+    rename_all = "kebab-case"
 )]
 struct Opt {
     /// OSM PBF file.
-    #[structopt(short = "i", long = "input", parse(from_os_str))]
+    #[structopt(short, long, parse(from_os_str))]
     input: PathBuf,
-    /// POI configuration.
-    #[structopt(short = "j", long = "poi-config", parse(from_os_str))]
+
+    /// POIs configuration.
+    #[structopt(short = "c", long, parse(from_os_str))]
     poi_config: Option<PathBuf>,
 
-    /// output poi file
-    #[structopt(short = "o", long = "output", parse(from_os_str))]
+    /// Output poi file.
+    #[structopt(short, long, parse(from_os_str))]
     output: PathBuf,
 }
 
@@ -44,7 +49,18 @@ fn run() -> Result<()> {
 
     let opt = Opt::from_args();
 
-    println!("{:#?}", opt);
+    let matcher = match opt.poi_config {
+        None => PoiConfig::default(),
+        Some(path) => {
+            let r = std::fs::File::open(&path)
+                .with_context(|_| format!("Error while opening configuration file {:?}", path))?;
+            PoiConfig::from_reader(r).unwrap()
+        }
+    };
+    info!("Extracting pois from osm");
+
+    let mut osm_reader = make_osm_reader(&opt.input)?;
+    let _pois = pois(&mut osm_reader, &matcher);
 
     Ok(())
 }
