@@ -59,7 +59,7 @@ fn run() -> Result<()> {
     osm_tools::improve_stop_positions::improve_with_pbf(
         &opt.geo.to_str().unwrap(),
         &mut collections,
-        opt.min_distance
+        opt.min_distance,
     )?;
     let model = Model::new(collections)?;
     navitia_model::ntfs::write(&model, opt.output)?;

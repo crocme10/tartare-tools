@@ -14,7 +14,7 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
+extern crate geo;
 extern crate navitia_model;
 extern crate osm_transit_extractor;
-extern crate geo;
 pub mod improve_stop_positions;
