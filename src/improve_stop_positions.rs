@@ -35,7 +35,6 @@ pub fn improve_with_pbf(
     let mut stop_points = collections.stop_points.take();
     let mut stop_area_ids_to_update = BTreeSet::new();
     for stop_point in stop_points.iter_mut().filter(|sp| !sp.codes.is_empty()) {
-        println!("{:?} => {:?}", stop_point.id, stop_point.codes);
         let osm_coords: Vec<Coord> = stop_point
             .codes
             .iter()
@@ -53,10 +52,8 @@ pub fn improve_with_pbf(
             })
             .collect();
         if osm_coords.is_empty() {
-            println!("stop point {:?} has no matching codes", stop_point.id);
             continue;
         }
-        println!("found {:?} coords", osm_coords.len());
         let new_coords = match osm_coords.len() {
             1 => osm_coords[0],
             _ => {
@@ -71,19 +68,12 @@ pub fn improve_with_pbf(
                 }
             }
         };
-        println!(
-            "coords: avant {:?} apres {:?}",
-            stop_point.coord, new_coords
-        );
         let sq_distance = stop_point.coord.approx().sq_distance_to(&new_coords);
-        println!("distance = {:?}", sq_distance);
         if sq_distance > sq_min_distance {
-            println!("distance min ok");
             stop_point.coord = new_coords.clone();
             stop_area_ids_to_update.insert(stop_point.stop_area_id.clone());
         }
     }
-    println!("stop_area_ids_to_update = {:?}", stop_area_ids_to_update);
     let mut stop_areas = collections.stop_areas.take();
     for stop_area_id in stop_area_ids_to_update {
         let point_list: Vec<_> = stop_points
@@ -100,10 +90,6 @@ pub fn improve_with_pbf(
             lon: centroid.x(),
             lat: centroid.y(),
         };
-        println!(
-            "centroid for stop area {:?} = {:?}",
-            stop_area_id, centroid
-        );
     }
     collections.stop_points = CollectionWithId::new(stop_points)?;
     collections.stop_areas = CollectionWithId::new(stop_areas)?;

@@ -4,8 +4,8 @@ version = "0.1.0"
 authors = ["David Quintanel <david.quintanel@kisio.org>"]
 
 [dependencies]
-navitia_model = { git = "https://github.com/CanalTP/navitia_model" }
-osm_transit_extractor = { path = "../osm-transit-extractor" }
+navitia_model = { git = "https://github.com/CanalTP/navitia_model"}
+osm_transit_extractor = { git = "https://github.com/CanalTP/osm-transit-extractor", branch = "prefix-ids-in-serialization" }
 structopt = "0.2.10"
 env_logger = "0.5.13"
 log = "0.4.5"
