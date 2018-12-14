@@ -1,10 +1,14 @@
 object_type,object_system,object_id,object_code
 stop_point,osm_stop_points_id,sp:01,node:1329813401
+stop_point,osm_stop_points_id,sp:same_distance,node:1329813401
 stop_point,osm_stop_points_id,sp:02,node:1253919792
 stop_point,osm_stop_points_id,sp:02,node:1329751966
 stop_point,osm_stop_points_id,sp:min_distance_group,node:1249329332
 stop_point,osm_stop_points_id,sp:min_distance_group,node:444323858
 stop_point,osm_stop_points_id,sp:min_distance_group,node:1329777224
+stop_point,osm_stop_points_id,sp:same_distance_group,node:1249329332
+stop_point,osm_stop_points_id,sp:same_distance_group,node:444323858
+stop_point,osm_stop_points_id,sp:same_distance_group,node:1329777224
 stop_point,osm_stop_points_id,sp:04,node:1329813417
 stop_point,osm_stop_points_id,sp:04,node:not_found_in_group
 stop_point,osm_stop_points_id,sp:04,node:444323854

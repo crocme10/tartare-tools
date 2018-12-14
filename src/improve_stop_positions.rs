@@ -20,9 +20,20 @@ use navitia_model::objects::Coord;
 use navitia_model::Result;
 use osm_transit_extractor::*;
 
-use geo::algorithm::centroid::Centroid;
-use geo::{LineString, Point};
 use std::collections::BTreeSet;
+
+fn get_centroid_from_coordinates(coordinates: Vec<Coord>) -> Coord {
+    let sum = coordinates
+        .iter()
+        .fold(Coord { lon: 0.0, lat: 0.0 }, |a, b| Coord {
+            lon: a.lon + b.lon,
+            lat: a.lat + b.lat,
+        });
+    Coord {
+        lon: sum.lon / coordinates.len() as f64,
+        lat: sum.lat / coordinates.len() as f64,
+    }
+}
 
 pub fn improve_with_pbf(
     osm_pbf_path: &str,
@@ -54,20 +65,7 @@ pub fn improve_with_pbf(
         if osm_coords.is_empty() {
             continue;
         }
-        let new_coords = match osm_coords.len() {
-            1 => osm_coords[0],
-            _ => {
-                let point_list: Vec<_> = osm_coords
-                    .iter()
-                    .map(|coords| Point::new(coords.lon, coords.lat))
-                    .collect();
-                let centroid = LineString::from(point_list).centroid().unwrap();
-                Coord {
-                    lon: centroid.x(),
-                    lat: centroid.y(),
-                }
-            }
-        };
+        let new_coords = get_centroid_from_coordinates(osm_coords);
         let sq_distance = stop_point.coord.approx().sq_distance_to(&new_coords);
         if sq_distance > sq_min_distance {
             stop_point.coord = new_coords.clone();
@@ -76,20 +74,16 @@ pub fn improve_with_pbf(
     }
     let mut stop_areas = collections.stop_areas.take();
     for stop_area_id in stop_area_ids_to_update {
-        let point_list: Vec<_> = stop_points
+        let coords: Vec<_> = stop_points
             .iter()
             .filter(|sp| sp.stop_area_id == stop_area_id)
-            .map(|sp| Point::new(sp.coord.lon, sp.coord.lat))
+            .map(|sp| sp.coord)
             .collect();
-        let centroid = LineString::from(point_list).centroid().unwrap();
         stop_areas
             .iter_mut()
             .find(|sa| sa.id == stop_area_id)
             .unwrap()
-            .coord = Coord {
-            lon: centroid.x(),
-            lat: centroid.y(),
-        };
+            .coord = get_centroid_from_coordinates(coords);
     }
     collections.stop_points = CollectionWithId::new(stop_points)?;
     collections.stop_areas = CollectionWithId::new(stop_areas)?;
