@@ -14,9 +14,11 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-use super::{get_way_coord, make_centroid, OsmPbfReader};
+use super::{get_relation_coord, get_way_coord, OsmPbfReader};
 use crate::objects;
-use osm_boundaries_utils::build_boundary;
+use log::{info, warn};
+
+use serde_derive::Deserialize;
 use serde_json;
 use std::collections::BTreeMap;
 use std::error::Error;
@@ -34,7 +36,7 @@ struct Rule {
 }
 #[derive(Deserialize, Debug)]
 pub struct PoiConfig {
-    poi_types: Vec<objects::PoiType>,
+    pub poi_types: Vec<objects::PoiType>,
     rules: Vec<Rule>,
 }
 impl Default for PoiConfig {
@@ -210,7 +212,7 @@ fn parse_poi(
         }
         osmpbfreader::OsmObj::Relation(ref relation) => (
             format_poi_id("relation", relation.id.0),
-            make_centroid(&build_boundary(relation, obj_map)),
+            get_relation_coord(obj_map, relation),
         ),
     };
 
@@ -237,7 +239,8 @@ fn format_poi_id(osm_type: &str, id: i64) -> String {
     format!("poi:osm:{}:{}", osm_type, id)
 }
 
-pub fn pois(pbf: &mut OsmPbfReader, matcher: &PoiConfig) -> Vec<objects::Poi> {
+/// Extract POIs from an OSM pbf.
+pub fn extract_pois(pbf: &mut OsmPbfReader, matcher: &PoiConfig) -> Vec<objects::Poi> {
     let objects = pbf.get_objs_and_deps(|o| matcher.is_poi(o.tags())).unwrap();
     objects
         .iter()

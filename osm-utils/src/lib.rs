@@ -17,36 +17,29 @@
 pub mod objects;
 pub mod poi;
 
+use failure;
 use geo::centroid::Centroid;
-use geo::MultiPolygon;
+use osm_boundaries_utils::build_boundary;
+use osmpbfreader;
 use std::collections::BTreeMap;
 use std::fs::File;
-#[macro_use]
-extern crate log;
-extern crate serde;
-#[macro_use]
-extern crate serde_derive;
-use failure;
-use osmpbfreader;
 use std::path::Path;
 
 pub type Error = failure::Error;
 
 pub type OsmPbfReader = osmpbfreader::OsmPbfReader<File>;
 
-pub fn make_osm_reader(path: &Path) -> Result<OsmPbfReader, Error> {
+pub fn make_osm_reader<P: AsRef<Path>>(path: P) -> Result<OsmPbfReader, Error> {
     Ok(osmpbfreader::OsmPbfReader::new(File::open(&path)?))
 }
 
+/// Returns arbitrary Coord on the way.
+/// A middle node is chosen as a better marker on a street
+/// than the first node.
 pub fn get_way_coord(
     obj_map: &BTreeMap<osmpbfreader::OsmId, osmpbfreader::OsmObj>,
     way: &osmpbfreader::objects::Way,
 ) -> objects::Coord {
-    /*
-        Returns arbitrary Coord on the way.
-        A middle node is chosen as a better marker on a street
-        than the first node.
-    */
     let nb_nodes = way.nodes.len();
     way.nodes
         .iter()
@@ -58,7 +51,12 @@ pub fn get_way_coord(
         .unwrap_or_else(objects::Coord::default)
 }
 
-pub fn make_centroid(boundary: &Option<MultiPolygon<f64>>) -> objects::Coord {
+/// Returns Coord on the relation.
+pub fn get_relation_coord(
+    obj_map: &BTreeMap<osmpbfreader::OsmId, osmpbfreader::OsmObj>,
+    relation: &osmpbfreader::objects::Relation,
+) -> objects::Coord {
+    let boundary = build_boundary(relation, obj_map);
     let coord = boundary
         .as_ref()
         .and_then(|b| b.centroid().map(|c| objects::Coord::new(c.x(), c.y())))

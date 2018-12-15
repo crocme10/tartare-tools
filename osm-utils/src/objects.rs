@@ -17,6 +17,8 @@
 // we want a custom serialization for coords, and so far the cleanest way
 // to do this that has been found is to wrap the coord in another struct
 
+use serde_derive::Deserialize;
+
 #[derive(Debug, Clone)]
 pub struct Coord(pub geo::Coordinate<f64>);
 impl Coord {
