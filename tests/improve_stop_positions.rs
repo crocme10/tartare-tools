@@ -18,6 +18,7 @@ extern crate navitia_model;
 use navitia_model::ntfs;
 use navitia_model::test_utils::*;
 use navitia_model::Model;
+use std::path::Path;
 
 #[test]
 fn test_global() {
@@ -26,7 +27,7 @@ fn test_global() {
         let model = ntfs::read(input_dir).unwrap();
         let mut collections = model.into_collections();
         osm_tools::improve_stop_positions::improve_with_pbf(
-            "./fixtures/improve-stop-positions/lemans-nodes.osm.pbf",
+            Path::new("./fixtures/improve-stop-positions/lemans-nodes.osm.pbf"),
             &mut collections,
             100.00,
         )

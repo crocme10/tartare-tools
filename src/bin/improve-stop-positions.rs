@@ -37,16 +37,16 @@ struct Opt {
     #[structopt(short, long, parse(from_os_str), default_value = ".")]
     input: PathBuf,
 
-    /// osm directory.
+    /// osm pbf file.
     #[structopt(short, long, parse(from_os_str))]
-    geo: PathBuf,
+    pbf: PathBuf,
 
     /// output directory
     #[structopt(short, long, parse(from_os_str))]
     output: PathBuf,
 
     // The min distance in meters to update the coordinates
-    #[structopt(long, short = "d")]
+    #[structopt(long, short = "d", default_value = "20")]
     min_distance: f64,
 }
 
@@ -57,7 +57,7 @@ fn run() -> Result<()> {
     let model = ntfs::read(opt.input)?;
     let mut collections = model.into_collections();
     osm_tools::improve_stop_positions::improve_with_pbf(
-        &opt.geo.to_str().unwrap(),
+        &opt.pbf,
         &mut collections,
         opt.min_distance,
     )?;

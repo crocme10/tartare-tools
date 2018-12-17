@@ -14,7 +14,13 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
+extern crate failure;
 extern crate geo;
 extern crate navitia_model;
 extern crate osm_transit_extractor;
+
 pub mod improve_stop_positions;
+/// The error type used by the crate.
+pub type Error = failure::Error;
+/// The corresponding result type used by the crate.
+pub type Result<T> = std::result::Result<T, Error>;

@@ -14,78 +14,74 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
+use failure::format_err;
+use geo::algorithm::centroid::Centroid;
+use geo::{MultiPoint, Point};
 use navitia_model::collection::CollectionWithId;
 use navitia_model::model::Collections;
 use navitia_model::objects::Coord;
-use navitia_model::Result;
 use osm_transit_extractor::*;
-
 use std::collections::BTreeSet;
+use std::collections::HashMap;
+use std::path::Path;
+use Result;
 
-fn get_centroid_from_coordinates(coordinates: Vec<Coord>) -> Coord {
-    let sum = coordinates
-        .iter()
-        .fold(Coord { lon: 0.0, lat: 0.0 }, |a, b| Coord {
-            lon: a.lon + b.lon,
-            lat: a.lat + b.lat,
-        });
+fn point_list_to_centroid_coord(point_list: Vec<Point<f64>>) -> Coord {
+    let multi_point: MultiPoint<_> = point_list.into();
+    let centroid = multi_point.centroid().unwrap();
     Coord {
-        lon: sum.lon / coordinates.len() as f64,
-        lat: sum.lat / coordinates.len() as f64,
+        lon: centroid.x(),
+        lat: centroid.y(),
     }
 }
 
 pub fn improve_with_pbf(
-    osm_pbf_path: &str,
+    osm_pbf_path: &Path,
     collections: &mut Collections,
     min_distance: f64,
 ) -> Result<()> {
-    let mut parsed_pbf = parse_osm_pbf(osm_pbf_path);
-    let osm_stop_points = get_stop_points_from_osm(&mut parsed_pbf);
-    let sq_min_distance = min_distance * min_distance;
+    let mut parsed_pbf = parse_osm_pbf(
+        osm_pbf_path
+            .to_str()
+            .ok_or_else(|| format_err!("osm pbf path is not valid"))?,
+    );
+    let osm_stop_points_map: HashMap<_, _> = get_stop_points_from_osm(&mut parsed_pbf)
+        .into_iter()
+        .map(|sp| (sp.id.clone(), sp))
+        .collect();
     let mut stop_points = collections.stop_points.take();
     let mut stop_area_ids_to_update = BTreeSet::new();
     for stop_point in stop_points.iter_mut().filter(|sp| !sp.codes.is_empty()) {
-        let osm_coords: Vec<Coord> = stop_point
+        let osm_coords: Vec<Point<f64>> = stop_point
             .codes
             .iter()
             .filter_map(|(code_type, code_value)| match code_type.as_str() {
-                "osm_stop_points_id" => osm_stop_points
-                    .iter()
-                    .find(|sp| &sp.id == code_value)
-                    .and_then(|osm_stop_point| {
-                        Some(Coord {
-                            lon: osm_stop_point.coord.lon,
-                            lat: osm_stop_point.coord.lat,
-                        })
-                    }),
+                "osm_stop_points_id" => osm_stop_points_map.get(code_value).map(|osm_stop_point| {
+                    Point::new(osm_stop_point.coord.lon, osm_stop_point.coord.lat)
+                }),
                 _ => None,
             })
             .collect();
         if osm_coords.is_empty() {
             continue;
         }
-        let new_coords = get_centroid_from_coordinates(osm_coords);
-        let sq_distance = stop_point.coord.approx().sq_distance_to(&new_coords);
-        if sq_distance > sq_min_distance {
-            stop_point.coord = new_coords.clone();
+        let new_coords = point_list_to_centroid_coord(osm_coords);
+        if stop_point.coord.distance_to(&new_coords) > min_distance {
+            stop_point.coord = new_coords;
             stop_area_ids_to_update.insert(stop_point.stop_area_id.clone());
         }
     }
-    let mut stop_areas = collections.stop_areas.take();
     for stop_area_id in stop_area_ids_to_update {
-        let coords: Vec<_> = stop_points
+        // @TODO if performance issue, use get_corresponding from navitia_model or find
+        // something else
+        let osm_coords: Vec<Point<f64>> = stop_points
             .iter()
             .filter(|sp| sp.stop_area_id == stop_area_id)
-            .map(|sp| sp.coord)
+            .map(|sp| Point::new(sp.coord.lon, sp.coord.lat))
             .collect();
-        stop_areas
-            .iter_mut()
-            .find(|sa| sa.id == stop_area_id)
-            .unwrap()
-            .coord = get_centroid_from_coordinates(coords);
+        let new_coords = point_list_to_centroid_coord(osm_coords);
+        collections.stop_areas.get_mut(&stop_area_id).unwrap().coord = new_coords;
     }
     collections.stop_points = CollectionWithId::new(stop_points)?;
-    collections.stop_areas = CollectionWithId::new(stop_areas)?;
     Ok(())
 }
