@@ -15,13 +15,12 @@
 // <http://www.gnu.org/licenses/>.
 
 use super::{get_relation_coord, get_way_coord, OsmPbfReader};
-use crate::objects;
-use log::{info, warn};
-
+use crate::{objects, Result};
+use failure::{bail, format_err};
+use log::warn;
 use serde_derive::Deserialize;
 use serde_json;
 use std::collections::BTreeMap;
-use std::error::Error;
 use std::io;
 
 #[derive(Deserialize, Debug)]
@@ -48,7 +47,7 @@ impl Default for PoiConfig {
     }
 }
 impl PoiConfig {
-    pub fn from_reader<R: io::Read>(r: R) -> Result<PoiConfig, Box<Error>> {
+    pub fn from_reader<R: io::Read>(r: R) -> Result<PoiConfig> {
         let mut res: PoiConfig = serde_json::from_reader(r)?;
         res.check()?;
         res.convert_id();
@@ -74,23 +73,17 @@ impl PoiConfig {
                     .find(|poi_type| poi_type.id == rule.poi_type_id)
             })
     }
-    pub fn check(&self) -> Result<(), Box<Error>> {
+    pub fn check(&self) -> Result<()> {
         use std::collections::BTreeSet;
         let mut ids = BTreeSet::<&str>::new();
         for poi_type in &self.poi_types {
             if !ids.insert(&poi_type.id) {
-                Err(format!(
-                    "poi_type_id {:?} present several times",
-                    poi_type.id
-                ))?;
+                bail!("poi_type_id {:?} present several times", poi_type.id);
             }
         }
         for rule in &self.rules {
             if !ids.contains(rule.poi_type_id.as_str()) {
-                Err(format!(
-                    "poi_type_id {:?} in a rule not declared",
-                    rule.poi_type_id
-                ))?;
+                bail!("poi_type_id {:?} in a rule not declared", rule.poi_type_id);
             }
         }
         Ok(())
@@ -191,42 +184,37 @@ fn parse_poi(
     osmobj: &osmpbfreader::OsmObj,
     obj_map: &BTreeMap<osmpbfreader::OsmId, osmpbfreader::OsmObj>,
     matcher: &PoiConfig,
-) -> Option<objects::Poi> {
-    let poi_type = match matcher.get_poi_type(osmobj.tags()) {
-        Some(poi_type) => poi_type,
-        None => {
-            warn!(
-                "The poi {:?} has no tags even if it passes the filters",
-                osmobj.id()
-            );
-            return None;
-        }
-    };
+) -> Result<objects::Poi> {
+    let poi_type = matcher.get_poi_type(osmobj.tags()).ok_or_else(|| {
+        format_err!(
+            "The poi {:?} has no tags even if it passes the filters",
+            osmobj.id()
+        )
+    })?;
     let (id, coord) = match *osmobj {
         osmpbfreader::OsmObj::Node(ref node) => (
             format_poi_id("node", node.id.0),
             objects::Coord::new(node.lon(), node.lat()),
         ),
         osmpbfreader::OsmObj::Way(ref way) => {
-            (format_poi_id("way", way.id.0), get_way_coord(obj_map, way))
+            (format_poi_id("way", way.id.0), get_way_coord(obj_map, way)?)
         }
         osmpbfreader::OsmObj::Relation(ref relation) => (
             format_poi_id("relation", relation.id.0),
-            get_relation_coord(obj_map, relation),
+            get_relation_coord(obj_map, relation)?,
         ),
     };
 
     let name = osmobj.tags().get("name").unwrap_or(&poi_type.name);
 
     if coord.is_default() {
-        info!(
+        bail!(
             "The poi {} is rejected, cause: could not compute coordinates.",
             id
         );
-        return None;
     }
 
-    Some(objects::Poi {
+    Ok(objects::Poi {
         id,
         name: name.to_string(),
         coord,
@@ -245,21 +233,26 @@ pub fn extract_pois(pbf: &mut OsmPbfReader, matcher: &PoiConfig) -> Vec<objects:
     objects
         .iter()
         .filter(|&(_, obj)| matcher.is_poi(obj.tags()))
-        .filter_map(|(_, obj)| parse_poi(obj, &objects, matcher))
+        .filter_map(|(_, obj)| match parse_poi(obj, &objects, matcher) {
+            Ok(poi) => Some(poi),
+            Err(err) => {
+                warn!("Error parsing POI {:?}: {}", obj.id(), err);
+                None
+            }
+        })
         .collect()
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::error::Error;
     use std::io;
 
     fn tags(v: &[(&str, &str)]) -> osmpbfreader::Tags {
         v.iter().map(|&(k, v)| (k.into(), v.into())).collect()
     }
 
-    fn from_str(s: &str) -> Result<PoiConfig, Box<Error>> {
+    fn from_str(s: &str) -> Result<PoiConfig> {
         PoiConfig::from_reader(io::Cursor::new(s))
     }
 

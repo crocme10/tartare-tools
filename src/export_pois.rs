@@ -118,11 +118,8 @@ pub fn export_pois<P: AsRef<Path>>(
     let data = get_csv_content(export_pois)?;
     write_data_to_zip(&mut zip, "pois.txt", &data)?;
 
-    let export_poi_types: BTreeSet<ExportPoiType> = matcher
-        .poi_types
-        .iter()
-        .map(|p| ExportPoiType::from(p))
-        .collect();
+    let export_poi_types: BTreeSet<ExportPoiType> =
+        matcher.poi_types.iter().map(ExportPoiType::from).collect();
     let data = get_csv_content(export_poi_types)?;
     write_data_to_zip(&mut zip, "poi_types.txt", &data)?;
 
