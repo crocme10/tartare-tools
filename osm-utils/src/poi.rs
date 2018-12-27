@@ -40,7 +40,8 @@ pub struct PoiConfig {
 }
 impl Default for PoiConfig {
     fn default() -> Self {
-        let mut res: PoiConfig = serde_json::from_str(DEFAULT_JSON_POI_TYPES).unwrap();
+        let mut res: PoiConfig =
+            serde_json::from_str(include_str!("default_pois_config.json")).unwrap();
         res.check().unwrap();
         res.convert_id();
         res
@@ -97,79 +98,6 @@ impl PoiConfig {
         }
     }
 }
-const DEFAULT_JSON_POI_TYPES: &str = r#"
-{
-  "poi_types": [
-    {"id": "amenity:bicycle_parking", "name": "Parking vélo"},
-    {"id": "amenity:bicycle_rental", "name": "Station VLS"},
-    {"id": "amenity:college", "name": "École"},
-    {"id": "amenity:hospital", "name": "Hôpital"},
-    {"id": "amenity:parking", "name": "Parking"},
-    {"id": "amenity:police", "name": "Police, gendarmerie"},
-    {"id": "amenity:post_office", "name": "Bureau de poste"},
-    {"id": "amenity:theatre", "name": "Théâtre"},
-    {"id": "amenity:townhall", "name": "Mairie"},
-    {"id": "amenity:university", "name": "Université"},
-    {"id": "leisure:garden", "name": "Jardin"},
-    {"id": "leisure:park", "name": "Parc, espace vert"},
-    {"id": "shop:ticket", "name": "Agence commerciale"}
-  ],
-  "rules": [
-    {
-      "osm_tags_filters": [{"key": "amenity", "value": "college"}],
-      "poi_type_id": "amenity:college"
-    },
-    {
-      "osm_tags_filters": [{"key": "amenity", "value": "university"}],
-      "poi_type_id": "amenity:university"
-    },
-    {
-      "osm_tags_filters": [{"key": "amenity", "value": "theatre"}],
-      "poi_type_id": "amenity:theatre"
-    },
-    {
-      "osm_tags_filters": [{"key": "amenity", "value": "hospital"}],
-      "poi_type_id": "amenity:hospital"
-    },
-   {
-      "osm_tags_filters": [{"key": "amenity", "value": "post_office"}],
-      "poi_type_id": "amenity:post_office"
-    },
-    {
-      "osm_tags_filters": [{"key": "amenity", "value": "bicycle_rental"}],
-      "poi_type_id": "amenity:bicycle_rental"
-    },
-    {
-      "osm_tags_filters": [{"key": "amenity", "value": "bicycle_parking"}],
-      "poi_type_id": "amenity:bicycle_parking"
-    },
-    {
-      "osm_tags_filters": [{"key": "amenity", "value": "parking"}],
-      "poi_type_id": "amenity:parking"
-    },
-    {
-      "osm_tags_filters": [{"key": "amenity", "value": "police"}],
-      "poi_type_id": "amenity:police"
-    },
-    {
-      "osm_tags_filters": [{"key": "amenity", "value": "townhall"}],
-      "poi_type_id": "amenity:townhall"
-    },
-    {
-      "osm_tags_filters": [{"key": "leisure", "value": "garden"}],
-      "poi_type_id": "leisure:garden"
-    },
-    {
-      "osm_tags_filters": [{"key": "leisure", "value": "park"}],
-      "poi_type_id": "leisure:park"
-    },
-    {
-      "osm_tags_filters": [{"key": "shop", "value": "ticket"}],
-      "poi_type_id": "shop:ticket"
-    }
-  ]
-}
-"#;
 
 fn make_properties(tags: &osmpbfreader::Tags) -> Vec<objects::Property> {
     tags.iter()
