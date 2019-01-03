@@ -14,17 +14,11 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-extern crate env_logger;
-#[macro_use]
-extern crate log;
-extern crate navitia_model;
-extern crate osm_tools;
-extern crate structopt;
-
+use log::info;
+use navitia_model::{ntfs, Model};
+use osm_tools::{improve_stop_positions, Result};
 use std::path::PathBuf;
 use structopt::StructOpt;
-
-use navitia_model::{ntfs, Model, Result};
 
 #[derive(Debug, StructOpt)]
 #[structopt(
@@ -56,11 +50,7 @@ fn run() -> Result<()> {
     let opt = Opt::from_args();
     let model = ntfs::read(opt.input)?;
     let mut collections = model.into_collections();
-    osm_tools::improve_stop_positions::improve_with_pbf(
-        &opt.pbf,
-        &mut collections,
-        opt.min_distance,
-    )?;
+    improve_stop_positions::improve_with_pbf(&opt.pbf, &mut collections, opt.min_distance)?;
     let model = Model::new(collections)?;
     navitia_model::ntfs::write(&model, opt.output)?;
 

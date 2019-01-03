@@ -146,7 +146,7 @@ fn parse_poi(
         id,
         name: name.to_string(),
         coord,
-        poi_type: poi_type.clone(),
+        poi_type_id: poi_type.id.clone(),
         properties: make_properties(osmobj.tags()),
     })
 }

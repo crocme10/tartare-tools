@@ -66,7 +66,7 @@ pub struct Poi {
     pub id: String,
     pub name: String,
     pub coord: Coord,
-    pub poi_type: PoiType,
+    pub poi_type_id: String,
     pub properties: Vec<Property>,
 }
 

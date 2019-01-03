@@ -14,23 +14,24 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
+use crate::poi::Model;
 use crate::Result;
 use failure::format_err;
-use osm_utils::{objects, poi::PoiConfig};
+use log::info;
+use osm_utils::objects;
 use serde::Serialize;
 use serde_derive::Serialize;
-use std::collections::BTreeSet;
 use std::io::Write;
 use std::path::Path;
 
 #[derive(Debug, Serialize)]
-struct ExportPoi {
+struct ExportPoi<'a> {
     #[serde(rename = "poi_id")]
-    id: String,
+    id: &'a str,
     #[serde(rename = "poi_type_id")]
-    type_id: String,
+    type_id: &'a str,
     #[serde(rename = "poi_name")]
-    name: String,
+    name: &'a str,
     #[serde(rename = "poi_lat")]
     lat: f64,
     #[serde(rename = "poi_lon")]
@@ -39,12 +40,12 @@ struct ExportPoi {
     weight: f64,
 }
 
-impl From<&objects::Poi> for ExportPoi {
+impl<'a> From<&'a objects::Poi> for ExportPoi<'a> {
     fn from(poi: &objects::Poi) -> ExportPoi {
         ExportPoi {
-            id: poi.id.clone(),
-            type_id: poi.poi_type.id.clone(),
-            name: poi.name.clone(),
+            id: &poi.id,
+            type_id: &poi.poi_type_id,
+            name: &poi.name,
             lat: poi.coord.lat(),
             lon: poi.coord.lon(),
             weight: 0.,
@@ -53,27 +54,27 @@ impl From<&objects::Poi> for ExportPoi {
 }
 
 #[derive(Debug, Serialize, Ord, PartialOrd, Eq, PartialEq)]
-struct ExportPoiType {
+struct ExportPoiType<'a> {
     #[serde(rename = "poi_type_id")]
-    id: String,
+    id: &'a str,
     #[serde(rename = "poi_type_name")]
-    name: String,
+    name: &'a str,
 }
 
-impl From<&objects::PoiType> for ExportPoiType {
+impl<'a> From<&'a objects::PoiType> for ExportPoiType<'a> {
     fn from(poi_type: &objects::PoiType) -> ExportPoiType {
         ExportPoiType {
-            id: poi_type.id.clone(),
-            name: poi_type.name.clone(),
+            id: &poi_type.id,
+            name: &poi_type.name,
         }
     }
 }
 
 #[derive(Debug, Serialize, Ord, PartialOrd, Eq, PartialEq)]
-struct ExportPoiProperty {
-    poi_id: String,
-    key: String,
-    value: String,
+struct ExportPoiProperty<'a> {
+    poi_id: &'a str,
+    key: &'a str,
+    value: &'a str,
 }
 
 fn get_csv_content<I: IntoIterator<Item = T>, T: Serialize>(items: I) -> Result<Vec<u8>> {
@@ -105,32 +106,37 @@ fn write_data_to_zip<W: ::std::io::Write + ::std::io::Seek>(
 /// - poi_types.txt: a csv file containing the list of all the POI types, even
 /// POI types that do not contain POIs
 /// - poi_properties.txt: a csv file containing the list of POI properties
-pub fn export_pois<P: AsRef<Path>>(
-    output: P,
-    pois: &[objects::Poi],
-    matcher: &PoiConfig,
-) -> Result<()> {
+pub fn export<P: AsRef<Path>>(output: P, model: &Model) -> Result<()> {
+    info!("Exporting OSM POIs to poi files");
     let output = output.as_ref().with_extension("poi");
     let file = std::fs::File::create(output)?;
     let mut zip = zip::ZipWriter::new(file);
 
-    let export_pois = pois.iter().map(ExportPoi::from);
+    let mut export_pois: Vec<ExportPoi> = model.pois.iter().map(ExportPoi::from).collect();
+    export_pois.sort_unstable_by(|a, b| a.id.cmp(&b.id));
     let data = get_csv_content(export_pois)?;
     write_data_to_zip(&mut zip, "pois.txt", &data)?;
 
-    let export_poi_types: BTreeSet<ExportPoiType> =
-        matcher.poi_types.iter().map(ExportPoiType::from).collect();
+    let mut export_poi_types: Vec<ExportPoiType> =
+        model.poi_types.iter().map(ExportPoiType::from).collect();
+    export_poi_types.sort_unstable_by(|a, b| a.id.cmp(&b.id));
     let data = get_csv_content(export_poi_types)?;
     write_data_to_zip(&mut zip, "poi_types.txt", &data)?;
 
-    let export_poi_propterties = pois.iter().flat_map(|p| {
-        p.properties.iter().map(move |prop| ExportPoiProperty {
-            poi_id: p.id.clone(),
-            key: prop.key.clone(),
-            value: prop.value.clone(),
+    let mut export_poi_properties: Vec<ExportPoiProperty> = model
+        .pois
+        .iter()
+        .flat_map(|p| {
+            p.properties.iter().map(move |prop| ExportPoiProperty {
+                poi_id: &p.id,
+                key: &prop.key,
+                value: &prop.value,
+            })
         })
-    });
-    let data = get_csv_content(export_poi_propterties)?;
+        .collect();
+    export_poi_properties
+        .sort_unstable_by(|a, b| (&a.poi_id, &a.key, &a.value).cmp(&(&b.poi_id, &b.key, &b.value)));
+    let data = get_csv_content(export_poi_properties)?;
     write_data_to_zip(&mut zip, "poi_properties.txt", &data)?;
 
     zip.finish()?;

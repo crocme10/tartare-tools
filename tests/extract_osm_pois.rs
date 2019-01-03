@@ -15,9 +15,9 @@
 // <http://www.gnu.org/licenses/>.
 
 use navitia_model::test_utils::*;
-use osm_tools::export_pois::export_pois;
-use osm_utils::make_osm_reader;
-use osm_utils::poi::{extract_pois, PoiConfig};
+use osm_tools::poi::export::export;
+use osm_tools::poi::osm::extract_pois;
+use osm_utils::poi::PoiConfig;
 use std::fs::File;
 use std::io;
 
@@ -29,10 +29,9 @@ fn test_export_pois() {
 
         let r = File::open(pois_config).unwrap();
         let matcher = PoiConfig::from_reader(r).unwrap();
-        let mut osm_reader = make_osm_reader(osm_pbf).unwrap();
 
-        let pois = extract_pois(&mut osm_reader, &matcher);
-        export_pois(path.join("pois.zip"), &pois, &matcher).unwrap();
+        let model = extract_pois(osm_pbf, matcher).unwrap();
+        export(path.join("pois.zip"), &model).unwrap();
 
         // file extension should be .poi
         let output_file = path.join("pois.poi");

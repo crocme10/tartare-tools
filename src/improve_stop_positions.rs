@@ -14,6 +14,7 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
+use crate::Result;
 use failure::format_err;
 use geo::algorithm::centroid::Centroid;
 use geo::{MultiPoint, Point};
@@ -24,7 +25,6 @@ use osm_transit_extractor::*;
 use std::collections::BTreeSet;
 use std::collections::HashMap;
 use std::path::Path;
-use Result;
 
 fn point_list_to_centroid_coord(point_list: Vec<Point<f64>>) -> Coord {
     let multi_point: MultiPoint<_> = point_list.into();

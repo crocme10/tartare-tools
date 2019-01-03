@@ -16,10 +16,11 @@
 
 use failure::ResultExt;
 use log::info;
-use osm_tools::export_pois::export_pois;
-use osm_tools::Result;
-use osm_utils::make_osm_reader;
-use osm_utils::poi::{extract_pois, PoiConfig};
+use osm_tools::{
+    poi::{export::export, osm},
+    Result,
+};
+use osm_utils::poi::PoiConfig;
 use std::path::PathBuf;
 use structopt::StructOpt;
 use zip;
@@ -55,13 +56,9 @@ fn run() -> Result<()> {
             PoiConfig::from_reader(r).unwrap()
         }
     };
-    let mut osm_reader = make_osm_reader(&opt.input)?;
 
-    info!("Extracting pois from osm");
-    let pois = extract_pois(&mut osm_reader, &matcher);
-
-    info!("Exporting OSM POIs to poi files");
-    export_pois(opt.output, &pois, &matcher)?;
+    let poi_model = osm::extract_pois(opt.input, matcher)?;
+    export(opt.output, &poi_model)?;
 
     Ok(())
 }
