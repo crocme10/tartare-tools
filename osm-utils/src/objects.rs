@@ -56,7 +56,7 @@ impl Default for Coord {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Ord, PartialOrd, Eq, PartialEq)]
 pub struct Property {
     pub key: String,
     pub value: String,

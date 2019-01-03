@@ -15,6 +15,7 @@
 // <http://www.gnu.org/licenses/>.
 
 pub mod export;
+pub mod merge;
 pub mod osm;
 
 use osm_utils::objects::{Poi, PoiType};

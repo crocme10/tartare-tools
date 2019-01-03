@@ -1,7 +1,7 @@
 {
   "poi_types": [
     {"id": "amenity:parking", "name": "Parking"},
-	{"id": "parking_relais", "name": "P+R"},
+    {"id": "parking_relais", "name": "P+R"},
     {"id": "leisure:park", "name": "Parc, espace vert"}
   ],
   "rules": [

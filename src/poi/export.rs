@@ -20,7 +20,7 @@ use failure::format_err;
 use log::info;
 use osm_utils::objects;
 use serde::{Serialize, Serializer};
-use serde_derive::Serialize;
+use serde_derive::{Deserialize, Serialize};
 use std::io::Write;
 use std::path::Path;
 
@@ -31,30 +31,30 @@ where
     serializer.serialize_u8(*v as u8)
 }
 
-#[derive(Debug, Serialize)]
-struct ExportPoi<'a> {
+#[derive(Debug, Deserialize, Serialize)]
+pub struct ExportPoi {
     #[serde(rename = "poi_id")]
-    id: &'a str,
+    pub id: String,
     #[serde(rename = "poi_type_id")]
-    type_id: &'a str,
+    pub type_id: String,
     #[serde(rename = "poi_name")]
-    name: &'a str,
+    pub name: String,
     #[serde(rename = "poi_lat")]
-    lat: f64,
+    pub lat: f64,
     #[serde(rename = "poi_lon")]
-    lon: f64,
+    pub lon: f64,
     #[serde(rename = "poi_weight")]
-    weight: f64,
+    pub weight: f64,
     #[serde(rename = "poi_visible", serialize_with = "ser_from_bool")]
     visible: bool,
 }
 
-impl<'a> From<&'a objects::Poi> for ExportPoi<'a> {
+impl From<&objects::Poi> for ExportPoi {
     fn from(poi: &objects::Poi) -> ExportPoi {
         ExportPoi {
-            id: &poi.id,
-            type_id: &poi.poi_type_id,
-            name: &poi.name,
+            id: poi.id.clone(),
+            type_id: poi.poi_type_id.clone(),
+            name: poi.name.clone(),
             lat: poi.coord.lat(),
             lon: poi.coord.lon(),
             weight: 0.,
@@ -63,31 +63,35 @@ impl<'a> From<&'a objects::Poi> for ExportPoi<'a> {
     }
 }
 
-#[derive(Debug, Serialize, Ord, PartialOrd, Eq, PartialEq)]
-struct ExportPoiType<'a> {
+#[derive(Debug, Deserialize, Serialize, Ord, PartialOrd, Eq, PartialEq)]
+pub struct ExportPoiType {
     #[serde(rename = "poi_type_id")]
-    id: &'a str,
+    pub id: String,
     #[serde(rename = "poi_type_name")]
-    name: &'a str,
+    pub name: String,
 }
 
-impl<'a> From<&'a objects::PoiType> for ExportPoiType<'a> {
+impl From<&objects::PoiType> for ExportPoiType {
     fn from(poi_type: &objects::PoiType) -> ExportPoiType {
         ExportPoiType {
-            id: &poi_type.id,
-            name: &poi_type.name,
+            id: poi_type.id.clone(),
+            name: poi_type.name.clone(),
         }
     }
 }
 
-#[derive(Debug, Serialize, Ord, PartialOrd, Eq, PartialEq)]
-struct ExportPoiProperty<'a> {
-    poi_id: &'a str,
-    key: &'a str,
-    value: &'a str,
+#[derive(Debug, Deserialize, Serialize, Ord, PartialOrd, Eq, PartialEq)]
+pub struct ExportPoiProperty {
+    pub poi_id: String,
+    pub key: String,
+    pub value: String,
 }
 
-fn get_csv_content<I: IntoIterator<Item = T>, T: Serialize>(items: I) -> Result<Vec<u8>> {
+fn get_csv_content<I, T>(items: I) -> Result<Vec<u8>>
+where
+    I: IntoIterator<Item = T>,
+    T: Serialize,
+{
     let mut wtr = csv::WriterBuilder::new()
         .delimiter(b';')
         .from_writer(vec![]);
@@ -138,9 +142,9 @@ pub fn export<P: AsRef<Path>>(output: P, model: &Model) -> Result<()> {
         .iter()
         .flat_map(|p| {
             p.properties.iter().map(move |prop| ExportPoiProperty {
-                poi_id: &p.id,
-                key: &prop.key,
-                value: &prop.value,
+                poi_id: p.id.clone(),
+                key: prop.key.clone(),
+                value: prop.value.clone(),
             })
         })
         .collect();
