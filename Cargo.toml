@@ -6,7 +6,7 @@ authors = ["David Quintanel <david.quintanel@kisio.org>"]
 [dependencies]
 navitia_model = { git = "https://github.com/CanalTP/navitia_model" }
 osm_transit_extractor = { git = "https://github.com/CanalTP/osm-transit-extractor", branch = "prefix-ids-in-serialization" }
-geo = { git = "https://github.com/nberard/geo", branch = "implement-multipoint-centroid" }
+geo = { git = "https://github.com/georust/geo" }
 structopt = "0.2.10"
 env_logger = "0.5.13"
 log = "0.4.5"
