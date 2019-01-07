@@ -5,7 +5,7 @@ authors = ["David Quintanel <david.quintanel@kisio.org>"]
 
 [dependencies]
 navitia_model = { git = "https://github.com/CanalTP/navitia_model" }
-osm_transit_extractor = { git = "https://github.com/CanalTP/osm-transit-extractor", branch = "prefix-ids-in-serialization" }
+osm_transit_extractor = { git = "https://github.com/CanalTP/osm-transit-extractor" }
 geo = { git = "https://github.com/georust/geo" }
 structopt = "0.2.10"
 env_logger = "0.5.13"
