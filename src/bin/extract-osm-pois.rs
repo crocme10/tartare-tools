@@ -14,45 +14,48 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
+use failure::ResultExt;
 use log::info;
-use navitia_model::{ntfs, Model};
-use osm_tools::{improve_stop_positions, Result};
+use osm_tools::{
+    poi::{export::export, osm},
+    Result,
+};
+use osm_utils::poi::PoiConfig;
 use std::path::PathBuf;
 use structopt::StructOpt;
+use zip;
 
+/// Extract POIs from OSM.
 #[derive(Debug, StructOpt)]
-#[structopt(
-    name = "improve-stop-positions",
-    about = "Improve stop positions with OpenStreetMap.",
-    rename_all = "kebab-case"
-)]
+#[structopt(name = "extract_osm_pois", rename_all = "kebab-case")]
 struct Opt {
-    /// input directory.
-    #[structopt(short, long, parse(from_os_str), default_value = ".")]
+    /// OSM PBF file.
+    #[structopt(short, long, parse(from_os_str))]
     input: PathBuf,
 
-    /// osm pbf file.
-    #[structopt(short, long, parse(from_os_str))]
-    pbf: PathBuf,
+    /// POIs configuration.
+    #[structopt(short = "c", long, parse(from_os_str))]
+    poi_config: Option<PathBuf>,
 
-    /// output directory
+    /// Output poi file.
     #[structopt(short, long, parse(from_os_str))]
     output: PathBuf,
-
-    // The min distance in meters to update the coordinates
-    #[structopt(long, short = "d", default_value = "20")]
-    min_distance: f64,
 }
 
 fn run() -> Result<()> {
-    info!("Launching improve-stop-positions.");
-
+    info!("Launching extract_osm_pois.");
     let opt = Opt::from_args();
-    let model = ntfs::read(opt.input)?;
-    let mut collections = model.into_collections();
-    improve_stop_positions::improve_with_pbf(&opt.pbf, &mut collections, opt.min_distance)?;
-    let model = Model::new(collections)?;
-    navitia_model::ntfs::write(&model, opt.output)?;
+    let matcher = match opt.poi_config {
+        None => PoiConfig::default(),
+        Some(path) => {
+            let r = std::fs::File::open(&path)
+                .with_context(|_| format!("Error while opening configuration file {:?}", path))?;
+            PoiConfig::from_reader(r)?
+        }
+    };
+
+    let poi_model = osm::extract_pois(opt.input, matcher)?;
+    export(opt.output, &poi_model)?;
 
     Ok(())
 }

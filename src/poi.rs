@@ -14,10 +14,12 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-pub mod improve_stop_positions;
-pub mod poi;
+pub mod export;
+pub mod osm;
 
-pub type Error = failure::Error;
+use osm_utils::objects::{Poi, PoiType};
 
-/// The corresponding result type used by the crate.
-pub type Result<T> = std::result::Result<T, Error>;
+pub struct Model {
+    pub pois: Vec<Poi>,
+    pub poi_types: Vec<PoiType>,
+}

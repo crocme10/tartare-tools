@@ -1,0 +1,21 @@
+{
+  "poi_types": [
+    {"id": "amenity:parking", "name": "Parking"},
+	{"id": "parking_relais", "name": "P+R"},
+    {"id": "leisure:park", "name": "Parc, espace vert"}
+  ],
+  "rules": [
+    {
+      "osm_tags_filters": [{"key": "amenity", "value": "parking"}, {"key": "park_ride", "value": "yes"}],
+      "poi_type_id": "parking_relais"
+    },
+	{
+      "osm_tags_filters": [{"key": "amenity", "value": "parking"}],
+      "poi_type_id": "amenity:parking"
+    },
+    {
+      "osm_tags_filters": [{"key": "leisure", "value": "park"}],
+      "poi_type_id": "leisure:park"
+    }
+  ]
+}

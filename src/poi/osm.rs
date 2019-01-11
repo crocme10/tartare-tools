@@ -14,10 +14,20 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-pub mod improve_stop_positions;
-pub mod poi;
+use crate::{poi::Model, Result};
+use log::info;
+use osm_utils::poi::{extract_pois as extract_osm_pois, PoiConfig};
+use osmpbfreader;
+use std::fs::File;
+use std::path::Path;
 
-pub type Error = failure::Error;
+pub fn extract_pois<P: AsRef<Path>>(osm_path: P, matcher: PoiConfig) -> Result<Model> {
+    info!("Extracting pois from osm");
+    let mut osm_reader = osmpbfreader::OsmPbfReader::new(File::open(osm_path.as_ref())?);
+    let pois = extract_osm_pois(&mut osm_reader, &matcher);
 
-/// The corresponding result type used by the crate.
-pub type Result<T> = std::result::Result<T, Error>;
+    Ok(Model {
+        pois,
+        poi_types: matcher.poi_types,
+    })
+}

@@ -1,0 +1,53 @@
+poi_id;key;value
+poi:osm:node:218117881;addr:city;Paris
+poi:osm:node:218117881;addr:housenumber;6
+poi:osm:node:218117881;addr:postcode;75004
+poi:osm:node:218117881;addr:street;quai de Gesvres
+poi:osm:node:218117881;amenity;parking
+poi:osm:node:218117881;capacity;505
+poi:osm:node:218117881;man_made;surveillance
+poi:osm:node:218117881;maxheight;1.85
+poi:osm:node:218117881;name;Parking Hôtel de Ville
+poi:osm:node:218117881;operator;Saemes
+poi:osm:node:218117881;park_ride;no
+poi:osm:node:218117881;parking;underground
+poi:osm:node:218117881;phone;+33 1 42 71 51 96
+poi:osm:node:218117881;supervised;yes
+poi:osm:node:218117881;website;http://www.saemes.fr/fr
+poi:osm:relation:3374016;access;customers
+poi:osm:relation:3374016;amenity;parking
+poi:osm:relation:3374016;capacity:disabled;yes
+poi:osm:relation:3374016;fee;no
+poi:osm:relation:3374016;name;Parking
+poi:osm:relation:3374016;parking;surface
+poi:osm:relation:3374016;type;multipolygon
+poi:osm:relation:3814560;access;customers
+poi:osm:relation:3814560;amenity;parking
+poi:osm:relation:3814560;capacity:disabled;yes
+poi:osm:relation:3814560;fee;no
+poi:osm:relation:3814560;lit;yes
+poi:osm:relation:3814560;name;Parking
+poi:osm:relation:3814560;parking;surface
+poi:osm:relation:3814560;source;Bing
+poi:osm:relation:3814560;surface;asphalt
+poi:osm:relation:3814560;type;multipolygon
+poi:osm:way:138211520;amenity;parking
+poi:osm:way:138211520;fee;no
+poi:osm:way:184311152;amenity;parking
+poi:osm:way:184311152;fee;no
+poi:osm:way:186519358;access;customers
+poi:osm:way:186519358;amenity;parking
+poi:osm:way:186519358;capacity;724
+poi:osm:way:186519358;capacity:disabled;14
+poi:osm:way:186519358;fee;yes
+poi:osm:way:186519358;levels;4
+poi:osm:way:186519358;maxheight;1.8
+poi:osm:way:186519358;name;Parc-Relais Porte de Bordeaux
+poi:osm:way:186519358;operator;PARCUB
+poi:osm:way:186519358;park_ride;yes
+poi:osm:way:186519358;parking;underground
+poi:osm:way:186519358;ref:FR:CUB;063J0019
+poi:osm:way:186519358;source;Communauté Urbaine de Bordeaux - 03/2014
+poi:osm:way:186519358;start_date;1992
+poi:osm:way:209152595;amenity;parking
+poi:osm:way:209152595;fee;no
