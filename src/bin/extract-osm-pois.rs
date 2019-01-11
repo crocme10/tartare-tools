@@ -25,12 +25,9 @@ use std::path::PathBuf;
 use structopt::StructOpt;
 use zip;
 
+/// Extract POIs from OSM.
 #[derive(Debug, StructOpt)]
-#[structopt(
-    name = "extract_osm_pois",
-    about = "Extract POIs from OSM.",
-    rename_all = "kebab-case"
-)]
+#[structopt(name = "extract_osm_pois", rename_all = "kebab-case")]
 struct Opt {
     /// OSM PBF file.
     #[structopt(short, long, parse(from_os_str))]
@@ -53,7 +50,7 @@ fn run() -> Result<()> {
         Some(path) => {
             let r = std::fs::File::open(&path)
                 .with_context(|_| format!("Error while opening configuration file {:?}", path))?;
-            PoiConfig::from_reader(r).unwrap()
+            PoiConfig::from_reader(r)?
         }
     };
 

@@ -24,16 +24,11 @@ use osm_boundaries_utils::build_boundary;
 use osmpbfreader;
 use std::collections::BTreeMap;
 use std::fs::File;
-use std::path::Path;
 
 pub type Error = failure::Error;
 pub type Result<T> = std::result::Result<T, Error>;
 
 pub type OsmPbfReader = osmpbfreader::OsmPbfReader<File>;
-
-pub fn make_osm_reader<P: AsRef<Path>>(path: P) -> Result<OsmPbfReader> {
-    Ok(osmpbfreader::OsmPbfReader::new(File::open(&path)?))
-}
 
 /// Returns arbitrary Coord on the way.
 /// A middle node is chosen as a better marker on a street
