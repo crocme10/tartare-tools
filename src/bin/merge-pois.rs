@@ -15,7 +15,6 @@
 // <http://www.gnu.org/licenses/>.
 
 use csv;
-use failure::bail;
 use log::info;
 use std::path::PathBuf;
 use structopt::StructOpt;
@@ -33,7 +32,7 @@ use zip;
 )]
 struct Opt {
     /// Navitia POI files
-    #[structopt(name = "INPUTS", parse(from_os_str))]
+    #[structopt(name = "INPUTS", required = true, min_values = 2, parse(from_os_str))]
     pois: Vec<PathBuf>,
 
     /// Output poi file.
@@ -44,10 +43,6 @@ struct Opt {
 fn run() -> Result<()> {
     info!("Launching merge-pois.");
     let opt = Opt::from_args();
-    if opt.pois.len() < 2 {
-        bail!("you should provide at least 2 POI files")
-    }
-
     let model = merge(&opt.pois)?;
     export(opt.output, &model)?;
 

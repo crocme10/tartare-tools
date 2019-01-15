@@ -16,7 +16,7 @@
 
 use std::path::Path;
 use std::{
-    collections::{hash_map::Entry::*, HashMap},
+    collections::{hash_map::Entry::*, BTreeSet, HashMap},
     fs::File,
 };
 
@@ -56,7 +56,7 @@ fn merge_poi_types(
         match poi_types.entry(poi_type.id.to_string()) {
             Occupied(v) => {
                 if v.get().name != poi_type.name {
-                    bail!("POI type \"{}\" already found but with 2 different labels \"{}\" and \"{}\"", v.get().id, v.get().name, poi_type.name.clone())
+                    bail!("POI type \"{}\" already found but with 2 different labels \"{}\" and \"{}\"", v.get().id, v.get().name, poi_type.name)
                 }
             }
             Vacant(v) => {
@@ -68,10 +68,7 @@ fn merge_poi_types(
     Ok(())
 }
 
-fn merge_poi_props(
-    zip: &mut zip::ZipArchive<File>,
-    poi_props: &mut HashMap<String, Vec<Property>>,
-) -> Result<()> {
+fn add_props(zip: &mut zip::ZipArchive<File>, pois: &mut HashMap<String, Poi>) -> Result<()> {
     let pois_file = zip.by_name("poi_properties.txt")?;
     let mut rdr = csv::ReaderBuilder::new()
         .delimiter(b';')
@@ -80,24 +77,21 @@ fn merge_poi_props(
     for export_poi_prop in rdr.deserialize() {
         let export_poi_prop: ExportPoiProperty = export_poi_prop?;
 
-        let p = Property {
+        let prop = Property {
             key: export_poi_prop.key.to_string(),
             value: export_poi_prop.value.to_string(),
         };
 
-        poi_props
-            .entry(export_poi_prop.poi_id)
-            .or_insert_with(|| vec![])
-            .push(p);
+        pois.entry(export_poi_prop.poi_id).and_modify(|p| {
+            let mut props: BTreeSet<&Property> = p.properties.iter().collect();
+            props.insert(&prop);
+            p.properties = props.into_iter().cloned().collect();
+        });
     }
     Ok(())
 }
 
-fn merge_pois(
-    zip: &mut zip::ZipArchive<File>,
-    pois: &mut HashMap<String, Poi>,
-    poi_props: &HashMap<String, Vec<Property>>,
-) -> Result<()> {
+fn merge_pois(zip: &mut zip::ZipArchive<File>, pois: &mut HashMap<String, Poi>) -> Result<()> {
     let pois_file = zip.by_name("pois.txt")?;
     let mut rdr = csv::ReaderBuilder::new()
         .delimiter(b';')
@@ -107,20 +101,15 @@ fn merge_pois(
         let export_poi: ExportPoi = export_poi?;
         let p = Poi {
             id: export_poi.id.to_string(),
-            name: export_poi.id.to_string(),
+            name: export_poi.name.to_string(),
             coord: Coord::new(export_poi.lon, export_poi.lat),
             poi_type_id: export_poi.type_id.to_string(),
-            properties: poi_props
-                .get(&export_poi.id.to_string())
-                .cloned()
-                .unwrap_or_else(|| vec![]),
+            properties: vec![],
         };
         match pois.entry(export_poi.id.to_string()) {
             Occupied(_) => bail!("POI {} already found", p.id),
-            Vacant(v) => {
-                v.insert(p);
-            }
-        }
+            Vacant(v) => v.insert(p),
+        };
     }
 
     Ok(())
@@ -129,17 +118,16 @@ fn merge_pois(
 pub fn merge<P: AsRef<Path>>(paths: &[P]) -> Result<Model> {
     let mut pois = HashMap::<String, Poi>::new();
     let mut poi_types = HashMap::<String, PoiType>::new();
-    let mut poi_props = HashMap::<String, Vec<Property>>::new();
 
     for poi_file in paths {
         let file = File::open(poi_file.as_ref())?;
         let mut zip = zip::ZipArchive::new(file)?;
         merge_poi_types(&mut zip, &mut poi_types)?;
-        merge_poi_props(&mut zip, &mut poi_props)?;
-        merge_pois(&mut zip, &mut pois, &poi_props)?;
+        merge_pois(&mut zip, &mut pois)?;
+        add_props(&mut zip, &mut pois)?;
     }
     Ok(Model {
-        pois: pois.values().cloned().collect(),
-        poi_types: poi_types.values().cloned().collect(),
+        pois: pois.into_iter().map(|(_, p)| p).collect(),
+        poi_types: poi_types.into_iter().map(|(_, p)| p).collect(),
     })
 }
