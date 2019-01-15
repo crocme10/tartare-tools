@@ -1,5 +1,5 @@
 [package]
-name = "osm-tools"
+name = "tartare-tools"
 version = "0.1.0"
 authors = ["David Quintanel <david.quintanel@gmail.com>", "Nicolas Bérard <nicolas.berard@kisio.org>"]
 edition="2018"

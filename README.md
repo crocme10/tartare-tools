@@ -1,4 +1,4 @@
-# osm-tools [![Build Status](https://travis-ci.org/CanalTP/osm-tools.svg?branch=master)](https://travis-ci.org/CanalTP/osm-tools)
+# tartare-tools [![Build Status](https://travis-ci.org/CanalTP/tartare-tools.svg?branch=master)](https://travis-ci.org/CanalTP/tartare-tools)
 
 more coming soon...
 

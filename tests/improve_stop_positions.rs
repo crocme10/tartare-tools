@@ -25,7 +25,7 @@ fn test_global() {
         let input_dir = "./fixtures/improve-stop-positions/input";
         let model = ntfs::read(input_dir).unwrap();
         let mut collections = model.into_collections();
-        osm_tools::improve_stop_positions::improve_with_pbf(
+        tartare_tools::improve_stop_positions::improve_with_pbf(
             Path::new("./fixtures/improve-stop-positions/lemans-nodes.osm.pbf"),
             &mut collections,
             100.00,
