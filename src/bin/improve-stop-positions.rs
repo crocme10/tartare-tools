@@ -16,9 +16,9 @@
 
 use log::info;
 use navitia_model::{ntfs, Model};
-use osm_tools::{improve_stop_positions, Result};
 use std::path::PathBuf;
 use structopt::StructOpt;
+use tartare_tools::{improve_stop_positions, Result};
 
 #[derive(Debug, StructOpt)]
 #[structopt(

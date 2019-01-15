@@ -16,13 +16,13 @@
 
 use failure::ResultExt;
 use log::info;
-use osm_tools::{
-    poi::{export::export, osm},
-    Result,
-};
 use osm_utils::poi::PoiConfig;
 use std::path::PathBuf;
 use structopt::StructOpt;
+use tartare_tools::{
+    poi::{export::export, osm},
+    Result,
+};
 use zip;
 
 /// Extract POIs from OSM.
