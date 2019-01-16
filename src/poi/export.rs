@@ -19,10 +19,17 @@ use crate::Result;
 use failure::format_err;
 use log::info;
 use osm_utils::objects;
-use serde::Serialize;
+use serde::{Serialize, Serializer};
 use serde_derive::Serialize;
 use std::io::Write;
 use std::path::Path;
+
+pub fn ser_from_bool<S>(v: &bool, serializer: S) -> std::result::Result<S::Ok, S::Error>
+where
+    S: Serializer,
+{
+    serializer.serialize_u8(*v as u8)
+}
 
 #[derive(Debug, Serialize)]
 struct ExportPoi<'a> {
@@ -38,6 +45,8 @@ struct ExportPoi<'a> {
     lon: f64,
     #[serde(rename = "poi_weight")]
     weight: f64,
+    #[serde(rename = "poi_visible", serialize_with = "ser_from_bool")]
+    visible: bool,
 }
 
 impl<'a> From<&'a objects::Poi> for ExportPoi<'a> {
@@ -49,6 +58,7 @@ impl<'a> From<&'a objects::Poi> for ExportPoi<'a> {
             lat: poi.coord.lat(),
             lon: poi.coord.lon(),
             weight: 0.,
+            visible: true,
         }
     }
 }
@@ -102,8 +112,8 @@ fn write_data_to_zip<W: ::std::io::Write + ::std::io::Seek>(
 /// Export POIs to a zip file with extension .poi.
 ///
 /// The exported file contains:
-/// - pois.txt: a csv file containing the list of this POIs
-/// - poi_types.txt: a csv file containing the list of all the POI types, even
+/// - poi.txt: a csv file containing the list of this POIs
+/// - poi_type.txt: a csv file containing the list of all the POI types, even
 /// POI types that do not contain POIs
 /// - poi_properties.txt: a csv file containing the list of POI properties
 pub fn export<P: AsRef<Path>>(output: P, model: &Model) -> Result<()> {
@@ -115,13 +125,13 @@ pub fn export<P: AsRef<Path>>(output: P, model: &Model) -> Result<()> {
     let mut export_pois: Vec<ExportPoi> = model.pois.iter().map(ExportPoi::from).collect();
     export_pois.sort_unstable_by(|a, b| a.id.cmp(&b.id));
     let data = get_csv_content(export_pois)?;
-    write_data_to_zip(&mut zip, "pois.txt", &data)?;
+    write_data_to_zip(&mut zip, "poi.txt", &data)?;
 
     let mut export_poi_types: Vec<ExportPoiType> =
         model.poi_types.iter().map(ExportPoiType::from).collect();
     export_poi_types.sort_unstable_by(|a, b| a.id.cmp(&b.id));
     let data = get_csv_content(export_poi_types)?;
-    write_data_to_zip(&mut zip, "poi_types.txt", &data)?;
+    write_data_to_zip(&mut zip, "poi_type.txt", &data)?;
 
     let mut export_poi_properties: Vec<ExportPoiProperty> = model
         .pois
