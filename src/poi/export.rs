@@ -19,16 +19,24 @@ use crate::Result;
 use failure::format_err;
 use log::info;
 use osm_utils::objects;
-use serde::{Serialize, Serializer};
+use serde::{Deserialize, Deserializer, Serialize, Serializer};
 use serde_derive::{Deserialize, Serialize};
 use std::io::Write;
 use std::path::Path;
 
-pub fn ser_from_bool<S>(v: &bool, serializer: S) -> std::result::Result<S::Ok, S::Error>
+fn ser_from_bool<S>(v: &bool, serializer: S) -> std::result::Result<S::Ok, S::Error>
 where
     S: Serializer,
 {
     serializer.serialize_u8(*v as u8)
+}
+
+fn de_from_u8<'de, D>(deserializer: D) -> std::result::Result<bool, D::Error>
+where
+    D: Deserializer<'de>,
+{
+    let i = u8::deserialize(deserializer)?;
+    Ok(i != 0)
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -45,7 +53,11 @@ pub struct ExportPoi {
     pub lon: f64,
     #[serde(rename = "poi_weight")]
     pub weight: f64,
-    #[serde(rename = "poi_visible", serialize_with = "ser_from_bool")]
+    #[serde(
+        rename = "poi_visible",
+        serialize_with = "ser_from_bool",
+        deserialize_with = "de_from_u8"
+    )]
     visible: bool,
 }
 

@@ -45,7 +45,7 @@ fn merge_poi_types(
     zip: &mut zip::ZipArchive<File>,
     poi_types: &mut HashMap<String, PoiType>,
 ) -> Result<()> {
-    let mut rdr = make_csv_reader_from_zip(zip, "poi_types.txt")?;
+    let mut rdr = make_csv_reader_from_zip(zip, "poi_type.txt")?;
 
     for export_poi_type in rdr.deserialize() {
         let export_poi_type: ExportPoiType = export_poi_type?;
@@ -92,7 +92,7 @@ fn add_props(zip: &mut zip::ZipArchive<File>, pois: &mut HashMap<String, Poi>) -
 }
 
 fn merge_pois(zip: &mut zip::ZipArchive<File>, pois: &mut HashMap<String, Poi>) -> Result<()> {
-    let pois_file = zip.by_name("pois.txt")?;
+    let pois_file = zip.by_name("poi.txt")?;
     let mut rdr = csv::ReaderBuilder::new()
         .delimiter(b';')
         .from_reader(pois_file);

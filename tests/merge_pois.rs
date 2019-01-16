@@ -45,7 +45,7 @@ fn test_merge_pois() {
 
         compare_output_dir_with_expected(
             &path,
-            vec!["pois.txt", "poi_properties.txt", "poi_types.txt"],
+            vec!["poi.txt", "poi_properties.txt", "poi_type.txt"],
             "./fixtures/merge_pois/output",
         );
     });
