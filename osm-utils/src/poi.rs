@@ -82,9 +82,22 @@ impl PoiConfig {
                 bail!("poi_type_id {:?} present several times", poi_type.id);
             }
         }
+        let mut poi_type_ids = BTreeSet::<&str>::new();
         for rule in &self.rules {
+            if !poi_type_ids.insert(rule.poi_type_id.as_str()) {
+                bail!(
+                    "poi_type_id {:?} present several times in rules",
+                    rule.poi_type_id
+                );
+            }
             if !ids.contains(rule.poi_type_id.as_str()) {
-                bail!("poi_type_id {:?} in a rule not declared", rule.poi_type_id);
+                bail!("no poi type associated to rule {:?}", rule.poi_type_id);
+            }
+        }
+
+        for poi_type in &self.poi_types {
+            if !poi_type_ids.contains(poi_type.id.as_str()) {
+                bail!("no rule associated to poi_type_id {:?}", poi_type.id);
             }
         }
         Ok(())
@@ -228,7 +241,6 @@ mod tests {
         from_str(r#"{"poi_types": [], "rules": []}"#).unwrap();
         from_str(r#"{"poi_types": [{"id": "foo"}], "rules": []}"#).unwrap_err();
         from_str(r#"{"poi_types": [{"name": "bar"}], "rules": []}"#).unwrap_err();
-        from_str(r#"{"poi_types": [{"id": "foo", "name": "bar"}], "rules": []}"#).unwrap();
     }
 
     #[test]
@@ -250,6 +262,34 @@ mod tests {
                 {
                     "osm_tags_filters": [{"key": "foo", "value": "bar"}],
                     "poi_type_id": "bobette"
+                }
+            ]
+        }"#,
+        )
+        .unwrap_err();
+        from_str(
+            r#"{
+            "poi_types": [{"id": "bob", "name": "Bob"}],
+            "rules": [
+                {
+                    "osm_tags_filters": [{"key": "foo", "value": "bar"}],
+                    "poi_type_id": "bob"
+                },
+                {
+                    "osm_tags_filters": [{"key": "foo", "value": "bar"}],
+                    "poi_type_id": "bob"
+                }
+            ]
+        }"#,
+        )
+        .unwrap_err();
+        from_str(
+            r#"{
+            "poi_types": [{"id": "bob", "name": "Bob"}, {"id": "bobette", "name": "Bobette"}],
+            "rules": [
+                {
+                    "osm_tags_filters": [{"key": "foo", "value": "bar"}],
+                    "poi_type_id": "bob"
                 }
             ]
         }"#,
