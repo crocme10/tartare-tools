@@ -15,22 +15,18 @@
 // <http://www.gnu.org/licenses/>.
 
 use navitia_model::test_utils::*;
-use osm_utils::poi::PoiConfig;
 use std::fs::File;
 use std::io;
 use tartare_tools::poi::export::export;
-use tartare_tools::poi::osm::extract_pois;
+use tartare_tools::poi::merge::merge;
 
 #[test]
-fn test_export_pois() {
+fn test_merge_pois() {
     test_in_tmp_dir(|path| {
-        let osm_pbf = "./fixtures/extract_osm_pois/input/osm_fixture.osm.pbf";
-        let pois_config = "./fixtures/extract_osm_pois/input/pois_config.json";
+        let poi1 = "./fixtures/merge_pois/input/poi1.poi";
+        let poi2 = "./fixtures/merge_pois/input/poi2.poi";
 
-        let r = File::open(pois_config).unwrap();
-        let matcher = PoiConfig::from_reader(r).unwrap();
-
-        let model = extract_pois(osm_pbf, matcher).unwrap();
+        let model = merge(&[poi1, poi2]).unwrap();
         export(path.join("pois.zip"), &model).unwrap();
 
         // file extension should be .poi
@@ -50,7 +46,7 @@ fn test_export_pois() {
         compare_output_dir_with_expected(
             &path,
             vec!["poi.txt", "poi_properties.txt", "poi_type.txt"],
-            "./fixtures/extract_osm_pois/output",
+            "./fixtures/merge_pois/output",
         );
     });
 }

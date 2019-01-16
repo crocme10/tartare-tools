@@ -1,0 +1,5 @@
+poi_id;poi_type_id;poi_name;poi_lat;poi_lon;poi_weight;poi_visible
+poi:osm:node:1;poi_type:amenity:parking;Parking Hôtel de Ville;48.8569549;2.3497208;0;1
+poi:osm:node:3;poi_type:amenity:college;École;48.8569549;2.3497208;0;1
+poi:osm:way:2;poi_type:parking_relais;Parc-Relais Porte de Bordeaux;44.8326363;-0.5979819;0;1
+poi:osm:way:4;poi_type:amenity:police;Police;45.193509999999996;5.7665532;0;1

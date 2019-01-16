@@ -1,0 +1,7 @@
+poi_id;key;value
+poi:osm:node:1;addr:city;Paris
+poi:osm:node:1;amenity;parking
+poi:osm:way:2;amenity;parking
+poi:osm:way:2;capacity;724
+poi:osm:way:2;name;Parc-Relais Porte de Bordeaux
+poi:osm:way:4;poi_type:amenity;police
