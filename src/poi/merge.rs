@@ -16,7 +16,7 @@
 
 use std::path::Path;
 use std::{
-    collections::{hash_map::Entry::*, BTreeSet, HashMap},
+    collections::{hash_map::Entry::*, HashMap},
     fs::File,
 };
 
@@ -83,9 +83,9 @@ fn add_props(zip: &mut zip::ZipArchive<File>, pois: &mut HashMap<String, Poi>) -
         };
 
         pois.entry(export_poi_prop.poi_id).and_modify(|p| {
-            let mut props: BTreeSet<&Property> = p.properties.iter().collect();
-            props.insert(&prop);
-            p.properties = props.into_iter().cloned().collect();
+            if !p.properties.contains(&prop) {
+                p.properties.push(prop);
+            }
         });
     }
     Ok(())
