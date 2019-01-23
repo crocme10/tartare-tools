@@ -18,6 +18,7 @@ use crate::{poi::Model, Result};
 use csv;
 use failure::bail;
 use failure::format_err;
+use failure::ResultExt;
 use log::info;
 use osm_utils::objects::{
     Coord, Poi as NavitiaPoi, PoiType as NavitiaPoiType, Property as NavitiaPoiProperty,
@@ -27,11 +28,11 @@ use std::collections::HashMap;
 use std::path::Path;
 use std::result::Result as StdResult;
 
-const MAIN_FILE: &str = "POI_TCL.csv";
-const PR_FILE: &str = "parcs_relais.csv";
-const PV_FILE: &str = "parcs_velos.csv";
+pub const MAIN_FILE: &str = "POI_TCL.csv";
+pub const PR_FILE: &str = "parcs_relais.csv";
+pub const PV_FILE: &str = "parcs_velos.csv";
 
-pub fn de_from_comma_float<'de, D>(deserializer: D) -> StdResult<f64, D::Error>
+fn de_from_comma_float<'de, D>(deserializer: D) -> StdResult<f64, D::Error>
 where
     D: serde::Deserializer<'de>,
 {
@@ -42,7 +43,7 @@ where
         .map_err(serde::de::Error::custom)
 }
 
-pub fn de_non_empty_string<'de, D>(deserializer: D) -> StdResult<String, D::Error>
+fn de_non_empty_string<'de, D>(deserializer: D) -> StdResult<String, D::Error>
 where
     D: serde::Deserializer<'de>,
 {
@@ -54,6 +55,12 @@ where
         ))),
         false => Ok(s),
     }
+}
+
+macro_rules! ctx_from_path {
+    ($path:expr) => {
+        |_| format!("Error reading {:?}", $path)
+    };
 }
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
@@ -124,7 +131,7 @@ fn extract_from_main_file<P: AsRef<Path>>(
         .delimiter(b';')
         .from_path(&main_file_path)?;
     for sytral_poi in rdr.deserialize() {
-        let sytral_poi: Poi = sytral_poi?;
+        let sytral_poi: Poi = sytral_poi.with_context(ctx_from_path!(main_file_path))?;
         if sytral_poi.id_main.is_none() {
             bail!("poi with undefined id found in file {}", MAIN_FILE);
         }
@@ -180,7 +187,7 @@ fn extract_from_parcs_relais<P: AsRef<Path>>(
         .delimiter(b';')
         .from_path(&parcs_relais_file_path)?;
     for sytral_poi in rdr.deserialize() {
-        let sytral_poi: Poi = sytral_poi?;
+        let sytral_poi: Poi = sytral_poi.with_context(ctx_from_path!(parcs_relais_file_path))?;
         if sytral_poi.id_vr.is_none() {
             bail!("poi with undefined id found in file {}", PR_FILE);
         }
@@ -258,7 +265,7 @@ fn extract_from_parcs_velos<P: AsRef<Path>>(
         .delimiter(b';')
         .from_path(&parcs_velos_file_path)?;
     for sytral_poi in rdr.deserialize() {
-        let sytral_poi: Poi = sytral_poi?;
+        let sytral_poi: Poi = sytral_poi.with_context(ctx_from_path!(parcs_velos_file_path))?;
         if sytral_poi.id_vr.is_none() {
             bail!("poi with undefined id found in file {}", PV_FILE);
         }

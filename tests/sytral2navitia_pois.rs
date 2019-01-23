@@ -15,10 +15,20 @@
 // <http://www.gnu.org/licenses/>.
 
 use navitia_model::test_utils::*;
+use std::collections::HashMap;
 use std::fs::File;
 use std::io;
+use std::path::Path;
 use tartare_tools::poi::export::export;
 use tartare_tools::poi::sytral::extract_pois;
+
+fn cover_all_fixtures() -> HashMap<&'static str, &'static str> {
+    let mut map = HashMap::new();
+    map.insert("main", tartare_tools::poi::sytral::MAIN_FILE);
+    map.insert("pv", tartare_tools::poi::sytral::PV_FILE);
+    map.insert("pr", tartare_tools::poi::sytral::PR_FILE);
+    map
+}
 
 #[test]
 fn test_export_sytral_pois_ok() {
@@ -50,34 +60,18 @@ fn test_export_sytral_pois_ok() {
 }
 
 #[test]
-fn test_export_sytral_pois_ko_csv_main_manquant() {
-    let input_path = "./fixtures/sytral2navitia-pois/input/sytral_poi_echec1_csv_main_manquant";
-    let poi_model = extract_pois(input_path);
-    assert!(poi_model.is_err());
-    match poi_model {
-        Ok(_) => assert!(false),
-        Err(e) => assert_eq!(format!("{}", e), "missing file POI_TCL.csv"),
-    };
-}
-#[test]
-fn test_export_sytral_pois_ko_csv_pv_manquant() {
-    let input_path = "./fixtures/sytral2navitia-pois/input/sytral_poi_echec1_csv_pv_manquant";
-    let poi_model = extract_pois(input_path);
-    assert!(poi_model.is_err());
-    match poi_model {
-        Ok(_) => assert!(false),
-        Err(e) => assert_eq!(format!("{}", e), "missing file parcs_velos.csv"),
-    };
-}
-#[test]
-fn test_export_sytral_pois_ko_csv_pr_manquant() {
-    let input_path = "./fixtures/sytral2navitia-pois/input/sytral_poi_echec1_csv_pr_manquant";
-    let poi_model = extract_pois(input_path);
-    assert!(poi_model.is_err());
-    match poi_model {
-        Ok(_) => assert!(false),
-        Err(e) => assert_eq!(format!("{}", e), "missing file parcs_relais.csv"),
-    };
+fn test_export_sytral_pois_ko_csv_manquant() {
+    let input_path_prefix =
+        Path::new("./fixtures/sytral2navitia-pois/input/sytral_poi_echec1_csv_manquant");
+    for (suffix, file_name) in cover_all_fixtures() {
+        let input_path = input_path_prefix.join(suffix);
+        let poi_model = extract_pois(input_path);
+        assert!(poi_model.is_err());
+        match poi_model {
+            Ok(_) => assert!(false),
+            Err(e) => assert_eq!(format!("{}", e), format!("missing file {}", file_name)),
+        };
+    }
 }
 
 #[test]
@@ -87,53 +81,28 @@ fn test_export_sytral_pois_ko_poi_type_id_manquant() {
     assert!(poi_model.is_err());
     match poi_model {
         Ok(_) => assert!(false),
-        Err(e) => assert_eq!(
-            format!("{}", e),
-            "CSV deserialize error: record 1 (line: 1, byte: 92): empty string not allowed in deserialization"
-        ),
+        Err(e) => assert_eq!(e.iter_chain().map(|err| format!("{}", err)).collect::<Vec<String>>(),
+                             vec!["Error reading \"./fixtures/sytral2navitia-pois/input/sytral_poi_echec2_poi_type_id_manquant/POI_TCL.csv\"",
+                                  "CSV deserialize error: record 1 (line: 1, byte: 92): empty string not allowed in deserialization"]),
     };
 }
 
 #[test]
-fn test_export_sytral_pois_ko_poi_id_manquant_main() {
-    let input_path = "./fixtures/sytral2navitia-pois/input/sytral_poi_echec3_poi_id_manquant_main";
-    let poi_model = extract_pois(input_path);
-    assert!(poi_model.is_err());
-    match poi_model {
-        Ok(_) => assert!(false),
-        Err(e) => assert_eq!(
-            format!("{}", e),
-            "poi with undefined id found in file POI_TCL.csv"
-        ),
-    };
-}
-
-#[test]
-fn test_export_sytral_pois_ko_poi_id_manquant_pv() {
-    let input_path = "./fixtures/sytral2navitia-pois/input/sytral_poi_echec3_poi_id_manquant_pv";
-    let poi_model = extract_pois(input_path);
-    assert!(poi_model.is_err());
-    match poi_model {
-        Ok(_) => assert!(false),
-        Err(e) => assert_eq!(
-            format!("{}", e),
-            "poi with undefined id found in file parcs_velos.csv"
-        ),
-    };
-}
-
-#[test]
-fn test_export_sytral_pois_ko_poi_id_manquant_pr() {
-    let input_path = "./fixtures/sytral2navitia-pois/input/sytral_poi_echec3_poi_id_manquant_pr";
-    let poi_model = extract_pois(input_path);
-    assert!(poi_model.is_err());
-    match poi_model {
-        Ok(_) => assert!(false),
-        Err(e) => assert_eq!(
-            format!("{}", e),
-            "poi with undefined id found in file parcs_relais.csv"
-        ),
-    };
+fn test_export_sytral_pois_ko_poi_id_manquant() {
+    let input_path_prefix =
+        Path::new("./fixtures/sytral2navitia-pois/input/sytral_poi_echec3_poi_id_manquant");
+    for (suffix, file_name) in cover_all_fixtures() {
+        let input_path = input_path_prefix.join(suffix);
+        let poi_model = extract_pois(input_path);
+        assert!(poi_model.is_err());
+        match poi_model {
+            Ok(_) => assert!(false),
+            Err(e) => assert_eq!(
+                format!("{}", e),
+                format!("poi with undefined id found in file {}", file_name)
+            ),
+        };
+    }
 }
 
 #[test]
@@ -143,7 +112,9 @@ fn test_export_sytral_pois_ko_poi_x_manquant() {
     assert!(poi_model.is_err());
     match poi_model {
         Ok(_) => assert!(false),
-        Err(e) => assert_eq!(format!("{}", e), "CSV deserialize error: record 1 (line: 1, byte: 92): cannot parse float from empty string"),
+        Err(e) => assert_eq!(e.iter_chain().map(|err| format!("{}", err)).collect::<Vec<String>>(),
+                             vec!["Error reading \"./fixtures/sytral2navitia-pois/input/sytral_poi_echec3_poi_x_manquant/POI_TCL.csv\"",
+                                  "CSV deserialize error: record 1 (line: 1, byte: 92): cannot parse float from empty string"]),
     };
 }
 
@@ -154,6 +125,8 @@ fn test_export_sytral_pois_ko_poi_y_manquant() {
     assert!(poi_model.is_err());
     match poi_model {
         Ok(_) => assert!(false),
-        Err(e) => assert_eq!(format!("{}", e), "CSV error: record 3 (line: 3, byte: 422): found record with 7 fields, but the previous record has 10 fields"),
+        Err(e) => assert_eq!(e.iter_chain().map(|err| format!("{}", err)).collect::<Vec<String>>(),
+                             vec!["Error reading \"./fixtures/sytral2navitia-pois/input/sytral_poi_echec3_poi_y_manquant/parcs_velos.csv\"",
+                                  "CSV deserialize error: record 2 (line: 2, byte: 161): cannot parse float from empty string"]),
     };
 }
