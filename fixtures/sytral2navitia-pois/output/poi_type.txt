@@ -1,0 +1,8 @@
+poi_type_id;poi_type_name
+TCL:AGE;Agence commerciale
+TCL:BET;Borne e-Técély
+TCL:DEP;Point service
+TCL:GAB;Guichet automatique bancaire
+TCL:RIS;Relais Infos Services
+amenity:bicycle_parking;Parc Relais Vélos TCL
+amenity:parking;Parc Relais TCL

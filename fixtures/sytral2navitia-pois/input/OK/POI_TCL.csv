@@ -1,0 +1,333 @@
+cod_typ_poi;lib_typ_poi;idt_poi;lib_poi;cmt_poi;adr;cod_pst;lib_cmn;coo_x_wgs84;coo_y_wgs84
+AGE;Agence commerciale;1457;Agence TCL Givors;;"2 Rue Roger Salengro";69700;Givors;4,772876385468;45,582740599557
+AGE;Agence commerciale;1773;Agence TCL La Soie;;"7 Rue Du Rail";69120;Vaulx-En-Velin;4,922117307224;45,760606995138
+AGE;Agence commerciale;516;Agence TCL Grange Blanche;;"1 Place D Arsonval";69003;Lyon 3eme;4,878677843708;45,742997683925
+AGE;Agence commerciale;550;Agence TCL Bellecour;;"6 Place Bellecour";69002;Lyon 2eme;4,832121175671;45,75855922193
+AGE;Agence commerciale;551;Agence TCL Gorge de Loup;;"1 Rue Sergent Michel Berthet";69009;Lyon 9eme;4,805196841581;45,766251723574
+AGE;Agence commerciale;556;Agence TCL Part Dieu;;"11 Boulevard Marius Vivier Merle";69003;Lyon 3eme;4,858175302462;45,762047418362
+BET;Borne e-Técély;90000;Part-Dieu Centre Commercial;;17 rue du Docteur Bouchut (Tour Oxygène);69003;Lyon;45,761658;4,857313
+DEP;Point service;50003;Tabac;LE CLIKE;"37 Cours D Herbouville";69004;Lyon 4eme;4,840742059988;45,778662996651
+DEP;Point service;50006;Tabac;PRESSE;"2 Rue D Artique";69120;Vaulx-En-Velin;4,911610954075;45,788431965328
+DEP;Point service;50007;Tabac;LE TOSCAN;"141 Rue Professeur Beauvisage";69008;Lyon 8eme;4,866085969316;45,728676958197
+DEP;Point service;50010;Papeterie;PRESSE;"68 Boulevard Des Etats-Unis";69008;Lyon 8eme;4,864167013701;45,73333004043
+DEP;Point service;50014;Tabac;CHAMPVERT PRESSE;"157 Avenue Berthelemy Buyer";69005;Lyon 5eme;4,796557956807;45,763543032979
+DEP;Point service;50015;Multiservices;PIMMS;"35 Rue Du 8 Mai 45";69100;Villeurbanne;4,891792965603;45,779520970159
+DEP;Point service;50022;Tabac;LE MONOPOLE;"52 Cours Gambetta";69007;Lyon 7eme;4,846705015256;45,753901991611
+DEP;Point service;50029;Multiservices;HUIT A HUIT;"8 Rue Fournier";69800;Saint-Priest;4,955327952855;45,692398031511
+DEP;Point service;50060;Tabac;PRESSE;"14 Place Carnot";69002;Lyon 2eme;4,828608977114;45,75025502919
+DEP;Point service;50062;Tabac;LE FANTASIO;"33 Avenue Henri Barbusse";69100;Villeurbanne;4,879682970291;45,767503017579
+DEP;Point service;50067;Multiservices;PIMMS;"5 Place Dumas De Loire";69009;Lyon 9eme;4,805230027976;45,772668002568
+DEP;Point service;50070;Papeterie;DROGUERIE;"7 Rue De Malval";69670;Vaugneray;4,656330035614;45,7380070131
+DEP;Point service;50073;Tabac;AUX VOLUTES;"22 Place De La Croix Rousse";69004;Lyon 4eme;4,832562009394;45,775292996904
+DEP;Point service;50107;Tabac;LIBERTY TABAC PRESSE;"40 Cours De La Liberte";69003;Lyon 3eme;4,842322002811;45,759469971921
+DEP;Point service;50113;Tabac;PRESSE;"1 Avenue Commandant L Herminier";69100;Villeurbanne;4,885327041295;45,771023970407
+DEP;Point service;50118;Tabac;PRESSE;"4 Quai De Bondy";69005;Lyon 5eme;4,827811024428;45,766789971622
+DEP;Point service;50128;Papeterie;PRESSE;"11 Boulevard Castellane";69580;Sathonay-Camp;4,874143951572;45,823694987423
+DEP;Point service;50132;Papeterie;PRESSE;"40 Rue Blanqui";69600;Oullins;4,811976056139;45,711596033305
+DEP;Point service;50142;Papeterie;PRESSE SANS SOUCIS;"47 Avenue Lacassagne";69003;Lyon 3eme;4,86883697938;45,75330101037
+DEP;Point service;50171;Tabac;LA ESCOGIDA;"2 Place Jules Ferry";69006;Lyon 6eme;4,858861964232;45,767598963067
+DEP;Point service;50178;Multiservices;PIMMS;"14 Rue Des Serpollieres";69008;Lyon 8eme;4,864083048142;45,732276977206
+DEP;Point service;50228;Multiservices;PIMMS;"58 Rue Marcel Bramet";69500;Bron;4,922784944436;45,743553016555
+DEP;Point service;50233;Tabac;TABAC PRESSE DES MONTS D OR;"2 Place De Verdun";69250;Albigny-Sur-Saone;4,831122033318;45,865508013192
+DEP;Point service;50260;Tabac;LE GRANDCLEMENT;"4 Rue Leon Blum";69100;Villeurbanne;4,891049065924;45,759472011324
+DEP;Point service;50264;Universite;SMERRA;"128 Boulevard Du 11 Novembre";69100;Villeurbanne;4,873999994985;45,779070017387
+DEP;Point service;50265;Universite;SMERRA;"38 Rue Chevreul";69007;Lyon 7eme;4,840326003812;45,748410008678
+DEP;Point service;50267;Papeterie;PRESSE;"74 Cours Du Docteur Long";69003;Lyon 3eme;4,886357959614;45,750018046019
+DEP;Point service;50269;Tabac;CAFE DU CENTRE;"19 Rue Marechal Leclerc";69390;Charly;4,79536195912;45,649860022642
+DEP;Point service;50327;Tabac;LA PYRAMIDE;"2 Rue Komarov";69200;Venissieux;4,872942975447;45,692357043547
+DEP;Point service;50339;Multiservices;POINT MULTISERVICE;"3 Place Des Palabres";69190;Saint-Fons;4,85547500424;45,693984014784
+DEP;Point service;50343;Multiservices;SUPERMARCHE SPAR;"1 Rue Contal";69890;La Tour De Salvagny;4,717264950981;45,815399028881
+DEP;Point service;50353;Tabac;LE RADJAH;"64 Avenue Jean Jaures";69007;Lyon 7eme;4,843418056457;45,748476021363
+DEP;Point service;50356;Multiservices;PIMMS;"9 Avenue De L Europe";69140;Rillieux-La-Pape;4,894298952664;45,813944021391
+DEP;Point service;50366;Tabac;PRESSE;"2 Rue Salvador Allende";69100;Villeurbanne;4,862693026269;45,776495035656
+DEP;Point service;50369;Tabac;LE FLORE;"54 Rue Moncey";69003;Lyon 3eme;4,848374962562;45,76004798801
+DEP;Point service;50370;Tabac;LA PIPE A EAU;"24 Rue Marechal";69200;Venissieux;4,882607023311;45,706932025311
+DEP;Point service;50373;Multiservices;PIMMS;"34 Rue De Narvik";69008;Lyon 8eme;5,137986066858;45,635604011631
+DEP;Point service;50384;Tabac;PRESSE;"2 Place Des Anciens Combattants";69290;Grezieu La Varenne;4,690209986755;45,748069967296
+DEP;Point service;50399;Tabac;PRESSE;"211 Boulevard Pinel";69500;Bron;4,888294059812;45,731905960851
+DEP;Point service;50415;Multiservices;PIMMS;"47 Avenue Roger Salengro";69120;Vaulx-En-Velin;4,929155949426;45,760602038026
+DEP;Point service;50416;Papeterie;LA MOULINOISE;"1 Gare Routiere";69002;Lyon 2eme;4,826801063547;45,749405018311
+DEP;Point service;50419;Tabac;PRESSE;"Centre Commercial";69130;Ecully;4,778670061973;45,774656974733
+DEP;Point service;50428;Buvette;BOULANGERIE PATISSERIE;"Place Charles De Gaulle";69700;Givors;4,76333566475;45,60550256286
+DEP;Point service;50440;Tabac;TABAC FOCH;"1 Place Puvis De Chavannes";69006;Lyon 6eme;4,843386999972;45,771742040475
+DEP;Point service;50444;Tabac;CHERIAA TABAC LOTO PRESSE;"89 Boulevard Amboise Croizat";69200;Venissieux;4,888776986463;45,697558031059
+DEP;Point service;50445;Tabac;PRESSE;"53 Boulevard Lenine";69200;Venissieux;4,865221972465;45,692482977482
+DEP;Point service;50448;Tabac;PRESSE;"64 Rue Du Professeur Florence";69003;Lyon 3eme;4,878592972824;45,743718006447
+DEP;Point service;50452;Tabac;TOTEM;"Centre Commercial";69230;Saint-Genis-Laval;4,792767964367;45,691998969711
+DEP;Point service;50455;Tabac;TABAC MONTPLAISIR;"133 Avenue Des Freres Lumiere";69008;Lyon 8eme;4,874103003069;45,743470976105
+DEP;Point service;50456;Tabac;PRESSE;"58 Rue De La Republique";69120;Vaulx-En-Velin;4,925571947167;45,786190040405
+DEP;Point service;50461;Tabac;COUP DE TABAC;"14 Place Jean Mace";69007;Lyon 7eme;4,841601946273;45,745860022624
+DEP;Point service;50462;Tabac;TABAC PRESSE GROS;"19 Avenue Jean Cagne";69200;Venissieux;4,87355698997;45,695105022951
+DEP;Point service;50463;Tabac;PRESSE;"103 Rue Leon Blum";69100;Villeurbanne;4,900085995593;45,760315978857
+DEP;Point service;50473;Tabac;BAR TABAC RUL;"14 Rue Aristide Briand";69800;Saint-Priest;4,935887019664;45,690943993234
+DEP;Point service;50475;Tabac;SMOKE SHOP;"Centre Commercial";69003;Lyon 3eme;4,854083959046;45,762085035514
+DEP;Point service;50477;Tabac;PRESSE;"20 Rue Romarin";69001;Lyon 1er;4,834129949833;45,76791500677
+DEP;Point service;50478;Tabac;TABAC DU METRO;"Centre Commercial";69003;Lyon 3eme;4,854083959046;45,762085035514
+DEP;Point service;50479;Tabac;LE CHIQUITO;"37 Avenue Auguste Comte";69002;Lyon 2eme;4,830166944462;45,752982007346
+DEP;Point service;50483;Tabac;PRESSE;"61 Rue Vaillant Coutirier";69310;Pierre-Benite;4,815624002965;45,706158021472
+DEP;Point service;50487;Tabac;LE NARVAL;"70 Avenue Du Point Du Jour";69005;Lyon 5eme;4,797231052757;45,756384015967
+DEP;Point service;50488;Tabac;PRESSE;"230 Rue Jean Jaures";69150;Decines-Charpieu;4,834906022007;45,73354796109
+DEP;Point service;50491;Tabac;PRESSE;"73 Avenue Corbetta";69960;Corbas;4,895370039667;45,666949982134
+DEP;Point service;50494;Tabac;PRESSE;"116 Rue Vendome";69006;Lyon 6eme;4,845377989437;45,766858035664
+DEP;Point service;50497;Tabac;TABAC DE LA MADELEINE;"17 Rue De La Madeleine";69007;Lyon 7eme;4,847967976868;45,748490981119
+DEP;Point service;50501;Tabac;AMPILO;"105 Avenue Roger Salengro";69100;Villeurbanne;4,876566998173;45,776915025709
+DEP;Point service;50509;Tabac;PRESSE;"1 Rue Du 8 Mai 1945";69800;Saint-Priest;4,947070974152;45,69893800986
+DEP;Point service;50512;Tabac;SNC ROJA;"78 Avenue De Verdun";69330;Meyzieu;4,9935519543;45,77756497421
+DEP;Point service;50518;Tabac;L ANATOLE FRANCE;"136 Rue Anatole France";69100;Villeurbanne;4,882956987673;45,768759955915
+DEP;Point service;50524;Tabac;AU PRESSE PAPIER;"2968 Route De Starsbourg";69140;Rillieux-La-Pape;4,896997019837;45,820632030957
+DEP;Point service;50525;Tabac;BAR TABC;"2 Cours Tolstoi";69100;Villeurbanne;4,870065988883;45,763668965895
+DEP;Point service;50526;Tabac;BAR TABAC;"176 Avenue Franklin Roosevelt";69500;Bron;4,911273985045;45,732639044999
+DEP;Point service;50528;Tabac;NOUVEAUTES;"14 Place De Verdun";69126;Brindas;4,694716973858;45,720479011946
+DEP;Point service;50529;Tabac;PRESSE;"11 Rue Du Onze Novembre";69800;Saint-Priest;4,926488057419;45,700119033787
+DEP;Point service;50533;Tabac;LE RAY MONDE;"1 Rue Roger Salengro";69700;Givors;4,772727983541;45,582750040226
+DEP;Point service;50535;Tabac;LE CHANT DU GRILLON;"31 Rue Hector Berlioz";69009;Lyon 9eme;4,825033970699;45,800997016482
+DEP;Point service;50545;Tabac;BAR TABAC;"70 Rue Jean Moulin";69300;Caluire-Et-Cuire;4,847002039643;45,799381030486
+DEP;Point service;50547;Papeterie;KIOSQUE CHARLES HERNU;"16 Place Charles Hernu";69100;Villeurbanne;4,865397969725;45,769559007156
+DEP;Point service;50548;Tabac;LES TARENTELLES;"Centre Commercial";69680;Chassieu;4,95856297081;45,74142103622
+DEP;Point service;50551;Tabac;PRESSE;"41 Boulevard Edouard Herriot";69800;Saint-Priest;4,937961005525;45,694411990655
+DEP;Point service;50553;Tabac;TABAC PRESSE DES PIERRES PLANTEES;"24 Rue Des Pierres Plantees";69001;Lyon 1er;4,832020973906;45,773042014837
+DEP;Point service;50560;Papeterie;PRESSE;"1 Rue Du Onze Novembre";69320;Feyzin;4,850395975648;45,666614992386
+DEP;Point service;50562;Tabac;PRESSE;"816 Avenue Jean Collomb";69280;Marcy L Etoile;4,707474042908;45,78243699197
+DEP;Point service;50564;Tabac;PRESSE;"33 Rue Claude Farrere";69800;Saint-Priest;4,95483705023;45,687707959368
+DEP;Point service;50566;Tabac;BAR TABAC VANCIA;"4960 Route De Strasbourg";69140;Rillieux-La-Pape;4,912914021454;45,835146007958
+DEP;Point service;50569;Tabac;PRESSE;"29 Avenue Edouard Millaud";69290;Craponne;4,735572040088;45,747349004494
+DEP;Point service;50572;Tabac;LE MONTABERLET;"9 Avenue Jean Jaures";69150;Decines-Charpieu;4,937529949298;45,768063982251
+DEP;Point service;50575;Papeterie;LA PRESSE DE FONTAINES;"6 Rue Pierre Carbon";69270;Fontaines-Sur-Saone;4,847612031764;45,834631023221
+DEP;Point service;50577;Tabac;LE RIALTO;"33 Grande Rue .";69340;Francheville;4,771124038552;45,737947979325
+DEP;Point service;50578;Tabac;TABAC DE L HORLOGE;"60 Avenue Victor Hugo";69160;Tassin-La-Demi-Lune;4,781733008161;45,764355043915
+DEP;Point service;50579;Tabac;TABAC SAINT PAUL;"12 Place Saint Paul";69005;Lyon 5eme;4,827549012372;45,765713026583
+DEP;Point service;50583;Tabac;PRESSE;"Place Guy Mocquet";69120;Vaulx-En-Velin;4,910906982729;45,785065044751
+DEP;Point service;50589;Tabac;LE CORONA;"21 Cours Lafayette";69006;Lyon 6eme;4,844595965752;45,76369498985
+DEP;Point service;50590;Tabac;PRESSE;"164 Grande Rue De La Guillotiere";69007;Lyon 7eme;4,852756006022;45,749498033334
+DEP;Point service;50591;Tabac;PRESSE;"122 Rue Pierre Delors";69008;Lyon 8eme;4,859412035097;45,731377984947
+DEP;Point service;50592;Tabac;VM CONCEPT;"Rue Rene Chapard";69630;Chaponost;4,745269040332;45,711605959432
+DEP;Point service;50593;Tabac;LE FONTENOY;"26 Rue Du Commandant Charcot";69005;Lyon 5eme;4,808281989224;45,755531000284
+DEP;Point service;50594;Tabac;LE CHANCLAU;"124 Avenue Paul Santy";69008;Lyon 8eme;4,876882972235;45,728551968362
+DEP;Point service;50598;Tabac;LE BONAPARTE;"1 Quai Fulchiron";69005;Lyon 5eme;4,827485998611;45,759377025288
+DEP;Point service;50599;Multiservices;LE FOURNIL DE BALMONT;"40 Boulevard De Balmont";69009;Lyon 9eme;4,801141995363;45,785973988436
+DEP;Point service;50601;Tabac;TABAC SATHONAY;"6 Place Sathonay";69001;Lyon 1er;4,830059939601;45,769430977497
+DEP;Point service;50603;Tabac;TABAC DU BOURG;"6 Rue Lieutenant Audras";69160;Tassin-La-Demi-Lune;4,757904034657;45,760089976234
+DEP;Point service;50608;Tabac;TABAC LA PERRALIERE;"150 Rue Du Quatre Aout";69100;Villeurbanne;4,890886962398;45,76453604589
+DEP;Point service;50609;Tabac;PRESSE;"8 Place Du 8 Mai 1945";69510;Messimy;4,673976958511;45,697681033795
+DEP;Point service;50610;Tabac;VAL PRESSE;"1 Place De Verdun";69730;Genay;4,841487039007;45,897847004837
+DEP;Point service;50611;Multiservices;SUPERETTE VIVAL;"9 Place Dugas";69510;Thurins;4,640330047989;45,681924029802
+DEP;Point service;50612;Tabac;PRESSE;"33 Rue Jean Ligonnet";69700;Givors;4,770229996178;45,591863015953
+DEP;Point service;50613;Tabac;BAR TABAC DU BACHUT;"7 Place Du Onze Novembre";69008;Lyon 8eme;4,868901014978;45,737006042248
+DEP;Point service;50614;Tabac;LA CHARLEMAGNE;"60 Cours Charlemagne";69002;Lyon 2eme;4,822278971494;45,744550987799
+DEP;Point service;50615;Tabac;LA BULLE;"1 Place Louis Braille";69300;Caluire-Et-Cuire;4,850056062433;45,794518999296
+DEP;Point service;50617;Tabac;PRESSE;"83 Rue Des Martyrs De La Liberation";69310;Pierre-Benite;4,823012978463;45,703220963133
+DEP;Point service;50618;Tabac;PRESSE ET PLUS;"39 Place Du Onze Novembre";69390;Vernaison;4,812068004474;45,647217035148
+DEP;Point service;50620;Tabac;PRESSE;"1 Place Des Collonges";69230;Saint-Genis-Laval;4,804813067036;45,6926930347
+DEP;Point service;50621;Tabac;PRESSE DES DEUX AMANTS;"19 Rue Du Pr0fesseur Patel";69009;Lyon 9eme;4,791157022846;45,765204009618
+DEP;Point service;50622;Tabac;LE VAUBECOUR;"6 Rue Vaubecour";69002;Lyon 2eme;4,826884019958;45,755195003652
+DEP;Point service;50623;Tabac;LE FLACHET;"42 Rue Flachet";69100;Villeurbanne;4,889710021175;45,767976973698
+DEP;Point service;50625;Tabac;TABAC PRESSE DE SAINT DIDIER;"17 Avenue De La Republique";69370;St Didier Au Mt D Or;4,798459044919;45,811087000847
+DEP;Point service;50626;Papeterie;AU PRESSE PAPIER;"49 Avenue General Leclerc";38540;Heyrieux;5,064027065963;45,63020797487
+DEP;Point service;50627;Tabac;TABAC LA DUCHERE;"17 Place Abbe Pierre";69009;Lyon 9eme;4,795145943583;45,786528970175
+DEP;Point service;50629;Tabac;PRESSE LES BRUYERES;"5 Place Saint Luc";69110;Sainte-Foy-Les-Lyon;4,799572060805;45,750512029188
+DEP;Point service;50630;Tabac;LE P TIT GERLAND;"178 Rue De Gerland";69007;Lyon 7eme;4,83765101797;45,728956958073
+DEP;Point service;50632;Tabac;TABAC TRION;"91 Rue De Trion";69005;Lyon 5eme;4,813675044153;45,758081977657
+DEP;Point service;50633;Tabac;TABAC DE LA BOURSE;"55 Place De La Bourse";69002;Lyon 2eme;4,836860040076;45,764597959806
+DEP;Point service;50634;Papeterie;PRESSE DE LA GARE;"1 Place De Paris";69009;Lyon 9eme;4,803671003433;45,779528013031
+DEP;Point service;50637;Tabac;BAR TABAC;"31 Rue Roger Salengro";69310;Pierre-Benite;4,821605062005;45,706159976732
+DEP;Point service;50638;Tabac;BAR TABAC;"6 Place Georges Pompidou";69290;Saint-Genis-Les-Ollieres;4,726006989802;45,757465993233
+DEP;Point service;50639;Tabac;PRESSE;"8 Rue Treves De Paques";69660;Collonges-Au-Mont-D Or;4,840373989214;45,816817037141
+DEP;Point service;50640;Tabac;LE ROUSSILLON;"181 Cours Lafayette";69006;Lyon 6eme;4,857053948901;45,763732980193
+DEP;Point service;50643;Tabac;TABAC PRESSE LOTO;"17 Quai Clemenceau";69300;Caluire-Et-Cuire;4,82311202094;45,791502025436
+DEP;Point service;50644;Tabac;TABAC JOKER;"104 Route Nationale 6";69380;Lissieu;4,748018978886;45,874617988991
+DEP;Point service;50645;Tabac;LE BRUCHET;"3 Rue De La Mairie";69210;Lentilly;4,662694035777;45,819466024956
+DEP;Point service;50647;Tabac;PRESSE;"68 Avenue Viviani";69200;Venissieux;4,872426009377;45,724089995808
+DEP;Point service;50648;Evenementiel;TABAC PRESSE EUREXPO;"Avenue Louis Bleriot";69680;Chassieu;4,957066979857;45,729088041308
+DEP;Point service;50651;Tabac;PRESSE;"5 Place General De Gaulle";69450;Saint-Cyr-Au-Mont-D Or;4,817233018416;45,81420698562
+DEP;Point service;50652;Tabac;TABAC DU DAUPHINE;"15 Rue Du Dauphine";69003;Lyon 3eme;4,864973964818;45,750830974918
+DEP;Point service;50656;Tabac;SNC LES LUMIERES;"372 Avenue Jean Jaures";69150;Decines-Charpieu;4,975611057099;45,772193970512
+DEP;Point service;50657;Tabac;TABAC DES MAISONS NEUVES;"5 Place Des Maisons Neuves";69100;Villeurbanne;4,876490015761;45,755848979427
+DEP;Point service;50659;Tabac;PRESSE;"2 Rue Gaspard Picard";69200;Venissieux;4,882186878286;45,699803315155
+DEP;Point service;50660;Tabac;SNC SALUT PUVILLAND;"83 Boulevard De La Croix Rousse";69004;Lyon 4eme;4,823750973736;45,77398903902
+DEP;Point service;50661;Tabac;la cervoise;"80 Route De La Liberation";69110;Sainte-Foy-Les-Lyon;4,778588033079;45,726410001195
+DEP;Point service;50662;Tabac;BAR LE CUSSET;"13 Rue Pierre Baratin";69100;Villeurbanne;4,901171995621;45,764963042897
+DEP;Point service;50663;Tabac;L AIGLON;"1 Cours Gambetta";69003;Lyon 3eme;4,840951987253;45,756056024511
+DEP;Point service;50664;Tabac;YANIKE;"5 Place Curial";69500;Bron;4,916656001741;45,737336019324
+DEP;Point service;50665;Tabac;PRESSE;"21 Avenue Jules Guesde";69200;Venissieux;4,888206983208;45,71736600728
+DEP;Point service;50666;Tabac;PRESSE;"Square Du Centre";69650;Quincieux;4,778686030175;45,914811039396
+DEP;Point service;50667;Tabac;LITTLE HAVANA;"2 Rue Dangon";69004;Lyon 4eme;4,820245056804;45,777526959539
+DEP;Point service;50668;Tabac;METRO FOCH;"20 Cours Franklin Roosevelt";69006;Lyon 6eme;4,845239053555;45,76864798588
+DEP;Point service;50671;Buvette;CAFE LE SAINT GERMAIN;"18 Rue 08 Mai 1945";69650;St Germain Au Mont D Or;4,804498981231;45,878435029465
+DEP;Point service;50672;Tabac;TABAC PRESSE;"1 Rue Marche";69009;Lyon 9eme;4,806955944591;45,774418042288
+DEP;Point service;50673;Tabac;TABAC LE GENEVE;"35 Route De Geneve";69140;Rillieux-La-Pape;4,885453972169;45,80596099173
+DEP;Point service;50674;Multiservices;LE FOURNIL NEUVILLOIS;"12 Place Ampere";69250;Neuville-Sur-Saone;4,839301974766;45,876522966532
+DEP;Point service;50675;Tabac;SAFARY;"35 Rue Seignemartin";69008;Lyon 8eme;4,881335960525;45,738257989523
+DEP;Point service;50676;Tabac;PRESSE DE CORBAS;"71 Rue Centrale";69960;Corbas;4,898808968443;45,671719016955
+DEP;Point service;50677;Tabac;CELESTIN;"2 Rue Des Archers";69002;Lyon 2eme;4,832181001391;45,75965406237
+DEP;Point service;50678;Tabac;LA MAISON DU FUMEUR;"18 Grande Rue";69800;Saint-Priest;4,943440028041;45,699782017355
+DEP;Point service;50680;Dsp1-Ccel;BERTHELET LYON EST;"19 Rue De L Avenir";69740;Genas;4,979575969257;45,719922966373
+DEP;Point service;50681;Dsp1-Ccel;BERTHELET VOYAGES;"36 Rue De La Republique";69740;Genas;4,998606047162;45,731540976574
+DEP;Point service;50682;Dsp1-Ccel;TABAC DES PLATANES;"8 Place De La Republique";69740;Genas;4,99792301804;45,73268996659
+DEP;Point service;50683;Dsp1-Ccel;TABAC LE STADE;"10 Rue Du Stade";69780;Saint Pierre De Chandieu;5,01041998885;45,64516202645
+DEP;Point service;50684;Dsp1-Ccel;TABAC DE L ESCALE;"35 Route Nationale 6";69720;Saint Bonnet De Mure;5,030134966392;45,692660974546
+DEP;Point service;50686;Dsp1-Ccel;SUPERETTE HUIT A HUIT;"2 Rue Du Vallon";69330;Pusignan;5,062072060945;45,759364977093
+DEP;Point service;50687;Tabac;LA CIVETTE;"7 Rue De La Republique";69001;Lyon 1er;4,836255955129;45,767274970516
+DEP;Point service;50688;Tabac;PRESSE;"25 Chemin Pierre Blanche";69570;Dardilly;4,750532971434;45,818570962785
+DEP;Point service;50689;Papeterie;PRESSE LA BASTERO;"260 Chemin De Fontanieres";69350;La Mulatiere;4,810875016191;45,725240972364
+DEP;Point service;50690;Tabac;LE CHARPENNE;"59 Rue Gabriel Peri";69100;Villeurbanne;4,866417957517;45,773107958929
+DEP;Point service;50691;Papeterie;HA PRESSE;"180 Rue Emile Zola";69150;Decines-Charpieu;4,962146063223;45,763544043077
+DEP;Point service;50692;Papeterie;LE RELAIS DE LA PRESSE;"12 Place Charles De Gaulle";69130;Ecully;4,777526048879;45,774978968536
+DEP;Point service;50694;Tabac;LE CLEMENCEAU;"107 Avenue Georges Clemenceau";69230;Saint-Genis-Laval;4,793336017601;45,694972970712
+DEP;Point service;50695;Tabac;PRESSE;"87 Rue Moncey";69003;Lyon 3eme;4,849357005818;45,761077006347
+DEP;Point service;50696;Tabac;PRESSE;"33 Rue De La Charite";69002;Lyon 2eme;4,831492034253;45,752093041123
+DEP;Point service;50697;Tabac;BAR LES ALLOBROGES;"44 Route De Vienne";69007;Lyon 7eme;4,8504520523;45,742250959726
+DEP;Point service;50698;Tabac;PRESSE;"115 Avenue Pierre Dumont";69290;Craponne;4,721386944111;45,746986980114
+DEP;Point service;50699;Tabac;DE LA MAIRIE;"47 Avenue Jean Mermoz";69008;Lyon 8eme;4,874603055631;45,735055007277
+DEP;Point service;50701;Tabac;LE SAINT CLAIR;"126 Grande Rue De Saint Clair";69300;Caluire-Et-Cuire;4,858360021865;45,790333970934
+DEP;Point service;50702;Tabac;DU PARC;"32 Rue Anatole France";69200;Venissieux;4,890877043066;45,721795957371
+DEP;Point service;50704;Tabac;BAR LE FELIX FAURE;"41 Avenue Felix Faure";69003;Lyon 3eme;4,85294203594;45,753053967332
+DEP;Point service;50705;Papeterie;PRESSE;"58 Cours Emile Zola";69100;Villeurbanne;4,868024054529;45,770761024085
+DEP;Point service;50707;Tabac;PRESSE;"4 Place Des Terreaux";69001;Lyon 1er;4,833643022566;45,767801977989
+DEP;Point service;50708;Tabac;LE PEISSEL;"15 Rue Francois Peissel";69300;Caluire-Et-Cuire;4,838156065851;45,792731034356
+DEP;Point service;50710;Multiservices;AUCHAN CALUIRE;"10 Chemin Petit";69300;Caluire-Et-Cuire;4,857580032062;45,803696999212
+DEP;Point service;50712;Tabac;PRESSE;"50 Avenue Des Marronniers";69270;Fontaines-Sur-Saone;4,862392942178;45,821807044089
+DEP;Point service;50713;Tabac;PRESSE;"13 Cours Vitton";69006;Lyon 6eme;4,851197053311;45,769612981355
+DEP;Point service;50714;Tabac;LA NOIX DE COCO;"2 Place Xavier Ricard";69110;Sainte-Foy-Les-Lyon;4,804689034191;45,736622004508
+DEP;Point service;50715;Tabac;PRESSE;"2 Place De La Croix Jaune";69540;Irigny;4,821086958283;45,673439041026
+DEP;Point service;50716;Tabac;LE MONT D OR;"40 Avenue Lanessan";69410;Champagne-Au-Mont-D Or;4,793097046445;45,79477904254
+DEP;Point service;50717;Tabac;PRESSE DE COUZON;"6 Rue De La Republique";69270;Couzon;4,831381016093;45,845239001277
+DEP;Point service;50718;Dsp1-Ccel;SNC GARCIA GABRIEL;"2 Place De La Bascule";69330;Pusignan;5,06827602334;45,757686986046
+DEP;Point service;50719;Tabac;PRESSE DES TROIS RENARDS;"17 Place Des Trois Renerds";69160;Tassin-La-Demi-Lune;4,773176953771;45,763414995248
+DEP;Point service;50720;Tabac;PRESSE;"58 Avenue De L Europe";69140;Rillieux-La-Pape;4,902392965079;45,817631007403
+DEP;Point service;50721;Tabac;DU METRO;"9 Rue Louis Loucheur";69009;Lyon 9eme;4,8042459949;45,768017043472
+DEP;Point service;50722;Tabac;LE CALYPSO;"64 Rue Pasteur";69300;Caluire-Et-Cuire;4,841932980964;45,790256035564
+DEP;Point service;50723;Tabac;PRESSE;"79 Avenue Des Freres Lumiere";69008;Lyon 8eme;4,868141056228;45,744769021214
+DEP;Point service;50724;Tabac;LA TABACTIERE;"49 Cours Richard Vitton";69003;Lyon 3eme;4,891106043952;45,753640027876
+DEP;Point service;50725;Tabac;PRESSE;"13 Rue De La Mairie";69570;Dardilly;4,75356402488;45,805483972214
+DEP;Point service;50726;Tabac;PRESSE;"11 Rue Du 11 Novembre 1918";69780;Mions;4,955426981088;45,663045967955
+DEP;Point service;50727;Tabac;DES BATTIERES;"27 Avenue General Eisenhower";69005;Lyon 5eme;4,782295978514;45,753903002154
+DEP;Point service;50728;Tabac;PRESSE DES ARCADE;"100 Rue Du 23 Aout 1944";69780;Mions;4,952405947029;45,664361970337
+DEP;Point service;50729;Tabac;PRESSE;"76 Cours Vitton";69006;Lyon 6eme;4,856762021634;45,769701024841
+DEP;Point service;50730;Tabac;BAR;"64 Grande Rue Grande Rue";69600;Oullins;4,809320011168;45,717110980516
+DEP;Point service;50731;Multiservices;PROXI;"3 Rue De Verdun";69280;Ste Consorce;4,690578003268;45,775436998955
+DEP;Point service;50732;Tabac;BAR LE SORBIER;"6 Place Georges Pompidou";69290;Saint-Genis-Les-Ollieres;4,725984029584;45,757414006868
+DEP;Point service;50733;Tabac;DES MARGNOLLES;"5 Rue Des Margnolles";69300;Caluire-Et-Cuire;4,833429049646;45,782264014441
+DEP;Point service;50736;Tabac;PRESSE;"20 Place Jean Jaures";69520;Grigny;4,792162955254;45,609349042773
+DEP;Point service;50738;Tabac;LE PRESSE BOOK;"204 Avenue Jean Jaures";69007;Lyon 7eme;4,836082939973;45,73579897308
+DEP;Point service;50742;Tabac;LE GUIMET;"69 Rue Duquesne";69006;Lyon 6eme;4,84846204219;45,773133032336
+DEP;Point service;50743;Tabac;PRESSE;"1 Avenue Commandant L Herminier";69100;Villeurbanne;4,885618045363;45,770742011386
+DEP;Point service;50744;Tabac;PRESSE;"14 Boulevard Emile Zola";69600;Oullins;4,804536015394;45,719662988745
+DEP;Point service;50745;Tabac;LE FLASH;"12 Rue Greuze";69100;Villeurbanne;4,89362300238;45,773238956437
+DEP;Point service;50746;Tabac;RELAIS ROUTE DE LYON;"10 Place De La Porte De Lyon";69570;Dardilly;4,760200064291;45,821503043705
+DEP;Point service;50747;Multiservices;AUCHAN PORTE DE LYON;"23 Porte De Lyon";69570;Dardilly;4,759486985439;45,820776009742
+DEP;Point service;50748;Tabac;PRESSE DE ROULE;"10 Rue De Navarre";69350;La Mulatiere;4,811386994921;45,728642005302
+DEP;Point service;50749;Tabac;PRESSE;"94 Rue Garibaldi";69006;Lyon 6eme;4,849814024585;45,767663023309
+DEP;Point service;50751;Tabac;PRESSE;"72 Rue Marcel Bramet";69500;Bron;4,920383941724;45,743200992081
+DEP;Point service;50757;Papeterie;LE KIOSQUE;"Place Le Viste";69002;Lyon 2eme;4,834617953847;45,758054988215
+DEP;Point service;50758;Tabac;LE NEWS BAR;"172 Grande Rue Rue";69600;Oullins;4,804436947294;45,713093031091
+DEP;Point service;50761;Tabac;LE 7/7;"159 Rue Challemel Lacour";69008;Lyon 8eme;4,853444979023;45,729816038692
+DEP;Point service;50762;Tabac;LE TOLSTOI;"121 Cours Tolstoi";69100;Villeurbanne;4,883537039168;45,761384982831
+DEP;Point service;50765;Tabac;PRESSE;"7 Place Gabriel Peri";69007;Lyon 7eme;4,842577531309;45,75476146633
+DEP;Point service;50766;Tabac;SNC DE LA SOIE;"37 Rue De La Soie";69100;Villeurbanne;4,918191512953;45,761630969633
+DEP;Point service;50767;Tabac;LE BALTO;"8 Avenue Gabriel Peri";69190;Saint-Fons;4,855137336388;45,708005989984
+GAB;Guichet automatique bancaire;1521;CCM SAINT PRIEST;4;"8 Rue Colette";69800;Saint-Priest;4,939818719869;45,691503060527
+GAB;Guichet automatique bancaire;1522;CCM MIONS;5;"1 Rue Du 19 Mars 1962";69780;Mions;4,958046190845;45,665397339202
+GAB;Guichet automatique bancaire;1523;CCM LA TOUR DE SALVAGNY;104;"6 Avenue De L Hippodrome";69890;La Tour De Salvagny;4,719462593943;45,816134907913
+GAB;Guichet automatique bancaire;1524;CCM BRON;7;"140 Avenue Franklin Roosevelt";69500;Bron;4,908256708265;45,733841515083
+GAB;Guichet automatique bancaire;1525;CCM NEUVILLE SUR SAONE;8;"12 Quai Pasteur";69250;Neuville-Sur-Saone;4,839070953893;45,875514729005
+GAB;Guichet automatique bancaire;1526;SPAR ST GERMAIN AU MONT D OR;9;"1 Place Du 11 Novembre 1918";69650;St Germain Au Mont D'Or;4,803193919491;45,883595532797
+GAB;Guichet automatique bancaire;1527;CCM LYON BELLECOUR;113;"15 Place Bellecour";69002;Lyon 2eme;4,834370898922;45,757748501637
+GAB;Guichet automatique bancaire;1528;CCM LYON ST JEAN;10;"1 Place Du Change";69005;Lyon 5eme;4,828695747256;45,764422370552
+GAB;Guichet automatique bancaire;1529;CCM LYON JEAN MACE;93;"79 Avenue Jean Jaures";69007;Lyon 7eme;4,843303210742;45,747027582917
+GAB;Guichet automatique bancaire;1531;CCM SAINT FONS;121;"85 Avenue Jean Jaures";69190;Saint-Fons;4,855608390683;45,709372064555
+GAB;Guichet automatique bancaire;1532;CCM VENISSIEUX;14;"12 Rue Gambetta";69200;Venissieux;4,88353143699;45,698511161943
+GAB;Guichet automatique bancaire;1533;CCM PIERRE BENITE;15;"18 Place Jean Jaures";69310;Pierre-Benite;4,82329312113;45,703584249108
+GAB;Guichet automatique bancaire;1534;CCM LYON OUEST VAISE;16;"22 Rue Sergent Michel Berthet";69009;Lyon 9eme;4,805659840373;45,772165380875
+GAB;Guichet automatique bancaire;1535;CM LYON BERTHET;102;"44 Rue Sergent Michel Berthet";69009;Lyon 9eme;4,805801897315;45,773212332307
+GAB;Guichet automatique bancaire;1536;CCM LYON OUEST VAISE.;18;"2 Rue Du 24 Mars 1852";69009;Lyon 9eme;4,805947961408;45,78073121005
+GAB;Guichet automatique bancaire;1537;CCM TASSIN LA DEMI LUNE;20;"52 Avenue De La Republique";69160;Tassin-La-Demi-Lune;4,779505262555;45,764067251272
+GAB;Guichet automatique bancaire;1538;CCM VILLEURBANNE GRATTE CIEL;19;"1 Avenue Aristide Briand";69100;Villeurbanne;4,879607829792;45,76693213909
+GAB;Guichet automatique bancaire;1539;CM OULLINS;21;"121 Rue Grande Rue";69600;Oullins;4,821658051299;45,710098236665
+GAB;Guichet automatique bancaire;1540;CCM LYON CROIX ROUSSE J AMBRE;112;"1 Place Joannes Ambre";69004;Lyon 4eme;4,833489069364;45,78123707614
+GAB;Guichet automatique bancaire;1541;CCM LYON REPUBLIQUE;23;"12 Rue De La Republique";69002;Lyon 2eme;4,834789924634;45,758316428536
+GAB;Guichet automatique bancaire;1542;CCM LYON BROTTEAUX MASSENA;107;"36 Cours Vitton";69006;Lyon 6eme;4,854150559259;45,769632230563
+GAB;Guichet automatique bancaire;1543;CCM VILLEURBANNE GRANDCLEMENT;25;"33 Place Jules Grandclement";69100;Villeurbanne;4,8877361073;45,758887260791
+GAB;Guichet automatique bancaire;1544;CCM STE FOY LES LYON;26;"10 Place Xavier Ricard";69110;Sainte-Foy-Les-Lyon;4,806710688114;45,736643867456
+GAB;Guichet automatique bancaire;1545;CCM LYON PART DIEU LAFAYETTE;1;"154 Cours Lafayette";69003;Lyon 3eme;4,855806850585;45,763716319592
+GAB;Guichet automatique bancaire;1546;CCM CALUIRE JEAN MOULIN;27;"5 Montee Castellane";69300;Caluire-Et-Cuire;4,846800274553;45,79920677174
+GAB;Guichet automatique bancaire;1547;CCM LYON SAXE PREFECTURE;28;"91 Avenue Marechal De Saxe";69003;Lyon 3eme;4,846010333701;45,760429408028
+GAB;Guichet automatique bancaire;1548;CCM CRAPONNE;29;"117 Avenue Pierre Dumond";69290;Craponne;4,721483265795;45,747399961869
+GAB;Guichet automatique bancaire;1549;CCM MEYZIEU;131;"66 Rue De La Republique";69330;Meyzieu;5,003376787031;45,76678468629
+GAB;Guichet automatique bancaire;1550;CCM LYON LE POINT DU JOUR;31;"4 Rue Des Aqueducs";69005;Lyon 5eme;4,796862048385;45,75671560211
+GAB;Guichet automatique bancaire;1551;CM LYON FRERES LUMIERE;32;"4 Place Ambroise Courtois";69008;Lyon 8eme;4,872122360348;45,744876470042
+GAB;Guichet automatique bancaire;1552;CCM LYON DUQUESNE;33;"18 Rue Duquesne";69006;Lyon 6eme;4,844895404918;45,77263918459
+GAB;Guichet automatique bancaire;1553;CCM VILLEURBANNE CHARPENNES;111;"3 Cours Emile Zola";69100;Villeurbanne;4,862884091449;45,770520134138
+GAB;Guichet automatique bancaire;1554;CM LYON MONTCHAT;35;"70 Cours Docteur Long";69003;Lyon 3eme;4,886325867562;45,750041368496
+GAB;Guichet automatique bancaire;1555;CCM ECULLY;36;"4 Rue Benoit Tabard";69130;Ecully;4,777429727547;45,773811464818
+GAB;Guichet automatique bancaire;1556;CCM LYON MOULIN A VENT;37;"238 Route De Vienne";69008;Lyon 8eme;4,854028538566;45,729937788218
+GAB;Guichet automatique bancaire;1557;CCM VILLEURBANNE TOTEM;38;"52 Cours Tolstoi";69100;Villeurbanne;4,875155543179;45,76368318754
+GAB;Guichet automatique bancaire;1558;CCM DECINES CHARPIEU;39;"112 Avenue Jean Jaures";69150;Decines-Charpieu;4,947018823944;45,769330155167
+GAB;Guichet automatique bancaire;1559;CCM LYON MARECHAL LYAUTEY;40;"18 Place Marechal Lyautey";69006;Lyon 6eme;4,842108214167;45,767775268315
+GAB;Guichet automatique bancaire;1560;CCM LYON GAMBETTA;100;"52 Cours Gambetta";69007;Lyon 7eme;4,846801618067;45,753995785353
+GAB;Guichet automatique bancaire;1561;CCM LYON ROUGET DE LISLE;41;"34 Avenue Lacassagne";69003;Lyon 3eme;4,867409171245;45,754301392301
+GAB;Guichet automatique bancaire;1562;CCM CHARBONNIERES LES BAINS;119;"1 Square De Verdun";69260;Charbonnieres-Les-Bains;4,736425096731;45,782558397868
+GAB;Guichet automatique bancaire;1563;CCM FRANCHEVILLE;108;"36 Rue Grande ";69340;Francheville;4,772347249908;45,739100930489
+GAB;Guichet automatique bancaire;1564;CCM CHAMPAGNE AU MONT D OR;43;"46 Avenue De Lanessan";69410;Champagne-Au-Mont-D'Or;4,792733548728;45,795315085988
+GAB;Guichet automatique bancaire;1565;CCM VILLEURBANNE CROIX LUIZET;44;"111 Avenue Roger Salengro";69100;Villeurbanne;4,87917689008;45,778337967736
+GAB;Guichet automatique bancaire;1566;CCM LYON GERLAND;45;"58 Avenue Debourg";69007;Lyon 7eme;4,829659572733;45,731538819009
+GAB;Guichet automatique bancaire;1567;CCM LYON ETATS UNIS;46;"77 Boulevard Des Etats Unis";69008;Lyon 8eme;4,865681952532;45,732549700819
+GAB;Guichet automatique bancaire;1568;CCM ST GENIS LAVAL;48;"144 Avenue Georges Clemenceau";69230;Saint-Genis-Laval;4,794677813155;45,697193463403
+GAB;Guichet automatique bancaire;1569;CCM RILLIEUX LA PAPE;50;"3006 Route De Strasbourg";69140;Rillieux-La-Pape;4,896972833347;45,820668318024
+GAB;Guichet automatique bancaire;1570;CCM LYON PERRACHE;51;"5 Cours Charlemagne";69002;Lyon 2eme;4,824773415177;45,746830631276
+GAB;Guichet automatique bancaire;1571;CCM CHASSIEU;52;"5 Avenue Du Progres";69680;Chassieu;4,969214226051;45,73769326396
+GAB;Guichet automatique bancaire;1572;CME LYON JEAN JAURES;118;"179 Avenue Jean Jaures";69007;Lyon 7eme;4,837836846242;45,737862764875
+GAB;Guichet automatique bancaire;1573;CME VILLEURBANNE;137;"18 Cours Emile Zola";69100;Villeurbanne;4,864428223384;45,770646151631
+GAB;Guichet automatique bancaire;1574;CMPS LYON;54;"31 Rue Garibaldi";69006;Lyon 6eme;4,850171676813;45,771729192038
+GAB;Guichet automatique bancaire;1575;CIC IBB LYON;109;"6 Avenue Jean Jaures";69007;Lyon 7eme;4,847147356216;45,753589477746
+GAB;Guichet automatique bancaire;1576;CIC IBERBANCO VILLEURBANNE;56;"52 Cours Emile Zola";69100;Villeurbanne;4,874354614398;45,770614095223
+GAB;Guichet automatique bancaire;1577;CICLB LYON REPUBLIQUE 2;2;"8 Rue De La Republique";69001;Lyon 1er;4,836312907205;45,765981122224
+GAB;Guichet automatique bancaire;1578;CIC LYON BELLECOUR BOUTIQUES;57;"26 Place Bellecour";69002;Lyon 2eme;4,8314397704;45,756940461923
+GAB;Guichet automatique bancaire;1579;CIC CHAMPAGNE AU MONT D'OR 1;58;"1 Rue Louis Juttet";69410;Champagne-Au-Mont-D'Or;4,792546413572;45,794450117381
+GAB;Guichet automatique bancaire;1580;CICLB VILLEURBANNE TOTEM 1;59;"1 Place Albert Thomas";69100;Villeurbanne;4,87444050994;45,763809257615
+GAB;Guichet automatique bancaire;1581;CICLB LYON FOCH 2;60;"21 Cours Franklin Roosevelt";69006;Lyon 6eme;4,846193455332;45,769114261514
+GAB;Guichet automatique bancaire;1582;CIC LYON GUILLOTIERE 3;61;"80 Cours De La Liberte";69003;Lyon 3eme;4,84325028213;45,755853423854
+GAB;Guichet automatique bancaire;1583;CICLB LYON JEAN-MACE 2;134;"1 Place Jean Mace";69007;Lyon 7eme;4,84205508845;45,74548058806
+GAB;Guichet automatique bancaire;1584;CIC RILLIEUX VILLAGE;63;"60 Place De Verdun";69140;Rillieux-La-Pape;4,897078932829;45,820754296305
+GAB;Guichet automatique bancaire;1585;CIC VENISSIEUX;64;"12 Rue Paul Bert";69200;Venissieux;4,885771535789;45,700327599177
+GAB;Guichet automatique bancaire;1586;CIC OULLINS;65;"71 Rue Grande Rue";69600;Oullins;4,80991166001;45,717072106179
+GAB;Guichet automatique bancaire;1587;CIC DECINES CHARPIEU;66;"218 Avenue Jean Jaures";69150;Decines-Charpieu;4,957540945274;45,770593840496
+GAB;Guichet automatique bancaire;1588;CICLB LYON CROIX ROUSSE N°1;67;"2 Place De La Croix Rousse";69004;Lyon 4eme;4,832197950012;45,775278223797
+GAB;Guichet automatique bancaire;1589;CIC LYON CONFLUENCE;68;"56 Cours Charlemagne";69002;Lyon 2eme;4,822932345701;45,744861730183
+GAB;Guichet automatique bancaire;1590;CICLB CORBAS VILLAGE 1;106;"68 Rue Centrale";69960;Corbas;4,89895194378;45,67252947203
+GAB;Guichet automatique bancaire;1591;CIC VILLEURBANNE GRATTE CIEL;69;"22 Rue Michel Servet";69100;Villeurbanne;4,879085722309;45,768071748961
+GAB;Guichet automatique bancaire;1592;CICLB LYON PARC;70;"27 Boulevard Des Brotteaux";69006;Lyon 6eme;4,857282823013;45,766743288874
+GAB;Guichet automatique bancaire;1593;CIC LYON LAFAYETTE N°1;71;"28 Cours Lafayette";69003;Lyon 3eme;4,845448330265;45,763127320283
+GAB;Guichet automatique bancaire;1594;CICLB CALUIRE 2;72;"52 Rue Jean Moulin";69300;Caluire-Et-Cuire;4,84654165729;45,798928827132
+GAB;Guichet automatique bancaire;1595;CICLB PART DIEU VILLETTE 1;73;"206 Rue Paul Bert";69003;Lyon 3eme;4,863014098587;45,757143361234
+GAB;Guichet automatique bancaire;1596;CICLB CIVRIEUX D AZERGUES 1;110;"1 Place Des Arcades";69380;Civrieux D'Azergues;4,701424199163;45,855329545133
+GAB;Guichet automatique bancaire;1597;CICLB CRAPONNE;75;"46 Place Andree Marie Perrin";69290;Craponne;4,723940399818;45,74636097361
+GAB;Guichet automatique bancaire;1598;CICLB LYON VAISE;76;"2 Rue Grande De Vaise";69009;Lyon 9eme;4,80670490874;45,774920337704
+GAB;Guichet automatique bancaire;1599;CICLB TASSIN DEMI LUNE;77;"129 Avenue Charles De Gaulle";69160;Tassin-La-Demi-Lune;4,778921654948;45,761509607497
+GAB;Guichet automatique bancaire;1600;CIC LYON MONTCHAT;78;"61 Cours Docteur Long";69003;Lyon 3eme;4,885622898036;45,749832387385
+GAB;Guichet automatique bancaire;1601;CICLB LYON MONPLAISIR 2;116;"102 Avenue Des Freres Lumiere";69008;Lyon 8eme;4,870257275153;45,744256534265
+GAB;Guichet automatique bancaire;1602;CICLB LYON BACHUT 1;79;"1 Avenue Paul Santy";69008;Lyon 8eme;4,870789259216;45,735362622758
+GAB;Guichet automatique bancaire;1603;CICLB CHASSIEU 1;99;"38 Avenue Des Freres Montgolfier";69680;Chassieu;4,973588264389;45,724736470259
+GAB;Guichet automatique bancaire;1604;CICLB BRON 1;81;"185 Avenue Franklin Roosevelt";69500;Bron;4,913296884468;45,732248578816
+GAB;Guichet automatique bancaire;1605;CIC SAINT PRIEST;97;"3 Avenue De La Gare";69800;Saint-Priest;4,937106592959;45,689878020861
+GAB;Guichet automatique bancaire;1606;CICLB NEUVILLE SUR SAONE;83;"23 Rue Victor Hugo";69250;Neuville-Sur-Saone;4,840906033511;45,877141677513
+GAB;Guichet automatique bancaire;1607;CICLB GIVORS;84;"6 Place Jean Jaures";69700;Givors;4,775027286344;45,582349301121
+GAB;Guichet automatique bancaire;1608;CICLB LYON POINT DU JOUR 1;85;"4 Rue Joliot Curie";69005;Lyon 5eme;4,7918951256;45,757223618722
+GAB;Guichet automatique bancaire;1609;CIC LYON GERLAND;86;"32 Rue Jacques Monod";69007;Lyon 7eme;4,830197576193;45,730604873991
+GAB;Guichet automatique bancaire;1610;CICLB ECULLY;87;"8 Place Charles De Gaulle";69130;Ecully;4,778520755642;45,77472142827
+GAB;Guichet automatique bancaire;1611;CICLB MEYZIEU;120;"100 Rue De La Republique";69330;Meyzieu;5,010145667064;45,765104021387
+GAB;Guichet automatique bancaire;1612;CIC VAULX EN VELIN 1;88;"94 Rue De La Republique";69120;Vaulx-En-Velin;4,928868858264;45,785666714448
+GAB;Guichet automatique bancaire;1613;CIC;132;"28 Avenue De L Europe";69140;Rillieux-La-Pape;4,895334809101;45,814665409402
+GAB;Guichet automatique bancaire;1614;LYON ESPACE 75 N°1;89;"75 Rue De La Republique";69002;Lyon 2eme;4,834949950553;45,758589475997
+GAB;Guichet automatique bancaire;1615;CICLB LYON PLACE ST LOUIS;135;"13 Rue De La Madeleine";69007;Lyon 7eme;4,848150343663;45,748838581075
+GAB;Guichet automatique bancaire;1616; CICLB LYON ST JEAN 1;90;"66 Rue Saint Jean";69005;Lyon 5eme;4,827547637921;45,761499405162
+GAB;Guichet automatique bancaire;1617;CICLB ST GENIS 2;91;"1 Rue Les Basses Barolle";42260;St Germain Laval;4,79290266606;45,679268794983
+GAB;Guichet automatique bancaire;1618;CICLB UNIVERSITE LYON II - BRON;117;"5 Avenue Pierre Mendes France";69500;Bron;4,915378895104;45,722997710752
+GAB;Guichet automatique bancaire;1619;CCM SAINT BONNET DE MURE;47;"1 Montee Du Chateau";69720;Saint Laurent De Mure;5,02989533388;45,692735684794
+GAB;Guichet automatique bancaire;1620;ccm brignais;49;"134 Rue Du Général De Gaulle";69530;Brignais;4,753997071229;45,673092006215
+GAB;Guichet automatique bancaire;1621;CICLB BRIGNAIS;80;"169 Rue Du Général De Gaulle";69530;Brignais;4,753790003539;45,671761017103
+GAB;Guichet automatique bancaire;1726;Crédit Mutuel Croix rousse;94;"143 Boulevard De La Croix Rousse";69004;Lyon 4eme;4,828557785395;45,774566220882
+GAB;Guichet automatique bancaire;1781;CIC LYON PART DIEU CC METRO 1;122;"17 Rue Docteur Bouchut";69003;Lyon 3eme;4,856799914404;45,761733636377
+GAB;Guichet automatique bancaire;1782;CIC Lyon La BUIRE;123;"96 Avenue Felix Faure";69003;Lyon 3eme;4,858290096237;45,753562980071
+RIS;Relais Infos Services;21849;Relais Info Service TCL Gare de vaise;;"Rue Du 24 Mars 1852";69009;Lyon 9eme;4,804761291116;45,780916342192
+RIS;Relais Infos Services;21850;Relais Info Service TCL Part Dieu Villette;;"30 Rue De La Villette";69003;Lyon 3eme;4,861807895094;45,760485330888
+RIS;Relais Infos Services;21853;Relais Info Service TCL Part Dieu vivier merle;;"11 Boulevard Marius Vivier Merle";69003;Lyon 3eme;4,857651478519;45,761592371764

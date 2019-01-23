@@ -17,6 +17,7 @@
 pub mod export;
 pub mod merge;
 pub mod osm;
+pub mod sytral;
 
 use navitia_poi_model::objects::{Poi, PoiType};
 

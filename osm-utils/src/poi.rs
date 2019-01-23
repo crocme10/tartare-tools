@@ -162,6 +162,7 @@ fn parse_poi(
         coord,
         poi_type_id: poi_type.id.clone(),
         properties: make_properties(osmobj.tags()),
+        visible: true,
     })
 }
 

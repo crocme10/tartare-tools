@@ -1,0 +1,22 @@
+cod_typ_poi;lib_typ_poi;Idt;Lib;Capacite;Place_Handi;Horaires;P_surv;coo_x_wgs84;coo_y_wgs84
+REL;Parc Relais TCL;ALP;Parc Relais TCL Porte des Alpes;389;10;Ouvert de 4h30 à 1h00 du lundi au dimanche.;O;4,926048384073;45,71873279927
+REL;Parc Relais TCL;BELA;Parc Relais TCL St Priest Bel Air;123;4;Ouvert de 5h00 à 17h30 du lundi au dimanche,  en accès libre en dehors de ces horaires;O;4,956860402653;45,693001888899
+REL;Parc Relais TCL;BON;Parc Relais TCL Laurent Bonnevay;655;20;Ouvert de 4h30 à 1h00 du lundi au samedi  fermé le dimanche et jours fériés. Niveau 0 en accès libre le dimanche.;O;4,909252182067;45,765467903422
+REL;Parc Relais TCL;CUI;Parc Relais TCL Cuire;80;2;Ouvert de 4h30 à 1h00, du lundi au dimanche.;N;4,831363374701;45,786425018293
+REL;Parc Relais TCL;DECC;Parc Relais TCL Décines Centre;108;3;Ouvert de 4h30 à 1h00, du lundi au dimanche.;O;4,956415070652;45,772208914013
+REL;Parc Relais TCL;DECG;Parc Relais TCL Décines Grand Large;57;2;Ouvert de 4h30 à 1h00, du lundi au dimanche.;O;4,976984755071;45,774913798625
+REL;Parc Relais TCL;FEY;Parc Relais TCL Feyssine;80;0; Ouvert du lundi au dimanche.;O;4,881494147479;45,786524686561
+REL;Parc Relais TCL;GOR;Parc Relais TCL Gorge de Loup;680;19;Ouvert de 4h30 à 1h00, du lundi au samedi. Fermé dimanche et jours fériés.;O;4,802718424473;45,766507895134
+REL;Parc Relais TCL;GREY;Parc Relais TCL Grezieu la Varenne;69;2;ouvert de 4h30 à 1h00 du lundi au dimanche.;N;4,697207012576;45,748564537613
+REL;Parc Relais TCL;HFVE;Parc Relais TCL Hopital Feyzin Vénissieux;80;2;Ouvert de 4h30 à 1h00, du lundi au dimanche.;O;4,864562868429;45,688594530507
+REL;Parc Relais TCL;MERP;Parc Relais TCL Mermoz pinel;416;10;Ouvert de 4h30 à 01h00 du lundi au dimanche;O;4,889788364744;45,730483686058
+REL;Parc Relais TCL;MEYG;Parc Relais TCL Meyzieu Gare;107;3;Ouvert de 4h30 à 1h00, du lundi au dimanche.;O;4,99742524779;45,77171279701
+REL;Parc Relais TCL;MEYP;Parc Relais TCL Meyzieu les Panettes;590;14;Ouvert de 4h30 à 1h00  du lundi au vendredi. Fermé le samedi, dimanche et jours fériés.;O;5,034473176949;45,766228818241
+REL;Parc Relais TCL;MEYZ;Parc Relais TCL Meyzieu ZI;450;10;Ouvert de 4h30 à 1h00, du lundi au dimanche.;O;5,031553659564;45,768333378785
+REL;Parc Relais TCL;OULN;Parc Relais TCL Oullins La Saulaie Nord;107;2;Ouvert de 4h30 à 1h00, du lundi au dimanche.;O;4,814091397023;45,717192313164
+REL;Parc Relais TCL;OULS;Parc Relais TCL Oullins La Saulaie Sud;306;7;Ouvert de 4h30 à 1h00, du lundi au dimanche.;O;4,815134004709;45,715234045563
+REL;Parc Relais TCL;PAR;Parc Relais TCL Parilly;310;6;Ouvert de 4h30 à 1h00, du lundi au dimanche.;O;4,88619340547;45,720554706061
+REL;Parc Relais TCL;SOI;Parc Relais TCL Vaulx en Velin La Soie;474;10;Ouvert de 4h30 à 1h00, du lundi au dimanche.;O;4,922237597751;45,76044381711
+REL;Parc Relais TCL;VAI1;Parc Relais TCL Vaise 1;521;10;Ouvert de 4h30 à 1h00, du lundi au dimanche.;O;4,805585209521;45,781665854028
+REL;Parc Relais TCL;VAI2;Parc Relais TCL  Vaise 2;748;18;Ouvert de 4h30 à 1h du lundi au vendredi, fermé les jours fériés.Fermé au mois d'août. ;O;4,806236836552;45,782425629366
+REL;Parc Relais TCL;VEN;Parc Relais TCL  Gare deVénissieux;745;21;Ouvert de 4h30 à 1h00. Du lundi au samedi. Fermé le dimanche et jours fériés.;O;4,888046439619;45,706191388399
