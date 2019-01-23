@@ -83,7 +83,7 @@ fn test_export_sytral_pois_ko_poi_type_id_manquant() {
         Ok(_) => assert!(false),
         Err(e) => assert_eq!(e.iter_chain().map(|err| format!("{}", err)).collect::<Vec<String>>(),
                              vec!["Error reading \"./fixtures/sytral2navitia-pois/input/sytral_poi_echec2_poi_type_id_manquant/POI_TCL.csv\"",
-                                  "CSV deserialize error: record 1 (line: 1, byte: 92): empty string not allowed in deserialization"]),
+                                  "CSV deserialize error: record 1 (line: 2, byte: 92): empty string not allowed in deserialization"]),
     };
 }
 
@@ -114,7 +114,7 @@ fn test_export_sytral_pois_ko_poi_x_manquant() {
         Ok(_) => assert!(false),
         Err(e) => assert_eq!(e.iter_chain().map(|err| format!("{}", err)).collect::<Vec<String>>(),
                              vec!["Error reading \"./fixtures/sytral2navitia-pois/input/sytral_poi_echec3_poi_x_manquant/POI_TCL.csv\"",
-                                  "CSV deserialize error: record 1 (line: 1, byte: 92): cannot parse float from empty string"]),
+                                  "CSV deserialize error: record 1 (line: 2, byte: 92): cannot parse float from empty string"]),
     };
 }
 
@@ -127,6 +127,6 @@ fn test_export_sytral_pois_ko_poi_y_manquant() {
         Ok(_) => assert!(false),
         Err(e) => assert_eq!(e.iter_chain().map(|err| format!("{}", err)).collect::<Vec<String>>(),
                              vec!["Error reading \"./fixtures/sytral2navitia-pois/input/sytral_poi_echec3_poi_y_manquant/parcs_velos.csv\"",
-                                  "CSV deserialize error: record 2 (line: 2, byte: 161): cannot parse float from empty string"]),
+                                  "CSV deserialize error: record 2 (line: 3, byte: 160): cannot parse float from empty string"]),
     };
 }

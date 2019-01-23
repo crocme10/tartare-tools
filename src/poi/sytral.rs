@@ -20,7 +20,7 @@ use failure::bail;
 use failure::format_err;
 use failure::ResultExt;
 use log::info;
-use osm_utils::objects::{
+use navitia_poi_model::objects::{
     Coord, Poi as NavitiaPoi, PoiType as NavitiaPoiType, Property as NavitiaPoiProperty,
 };
 use serde_derive::{Deserialize, Serialize};
@@ -94,7 +94,7 @@ struct Poi {
     #[serde(rename = "Place_Handi")]
     disabled_capacity: Option<u64>,
     #[serde(rename = "Horaires")]
-    openning: Option<String>,
+    opening: Option<String>,
     #[serde(rename = "P_surv")]
     supervised: Option<String>,
     #[serde(rename = "lib_typ_pvel")]
@@ -105,19 +105,19 @@ fn add_poi_with_properties(
     sytral_poi: &Poi,
     poi_id: String,
     poi_label: String,
+    poi_type: String,
     properties: Vec<NavitiaPoiProperty>,
     pois: &mut Vec<NavitiaPoi>,
-) -> Result<()> {
+) {
     let visible = !vec!["GAB", "DEP", "BET"].contains(&sytral_poi.poi_type.as_str());
     pois.push(NavitiaPoi {
         id: format!("TCL:{}:{}", sytral_poi.poi_type, poi_id),
         name: poi_label,
         coord: Coord::new(sytral_poi.coord_x, sytral_poi.coord_y),
-        poi_type_id: sytral_poi.poi_type.to_string(),
+        poi_type_id: poi_type,
         properties,
         visible,
     });
-    Ok(())
 }
 
 fn extract_from_main_file<P: AsRef<Path>>(
@@ -160,18 +160,19 @@ fn extract_from_main_file<P: AsRef<Path>>(
                 value: city_label.to_string(),
             });
         }
+        let poi_type = format!("TCL:{}", sytral_poi.poi_type);
+        poi_types.entry(poi_type.clone()).or_insert(NavitiaPoiType {
+            id: poi_type.clone(),
+            name: sytral_poi.poi_type_label.clone(),
+        });
         add_poi_with_properties(
             &sytral_poi,
             sytral_poi.id_main.clone().unwrap(),
             sytral_poi.label_main.clone().unwrap(),
+            poi_type,
             properties,
             pois,
-        )?;
-        let poi_type = format!("TCL:{}", sytral_poi.poi_type);
-        poi_types.entry(poi_type.clone()).or_insert(NavitiaPoiType {
-            id: poi_type,
-            name: sytral_poi.poi_type_label,
-        });
+        );
     }
     Ok(())
 }
@@ -209,7 +210,7 @@ fn extract_from_parcs_relais<P: AsRef<Path>>(
                 value: disabled,
             });
         }
-        if let Some(opening) = &sytral_poi.openning {
+        if let Some(opening) = &sytral_poi.opening {
             properties.push(NavitiaPoiProperty {
                 key: "opening".to_string(),
                 value: opening.to_string(),
@@ -237,19 +238,19 @@ fn extract_from_parcs_relais<P: AsRef<Path>>(
             key: "ref".to_string(),
             value: sytral_poi.id_vr.clone().unwrap(),
         });
+        let poi_type = "amenity:parking".to_string();
+        poi_types.entry(poi_type.clone()).or_insert(NavitiaPoiType {
+            id: poi_type.clone(),
+            name: sytral_poi.poi_type_label.clone(),
+        });
         add_poi_with_properties(
             &sytral_poi,
             sytral_poi.id_vr.clone().unwrap(),
             sytral_poi.label_vr.clone().unwrap(),
+            poi_type,
             properties,
             pois,
-        )?;
-
-        let poi_type = "amenity:parking".to_string();
-        poi_types.entry(poi_type.clone()).or_insert(NavitiaPoiType {
-            id: poi_type,
-            name: sytral_poi.poi_type_label,
-        });
+        );
     }
     Ok(())
 }
@@ -282,19 +283,19 @@ fn extract_from_parcs_velos<P: AsRef<Path>>(
                 value: desc.to_string(),
             });
         }
+        let poi_type = "amenity:bicycle_parking".to_string();
+        poi_types.entry(poi_type.clone()).or_insert(NavitiaPoiType {
+            id: poi_type.clone(),
+            name: sytral_poi.poi_type_label.clone(),
+        });
         add_poi_with_properties(
             &sytral_poi,
             sytral_poi.id_vr.clone().unwrap(),
             sytral_poi.label_vr.clone().unwrap(),
+            poi_type,
             properties,
             pois,
-        )?;
-
-        let poi_type = "amenity:bicycle_parking".to_string();
-        poi_types.entry(poi_type.clone()).or_insert(NavitiaPoiType {
-            id: poi_type,
-            name: sytral_poi.poi_type_label,
-        });
+        );
     }
     Ok(())
 }
