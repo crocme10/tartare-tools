@@ -49,7 +49,7 @@ fn test_export_pois() {
 
         compare_output_dir_with_expected(
             &path,
-            vec!["poi.txt", "poi_properties.txt", "poi_type.txt"],
+            Some(vec!["poi.txt", "poi_properties.txt", "poi_type.txt"]),
             "./fixtures/extract_osm_pois/output",
         );
     });

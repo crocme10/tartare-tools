@@ -14,7 +14,6 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-use csv;
 use log::info;
 use std::path::PathBuf;
 use structopt::StructOpt;
@@ -22,7 +21,6 @@ use tartare_tools::{
     poi::{export::export, merge::merge},
     Result,
 };
-use zip;
 
 #[derive(Debug, StructOpt)]
 #[structopt(

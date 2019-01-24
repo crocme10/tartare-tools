@@ -35,7 +35,7 @@ fn test_global() {
         ntfs::write(&model, path).unwrap();
         compare_output_dir_with_expected(
             &path,
-            vec!["stops.txt"],
+            Some(vec!["stops.txt"]),
             "./fixtures/improve-stop-positions/output",
         );
     });

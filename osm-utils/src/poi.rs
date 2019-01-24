@@ -18,11 +18,11 @@ use super::{get_relation_coord, get_way_coord, OsmPbfReader};
 use crate::Result;
 use failure::{bail, format_err};
 use log::warn;
+use navitia_poi_model::objects;
 use serde_derive::Deserialize;
 use serde_json;
 use std::collections::BTreeMap;
 use std::io;
-use navitia_poi_model::objects;
 
 #[derive(Deserialize, Debug)]
 struct OsmTagsFilter {

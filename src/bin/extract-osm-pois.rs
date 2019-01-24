@@ -23,7 +23,6 @@ use tartare_tools::{
     poi::{export::export, osm},
     Result,
 };
-use zip;
 
 /// Extract POIs from OSM.
 #[derive(Debug, StructOpt)]
