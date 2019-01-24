@@ -14,7 +14,6 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-pub mod objects;
 pub mod poi;
 
 use failure;
@@ -24,6 +23,7 @@ use osm_boundaries_utils::build_boundary;
 use osmpbfreader;
 use std::collections::BTreeMap;
 use std::fs::File;
+use navitia_poi_model::objects;
 
 pub type Error = failure::Error;
 pub type Result<T> = std::result::Result<T, Error>;

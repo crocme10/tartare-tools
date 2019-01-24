@@ -14,13 +14,4 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-pub mod export;
-pub mod merge;
-pub mod osm;
-
-use navitia_poi_model::objects::{Poi, PoiType};
-
-pub struct Model {
-    pub pois: Vec<Poi>,
-    pub poi_types: Vec<PoiType>,
-}
+pub mod objects;

@@ -6,13 +6,14 @@ edition="2018"
 
 [dependencies]
 navitia_model = { git = "https://github.com/CanalTP/navitia_model" }
-osm_transit_extractor = { git = "https://github.com/CanalTP/osm-transit-extractor" }
+osm_transit_extractor = { git = "https://github.com/CanalTP/osm-transit-extractor", tag = "v0.1.2" }
 geo = { git = "https://github.com/georust/geo" }
 structopt = "0.2.10"
 env_logger = "0.6.0"
 log = "0.4.6"
 failure = "0.1.5"
 osm-utils = { path = "./osm-utils" }
+navitia-poi-model = { path = "./navitia-poi-model" }
 csv = "1.0.5"
 zip = "0.5.0"
 serde = "1.0.84"
