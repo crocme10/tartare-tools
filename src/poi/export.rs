@@ -18,7 +18,7 @@ use crate::poi::Model;
 use crate::Result;
 use failure::format_err;
 use log::info;
-use osm_utils::objects;
+use navitia_poi_model::objects;
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 use serde_derive::{Deserialize, Serialize};
 use std::io::Write;

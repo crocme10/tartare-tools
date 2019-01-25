@@ -22,7 +22,7 @@ use std::{
 
 use csv;
 use failure::bail;
-use osm_utils::objects::{Coord, Poi, PoiType, Property};
+use navitia_poi_model::objects::*;
 use zip;
 
 use crate::{

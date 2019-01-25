@@ -14,12 +14,12 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-pub mod objects;
 pub mod poi;
 
 use failure;
 use failure::format_err;
 use geo::centroid::Centroid;
+use navitia_poi_model::objects;
 use osm_boundaries_utils::build_boundary;
 use osmpbfreader;
 use std::collections::BTreeMap;
