@@ -1,0 +1,1484 @@
+poi_id;key;value
+TCL:AGE:1457;addr:city;Givors
+TCL:AGE:1457;addr:full;2 Rue Roger Salengro
+TCL:AGE:1457;addr:postcode;69700
+TCL:AGE:1773;addr:city;Vaulx-En-Velin
+TCL:AGE:1773;addr:full;7 Rue Du Rail
+TCL:AGE:1773;addr:postcode;69120
+TCL:AGE:516;addr:city;Lyon 3eme
+TCL:AGE:516;addr:full;1 Place D Arsonval
+TCL:AGE:516;addr:postcode;69003
+TCL:AGE:550;addr:city;Lyon 2eme
+TCL:AGE:550;addr:full;6 Place Bellecour
+TCL:AGE:550;addr:postcode;69002
+TCL:AGE:551;addr:city;Lyon 9eme
+TCL:AGE:551;addr:full;1 Rue Sergent Michel Berthet
+TCL:AGE:551;addr:postcode;69009
+TCL:AGE:556;addr:city;Lyon 3eme
+TCL:AGE:556;addr:full;11 Boulevard Marius Vivier Merle
+TCL:AGE:556;addr:postcode;69003
+TCL:BET:90000;addr:city;Lyon
+TCL:BET:90000;addr:full;17 rue du Docteur Bouchut (Tour Oxygène)
+TCL:BET:90000;addr:postcode;69003
+TCL:DEP:50003;addr:city;Lyon 4eme
+TCL:DEP:50003;addr:full;37 Cours D Herbouville
+TCL:DEP:50003;addr:postcode;69004
+TCL:DEP:50003;description;LE CLIKE
+TCL:DEP:50006;addr:city;Vaulx-En-Velin
+TCL:DEP:50006;addr:full;2 Rue D Artique
+TCL:DEP:50006;addr:postcode;69120
+TCL:DEP:50006;description;PRESSE
+TCL:DEP:50007;addr:city;Lyon 8eme
+TCL:DEP:50007;addr:full;141 Rue Professeur Beauvisage
+TCL:DEP:50007;addr:postcode;69008
+TCL:DEP:50007;description;LE TOSCAN
+TCL:DEP:50010;addr:city;Lyon 8eme
+TCL:DEP:50010;addr:full;68 Boulevard Des Etats-Unis
+TCL:DEP:50010;addr:postcode;69008
+TCL:DEP:50010;description;PRESSE
+TCL:DEP:50014;addr:city;Lyon 5eme
+TCL:DEP:50014;addr:full;157 Avenue Berthelemy Buyer
+TCL:DEP:50014;addr:postcode;69005
+TCL:DEP:50014;description;CHAMPVERT PRESSE
+TCL:DEP:50015;addr:city;Villeurbanne
+TCL:DEP:50015;addr:full;35 Rue Du 8 Mai 45
+TCL:DEP:50015;addr:postcode;69100
+TCL:DEP:50015;description;PIMMS
+TCL:DEP:50022;addr:city;Lyon 7eme
+TCL:DEP:50022;addr:full;52 Cours Gambetta
+TCL:DEP:50022;addr:postcode;69007
+TCL:DEP:50022;description;LE MONOPOLE
+TCL:DEP:50029;addr:city;Saint-Priest
+TCL:DEP:50029;addr:full;8 Rue Fournier
+TCL:DEP:50029;addr:postcode;69800
+TCL:DEP:50029;description;HUIT A HUIT
+TCL:DEP:50060;addr:city;Lyon 2eme
+TCL:DEP:50060;addr:full;14 Place Carnot
+TCL:DEP:50060;addr:postcode;69002
+TCL:DEP:50060;description;PRESSE
+TCL:DEP:50062;addr:city;Villeurbanne
+TCL:DEP:50062;addr:full;33 Avenue Henri Barbusse
+TCL:DEP:50062;addr:postcode;69100
+TCL:DEP:50062;description;LE FANTASIO
+TCL:DEP:50067;addr:city;Lyon 9eme
+TCL:DEP:50067;addr:full;5 Place Dumas De Loire
+TCL:DEP:50067;addr:postcode;69009
+TCL:DEP:50067;description;PIMMS
+TCL:DEP:50070;addr:city;Vaugneray
+TCL:DEP:50070;addr:full;7 Rue De Malval
+TCL:DEP:50070;addr:postcode;69670
+TCL:DEP:50070;description;DROGUERIE
+TCL:DEP:50073;addr:city;Lyon 4eme
+TCL:DEP:50073;addr:full;22 Place De La Croix Rousse
+TCL:DEP:50073;addr:postcode;69004
+TCL:DEP:50073;description;AUX VOLUTES
+TCL:DEP:50107;addr:city;Lyon 3eme
+TCL:DEP:50107;addr:full;40 Cours De La Liberte
+TCL:DEP:50107;addr:postcode;69003
+TCL:DEP:50107;description;LIBERTY TABAC PRESSE
+TCL:DEP:50113;addr:city;Villeurbanne
+TCL:DEP:50113;addr:full;1 Avenue Commandant L Herminier
+TCL:DEP:50113;addr:postcode;69100
+TCL:DEP:50113;description;PRESSE
+TCL:DEP:50118;addr:city;Lyon 5eme
+TCL:DEP:50118;addr:full;4 Quai De Bondy
+TCL:DEP:50118;addr:postcode;69005
+TCL:DEP:50118;description;PRESSE
+TCL:DEP:50128;addr:city;Sathonay-Camp
+TCL:DEP:50128;addr:full;11 Boulevard Castellane
+TCL:DEP:50128;addr:postcode;69580
+TCL:DEP:50128;description;PRESSE
+TCL:DEP:50132;addr:city;Oullins
+TCL:DEP:50132;addr:full;40 Rue Blanqui
+TCL:DEP:50132;addr:postcode;69600
+TCL:DEP:50132;description;PRESSE
+TCL:DEP:50142;addr:city;Lyon 3eme
+TCL:DEP:50142;addr:full;47 Avenue Lacassagne
+TCL:DEP:50142;addr:postcode;69003
+TCL:DEP:50142;description;PRESSE SANS SOUCIS
+TCL:DEP:50171;addr:city;Lyon 6eme
+TCL:DEP:50171;addr:full;2 Place Jules Ferry
+TCL:DEP:50171;addr:postcode;69006
+TCL:DEP:50171;description;LA ESCOGIDA
+TCL:DEP:50178;addr:city;Lyon 8eme
+TCL:DEP:50178;addr:full;14 Rue Des Serpollieres
+TCL:DEP:50178;addr:postcode;69008
+TCL:DEP:50178;description;PIMMS
+TCL:DEP:50228;addr:city;Bron
+TCL:DEP:50228;addr:full;58 Rue Marcel Bramet
+TCL:DEP:50228;addr:postcode;69500
+TCL:DEP:50228;description;PIMMS
+TCL:DEP:50233;addr:city;Albigny-Sur-Saone
+TCL:DEP:50233;addr:full;2 Place De Verdun
+TCL:DEP:50233;addr:postcode;69250
+TCL:DEP:50233;description;TABAC PRESSE DES MONTS D OR
+TCL:DEP:50260;addr:city;Villeurbanne
+TCL:DEP:50260;addr:full;4 Rue Leon Blum
+TCL:DEP:50260;addr:postcode;69100
+TCL:DEP:50260;description;LE GRANDCLEMENT
+TCL:DEP:50264;addr:city;Villeurbanne
+TCL:DEP:50264;addr:full;128 Boulevard Du 11 Novembre
+TCL:DEP:50264;addr:postcode;69100
+TCL:DEP:50264;description;SMERRA
+TCL:DEP:50265;addr:city;Lyon 7eme
+TCL:DEP:50265;addr:full;38 Rue Chevreul
+TCL:DEP:50265;addr:postcode;69007
+TCL:DEP:50265;description;SMERRA
+TCL:DEP:50267;addr:city;Lyon 3eme
+TCL:DEP:50267;addr:full;74 Cours Du Docteur Long
+TCL:DEP:50267;addr:postcode;69003
+TCL:DEP:50267;description;PRESSE
+TCL:DEP:50269;addr:city;Charly
+TCL:DEP:50269;addr:full;19 Rue Marechal Leclerc
+TCL:DEP:50269;addr:postcode;69390
+TCL:DEP:50269;description;CAFE DU CENTRE
+TCL:DEP:50327;addr:city;Venissieux
+TCL:DEP:50327;addr:full;2 Rue Komarov
+TCL:DEP:50327;addr:postcode;69200
+TCL:DEP:50327;description;LA PYRAMIDE
+TCL:DEP:50339;addr:city;Saint-Fons
+TCL:DEP:50339;addr:full;3 Place Des Palabres
+TCL:DEP:50339;addr:postcode;69190
+TCL:DEP:50339;description;POINT MULTISERVICE
+TCL:DEP:50343;addr:city;La Tour De Salvagny
+TCL:DEP:50343;addr:full;1 Rue Contal
+TCL:DEP:50343;addr:postcode;69890
+TCL:DEP:50343;description;SUPERMARCHE SPAR
+TCL:DEP:50353;addr:city;Lyon 7eme
+TCL:DEP:50353;addr:full;64 Avenue Jean Jaures
+TCL:DEP:50353;addr:postcode;69007
+TCL:DEP:50353;description;LE RADJAH
+TCL:DEP:50356;addr:city;Rillieux-La-Pape
+TCL:DEP:50356;addr:full;9 Avenue De L Europe
+TCL:DEP:50356;addr:postcode;69140
+TCL:DEP:50356;description;PIMMS
+TCL:DEP:50366;addr:city;Villeurbanne
+TCL:DEP:50366;addr:full;2 Rue Salvador Allende
+TCL:DEP:50366;addr:postcode;69100
+TCL:DEP:50366;description;PRESSE
+TCL:DEP:50369;addr:city;Lyon 3eme
+TCL:DEP:50369;addr:full;54 Rue Moncey
+TCL:DEP:50369;addr:postcode;69003
+TCL:DEP:50369;description;LE FLORE
+TCL:DEP:50370;addr:city;Venissieux
+TCL:DEP:50370;addr:full;24 Rue Marechal
+TCL:DEP:50370;addr:postcode;69200
+TCL:DEP:50370;description;LA PIPE A EAU
+TCL:DEP:50373;addr:city;Lyon 8eme
+TCL:DEP:50373;addr:full;34 Rue De Narvik
+TCL:DEP:50373;addr:postcode;69008
+TCL:DEP:50373;description;PIMMS
+TCL:DEP:50384;addr:city;Grezieu La Varenne
+TCL:DEP:50384;addr:full;2 Place Des Anciens Combattants
+TCL:DEP:50384;addr:postcode;69290
+TCL:DEP:50384;description;PRESSE
+TCL:DEP:50399;addr:city;Bron
+TCL:DEP:50399;addr:full;211 Boulevard Pinel
+TCL:DEP:50399;addr:postcode;69500
+TCL:DEP:50399;description;PRESSE
+TCL:DEP:50415;addr:city;Vaulx-En-Velin
+TCL:DEP:50415;addr:full;47 Avenue Roger Salengro
+TCL:DEP:50415;addr:postcode;69120
+TCL:DEP:50415;description;PIMMS
+TCL:DEP:50416;addr:city;Lyon 2eme
+TCL:DEP:50416;addr:full;1 Gare Routiere
+TCL:DEP:50416;addr:postcode;69002
+TCL:DEP:50416;description;LA MOULINOISE
+TCL:DEP:50419;addr:city;Ecully
+TCL:DEP:50419;addr:full;Centre Commercial
+TCL:DEP:50419;addr:postcode;69130
+TCL:DEP:50419;description;PRESSE
+TCL:DEP:50428;addr:city;Givors
+TCL:DEP:50428;addr:full;Place Charles De Gaulle
+TCL:DEP:50428;addr:postcode;69700
+TCL:DEP:50428;description;BOULANGERIE PATISSERIE
+TCL:DEP:50440;addr:city;Lyon 6eme
+TCL:DEP:50440;addr:full;1 Place Puvis De Chavannes
+TCL:DEP:50440;addr:postcode;69006
+TCL:DEP:50440;description;TABAC FOCH
+TCL:DEP:50444;addr:city;Venissieux
+TCL:DEP:50444;addr:full;89 Boulevard Amboise Croizat
+TCL:DEP:50444;addr:postcode;69200
+TCL:DEP:50444;description;CHERIAA TABAC LOTO PRESSE
+TCL:DEP:50445;addr:city;Venissieux
+TCL:DEP:50445;addr:full;53 Boulevard Lenine
+TCL:DEP:50445;addr:postcode;69200
+TCL:DEP:50445;description;PRESSE
+TCL:DEP:50448;addr:city;Lyon 3eme
+TCL:DEP:50448;addr:full;64 Rue Du Professeur Florence
+TCL:DEP:50448;addr:postcode;69003
+TCL:DEP:50448;description;PRESSE
+TCL:DEP:50452;addr:city;Saint-Genis-Laval
+TCL:DEP:50452;addr:full;Centre Commercial
+TCL:DEP:50452;addr:postcode;69230
+TCL:DEP:50452;description;TOTEM
+TCL:DEP:50455;addr:city;Lyon 8eme
+TCL:DEP:50455;addr:full;133 Avenue Des Freres Lumiere
+TCL:DEP:50455;addr:postcode;69008
+TCL:DEP:50455;description;TABAC MONTPLAISIR
+TCL:DEP:50456;addr:city;Vaulx-En-Velin
+TCL:DEP:50456;addr:full;58 Rue De La Republique
+TCL:DEP:50456;addr:postcode;69120
+TCL:DEP:50456;description;PRESSE
+TCL:DEP:50461;addr:city;Lyon 7eme
+TCL:DEP:50461;addr:full;14 Place Jean Mace
+TCL:DEP:50461;addr:postcode;69007
+TCL:DEP:50461;description;COUP DE TABAC
+TCL:DEP:50462;addr:city;Venissieux
+TCL:DEP:50462;addr:full;19 Avenue Jean Cagne
+TCL:DEP:50462;addr:postcode;69200
+TCL:DEP:50462;description;TABAC PRESSE GROS
+TCL:DEP:50463;addr:city;Villeurbanne
+TCL:DEP:50463;addr:full;103 Rue Leon Blum
+TCL:DEP:50463;addr:postcode;69100
+TCL:DEP:50463;description;PRESSE
+TCL:DEP:50473;addr:city;Saint-Priest
+TCL:DEP:50473;addr:full;14 Rue Aristide Briand
+TCL:DEP:50473;addr:postcode;69800
+TCL:DEP:50473;description;BAR TABAC RUL
+TCL:DEP:50475;addr:city;Lyon 3eme
+TCL:DEP:50475;addr:full;Centre Commercial
+TCL:DEP:50475;addr:postcode;69003
+TCL:DEP:50475;description;SMOKE SHOP
+TCL:DEP:50477;addr:city;Lyon 1er
+TCL:DEP:50477;addr:full;20 Rue Romarin
+TCL:DEP:50477;addr:postcode;69001
+TCL:DEP:50477;description;PRESSE
+TCL:DEP:50478;addr:city;Lyon 3eme
+TCL:DEP:50478;addr:full;Centre Commercial
+TCL:DEP:50478;addr:postcode;69003
+TCL:DEP:50478;description;TABAC DU METRO
+TCL:DEP:50479;addr:city;Lyon 2eme
+TCL:DEP:50479;addr:full;37 Avenue Auguste Comte
+TCL:DEP:50479;addr:postcode;69002
+TCL:DEP:50479;description;LE CHIQUITO
+TCL:DEP:50483;addr:city;Pierre-Benite
+TCL:DEP:50483;addr:full;61 Rue Vaillant Coutirier
+TCL:DEP:50483;addr:postcode;69310
+TCL:DEP:50483;description;PRESSE
+TCL:DEP:50487;addr:city;Lyon 5eme
+TCL:DEP:50487;addr:full;70 Avenue Du Point Du Jour
+TCL:DEP:50487;addr:postcode;69005
+TCL:DEP:50487;description;LE NARVAL
+TCL:DEP:50488;addr:city;Decines-Charpieu
+TCL:DEP:50488;addr:full;230 Rue Jean Jaures
+TCL:DEP:50488;addr:postcode;69150
+TCL:DEP:50488;description;PRESSE
+TCL:DEP:50491;addr:city;Corbas
+TCL:DEP:50491;addr:full;73 Avenue Corbetta
+TCL:DEP:50491;addr:postcode;69960
+TCL:DEP:50491;description;PRESSE
+TCL:DEP:50494;addr:city;Lyon 6eme
+TCL:DEP:50494;addr:full;116 Rue Vendome
+TCL:DEP:50494;addr:postcode;69006
+TCL:DEP:50494;description;PRESSE
+TCL:DEP:50497;addr:city;Lyon 7eme
+TCL:DEP:50497;addr:full;17 Rue De La Madeleine
+TCL:DEP:50497;addr:postcode;69007
+TCL:DEP:50497;description;TABAC DE LA MADELEINE
+TCL:DEP:50501;addr:city;Villeurbanne
+TCL:DEP:50501;addr:full;105 Avenue Roger Salengro
+TCL:DEP:50501;addr:postcode;69100
+TCL:DEP:50501;description;AMPILO
+TCL:DEP:50509;addr:city;Saint-Priest
+TCL:DEP:50509;addr:full;1 Rue Du 8 Mai 1945
+TCL:DEP:50509;addr:postcode;69800
+TCL:DEP:50509;description;PRESSE
+TCL:DEP:50512;addr:city;Meyzieu
+TCL:DEP:50512;addr:full;78 Avenue De Verdun
+TCL:DEP:50512;addr:postcode;69330
+TCL:DEP:50512;description;SNC ROJA
+TCL:DEP:50518;addr:city;Villeurbanne
+TCL:DEP:50518;addr:full;136 Rue Anatole France
+TCL:DEP:50518;addr:postcode;69100
+TCL:DEP:50518;description;L ANATOLE FRANCE
+TCL:DEP:50524;addr:city;Rillieux-La-Pape
+TCL:DEP:50524;addr:full;2968 Route De Starsbourg
+TCL:DEP:50524;addr:postcode;69140
+TCL:DEP:50524;description;AU PRESSE PAPIER
+TCL:DEP:50525;addr:city;Villeurbanne
+TCL:DEP:50525;addr:full;2 Cours Tolstoi
+TCL:DEP:50525;addr:postcode;69100
+TCL:DEP:50525;description;BAR TABC
+TCL:DEP:50526;addr:city;Bron
+TCL:DEP:50526;addr:full;176 Avenue Franklin Roosevelt
+TCL:DEP:50526;addr:postcode;69500
+TCL:DEP:50526;description;BAR TABAC
+TCL:DEP:50528;addr:city;Brindas
+TCL:DEP:50528;addr:full;14 Place De Verdun
+TCL:DEP:50528;addr:postcode;69126
+TCL:DEP:50528;description;NOUVEAUTES
+TCL:DEP:50529;addr:city;Saint-Priest
+TCL:DEP:50529;addr:full;11 Rue Du Onze Novembre
+TCL:DEP:50529;addr:postcode;69800
+TCL:DEP:50529;description;PRESSE
+TCL:DEP:50533;addr:city;Givors
+TCL:DEP:50533;addr:full;1 Rue Roger Salengro
+TCL:DEP:50533;addr:postcode;69700
+TCL:DEP:50533;description;LE RAY MONDE
+TCL:DEP:50535;addr:city;Lyon 9eme
+TCL:DEP:50535;addr:full;31 Rue Hector Berlioz
+TCL:DEP:50535;addr:postcode;69009
+TCL:DEP:50535;description;LE CHANT DU GRILLON
+TCL:DEP:50545;addr:city;Caluire-Et-Cuire
+TCL:DEP:50545;addr:full;70 Rue Jean Moulin
+TCL:DEP:50545;addr:postcode;69300
+TCL:DEP:50545;description;BAR TABAC
+TCL:DEP:50547;addr:city;Villeurbanne
+TCL:DEP:50547;addr:full;16 Place Charles Hernu
+TCL:DEP:50547;addr:postcode;69100
+TCL:DEP:50547;description;KIOSQUE CHARLES HERNU
+TCL:DEP:50548;addr:city;Chassieu
+TCL:DEP:50548;addr:full;Centre Commercial
+TCL:DEP:50548;addr:postcode;69680
+TCL:DEP:50548;description;LES TARENTELLES
+TCL:DEP:50551;addr:city;Saint-Priest
+TCL:DEP:50551;addr:full;41 Boulevard Edouard Herriot
+TCL:DEP:50551;addr:postcode;69800
+TCL:DEP:50551;description;PRESSE
+TCL:DEP:50553;addr:city;Lyon 1er
+TCL:DEP:50553;addr:full;24 Rue Des Pierres Plantees
+TCL:DEP:50553;addr:postcode;69001
+TCL:DEP:50553;description;TABAC PRESSE DES PIERRES PLANTEES
+TCL:DEP:50560;addr:city;Feyzin
+TCL:DEP:50560;addr:full;1 Rue Du Onze Novembre
+TCL:DEP:50560;addr:postcode;69320
+TCL:DEP:50560;description;PRESSE
+TCL:DEP:50562;addr:city;Marcy L Etoile
+TCL:DEP:50562;addr:full;816 Avenue Jean Collomb
+TCL:DEP:50562;addr:postcode;69280
+TCL:DEP:50562;description;PRESSE
+TCL:DEP:50564;addr:city;Saint-Priest
+TCL:DEP:50564;addr:full;33 Rue Claude Farrere
+TCL:DEP:50564;addr:postcode;69800
+TCL:DEP:50564;description;PRESSE
+TCL:DEP:50566;addr:city;Rillieux-La-Pape
+TCL:DEP:50566;addr:full;4960 Route De Strasbourg
+TCL:DEP:50566;addr:postcode;69140
+TCL:DEP:50566;description;BAR TABAC VANCIA
+TCL:DEP:50569;addr:city;Craponne
+TCL:DEP:50569;addr:full;29 Avenue Edouard Millaud
+TCL:DEP:50569;addr:postcode;69290
+TCL:DEP:50569;description;PRESSE
+TCL:DEP:50572;addr:city;Decines-Charpieu
+TCL:DEP:50572;addr:full;9 Avenue Jean Jaures
+TCL:DEP:50572;addr:postcode;69150
+TCL:DEP:50572;description;LE MONTABERLET
+TCL:DEP:50575;addr:city;Fontaines-Sur-Saone
+TCL:DEP:50575;addr:full;6 Rue Pierre Carbon
+TCL:DEP:50575;addr:postcode;69270
+TCL:DEP:50575;description;LA PRESSE DE FONTAINES
+TCL:DEP:50577;addr:city;Francheville
+TCL:DEP:50577;addr:full;33 Grande Rue .
+TCL:DEP:50577;addr:postcode;69340
+TCL:DEP:50577;description;LE RIALTO
+TCL:DEP:50578;addr:city;Tassin-La-Demi-Lune
+TCL:DEP:50578;addr:full;60 Avenue Victor Hugo
+TCL:DEP:50578;addr:postcode;69160
+TCL:DEP:50578;description;TABAC DE L HORLOGE
+TCL:DEP:50579;addr:city;Lyon 5eme
+TCL:DEP:50579;addr:full;12 Place Saint Paul
+TCL:DEP:50579;addr:postcode;69005
+TCL:DEP:50579;description;TABAC SAINT PAUL
+TCL:DEP:50583;addr:city;Vaulx-En-Velin
+TCL:DEP:50583;addr:full;Place Guy Mocquet
+TCL:DEP:50583;addr:postcode;69120
+TCL:DEP:50583;description;PRESSE
+TCL:DEP:50589;addr:city;Lyon 6eme
+TCL:DEP:50589;addr:full;21 Cours Lafayette
+TCL:DEP:50589;addr:postcode;69006
+TCL:DEP:50589;description;LE CORONA
+TCL:DEP:50590;addr:city;Lyon 7eme
+TCL:DEP:50590;addr:full;164 Grande Rue De La Guillotiere
+TCL:DEP:50590;addr:postcode;69007
+TCL:DEP:50590;description;PRESSE
+TCL:DEP:50591;addr:city;Lyon 8eme
+TCL:DEP:50591;addr:full;122 Rue Pierre Delors
+TCL:DEP:50591;addr:postcode;69008
+TCL:DEP:50591;description;PRESSE
+TCL:DEP:50592;addr:city;Chaponost
+TCL:DEP:50592;addr:full;Rue Rene Chapard
+TCL:DEP:50592;addr:postcode;69630
+TCL:DEP:50592;description;VM CONCEPT
+TCL:DEP:50593;addr:city;Lyon 5eme
+TCL:DEP:50593;addr:full;26 Rue Du Commandant Charcot
+TCL:DEP:50593;addr:postcode;69005
+TCL:DEP:50593;description;LE FONTENOY
+TCL:DEP:50594;addr:city;Lyon 8eme
+TCL:DEP:50594;addr:full;124 Avenue Paul Santy
+TCL:DEP:50594;addr:postcode;69008
+TCL:DEP:50594;description;LE CHANCLAU
+TCL:DEP:50598;addr:city;Lyon 5eme
+TCL:DEP:50598;addr:full;1 Quai Fulchiron
+TCL:DEP:50598;addr:postcode;69005
+TCL:DEP:50598;description;LE BONAPARTE
+TCL:DEP:50599;addr:city;Lyon 9eme
+TCL:DEP:50599;addr:full;40 Boulevard De Balmont
+TCL:DEP:50599;addr:postcode;69009
+TCL:DEP:50599;description;LE FOURNIL DE BALMONT
+TCL:DEP:50601;addr:city;Lyon 1er
+TCL:DEP:50601;addr:full;6 Place Sathonay
+TCL:DEP:50601;addr:postcode;69001
+TCL:DEP:50601;description;TABAC SATHONAY
+TCL:DEP:50603;addr:city;Tassin-La-Demi-Lune
+TCL:DEP:50603;addr:full;6 Rue Lieutenant Audras
+TCL:DEP:50603;addr:postcode;69160
+TCL:DEP:50603;description;TABAC DU BOURG
+TCL:DEP:50608;addr:city;Villeurbanne
+TCL:DEP:50608;addr:full;150 Rue Du Quatre Aout
+TCL:DEP:50608;addr:postcode;69100
+TCL:DEP:50608;description;TABAC LA PERRALIERE
+TCL:DEP:50609;addr:city;Messimy
+TCL:DEP:50609;addr:full;8 Place Du 8 Mai 1945
+TCL:DEP:50609;addr:postcode;69510
+TCL:DEP:50609;description;PRESSE
+TCL:DEP:50610;addr:city;Genay
+TCL:DEP:50610;addr:full;1 Place De Verdun
+TCL:DEP:50610;addr:postcode;69730
+TCL:DEP:50610;description;VAL PRESSE
+TCL:DEP:50611;addr:city;Thurins
+TCL:DEP:50611;addr:full;9 Place Dugas
+TCL:DEP:50611;addr:postcode;69510
+TCL:DEP:50611;description;SUPERETTE VIVAL
+TCL:DEP:50612;addr:city;Givors
+TCL:DEP:50612;addr:full;33 Rue Jean Ligonnet
+TCL:DEP:50612;addr:postcode;69700
+TCL:DEP:50612;description;PRESSE
+TCL:DEP:50613;addr:city;Lyon 8eme
+TCL:DEP:50613;addr:full;7 Place Du Onze Novembre
+TCL:DEP:50613;addr:postcode;69008
+TCL:DEP:50613;description;BAR TABAC DU BACHUT
+TCL:DEP:50614;addr:city;Lyon 2eme
+TCL:DEP:50614;addr:full;60 Cours Charlemagne
+TCL:DEP:50614;addr:postcode;69002
+TCL:DEP:50614;description;LA CHARLEMAGNE
+TCL:DEP:50615;addr:city;Caluire-Et-Cuire
+TCL:DEP:50615;addr:full;1 Place Louis Braille
+TCL:DEP:50615;addr:postcode;69300
+TCL:DEP:50615;description;LA BULLE
+TCL:DEP:50617;addr:city;Pierre-Benite
+TCL:DEP:50617;addr:full;83 Rue Des Martyrs De La Liberation
+TCL:DEP:50617;addr:postcode;69310
+TCL:DEP:50617;description;PRESSE
+TCL:DEP:50618;addr:city;Vernaison
+TCL:DEP:50618;addr:full;39 Place Du Onze Novembre
+TCL:DEP:50618;addr:postcode;69390
+TCL:DEP:50618;description;PRESSE ET PLUS
+TCL:DEP:50620;addr:city;Saint-Genis-Laval
+TCL:DEP:50620;addr:full;1 Place Des Collonges
+TCL:DEP:50620;addr:postcode;69230
+TCL:DEP:50620;description;PRESSE
+TCL:DEP:50621;addr:city;Lyon 9eme
+TCL:DEP:50621;addr:full;19 Rue Du Pr0fesseur Patel
+TCL:DEP:50621;addr:postcode;69009
+TCL:DEP:50621;description;PRESSE DES DEUX AMANTS
+TCL:DEP:50622;addr:city;Lyon 2eme
+TCL:DEP:50622;addr:full;6 Rue Vaubecour
+TCL:DEP:50622;addr:postcode;69002
+TCL:DEP:50622;description;LE VAUBECOUR
+TCL:DEP:50623;addr:city;Villeurbanne
+TCL:DEP:50623;addr:full;42 Rue Flachet
+TCL:DEP:50623;addr:postcode;69100
+TCL:DEP:50623;description;LE FLACHET
+TCL:DEP:50625;addr:city;St Didier Au Mt D Or
+TCL:DEP:50625;addr:full;17 Avenue De La Republique
+TCL:DEP:50625;addr:postcode;69370
+TCL:DEP:50625;description;TABAC PRESSE DE SAINT DIDIER
+TCL:DEP:50626;addr:city;Heyrieux
+TCL:DEP:50626;addr:full;49 Avenue General Leclerc
+TCL:DEP:50626;addr:postcode;38540
+TCL:DEP:50626;description;AU PRESSE PAPIER
+TCL:DEP:50627;addr:city;Lyon 9eme
+TCL:DEP:50627;addr:full;17 Place Abbe Pierre
+TCL:DEP:50627;addr:postcode;69009
+TCL:DEP:50627;description;TABAC LA DUCHERE
+TCL:DEP:50629;addr:city;Sainte-Foy-Les-Lyon
+TCL:DEP:50629;addr:full;5 Place Saint Luc
+TCL:DEP:50629;addr:postcode;69110
+TCL:DEP:50629;description;PRESSE LES BRUYERES
+TCL:DEP:50630;addr:city;Lyon 7eme
+TCL:DEP:50630;addr:full;178 Rue De Gerland
+TCL:DEP:50630;addr:postcode;69007
+TCL:DEP:50630;description;LE P TIT GERLAND
+TCL:DEP:50632;addr:city;Lyon 5eme
+TCL:DEP:50632;addr:full;91 Rue De Trion
+TCL:DEP:50632;addr:postcode;69005
+TCL:DEP:50632;description;TABAC TRION
+TCL:DEP:50633;addr:city;Lyon 2eme
+TCL:DEP:50633;addr:full;55 Place De La Bourse
+TCL:DEP:50633;addr:postcode;69002
+TCL:DEP:50633;description;TABAC DE LA BOURSE
+TCL:DEP:50634;addr:city;Lyon 9eme
+TCL:DEP:50634;addr:full;1 Place De Paris
+TCL:DEP:50634;addr:postcode;69009
+TCL:DEP:50634;description;PRESSE DE LA GARE
+TCL:DEP:50637;addr:city;Pierre-Benite
+TCL:DEP:50637;addr:full;31 Rue Roger Salengro
+TCL:DEP:50637;addr:postcode;69310
+TCL:DEP:50637;description;BAR TABAC
+TCL:DEP:50638;addr:city;Saint-Genis-Les-Ollieres
+TCL:DEP:50638;addr:full;6 Place Georges Pompidou
+TCL:DEP:50638;addr:postcode;69290
+TCL:DEP:50638;description;BAR TABAC
+TCL:DEP:50639;addr:city;Collonges-Au-Mont-D Or
+TCL:DEP:50639;addr:full;8 Rue Treves De Paques
+TCL:DEP:50639;addr:postcode;69660
+TCL:DEP:50639;description;PRESSE
+TCL:DEP:50640;addr:city;Lyon 6eme
+TCL:DEP:50640;addr:full;181 Cours Lafayette
+TCL:DEP:50640;addr:postcode;69006
+TCL:DEP:50640;description;LE ROUSSILLON
+TCL:DEP:50643;addr:city;Caluire-Et-Cuire
+TCL:DEP:50643;addr:full;17 Quai Clemenceau
+TCL:DEP:50643;addr:postcode;69300
+TCL:DEP:50643;description;TABAC PRESSE LOTO
+TCL:DEP:50644;addr:city;Lissieu
+TCL:DEP:50644;addr:full;104 Route Nationale 6
+TCL:DEP:50644;addr:postcode;69380
+TCL:DEP:50644;description;TABAC JOKER
+TCL:DEP:50645;addr:city;Lentilly
+TCL:DEP:50645;addr:full;3 Rue De La Mairie
+TCL:DEP:50645;addr:postcode;69210
+TCL:DEP:50645;description;LE BRUCHET
+TCL:DEP:50647;addr:city;Venissieux
+TCL:DEP:50647;addr:full;68 Avenue Viviani
+TCL:DEP:50647;addr:postcode;69200
+TCL:DEP:50647;description;PRESSE
+TCL:DEP:50648;addr:city;Chassieu
+TCL:DEP:50648;addr:full;Avenue Louis Bleriot
+TCL:DEP:50648;addr:postcode;69680
+TCL:DEP:50648;description;TABAC PRESSE EUREXPO
+TCL:DEP:50651;addr:city;Saint-Cyr-Au-Mont-D Or
+TCL:DEP:50651;addr:full;5 Place General De Gaulle
+TCL:DEP:50651;addr:postcode;69450
+TCL:DEP:50651;description;PRESSE
+TCL:DEP:50652;addr:city;Lyon 3eme
+TCL:DEP:50652;addr:full;15 Rue Du Dauphine
+TCL:DEP:50652;addr:postcode;69003
+TCL:DEP:50652;description;TABAC DU DAUPHINE
+TCL:DEP:50656;addr:city;Decines-Charpieu
+TCL:DEP:50656;addr:full;372 Avenue Jean Jaures
+TCL:DEP:50656;addr:postcode;69150
+TCL:DEP:50656;description;SNC LES LUMIERES
+TCL:DEP:50657;addr:city;Villeurbanne
+TCL:DEP:50657;addr:full;5 Place Des Maisons Neuves
+TCL:DEP:50657;addr:postcode;69100
+TCL:DEP:50657;description;TABAC DES MAISONS NEUVES
+TCL:DEP:50659;addr:city;Venissieux
+TCL:DEP:50659;addr:full;2 Rue Gaspard Picard
+TCL:DEP:50659;addr:postcode;69200
+TCL:DEP:50659;description;PRESSE
+TCL:DEP:50660;addr:city;Lyon 4eme
+TCL:DEP:50660;addr:full;83 Boulevard De La Croix Rousse
+TCL:DEP:50660;addr:postcode;69004
+TCL:DEP:50660;description;SNC SALUT PUVILLAND
+TCL:DEP:50661;addr:city;Sainte-Foy-Les-Lyon
+TCL:DEP:50661;addr:full;80 Route De La Liberation
+TCL:DEP:50661;addr:postcode;69110
+TCL:DEP:50661;description;la cervoise
+TCL:DEP:50662;addr:city;Villeurbanne
+TCL:DEP:50662;addr:full;13 Rue Pierre Baratin
+TCL:DEP:50662;addr:postcode;69100
+TCL:DEP:50662;description;BAR LE CUSSET
+TCL:DEP:50663;addr:city;Lyon 3eme
+TCL:DEP:50663;addr:full;1 Cours Gambetta
+TCL:DEP:50663;addr:postcode;69003
+TCL:DEP:50663;description;L AIGLON
+TCL:DEP:50664;addr:city;Bron
+TCL:DEP:50664;addr:full;5 Place Curial
+TCL:DEP:50664;addr:postcode;69500
+TCL:DEP:50664;description;YANIKE
+TCL:DEP:50665;addr:city;Venissieux
+TCL:DEP:50665;addr:full;21 Avenue Jules Guesde
+TCL:DEP:50665;addr:postcode;69200
+TCL:DEP:50665;description;PRESSE
+TCL:DEP:50666;addr:city;Quincieux
+TCL:DEP:50666;addr:full;Square Du Centre
+TCL:DEP:50666;addr:postcode;69650
+TCL:DEP:50666;description;PRESSE
+TCL:DEP:50667;addr:city;Lyon 4eme
+TCL:DEP:50667;addr:full;2 Rue Dangon
+TCL:DEP:50667;addr:postcode;69004
+TCL:DEP:50667;description;LITTLE HAVANA
+TCL:DEP:50668;addr:city;Lyon 6eme
+TCL:DEP:50668;addr:full;20 Cours Franklin Roosevelt
+TCL:DEP:50668;addr:postcode;69006
+TCL:DEP:50668;description;METRO FOCH
+TCL:DEP:50671;addr:city;St Germain Au Mont D Or
+TCL:DEP:50671;addr:full;18 Rue 08 Mai 1945
+TCL:DEP:50671;addr:postcode;69650
+TCL:DEP:50671;description;CAFE LE SAINT GERMAIN
+TCL:DEP:50672;addr:city;Lyon 9eme
+TCL:DEP:50672;addr:full;1 Rue Marche
+TCL:DEP:50672;addr:postcode;69009
+TCL:DEP:50672;description;TABAC PRESSE
+TCL:DEP:50673;addr:city;Rillieux-La-Pape
+TCL:DEP:50673;addr:full;35 Route De Geneve
+TCL:DEP:50673;addr:postcode;69140
+TCL:DEP:50673;description;TABAC LE GENEVE
+TCL:DEP:50674;addr:city;Neuville-Sur-Saone
+TCL:DEP:50674;addr:full;12 Place Ampere
+TCL:DEP:50674;addr:postcode;69250
+TCL:DEP:50674;description;LE FOURNIL NEUVILLOIS
+TCL:DEP:50675;addr:city;Lyon 8eme
+TCL:DEP:50675;addr:full;35 Rue Seignemartin
+TCL:DEP:50675;addr:postcode;69008
+TCL:DEP:50675;description;SAFARY
+TCL:DEP:50676;addr:city;Corbas
+TCL:DEP:50676;addr:full;71 Rue Centrale
+TCL:DEP:50676;addr:postcode;69960
+TCL:DEP:50676;description;PRESSE DE CORBAS
+TCL:DEP:50677;addr:city;Lyon 2eme
+TCL:DEP:50677;addr:full;2 Rue Des Archers
+TCL:DEP:50677;addr:postcode;69002
+TCL:DEP:50677;description;CELESTIN
+TCL:DEP:50678;addr:city;Saint-Priest
+TCL:DEP:50678;addr:full;18 Grande Rue
+TCL:DEP:50678;addr:postcode;69800
+TCL:DEP:50678;description;LA MAISON DU FUMEUR
+TCL:DEP:50680;addr:city;Genas
+TCL:DEP:50680;addr:full;19 Rue De L Avenir
+TCL:DEP:50680;addr:postcode;69740
+TCL:DEP:50680;description;BERTHELET LYON EST
+TCL:DEP:50681;addr:city;Genas
+TCL:DEP:50681;addr:full;36 Rue De La Republique
+TCL:DEP:50681;addr:postcode;69740
+TCL:DEP:50681;description;BERTHELET VOYAGES
+TCL:DEP:50682;addr:city;Genas
+TCL:DEP:50682;addr:full;8 Place De La Republique
+TCL:DEP:50682;addr:postcode;69740
+TCL:DEP:50682;description;TABAC DES PLATANES
+TCL:DEP:50683;addr:city;Saint Pierre De Chandieu
+TCL:DEP:50683;addr:full;10 Rue Du Stade
+TCL:DEP:50683;addr:postcode;69780
+TCL:DEP:50683;description;TABAC LE STADE
+TCL:DEP:50684;addr:city;Saint Bonnet De Mure
+TCL:DEP:50684;addr:full;35 Route Nationale 6
+TCL:DEP:50684;addr:postcode;69720
+TCL:DEP:50684;description;TABAC DE L ESCALE
+TCL:DEP:50686;addr:city;Pusignan
+TCL:DEP:50686;addr:full;2 Rue Du Vallon
+TCL:DEP:50686;addr:postcode;69330
+TCL:DEP:50686;description;SUPERETTE HUIT A HUIT
+TCL:DEP:50687;addr:city;Lyon 1er
+TCL:DEP:50687;addr:full;7 Rue De La Republique
+TCL:DEP:50687;addr:postcode;69001
+TCL:DEP:50687;description;LA CIVETTE
+TCL:DEP:50688;addr:city;Dardilly
+TCL:DEP:50688;addr:full;25 Chemin Pierre Blanche
+TCL:DEP:50688;addr:postcode;69570
+TCL:DEP:50688;description;PRESSE
+TCL:DEP:50689;addr:city;La Mulatiere
+TCL:DEP:50689;addr:full;260 Chemin De Fontanieres
+TCL:DEP:50689;addr:postcode;69350
+TCL:DEP:50689;description;PRESSE LA BASTERO
+TCL:DEP:50690;addr:city;Villeurbanne
+TCL:DEP:50690;addr:full;59 Rue Gabriel Peri
+TCL:DEP:50690;addr:postcode;69100
+TCL:DEP:50690;description;LE CHARPENNE
+TCL:DEP:50691;addr:city;Decines-Charpieu
+TCL:DEP:50691;addr:full;180 Rue Emile Zola
+TCL:DEP:50691;addr:postcode;69150
+TCL:DEP:50691;description;HA PRESSE
+TCL:DEP:50692;addr:city;Ecully
+TCL:DEP:50692;addr:full;12 Place Charles De Gaulle
+TCL:DEP:50692;addr:postcode;69130
+TCL:DEP:50692;description;LE RELAIS DE LA PRESSE
+TCL:DEP:50694;addr:city;Saint-Genis-Laval
+TCL:DEP:50694;addr:full;107 Avenue Georges Clemenceau
+TCL:DEP:50694;addr:postcode;69230
+TCL:DEP:50694;description;LE CLEMENCEAU
+TCL:DEP:50695;addr:city;Lyon 3eme
+TCL:DEP:50695;addr:full;87 Rue Moncey
+TCL:DEP:50695;addr:postcode;69003
+TCL:DEP:50695;description;PRESSE
+TCL:DEP:50696;addr:city;Lyon 2eme
+TCL:DEP:50696;addr:full;33 Rue De La Charite
+TCL:DEP:50696;addr:postcode;69002
+TCL:DEP:50696;description;PRESSE
+TCL:DEP:50697;addr:city;Lyon 7eme
+TCL:DEP:50697;addr:full;44 Route De Vienne
+TCL:DEP:50697;addr:postcode;69007
+TCL:DEP:50697;description;BAR LES ALLOBROGES
+TCL:DEP:50698;addr:city;Craponne
+TCL:DEP:50698;addr:full;115 Avenue Pierre Dumont
+TCL:DEP:50698;addr:postcode;69290
+TCL:DEP:50698;description;PRESSE
+TCL:DEP:50699;addr:city;Lyon 8eme
+TCL:DEP:50699;addr:full;47 Avenue Jean Mermoz
+TCL:DEP:50699;addr:postcode;69008
+TCL:DEP:50699;description;DE LA MAIRIE
+TCL:DEP:50701;addr:city;Caluire-Et-Cuire
+TCL:DEP:50701;addr:full;126 Grande Rue De Saint Clair
+TCL:DEP:50701;addr:postcode;69300
+TCL:DEP:50701;description;LE SAINT CLAIR
+TCL:DEP:50702;addr:city;Venissieux
+TCL:DEP:50702;addr:full;32 Rue Anatole France
+TCL:DEP:50702;addr:postcode;69200
+TCL:DEP:50702;description;DU PARC
+TCL:DEP:50704;addr:city;Lyon 3eme
+TCL:DEP:50704;addr:full;41 Avenue Felix Faure
+TCL:DEP:50704;addr:postcode;69003
+TCL:DEP:50704;description;BAR LE FELIX FAURE
+TCL:DEP:50705;addr:city;Villeurbanne
+TCL:DEP:50705;addr:full;58 Cours Emile Zola
+TCL:DEP:50705;addr:postcode;69100
+TCL:DEP:50705;description;PRESSE
+TCL:DEP:50707;addr:city;Lyon 1er
+TCL:DEP:50707;addr:full;4 Place Des Terreaux
+TCL:DEP:50707;addr:postcode;69001
+TCL:DEP:50707;description;PRESSE
+TCL:DEP:50708;addr:city;Caluire-Et-Cuire
+TCL:DEP:50708;addr:full;15 Rue Francois Peissel
+TCL:DEP:50708;addr:postcode;69300
+TCL:DEP:50708;description;LE PEISSEL
+TCL:DEP:50710;addr:city;Caluire-Et-Cuire
+TCL:DEP:50710;addr:full;10 Chemin Petit
+TCL:DEP:50710;addr:postcode;69300
+TCL:DEP:50710;description;AUCHAN CALUIRE
+TCL:DEP:50712;addr:city;Fontaines-Sur-Saone
+TCL:DEP:50712;addr:full;50 Avenue Des Marronniers
+TCL:DEP:50712;addr:postcode;69270
+TCL:DEP:50712;description;PRESSE
+TCL:DEP:50713;addr:city;Lyon 6eme
+TCL:DEP:50713;addr:full;13 Cours Vitton
+TCL:DEP:50713;addr:postcode;69006
+TCL:DEP:50713;description;PRESSE
+TCL:DEP:50714;addr:city;Sainte-Foy-Les-Lyon
+TCL:DEP:50714;addr:full;2 Place Xavier Ricard
+TCL:DEP:50714;addr:postcode;69110
+TCL:DEP:50714;description;LA NOIX DE COCO
+TCL:DEP:50715;addr:city;Irigny
+TCL:DEP:50715;addr:full;2 Place De La Croix Jaune
+TCL:DEP:50715;addr:postcode;69540
+TCL:DEP:50715;description;PRESSE
+TCL:DEP:50716;addr:city;Champagne-Au-Mont-D Or
+TCL:DEP:50716;addr:full;40 Avenue Lanessan
+TCL:DEP:50716;addr:postcode;69410
+TCL:DEP:50716;description;LE MONT D OR
+TCL:DEP:50717;addr:city;Couzon
+TCL:DEP:50717;addr:full;6 Rue De La Republique
+TCL:DEP:50717;addr:postcode;69270
+TCL:DEP:50717;description;PRESSE DE COUZON
+TCL:DEP:50718;addr:city;Pusignan
+TCL:DEP:50718;addr:full;2 Place De La Bascule
+TCL:DEP:50718;addr:postcode;69330
+TCL:DEP:50718;description;SNC GARCIA GABRIEL
+TCL:DEP:50719;addr:city;Tassin-La-Demi-Lune
+TCL:DEP:50719;addr:full;17 Place Des Trois Renerds
+TCL:DEP:50719;addr:postcode;69160
+TCL:DEP:50719;description;PRESSE DES TROIS RENARDS
+TCL:DEP:50720;addr:city;Rillieux-La-Pape
+TCL:DEP:50720;addr:full;58 Avenue De L Europe
+TCL:DEP:50720;addr:postcode;69140
+TCL:DEP:50720;description;PRESSE
+TCL:DEP:50721;addr:city;Lyon 9eme
+TCL:DEP:50721;addr:full;9 Rue Louis Loucheur
+TCL:DEP:50721;addr:postcode;69009
+TCL:DEP:50721;description;DU METRO
+TCL:DEP:50722;addr:city;Caluire-Et-Cuire
+TCL:DEP:50722;addr:full;64 Rue Pasteur
+TCL:DEP:50722;addr:postcode;69300
+TCL:DEP:50722;description;LE CALYPSO
+TCL:DEP:50723;addr:city;Lyon 8eme
+TCL:DEP:50723;addr:full;79 Avenue Des Freres Lumiere
+TCL:DEP:50723;addr:postcode;69008
+TCL:DEP:50723;description;PRESSE
+TCL:DEP:50724;addr:city;Lyon 3eme
+TCL:DEP:50724;addr:full;49 Cours Richard Vitton
+TCL:DEP:50724;addr:postcode;69003
+TCL:DEP:50724;description;LA TABACTIERE
+TCL:DEP:50725;addr:city;Dardilly
+TCL:DEP:50725;addr:full;13 Rue De La Mairie
+TCL:DEP:50725;addr:postcode;69570
+TCL:DEP:50725;description;PRESSE
+TCL:DEP:50726;addr:city;Mions
+TCL:DEP:50726;addr:full;11 Rue Du 11 Novembre 1918
+TCL:DEP:50726;addr:postcode;69780
+TCL:DEP:50726;description;PRESSE
+TCL:DEP:50727;addr:city;Lyon 5eme
+TCL:DEP:50727;addr:full;27 Avenue General Eisenhower
+TCL:DEP:50727;addr:postcode;69005
+TCL:DEP:50727;description;DES BATTIERES
+TCL:DEP:50728;addr:city;Mions
+TCL:DEP:50728;addr:full;100 Rue Du 23 Aout 1944
+TCL:DEP:50728;addr:postcode;69780
+TCL:DEP:50728;description;PRESSE DES ARCADE
+TCL:DEP:50729;addr:city;Lyon 6eme
+TCL:DEP:50729;addr:full;76 Cours Vitton
+TCL:DEP:50729;addr:postcode;69006
+TCL:DEP:50729;description;PRESSE
+TCL:DEP:50730;addr:city;Oullins
+TCL:DEP:50730;addr:full;64 Grande Rue Grande Rue
+TCL:DEP:50730;addr:postcode;69600
+TCL:DEP:50730;description;BAR
+TCL:DEP:50731;addr:city;Ste Consorce
+TCL:DEP:50731;addr:full;3 Rue De Verdun
+TCL:DEP:50731;addr:postcode;69280
+TCL:DEP:50731;description;PROXI
+TCL:DEP:50732;addr:city;Saint-Genis-Les-Ollieres
+TCL:DEP:50732;addr:full;6 Place Georges Pompidou
+TCL:DEP:50732;addr:postcode;69290
+TCL:DEP:50732;description;BAR LE SORBIER
+TCL:DEP:50733;addr:city;Caluire-Et-Cuire
+TCL:DEP:50733;addr:full;5 Rue Des Margnolles
+TCL:DEP:50733;addr:postcode;69300
+TCL:DEP:50733;description;DES MARGNOLLES
+TCL:DEP:50736;addr:city;Grigny
+TCL:DEP:50736;addr:full;20 Place Jean Jaures
+TCL:DEP:50736;addr:postcode;69520
+TCL:DEP:50736;description;PRESSE
+TCL:DEP:50738;addr:city;Lyon 7eme
+TCL:DEP:50738;addr:full;204 Avenue Jean Jaures
+TCL:DEP:50738;addr:postcode;69007
+TCL:DEP:50738;description;LE PRESSE BOOK
+TCL:DEP:50742;addr:city;Lyon 6eme
+TCL:DEP:50742;addr:full;69 Rue Duquesne
+TCL:DEP:50742;addr:postcode;69006
+TCL:DEP:50742;description;LE GUIMET
+TCL:DEP:50743;addr:city;Villeurbanne
+TCL:DEP:50743;addr:full;1 Avenue Commandant L Herminier
+TCL:DEP:50743;addr:postcode;69100
+TCL:DEP:50743;description;PRESSE
+TCL:DEP:50744;addr:city;Oullins
+TCL:DEP:50744;addr:full;14 Boulevard Emile Zola
+TCL:DEP:50744;addr:postcode;69600
+TCL:DEP:50744;description;PRESSE
+TCL:DEP:50745;addr:city;Villeurbanne
+TCL:DEP:50745;addr:full;12 Rue Greuze
+TCL:DEP:50745;addr:postcode;69100
+TCL:DEP:50745;description;LE FLASH
+TCL:DEP:50746;addr:city;Dardilly
+TCL:DEP:50746;addr:full;10 Place De La Porte De Lyon
+TCL:DEP:50746;addr:postcode;69570
+TCL:DEP:50746;description;RELAIS ROUTE DE LYON
+TCL:DEP:50747;addr:city;Dardilly
+TCL:DEP:50747;addr:full;23 Porte De Lyon
+TCL:DEP:50747;addr:postcode;69570
+TCL:DEP:50747;description;AUCHAN PORTE DE LYON
+TCL:DEP:50748;addr:city;La Mulatiere
+TCL:DEP:50748;addr:full;10 Rue De Navarre
+TCL:DEP:50748;addr:postcode;69350
+TCL:DEP:50748;description;PRESSE DE ROULE
+TCL:DEP:50749;addr:city;Lyon 6eme
+TCL:DEP:50749;addr:full;94 Rue Garibaldi
+TCL:DEP:50749;addr:postcode;69006
+TCL:DEP:50749;description;PRESSE
+TCL:DEP:50751;addr:city;Bron
+TCL:DEP:50751;addr:full;72 Rue Marcel Bramet
+TCL:DEP:50751;addr:postcode;69500
+TCL:DEP:50751;description;PRESSE
+TCL:DEP:50757;addr:city;Lyon 2eme
+TCL:DEP:50757;addr:full;Place Le Viste
+TCL:DEP:50757;addr:postcode;69002
+TCL:DEP:50757;description;LE KIOSQUE
+TCL:DEP:50758;addr:city;Oullins
+TCL:DEP:50758;addr:full;172 Grande Rue Rue
+TCL:DEP:50758;addr:postcode;69600
+TCL:DEP:50758;description;LE NEWS BAR
+TCL:DEP:50761;addr:city;Lyon 8eme
+TCL:DEP:50761;addr:full;159 Rue Challemel Lacour
+TCL:DEP:50761;addr:postcode;69008
+TCL:DEP:50761;description;LE 7/7
+TCL:DEP:50762;addr:city;Villeurbanne
+TCL:DEP:50762;addr:full;121 Cours Tolstoi
+TCL:DEP:50762;addr:postcode;69100
+TCL:DEP:50762;description;LE TOLSTOI
+TCL:DEP:50765;addr:city;Lyon 7eme
+TCL:DEP:50765;addr:full;7 Place Gabriel Peri
+TCL:DEP:50765;addr:postcode;69007
+TCL:DEP:50765;description;PRESSE
+TCL:DEP:50766;addr:city;Villeurbanne
+TCL:DEP:50766;addr:full;37 Rue De La Soie
+TCL:DEP:50766;addr:postcode;69100
+TCL:DEP:50766;description;SNC DE LA SOIE
+TCL:DEP:50767;addr:city;Saint-Fons
+TCL:DEP:50767;addr:full;8 Avenue Gabriel Peri
+TCL:DEP:50767;addr:postcode;69190
+TCL:DEP:50767;description;LE BALTO
+TCL:GAB:1521;addr:city;Saint-Priest
+TCL:GAB:1521;addr:full;8 Rue Colette
+TCL:GAB:1521;addr:postcode;69800
+TCL:GAB:1521;description;4
+TCL:GAB:1522;addr:city;Mions
+TCL:GAB:1522;addr:full;1 Rue Du 19 Mars 1962
+TCL:GAB:1522;addr:postcode;69780
+TCL:GAB:1522;description;5
+TCL:GAB:1523;addr:city;La Tour De Salvagny
+TCL:GAB:1523;addr:full;6 Avenue De L Hippodrome
+TCL:GAB:1523;addr:postcode;69890
+TCL:GAB:1523;description;104
+TCL:GAB:1524;addr:city;Bron
+TCL:GAB:1524;addr:full;140 Avenue Franklin Roosevelt
+TCL:GAB:1524;addr:postcode;69500
+TCL:GAB:1524;description;7
+TCL:GAB:1525;addr:city;Neuville-Sur-Saone
+TCL:GAB:1525;addr:full;12 Quai Pasteur
+TCL:GAB:1525;addr:postcode;69250
+TCL:GAB:1525;description;8
+TCL:GAB:1526;addr:city;St Germain Au Mont D'Or
+TCL:GAB:1526;addr:full;1 Place Du 11 Novembre 1918
+TCL:GAB:1526;addr:postcode;69650
+TCL:GAB:1526;description;9
+TCL:GAB:1527;addr:city;Lyon 2eme
+TCL:GAB:1527;addr:full;15 Place Bellecour
+TCL:GAB:1527;addr:postcode;69002
+TCL:GAB:1527;description;113
+TCL:GAB:1528;addr:city;Lyon 5eme
+TCL:GAB:1528;addr:full;1 Place Du Change
+TCL:GAB:1528;addr:postcode;69005
+TCL:GAB:1528;description;10
+TCL:GAB:1529;addr:city;Lyon 7eme
+TCL:GAB:1529;addr:full;79 Avenue Jean Jaures
+TCL:GAB:1529;addr:postcode;69007
+TCL:GAB:1529;description;93
+TCL:GAB:1531;addr:city;Saint-Fons
+TCL:GAB:1531;addr:full;85 Avenue Jean Jaures
+TCL:GAB:1531;addr:postcode;69190
+TCL:GAB:1531;description;121
+TCL:GAB:1532;addr:city;Venissieux
+TCL:GAB:1532;addr:full;12 Rue Gambetta
+TCL:GAB:1532;addr:postcode;69200
+TCL:GAB:1532;description;14
+TCL:GAB:1533;addr:city;Pierre-Benite
+TCL:GAB:1533;addr:full;18 Place Jean Jaures
+TCL:GAB:1533;addr:postcode;69310
+TCL:GAB:1533;description;15
+TCL:GAB:1534;addr:city;Lyon 9eme
+TCL:GAB:1534;addr:full;22 Rue Sergent Michel Berthet
+TCL:GAB:1534;addr:postcode;69009
+TCL:GAB:1534;description;16
+TCL:GAB:1535;addr:city;Lyon 9eme
+TCL:GAB:1535;addr:full;44 Rue Sergent Michel Berthet
+TCL:GAB:1535;addr:postcode;69009
+TCL:GAB:1535;description;102
+TCL:GAB:1536;addr:city;Lyon 9eme
+TCL:GAB:1536;addr:full;2 Rue Du 24 Mars 1852
+TCL:GAB:1536;addr:postcode;69009
+TCL:GAB:1536;description;18
+TCL:GAB:1537;addr:city;Tassin-La-Demi-Lune
+TCL:GAB:1537;addr:full;52 Avenue De La Republique
+TCL:GAB:1537;addr:postcode;69160
+TCL:GAB:1537;description;20
+TCL:GAB:1538;addr:city;Villeurbanne
+TCL:GAB:1538;addr:full;1 Avenue Aristide Briand
+TCL:GAB:1538;addr:postcode;69100
+TCL:GAB:1538;description;19
+TCL:GAB:1539;addr:city;Oullins
+TCL:GAB:1539;addr:full;121 Rue Grande Rue
+TCL:GAB:1539;addr:postcode;69600
+TCL:GAB:1539;description;21
+TCL:GAB:1540;addr:city;Lyon 4eme
+TCL:GAB:1540;addr:full;1 Place Joannes Ambre
+TCL:GAB:1540;addr:postcode;69004
+TCL:GAB:1540;description;112
+TCL:GAB:1541;addr:city;Lyon 2eme
+TCL:GAB:1541;addr:full;12 Rue De La Republique
+TCL:GAB:1541;addr:postcode;69002
+TCL:GAB:1541;description;23
+TCL:GAB:1542;addr:city;Lyon 6eme
+TCL:GAB:1542;addr:full;36 Cours Vitton
+TCL:GAB:1542;addr:postcode;69006
+TCL:GAB:1542;description;107
+TCL:GAB:1543;addr:city;Villeurbanne
+TCL:GAB:1543;addr:full;33 Place Jules Grandclement
+TCL:GAB:1543;addr:postcode;69100
+TCL:GAB:1543;description;25
+TCL:GAB:1544;addr:city;Sainte-Foy-Les-Lyon
+TCL:GAB:1544;addr:full;10 Place Xavier Ricard
+TCL:GAB:1544;addr:postcode;69110
+TCL:GAB:1544;description;26
+TCL:GAB:1545;addr:city;Lyon 3eme
+TCL:GAB:1545;addr:full;154 Cours Lafayette
+TCL:GAB:1545;addr:postcode;69003
+TCL:GAB:1545;description;1
+TCL:GAB:1546;addr:city;Caluire-Et-Cuire
+TCL:GAB:1546;addr:full;5 Montee Castellane
+TCL:GAB:1546;addr:postcode;69300
+TCL:GAB:1546;description;27
+TCL:GAB:1547;addr:city;Lyon 3eme
+TCL:GAB:1547;addr:full;91 Avenue Marechal De Saxe
+TCL:GAB:1547;addr:postcode;69003
+TCL:GAB:1547;description;28
+TCL:GAB:1548;addr:city;Craponne
+TCL:GAB:1548;addr:full;117 Avenue Pierre Dumond
+TCL:GAB:1548;addr:postcode;69290
+TCL:GAB:1548;description;29
+TCL:GAB:1549;addr:city;Meyzieu
+TCL:GAB:1549;addr:full;66 Rue De La Republique
+TCL:GAB:1549;addr:postcode;69330
+TCL:GAB:1549;description;131
+TCL:GAB:1550;addr:city;Lyon 5eme
+TCL:GAB:1550;addr:full;4 Rue Des Aqueducs
+TCL:GAB:1550;addr:postcode;69005
+TCL:GAB:1550;description;31
+TCL:GAB:1551;addr:city;Lyon 8eme
+TCL:GAB:1551;addr:full;4 Place Ambroise Courtois
+TCL:GAB:1551;addr:postcode;69008
+TCL:GAB:1551;description;32
+TCL:GAB:1552;addr:city;Lyon 6eme
+TCL:GAB:1552;addr:full;18 Rue Duquesne
+TCL:GAB:1552;addr:postcode;69006
+TCL:GAB:1552;description;33
+TCL:GAB:1553;addr:city;Villeurbanne
+TCL:GAB:1553;addr:full;3 Cours Emile Zola
+TCL:GAB:1553;addr:postcode;69100
+TCL:GAB:1553;description;111
+TCL:GAB:1554;addr:city;Lyon 3eme
+TCL:GAB:1554;addr:full;70 Cours Docteur Long
+TCL:GAB:1554;addr:postcode;69003
+TCL:GAB:1554;description;35
+TCL:GAB:1555;addr:city;Ecully
+TCL:GAB:1555;addr:full;4 Rue Benoit Tabard
+TCL:GAB:1555;addr:postcode;69130
+TCL:GAB:1555;description;36
+TCL:GAB:1556;addr:city;Lyon 8eme
+TCL:GAB:1556;addr:full;238 Route De Vienne
+TCL:GAB:1556;addr:postcode;69008
+TCL:GAB:1556;description;37
+TCL:GAB:1557;addr:city;Villeurbanne
+TCL:GAB:1557;addr:full;52 Cours Tolstoi
+TCL:GAB:1557;addr:postcode;69100
+TCL:GAB:1557;description;38
+TCL:GAB:1558;addr:city;Decines-Charpieu
+TCL:GAB:1558;addr:full;112 Avenue Jean Jaures
+TCL:GAB:1558;addr:postcode;69150
+TCL:GAB:1558;description;39
+TCL:GAB:1559;addr:city;Lyon 6eme
+TCL:GAB:1559;addr:full;18 Place Marechal Lyautey
+TCL:GAB:1559;addr:postcode;69006
+TCL:GAB:1559;description;40
+TCL:GAB:1560;addr:city;Lyon 7eme
+TCL:GAB:1560;addr:full;52 Cours Gambetta
+TCL:GAB:1560;addr:postcode;69007
+TCL:GAB:1560;description;100
+TCL:GAB:1561;addr:city;Lyon 3eme
+TCL:GAB:1561;addr:full;34 Avenue Lacassagne
+TCL:GAB:1561;addr:postcode;69003
+TCL:GAB:1561;description;41
+TCL:GAB:1562;addr:city;Charbonnieres-Les-Bains
+TCL:GAB:1562;addr:full;1 Square De Verdun
+TCL:GAB:1562;addr:postcode;69260
+TCL:GAB:1562;description;119
+TCL:GAB:1563;addr:city;Francheville
+TCL:GAB:1563;addr:full;36 Rue Grande 
+TCL:GAB:1563;addr:postcode;69340
+TCL:GAB:1563;description;108
+TCL:GAB:1564;addr:city;Champagne-Au-Mont-D'Or
+TCL:GAB:1564;addr:full;46 Avenue De Lanessan
+TCL:GAB:1564;addr:postcode;69410
+TCL:GAB:1564;description;43
+TCL:GAB:1565;addr:city;Villeurbanne
+TCL:GAB:1565;addr:full;111 Avenue Roger Salengro
+TCL:GAB:1565;addr:postcode;69100
+TCL:GAB:1565;description;44
+TCL:GAB:1566;addr:city;Lyon 7eme
+TCL:GAB:1566;addr:full;58 Avenue Debourg
+TCL:GAB:1566;addr:postcode;69007
+TCL:GAB:1566;description;45
+TCL:GAB:1567;addr:city;Lyon 8eme
+TCL:GAB:1567;addr:full;77 Boulevard Des Etats Unis
+TCL:GAB:1567;addr:postcode;69008
+TCL:GAB:1567;description;46
+TCL:GAB:1568;addr:city;Saint-Genis-Laval
+TCL:GAB:1568;addr:full;144 Avenue Georges Clemenceau
+TCL:GAB:1568;addr:postcode;69230
+TCL:GAB:1568;description;48
+TCL:GAB:1569;addr:city;Rillieux-La-Pape
+TCL:GAB:1569;addr:full;3006 Route De Strasbourg
+TCL:GAB:1569;addr:postcode;69140
+TCL:GAB:1569;description;50
+TCL:GAB:1570;addr:city;Lyon 2eme
+TCL:GAB:1570;addr:full;5 Cours Charlemagne
+TCL:GAB:1570;addr:postcode;69002
+TCL:GAB:1570;description;51
+TCL:GAB:1571;addr:city;Chassieu
+TCL:GAB:1571;addr:full;5 Avenue Du Progres
+TCL:GAB:1571;addr:postcode;69680
+TCL:GAB:1571;description;52
+TCL:GAB:1572;addr:city;Lyon 7eme
+TCL:GAB:1572;addr:full;179 Avenue Jean Jaures
+TCL:GAB:1572;addr:postcode;69007
+TCL:GAB:1572;description;118
+TCL:GAB:1573;addr:city;Villeurbanne
+TCL:GAB:1573;addr:full;18 Cours Emile Zola
+TCL:GAB:1573;addr:postcode;69100
+TCL:GAB:1573;description;137
+TCL:GAB:1574;addr:city;Lyon 6eme
+TCL:GAB:1574;addr:full;31 Rue Garibaldi
+TCL:GAB:1574;addr:postcode;69006
+TCL:GAB:1574;description;54
+TCL:GAB:1575;addr:city;Lyon 7eme
+TCL:GAB:1575;addr:full;6 Avenue Jean Jaures
+TCL:GAB:1575;addr:postcode;69007
+TCL:GAB:1575;description;109
+TCL:GAB:1576;addr:city;Villeurbanne
+TCL:GAB:1576;addr:full;52 Cours Emile Zola
+TCL:GAB:1576;addr:postcode;69100
+TCL:GAB:1576;description;56
+TCL:GAB:1577;addr:city;Lyon 1er
+TCL:GAB:1577;addr:full;8 Rue De La Republique
+TCL:GAB:1577;addr:postcode;69001
+TCL:GAB:1577;description;2
+TCL:GAB:1578;addr:city;Lyon 2eme
+TCL:GAB:1578;addr:full;26 Place Bellecour
+TCL:GAB:1578;addr:postcode;69002
+TCL:GAB:1578;description;57
+TCL:GAB:1579;addr:city;Champagne-Au-Mont-D'Or
+TCL:GAB:1579;addr:full;1 Rue Louis Juttet
+TCL:GAB:1579;addr:postcode;69410
+TCL:GAB:1579;description;58
+TCL:GAB:1580;addr:city;Villeurbanne
+TCL:GAB:1580;addr:full;1 Place Albert Thomas
+TCL:GAB:1580;addr:postcode;69100
+TCL:GAB:1580;description;59
+TCL:GAB:1581;addr:city;Lyon 6eme
+TCL:GAB:1581;addr:full;21 Cours Franklin Roosevelt
+TCL:GAB:1581;addr:postcode;69006
+TCL:GAB:1581;description;60
+TCL:GAB:1582;addr:city;Lyon 3eme
+TCL:GAB:1582;addr:full;80 Cours De La Liberte
+TCL:GAB:1582;addr:postcode;69003
+TCL:GAB:1582;description;61
+TCL:GAB:1583;addr:city;Lyon 7eme
+TCL:GAB:1583;addr:full;1 Place Jean Mace
+TCL:GAB:1583;addr:postcode;69007
+TCL:GAB:1583;description;134
+TCL:GAB:1584;addr:city;Rillieux-La-Pape
+TCL:GAB:1584;addr:full;60 Place De Verdun
+TCL:GAB:1584;addr:postcode;69140
+TCL:GAB:1584;description;63
+TCL:GAB:1585;addr:city;Venissieux
+TCL:GAB:1585;addr:full;12 Rue Paul Bert
+TCL:GAB:1585;addr:postcode;69200
+TCL:GAB:1585;description;64
+TCL:GAB:1586;addr:city;Oullins
+TCL:GAB:1586;addr:full;71 Rue Grande Rue
+TCL:GAB:1586;addr:postcode;69600
+TCL:GAB:1586;description;65
+TCL:GAB:1587;addr:city;Decines-Charpieu
+TCL:GAB:1587;addr:full;218 Avenue Jean Jaures
+TCL:GAB:1587;addr:postcode;69150
+TCL:GAB:1587;description;66
+TCL:GAB:1588;addr:city;Lyon 4eme
+TCL:GAB:1588;addr:full;2 Place De La Croix Rousse
+TCL:GAB:1588;addr:postcode;69004
+TCL:GAB:1588;description;67
+TCL:GAB:1589;addr:city;Lyon 2eme
+TCL:GAB:1589;addr:full;56 Cours Charlemagne
+TCL:GAB:1589;addr:postcode;69002
+TCL:GAB:1589;description;68
+TCL:GAB:1590;addr:city;Corbas
+TCL:GAB:1590;addr:full;68 Rue Centrale
+TCL:GAB:1590;addr:postcode;69960
+TCL:GAB:1590;description;106
+TCL:GAB:1591;addr:city;Villeurbanne
+TCL:GAB:1591;addr:full;22 Rue Michel Servet
+TCL:GAB:1591;addr:postcode;69100
+TCL:GAB:1591;description;69
+TCL:GAB:1592;addr:city;Lyon 6eme
+TCL:GAB:1592;addr:full;27 Boulevard Des Brotteaux
+TCL:GAB:1592;addr:postcode;69006
+TCL:GAB:1592;description;70
+TCL:GAB:1593;addr:city;Lyon 3eme
+TCL:GAB:1593;addr:full;28 Cours Lafayette
+TCL:GAB:1593;addr:postcode;69003
+TCL:GAB:1593;description;71
+TCL:GAB:1594;addr:city;Caluire-Et-Cuire
+TCL:GAB:1594;addr:full;52 Rue Jean Moulin
+TCL:GAB:1594;addr:postcode;69300
+TCL:GAB:1594;description;72
+TCL:GAB:1595;addr:city;Lyon 3eme
+TCL:GAB:1595;addr:full;206 Rue Paul Bert
+TCL:GAB:1595;addr:postcode;69003
+TCL:GAB:1595;description;73
+TCL:GAB:1596;addr:city;Civrieux D'Azergues
+TCL:GAB:1596;addr:full;1 Place Des Arcades
+TCL:GAB:1596;addr:postcode;69380
+TCL:GAB:1596;description;110
+TCL:GAB:1597;addr:city;Craponne
+TCL:GAB:1597;addr:full;46 Place Andree Marie Perrin
+TCL:GAB:1597;addr:postcode;69290
+TCL:GAB:1597;description;75
+TCL:GAB:1598;addr:city;Lyon 9eme
+TCL:GAB:1598;addr:full;2 Rue Grande De Vaise
+TCL:GAB:1598;addr:postcode;69009
+TCL:GAB:1598;description;76
+TCL:GAB:1599;addr:city;Tassin-La-Demi-Lune
+TCL:GAB:1599;addr:full;129 Avenue Charles De Gaulle
+TCL:GAB:1599;addr:postcode;69160
+TCL:GAB:1599;description;77
+TCL:GAB:1600;addr:city;Lyon 3eme
+TCL:GAB:1600;addr:full;61 Cours Docteur Long
+TCL:GAB:1600;addr:postcode;69003
+TCL:GAB:1600;description;78
+TCL:GAB:1601;addr:city;Lyon 8eme
+TCL:GAB:1601;addr:full;102 Avenue Des Freres Lumiere
+TCL:GAB:1601;addr:postcode;69008
+TCL:GAB:1601;description;116
+TCL:GAB:1602;addr:city;Lyon 8eme
+TCL:GAB:1602;addr:full;1 Avenue Paul Santy
+TCL:GAB:1602;addr:postcode;69008
+TCL:GAB:1602;description;79
+TCL:GAB:1603;addr:city;Chassieu
+TCL:GAB:1603;addr:full;38 Avenue Des Freres Montgolfier
+TCL:GAB:1603;addr:postcode;69680
+TCL:GAB:1603;description;99
+TCL:GAB:1604;addr:city;Bron
+TCL:GAB:1604;addr:full;185 Avenue Franklin Roosevelt
+TCL:GAB:1604;addr:postcode;69500
+TCL:GAB:1604;description;81
+TCL:GAB:1605;addr:city;Saint-Priest
+TCL:GAB:1605;addr:full;3 Avenue De La Gare
+TCL:GAB:1605;addr:postcode;69800
+TCL:GAB:1605;description;97
+TCL:GAB:1606;addr:city;Neuville-Sur-Saone
+TCL:GAB:1606;addr:full;23 Rue Victor Hugo
+TCL:GAB:1606;addr:postcode;69250
+TCL:GAB:1606;description;83
+TCL:GAB:1607;addr:city;Givors
+TCL:GAB:1607;addr:full;6 Place Jean Jaures
+TCL:GAB:1607;addr:postcode;69700
+TCL:GAB:1607;description;84
+TCL:GAB:1608;addr:city;Lyon 5eme
+TCL:GAB:1608;addr:full;4 Rue Joliot Curie
+TCL:GAB:1608;addr:postcode;69005
+TCL:GAB:1608;description;85
+TCL:GAB:1609;addr:city;Lyon 7eme
+TCL:GAB:1609;addr:full;32 Rue Jacques Monod
+TCL:GAB:1609;addr:postcode;69007
+TCL:GAB:1609;description;86
+TCL:GAB:1610;addr:city;Ecully
+TCL:GAB:1610;addr:full;8 Place Charles De Gaulle
+TCL:GAB:1610;addr:postcode;69130
+TCL:GAB:1610;description;87
+TCL:GAB:1611;addr:city;Meyzieu
+TCL:GAB:1611;addr:full;100 Rue De La Republique
+TCL:GAB:1611;addr:postcode;69330
+TCL:GAB:1611;description;120
+TCL:GAB:1612;addr:city;Vaulx-En-Velin
+TCL:GAB:1612;addr:full;94 Rue De La Republique
+TCL:GAB:1612;addr:postcode;69120
+TCL:GAB:1612;description;88
+TCL:GAB:1613;addr:city;Rillieux-La-Pape
+TCL:GAB:1613;addr:full;28 Avenue De L Europe
+TCL:GAB:1613;addr:postcode;69140
+TCL:GAB:1613;description;132
+TCL:GAB:1614;addr:city;Lyon 2eme
+TCL:GAB:1614;addr:full;75 Rue De La Republique
+TCL:GAB:1614;addr:postcode;69002
+TCL:GAB:1614;description;89
+TCL:GAB:1615;addr:city;Lyon 7eme
+TCL:GAB:1615;addr:full;13 Rue De La Madeleine
+TCL:GAB:1615;addr:postcode;69007
+TCL:GAB:1615;description;135
+TCL:GAB:1616;addr:city;Lyon 5eme
+TCL:GAB:1616;addr:full;66 Rue Saint Jean
+TCL:GAB:1616;addr:postcode;69005
+TCL:GAB:1616;description;90
+TCL:GAB:1617;addr:city;St Germain Laval
+TCL:GAB:1617;addr:full;1 Rue Les Basses Barolle
+TCL:GAB:1617;addr:postcode;42260
+TCL:GAB:1617;description;91
+TCL:GAB:1618;addr:city;Bron
+TCL:GAB:1618;addr:full;5 Avenue Pierre Mendes France
+TCL:GAB:1618;addr:postcode;69500
+TCL:GAB:1618;description;117
+TCL:GAB:1619;addr:city;Saint Laurent De Mure
+TCL:GAB:1619;addr:full;1 Montee Du Chateau
+TCL:GAB:1619;addr:postcode;69720
+TCL:GAB:1619;description;47
+TCL:GAB:1620;addr:city;Brignais
+TCL:GAB:1620;addr:full;134 Rue Du Général De Gaulle
+TCL:GAB:1620;addr:postcode;69530
+TCL:GAB:1620;description;49
+TCL:GAB:1621;addr:city;Brignais
+TCL:GAB:1621;addr:full;169 Rue Du Général De Gaulle
+TCL:GAB:1621;addr:postcode;69530
+TCL:GAB:1621;description;80
+TCL:GAB:1726;addr:city;Lyon 4eme
+TCL:GAB:1726;addr:full;143 Boulevard De La Croix Rousse
+TCL:GAB:1726;addr:postcode;69004
+TCL:GAB:1726;description;94
+TCL:GAB:1781;addr:city;Lyon 3eme
+TCL:GAB:1781;addr:full;17 Rue Docteur Bouchut
+TCL:GAB:1781;addr:postcode;69003
+TCL:GAB:1781;description;122
+TCL:GAB:1782;addr:city;Lyon 3eme
+TCL:GAB:1782;addr:full;96 Avenue Felix Faure
+TCL:GAB:1782;addr:postcode;69003
+TCL:GAB:1782;description;123
+TCL:REL:ALP;capacity;389
+TCL:REL:ALP;capacity:disabled;10
+TCL:REL:ALP;network;TCL
+TCL:REL:ALP;opening;Ouvert de 4h30 à 1h00 du lundi au dimanche.
+TCL:REL:ALP;operator;SYTRAL
+TCL:REL:ALP;ref;ALP
+TCL:REL:ALP;supervised;yes
+TCL:REL:BELA;capacity;123
+TCL:REL:BELA;capacity:disabled;4
+TCL:REL:BELA;network;TCL
+TCL:REL:BELA;opening;Ouvert de 5h00 à 17h30 du lundi au dimanche,  en accès libre en dehors de ces horaires
+TCL:REL:BELA;operator;SYTRAL
+TCL:REL:BELA;ref;BELA
+TCL:REL:BELA;supervised;yes
+TCL:REL:BON;capacity;655
+TCL:REL:BON;capacity:disabled;20
+TCL:REL:BON;network;TCL
+TCL:REL:BON;opening;Ouvert de 4h30 à 1h00 du lundi au samedi  fermé le dimanche et jours fériés. Niveau 0 en accès libre le dimanche.
+TCL:REL:BON;operator;SYTRAL
+TCL:REL:BON;ref;BON
+TCL:REL:BON;supervised;yes
+TCL:REL:CUI;capacity;80
+TCL:REL:CUI;capacity:disabled;2
+TCL:REL:CUI;network;TCL
+TCL:REL:CUI;opening;Ouvert de 4h30 à 1h00, du lundi au dimanche.
+TCL:REL:CUI;operator;SYTRAL
+TCL:REL:CUI;ref;CUI
+TCL:REL:CUI;supervised;no
+TCL:REL:DECC;capacity;108
+TCL:REL:DECC;capacity:disabled;3
+TCL:REL:DECC;network;TCL
+TCL:REL:DECC;opening;Ouvert de 4h30 à 1h00, du lundi au dimanche.
+TCL:REL:DECC;operator;SYTRAL
+TCL:REL:DECC;ref;DECC
+TCL:REL:DECC;supervised;yes
+TCL:REL:DECG;capacity;57
+TCL:REL:DECG;capacity:disabled;2
+TCL:REL:DECG;network;TCL
+TCL:REL:DECG;opening;Ouvert de 4h30 à 1h00, du lundi au dimanche.
+TCL:REL:DECG;operator;SYTRAL
+TCL:REL:DECG;ref;DECG
+TCL:REL:DECG;supervised;yes
+TCL:REL:FEY;capacity;80
+TCL:REL:FEY;capacity:disabled;no
+TCL:REL:FEY;network;TCL
+TCL:REL:FEY;opening; Ouvert du lundi au dimanche.
+TCL:REL:FEY;operator;SYTRAL
+TCL:REL:FEY;ref;FEY
+TCL:REL:FEY;supervised;yes
+TCL:REL:GOR;capacity;680
+TCL:REL:GOR;capacity:disabled;19
+TCL:REL:GOR;network;TCL
+TCL:REL:GOR;opening;Ouvert de 4h30 à 1h00, du lundi au samedi. Fermé dimanche et jours fériés.
+TCL:REL:GOR;operator;SYTRAL
+TCL:REL:GOR;ref;GOR
+TCL:REL:GOR;supervised;yes
+TCL:REL:GREY;capacity;69
+TCL:REL:GREY;capacity:disabled;2
+TCL:REL:GREY;network;TCL
+TCL:REL:GREY;opening;ouvert de 4h30 à 1h00 du lundi au dimanche.
+TCL:REL:GREY;operator;SYTRAL
+TCL:REL:GREY;ref;GREY
+TCL:REL:GREY;supervised;no
+TCL:REL:HFVE;capacity;80
+TCL:REL:HFVE;capacity:disabled;2
+TCL:REL:HFVE;network;TCL
+TCL:REL:HFVE;opening;Ouvert de 4h30 à 1h00, du lundi au dimanche.
+TCL:REL:HFVE;operator;SYTRAL
+TCL:REL:HFVE;ref;HFVE
+TCL:REL:HFVE;supervised;yes
+TCL:REL:MERP;capacity;416
+TCL:REL:MERP;capacity:disabled;10
+TCL:REL:MERP;network;TCL
+TCL:REL:MERP;opening;Ouvert de 4h30 à 01h00 du lundi au dimanche
+TCL:REL:MERP;operator;SYTRAL
+TCL:REL:MERP;ref;MERP
+TCL:REL:MERP;supervised;yes
+TCL:REL:MEYG;capacity;107
+TCL:REL:MEYG;capacity:disabled;3
+TCL:REL:MEYG;network;TCL
+TCL:REL:MEYG;opening;Ouvert de 4h30 à 1h00, du lundi au dimanche.
+TCL:REL:MEYG;operator;SYTRAL
+TCL:REL:MEYG;ref;MEYG
+TCL:REL:MEYG;supervised;yes
+TCL:REL:MEYP;capacity;590
+TCL:REL:MEYP;capacity:disabled;14
+TCL:REL:MEYP;network;TCL
+TCL:REL:MEYP;opening;Ouvert de 4h30 à 1h00  du lundi au vendredi. Fermé le samedi, dimanche et jours fériés.
+TCL:REL:MEYP;operator;SYTRAL
+TCL:REL:MEYP;ref;MEYP
+TCL:REL:MEYP;supervised;yes
+TCL:REL:MEYZ;capacity;450
+TCL:REL:MEYZ;capacity:disabled;10
+TCL:REL:MEYZ;network;TCL
+TCL:REL:MEYZ;opening;Ouvert de 4h30 à 1h00, du lundi au dimanche.
+TCL:REL:MEYZ;operator;SYTRAL
+TCL:REL:MEYZ;ref;MEYZ
+TCL:REL:MEYZ;supervised;yes
+TCL:REL:OULN;capacity;107
+TCL:REL:OULN;capacity:disabled;2
+TCL:REL:OULN;network;TCL
+TCL:REL:OULN;opening;Ouvert de 4h30 à 1h00, du lundi au dimanche.
+TCL:REL:OULN;operator;SYTRAL
+TCL:REL:OULN;ref;OULN
+TCL:REL:OULN;supervised;yes
+TCL:REL:OULS;capacity;306
+TCL:REL:OULS;capacity:disabled;7
+TCL:REL:OULS;network;TCL
+TCL:REL:OULS;opening;Ouvert de 4h30 à 1h00, du lundi au dimanche.
+TCL:REL:OULS;operator;SYTRAL
+TCL:REL:OULS;ref;OULS
+TCL:REL:OULS;supervised;yes
+TCL:REL:PAR;capacity;310
+TCL:REL:PAR;capacity:disabled;6
+TCL:REL:PAR;network;TCL
+TCL:REL:PAR;opening;Ouvert de 4h30 à 1h00, du lundi au dimanche.
+TCL:REL:PAR;operator;SYTRAL
+TCL:REL:PAR;ref;PAR
+TCL:REL:PAR;supervised;yes
+TCL:REL:SOI;capacity;474
+TCL:REL:SOI;capacity:disabled;10
+TCL:REL:SOI;network;TCL
+TCL:REL:SOI;opening;Ouvert de 4h30 à 1h00, du lundi au dimanche.
+TCL:REL:SOI;operator;SYTRAL
+TCL:REL:SOI;ref;SOI
+TCL:REL:SOI;supervised;yes
+TCL:REL:VAI1;capacity;521
+TCL:REL:VAI1;capacity:disabled;10
+TCL:REL:VAI1;network;TCL
+TCL:REL:VAI1;opening;Ouvert de 4h30 à 1h00, du lundi au dimanche.
+TCL:REL:VAI1;operator;SYTRAL
+TCL:REL:VAI1;ref;VAI1
+TCL:REL:VAI1;supervised;yes
+TCL:REL:VAI2;capacity;748
+TCL:REL:VAI2;capacity:disabled;18
+TCL:REL:VAI2;network;TCL
+TCL:REL:VAI2;opening;Ouvert de 4h30 à 1h du lundi au vendredi, fermé les jours fériés.Fermé au mois d'août. 
+TCL:REL:VAI2;operator;SYTRAL
+TCL:REL:VAI2;ref;VAI2
+TCL:REL:VAI2;supervised;yes
+TCL:REL:VEN;capacity;745
+TCL:REL:VEN;capacity:disabled;21
+TCL:REL:VEN;network;TCL
+TCL:REL:VEN;opening;Ouvert de 4h30 à 1h00. Du lundi au samedi. Fermé le dimanche et jours fériés.
+TCL:REL:VEN;operator;SYTRAL
+TCL:REL:VEN;ref;VEN
+TCL:REL:VEN;supervised;yes
+TCL:RIS:21849;addr:city;Lyon 9eme
+TCL:RIS:21849;addr:full;Rue Du 24 Mars 1852
+TCL:RIS:21849;addr:postcode;69009
+TCL:RIS:21850;addr:city;Lyon 3eme
+TCL:RIS:21850;addr:full;30 Rue De La Villette
+TCL:RIS:21850;addr:postcode;69003
+TCL:RIS:21853;addr:city;Lyon 3eme
+TCL:RIS:21853;addr:full;11 Boulevard Marius Vivier Merle
+TCL:RIS:21853;addr:postcode;69003
+TCL:VEL:BON;capacity;16
+TCL:VEL:BON;description;Portique
+TCL:VEL:DECC;capacity;52
+TCL:VEL:DECC;description;Parcs à vélo sous contrôle d'accès
+TCL:VEL:MER;capacity;32
+TCL:VEL:MER;description;Parcs à vélo sous contrôle d'accès
+TCL:VEL:MEYG;capacity;102
+TCL:VEL:MEYG;description;Parcs à vélo sous contrôle d'accès
+TCL:VEL:MEYZ;capacity;120
+TCL:VEL:MEYZ;description;Parcs à vélo sous contrôle d'accès
+TCL:VEL:OULL;capacity;40
+TCL:VEL:OULL;description;Parcs à vélo sous contrôle d'accès
+TCL:VEL:SOI;capacity;142
+TCL:VEL:SOI;description;Parcs à vélo sous contrôle d'accès
+TCL:VEL:VAI2;capacity;40
+TCL:VEL:VAI2;description;Parcs à vélo sous contrôle d'accès
+TCL:VEL:VEN;capacity;35
+TCL:VEL:VEN;description;Parcs à vélo sans contrôle d'accès

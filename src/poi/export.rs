@@ -70,7 +70,7 @@ impl From<&objects::Poi> for ExportPoi {
             lat: poi.coord.lat(),
             lon: poi.coord.lon(),
             weight: 0.,
-            visible: true,
+            visible: poi.visible,
         }
     }
 }

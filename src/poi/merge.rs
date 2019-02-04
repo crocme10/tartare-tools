@@ -105,6 +105,7 @@ fn merge_pois(zip: &mut zip::ZipArchive<File>, pois: &mut HashMap<String, Poi>) 
             coord: Coord::new(export_poi.lon, export_poi.lat),
             poi_type_id: export_poi.type_id.to_string(),
             properties: vec![],
+            visible: true,
         };
         match pois.entry(export_poi.id.to_string()) {
             Occupied(_) => bail!("POI {} already found", p.id),

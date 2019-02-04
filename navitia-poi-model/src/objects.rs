@@ -68,6 +68,7 @@ pub struct Poi {
     pub coord: Coord,
     pub poi_type_id: String,
     pub properties: Vec<Property>,
+    pub visible: bool,
 }
 
 #[derive(Deserialize, Debug, Clone)]
