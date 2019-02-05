@@ -66,7 +66,6 @@ fn test_export_sytral_pois_ko_csv_manquant() {
     for (suffix, file_name) in cover_all_fixtures() {
         let input_path = input_path_prefix.join(suffix);
         let poi_model = extract_pois(input_path);
-        assert!(poi_model.is_err());
         match poi_model {
             Ok(_) => assert!(false),
             Err(e) => assert_eq!(format!("{}", e), format!("missing file {}", file_name)),
@@ -78,7 +77,6 @@ fn test_export_sytral_pois_ko_csv_manquant() {
 fn test_export_sytral_pois_ko_poi_type_id_manquant() {
     let input_path = "./fixtures/sytral2navitia-pois/input/sytral_poi_echec2_poi_type_id_manquant";
     let poi_model = extract_pois(input_path);
-    assert!(poi_model.is_err());
     match poi_model {
         Ok(_) => assert!(false),
         Err(e) => assert_eq!(e.iter_chain().map(|err| format!("{}", err)).collect::<Vec<String>>(),
@@ -128,5 +126,18 @@ fn test_export_sytral_pois_ko_poi_y_manquant() {
         Err(e) => assert_eq!(e.iter_chain().map(|err| format!("{}", err)).collect::<Vec<String>>(),
                              vec!["Error reading \"./fixtures/sytral2navitia-pois/input/sytral_poi_echec3_poi_y_manquant/parcs_velos.csv\"",
                                   "CSV deserialize error: record 2 (line: 3, byte: 160): cannot parse float from empty string"]),
+    };
+}
+
+#[test]
+fn test_export_sytral_poi_id_double() {
+    let input_path = "./fixtures/sytral2navitia-pois/input/sytral_poi_echec4_poi_id_double";
+    let poi_model = extract_pois(input_path);
+    match poi_model {
+        Ok(_) => assert!(false),
+        Err(e) => assert_eq!(
+            format!("{}", e),
+            "poi with id 42 found at least twice in file POI_TCL.csv"
+        ),
     };
 }
