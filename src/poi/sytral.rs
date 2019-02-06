@@ -24,7 +24,7 @@ use navitia_poi_model::objects::{
     Coord, Poi as NavitiaPoi, PoiType as NavitiaPoiType, Property as NavitiaPoiProperty,
 };
 use serde_derive::{Deserialize, Serialize};
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use std::path::Path;
 use std::result::Result as StdResult;
 
@@ -120,6 +120,25 @@ fn add_poi_with_properties(
     });
 }
 
+fn get_poi_id_without_collision(
+    poi_id: &Option<String>,
+    poi_ids: &mut HashSet<String>,
+    file: &str,
+) -> Result<String> {
+    let poi_id = match poi_id.as_ref() {
+        Some(val) => val.clone(),
+        None => bail!("poi with undefined id found in file {}", file),
+    };
+    if !poi_ids.insert(poi_id.clone().into()) {
+        bail!(
+            "poi with id {:?} found at least twice in file {:?}",
+            poi_id,
+            file
+        );
+    }
+    Ok(poi_id)
+}
+
 fn extract_from_main_file<P: AsRef<Path>>(
     dir_path: &P,
     pois: &mut Vec<NavitiaPoi>,
@@ -127,14 +146,13 @@ fn extract_from_main_file<P: AsRef<Path>>(
 ) -> Result<()> {
     info!("extract pois from file {}", MAIN_FILE);
     let main_file_path = dir_path.as_ref().join(MAIN_FILE);
+    let mut poi_ids = HashSet::new();
     let mut rdr = csv::ReaderBuilder::new()
         .delimiter(b';')
         .from_path(&main_file_path)?;
     for sytral_poi in rdr.deserialize() {
         let sytral_poi: Poi = sytral_poi.with_context(ctx_from_path!(main_file_path))?;
-        if sytral_poi.id_main.is_none() {
-            bail!("poi with undefined id found in file {}", MAIN_FILE);
-        }
+        let poi_id = get_poi_id_without_collision(&sytral_poi.id_main, &mut poi_ids, MAIN_FILE)?;
         let mut properties = vec![];
         if let Some(desc) = &sytral_poi.comment {
             properties.push(NavitiaPoiProperty {
@@ -167,7 +185,7 @@ fn extract_from_main_file<P: AsRef<Path>>(
         });
         add_poi_with_properties(
             &sytral_poi,
-            sytral_poi.id_main.clone().unwrap(),
+            poi_id,
             sytral_poi.label_main.clone().unwrap(),
             poi_type,
             properties,
@@ -184,15 +202,13 @@ fn extract_from_parcs_relais<P: AsRef<Path>>(
 ) -> Result<()> {
     info!("extract pois from file {}", PR_FILE);
     let parcs_relais_file_path = dir_path.as_ref().join(PR_FILE);
+    let mut poi_ids = HashSet::new();
     let mut rdr = csv::ReaderBuilder::new()
         .delimiter(b';')
         .from_path(&parcs_relais_file_path)?;
     for sytral_poi in rdr.deserialize() {
         let sytral_poi: Poi = sytral_poi.with_context(ctx_from_path!(parcs_relais_file_path))?;
-        if sytral_poi.id_vr.is_none() {
-            bail!("poi with undefined id found in file {}", PR_FILE);
-        }
-
+        let poi_id = get_poi_id_without_collision(&sytral_poi.id_vr, &mut poi_ids, PR_FILE)?;
         let mut properties = vec![];
         if let Some(capacity) = &sytral_poi.capacity {
             properties.push(NavitiaPoiProperty {
@@ -236,7 +252,7 @@ fn extract_from_parcs_relais<P: AsRef<Path>>(
         });
         properties.push(NavitiaPoiProperty {
             key: "ref".to_string(),
-            value: sytral_poi.id_vr.clone().unwrap(),
+            value: poi_id.clone(),
         });
         let poi_type = "amenity:parking".to_string();
         poi_types.entry(poi_type.clone()).or_insert(NavitiaPoiType {
@@ -245,7 +261,7 @@ fn extract_from_parcs_relais<P: AsRef<Path>>(
         });
         add_poi_with_properties(
             &sytral_poi,
-            sytral_poi.id_vr.clone().unwrap(),
+            poi_id,
             sytral_poi.label_vr.clone().unwrap(),
             poi_type,
             properties,
@@ -262,14 +278,13 @@ fn extract_from_parcs_velos<P: AsRef<Path>>(
 ) -> Result<()> {
     info!("extract pois from file {}", PV_FILE);
     let parcs_velos_file_path = dir_path.as_ref().join(PV_FILE);
+    let mut poi_ids = HashSet::new();
     let mut rdr = csv::ReaderBuilder::new()
         .delimiter(b';')
         .from_path(&parcs_velos_file_path)?;
     for sytral_poi in rdr.deserialize() {
         let sytral_poi: Poi = sytral_poi.with_context(ctx_from_path!(parcs_velos_file_path))?;
-        if sytral_poi.id_vr.is_none() {
-            bail!("poi with undefined id found in file {}", PV_FILE);
-        }
+        let poi_id = get_poi_id_without_collision(&sytral_poi.id_vr, &mut poi_ids, PV_FILE)?;
         let mut properties = vec![];
         if let Some(capacity) = &sytral_poi.capacity {
             properties.push(NavitiaPoiProperty {
@@ -290,7 +305,7 @@ fn extract_from_parcs_velos<P: AsRef<Path>>(
         });
         add_poi_with_properties(
             &sytral_poi,
-            sytral_poi.id_vr.clone().unwrap(),
+            poi_id,
             sytral_poi.label_vr.clone().unwrap(),
             poi_type,
             properties,
