@@ -120,16 +120,23 @@ fn add_poi_with_properties(
     });
 }
 
-fn check_poi_id_collision(poi_id: String, poi_ids: &mut HashSet<String>, file: &str) -> Result<()> {
-    if poi_ids.contains(&poi_id) {
+fn get_poi_id_without_collision(
+    poi_id: &Option<String>,
+    poi_ids: &mut HashSet<String>,
+    file: &str,
+) -> Result<String> {
+    let poi_id = match poi_id.as_ref() {
+        Some(val) => val.clone(),
+        None => bail!("poi with undefined id found in file {}", file),
+    };
+    if !poi_ids.insert(poi_id.clone().into()) {
         bail!(
-            "poi with id {} found at least twice in file {}",
-            &poi_id,
+            "poi with id {:?} found at least twice in file {:?}",
+            poi_id,
             file
         );
     }
-    poi_ids.insert(poi_id.clone());
-    Ok(())
+    Ok(poi_id)
 }
 
 fn extract_from_main_file<P: AsRef<Path>>(
@@ -145,11 +152,7 @@ fn extract_from_main_file<P: AsRef<Path>>(
         .from_path(&main_file_path)?;
     for sytral_poi in rdr.deserialize() {
         let sytral_poi: Poi = sytral_poi.with_context(ctx_from_path!(main_file_path))?;
-        let poi_id = match sytral_poi.id_main.as_ref() {
-            Some(val) => val.clone(),
-            None => bail!("poi with undefined id found in file {}", MAIN_FILE),
-        };
-        check_poi_id_collision(poi_id.clone(), &mut poi_ids, MAIN_FILE)?;
+        let poi_id = get_poi_id_without_collision(&sytral_poi.id_main, &mut poi_ids, MAIN_FILE)?;
         let mut properties = vec![];
         if let Some(desc) = &sytral_poi.comment {
             properties.push(NavitiaPoiProperty {
@@ -182,7 +185,7 @@ fn extract_from_main_file<P: AsRef<Path>>(
         });
         add_poi_with_properties(
             &sytral_poi,
-            poi_id.clone(),
+            poi_id,
             sytral_poi.label_main.clone().unwrap(),
             poi_type,
             properties,
@@ -205,11 +208,7 @@ fn extract_from_parcs_relais<P: AsRef<Path>>(
         .from_path(&parcs_relais_file_path)?;
     for sytral_poi in rdr.deserialize() {
         let sytral_poi: Poi = sytral_poi.with_context(ctx_from_path!(parcs_relais_file_path))?;
-        let poi_id = match sytral_poi.id_vr.as_ref() {
-            Some(val) => val.clone(),
-            None => bail!("poi with undefined id found in file {}", PR_FILE),
-        };
-        check_poi_id_collision(poi_id.clone(), &mut poi_ids, PR_FILE)?;
+        let poi_id = get_poi_id_without_collision(&sytral_poi.id_vr, &mut poi_ids, PR_FILE)?;
         let mut properties = vec![];
         if let Some(capacity) = &sytral_poi.capacity {
             properties.push(NavitiaPoiProperty {
@@ -262,7 +261,7 @@ fn extract_from_parcs_relais<P: AsRef<Path>>(
         });
         add_poi_with_properties(
             &sytral_poi,
-            poi_id.clone(),
+            poi_id,
             sytral_poi.label_vr.clone().unwrap(),
             poi_type,
             properties,
@@ -285,11 +284,7 @@ fn extract_from_parcs_velos<P: AsRef<Path>>(
         .from_path(&parcs_velos_file_path)?;
     for sytral_poi in rdr.deserialize() {
         let sytral_poi: Poi = sytral_poi.with_context(ctx_from_path!(parcs_velos_file_path))?;
-        let poi_id = match sytral_poi.id_vr.as_ref() {
-            Some(val) => val.clone(),
-            None => bail!("poi with undefined id found in file {}", PV_FILE),
-        };
-        check_poi_id_collision(poi_id.clone(), &mut poi_ids, PV_FILE)?;
+        let poi_id = get_poi_id_without_collision(&sytral_poi.id_vr, &mut poi_ids, PV_FILE)?;
         let mut properties = vec![];
         if let Some(capacity) = &sytral_poi.capacity {
             properties.push(NavitiaPoiProperty {
@@ -310,7 +305,7 @@ fn extract_from_parcs_velos<P: AsRef<Path>>(
         });
         add_poi_with_properties(
             &sytral_poi,
-            poi_id.clone(),
+            poi_id,
             sytral_poi.label_vr.clone().unwrap(),
             poi_type,
             properties,

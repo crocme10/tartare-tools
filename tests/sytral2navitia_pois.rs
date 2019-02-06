@@ -131,13 +131,20 @@ fn test_export_sytral_pois_ko_poi_y_manquant() {
 
 #[test]
 fn test_export_sytral_poi_id_double() {
-    let input_path = "./fixtures/sytral2navitia-pois/input/sytral_poi_echec4_poi_id_double";
-    let poi_model = extract_pois(input_path);
-    match poi_model {
-        Ok(_) => assert!(false),
-        Err(e) => assert_eq!(
-            format!("{}", e),
-            "poi with id 42 found at least twice in file POI_TCL.csv"
-        ),
-    };
+    let input_path_prefix =
+        Path::new("./fixtures/sytral2navitia-pois/input/sytral_poi_echec4_poi_id_double");
+    for (suffix, file_name) in cover_all_fixtures() {
+        let input_path = input_path_prefix.join(suffix);
+        let poi_model = extract_pois(input_path);
+        match poi_model {
+            Ok(_) => assert!(false),
+            Err(e) => assert_eq!(
+                format!("{}", e),
+                format!(
+                    "poi with id \"duplicated:id\" found at least twice in file \"{}\"",
+                    file_name
+                )
+            ),
+        };
+    }
 }
