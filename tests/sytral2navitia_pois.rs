@@ -141,7 +141,7 @@ fn test_export_sytral_poi_id_double() {
             Err(e) => assert_eq!(
                 format!("{}", e),
                 format!(
-                    "poi with id \"duplicated:id\" found at least twice in file \"{}\"",
+                    "poi with id \"duplicated:id\" and type \"duplicated:type\" found at least twice in file \"{}\"",
                     file_name
                 )
             ),
