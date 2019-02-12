@@ -15,16 +15,18 @@
 // <http://www.gnu.org/licenses/>.
 
 use crate::Result;
+use failure::bail;
 use failure::format_err;
 use geo::algorithm::centroid::Centroid;
 use geo::{MultiPoint, Point};
-use navitia_model::collection::CollectionWithId;
-use navitia_model::model::Collections;
-use navitia_model::objects::Coord;
+use log::info;
+use navitia_model::collection::{CollectionWithId, Idx};
+use navitia_model::model::{Collections, Model};
+use navitia_model::objects::{Coord, StopPoint as NtfsStopPoint, VehicleJourney};
 use osm_transit_extractor::*;
-use std::collections::BTreeSet;
-use std::collections::HashMap;
+use std::collections::{BTreeSet, HashMap, HashSet};
 use std::path::Path;
+use unidecode::unidecode;
 
 fn point_list_to_centroid_coord(point_list: Vec<Point<f64>>) -> Coord {
     let multi_point: MultiPoint<_> = point_list.into();
@@ -33,6 +35,205 @@ fn point_list_to_centroid_coord(point_list: Vec<Point<f64>>) -> Coord {
         lon: centroid.x(),
         lat: centroid.y(),
     }
+}
+
+type StopPointMap = HashMap<String, BTreeSet<String>>;
+
+fn compare_almost_equal(a: &str, b: &str) -> bool {
+    sanitize(a) == sanitize(b)
+}
+
+fn sanitize(broken: &str) -> String {
+    unidecode(&broken).to_lowercase()
+}
+
+pub fn enrich_object_codes(
+    osm_pbf_path: &Path,
+    model: Model,
+    ntfs_network_to_osm: HashMap<&str, &str>,
+    force_double_stop_point_matching: bool,
+) -> Result<Model> {
+    for (ntfs_network_id, _) in ntfs_network_to_osm.iter() {
+        if model.networks.get(&ntfs_network_id).is_none() {
+            bail!(
+                "ntfs network id {:?} from mapping does not exist in ntfs",
+                &ntfs_network_id
+            )
+        }
+    }
+    let mut parsed_pbf = parse_osm_pbf(
+        osm_pbf_path
+            .to_str()
+            .ok_or_else(|| format_err!("osm pbf path is not valid"))?,
+    );
+    let objects = get_osm_tcobjects(&mut parsed_pbf, false);
+    let mut ntfs_lines = model.lines.clone().take();
+    let mut ntfs_routes = model.routes.clone();
+    let mut ntfs_stop_points = model.stop_points.clone();
+    let osm_lines = match &objects.lines {
+        Some(lines) => lines,
+        None => {
+            bail!(
+                "no lines found in osm for file {}",
+                osm_pbf_path.to_str().unwrap()
+            );
+        }
+    };
+    let osm_stops_map = objects
+        .stop_points
+        .iter()
+        .map(|sp| (sp.id.clone(), sp))
+        .collect::<HashMap<_, _>>();
+    let osm_routes_map = match &objects.routes {
+        Some(routes) => routes
+            .iter()
+            .map(|r| (r.id.clone(), r))
+            .collect::<HashMap<_, _>>(),
+        None => {
+            bail!(
+                "no routes found in osm for file {}",
+                osm_pbf_path.to_str().unwrap()
+            );
+        }
+    };
+    let mut map_ntfs_to_osm_points: StopPointMap = HashMap::new();
+    let mut map_osm_to_ntfs_points: StopPointMap = HashMap::new();
+    for line in ntfs_lines.iter_mut() {
+        let osm_network_of_line = match ntfs_network_to_osm.get(&line.network_id as &str) {
+            Some(osm_network) => osm_network,
+            None => continue,
+        };
+        if let Some(code) = &line.code {
+            let corresponding_osm_lines = osm_lines
+                .iter()
+                .filter(|l| {
+                    compare_almost_equal(&l.network, &osm_network_of_line)
+                        && l.all_osm_tags.contains("ref", &code)
+                })
+                .collect::<Vec<_>>();
+            if corresponding_osm_lines.len() == 1 {
+                let corresponding_osm_line = corresponding_osm_lines[0];
+                line.codes
+                    .insert(("osm_line_id".to_string(), corresponding_osm_line.id.clone()));
+                line.codes.insert((
+                    "osm_network".to_string(),
+                    corresponding_osm_line.network.clone(),
+                ));
+                line.codes.insert((
+                    "osm_company".to_string(),
+                    corresponding_osm_line.operator.clone(),
+                ));
+                //                dbg!(&line.codes);
+                let routes_of_line = osm_routes_map
+                    .iter()
+                    .filter_map(|(id, route)| {
+                        if corresponding_osm_line.routes_id.contains(id) {
+                            Some(route)
+                        } else {
+                            None
+                        }
+                    })
+                    .collect::<Vec<_>>();
+                let vjs_idx: BTreeSet<Idx<VehicleJourney>> =
+                    model.get_corresponding_from_idx(model.lines.get_idx(&line.id).unwrap());
+                let vjs: HashMap<Idx<VehicleJourney>, VehicleJourney> = vjs_idx
+                    .iter()
+                    .map(|vj_idx| (*vj_idx, model.vehicle_journeys[*vj_idx].clone()))
+                    .collect();
+                let mut vj_patterns: HashSet<(Vec<Idx<NtfsStopPoint>>, String, String)> =
+                    HashSet::new();
+                for vj in vjs.values() {
+                    vj_patterns.insert((
+                        vj.stop_times.iter().map(|st| st.stop_point_idx).collect(),
+                        model.stop_points[vj.stop_times.last().unwrap().stop_point_idx]
+                            .name
+                            .clone(),
+                        vj.route_id.clone(),
+                    ));
+                }
+                for route in routes_of_line {
+                    let route_points = route
+                        .ordered_stops_id
+                        .iter()
+                        .filter_map(|stop_id| osm_stops_map.get(stop_id))
+                        .collect::<Vec<_>>();
+                    let corresponding_vj_patterns = vj_patterns
+                        .iter()
+                        .filter(|(stops, destination, _)| {
+                            stops.len() == route_points.len()
+                                && compare_almost_equal(destination, &route.destination)
+                        })
+                        .collect::<Vec<_>>();
+                    for (stop_points_idx, _, ntfs_route_id) in corresponding_vj_patterns {
+                        let mut ntfs_route = ntfs_routes.get_mut(ntfs_route_id).unwrap();
+                        ntfs_route
+                            .codes
+                            .insert(("osm_route_id".to_string(), route.id.clone()));
+                        for route_point in route_points.iter() {
+                            for stop_point_idx in stop_points_idx.iter() {
+                                let ntfs_stop_point = ntfs_stop_points.index_mut(*stop_point_idx);
+                                if compare_almost_equal(&ntfs_stop_point.name, &route_point.name) {
+                                    map_ntfs_to_osm_points
+                                        .entry(ntfs_stop_point.id.clone())
+                                        .or_insert(BTreeSet::new())
+                                        .insert(route_point.id.clone());
+                                    map_osm_to_ntfs_points
+                                        .entry(route_point.id.clone())
+                                        .or_insert(BTreeSet::new())
+                                        .insert(ntfs_stop_point.id.clone());
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                info!(
+                    "found {} osm lines corresponding to line {:?}",
+                    corresponding_osm_lines.len(),
+                    &line.id
+                );
+            }
+        }
+    }
+    clean_up_multiple_mappings(
+        &mut map_ntfs_to_osm_points,
+        &mut map_osm_to_ntfs_points,
+        force_double_stop_point_matching,
+    );
+    clean_up_multiple_mappings(
+        &mut map_osm_to_ntfs_points,
+        &mut map_ntfs_to_osm_points,
+        force_double_stop_point_matching,
+    );
+    for (ntfs_point_id, osm_points) in map_ntfs_to_osm_points {
+        for osm_stop_id in osm_points {
+            ntfs_stop_points
+                .get_mut(&ntfs_point_id)
+                .unwrap()
+                .codes
+                .insert(("osm_stop_points_id".to_string(), osm_stop_id));
+        }
+    }
+    let mut collections = model.into_collections();
+    collections.stop_points = ntfs_stop_points;
+    collections.routes = ntfs_routes;
+    collections.lines = CollectionWithId::new(ntfs_lines)?;
+    Ok(Model::new(collections)?)
+}
+
+fn clean_up_multiple_mappings(
+    map: &mut StopPointMap,
+    reverse_map: &mut StopPointMap,
+    force_double: bool,
+) {
+    map.retain(|key, points_vec| match (force_double, points_vec.len()) {
+        (_, 1) | (true, 2) => true,
+        _ => {
+            reverse_map.retain(|rev_key, _| !points_vec.contains(rev_key));
+            info!("mapping {:?} => {:?} removed", key, points_vec);
+            false
+        }
+    });
 }
 
 pub fn improve_with_pbf(
