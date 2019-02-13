@@ -1,6 +1,6 @@
 poi_type_id;poi_type_name
-poi_type:amenity:college;École
-poi_type:amenity:parking;Parking
-poi_type:amenity:police;Police, gendarmerie
-poi_type:does_not_match_poi;Parc, espace vert
-poi_type:parking_relais;P+R
+amenity:college;École
+amenity:parking;Parking
+amenity:police;Police, gendarmerie
+does_not_match_poi;Parc, espace vert
+parking_relais;P+R
