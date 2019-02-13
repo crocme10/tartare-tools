@@ -1,4 +1,4 @@
 poi_type_id;poi_type_name
-poi_type:amenity:parking;Parking
-poi_type:leisure:park;Parc, espace vert
-poi_type:parking_relais;P+R
+amenity:parking;Parking
+leisure:park;Parc, espace vert
+parking_relais;P+R
