@@ -82,13 +82,10 @@ pub fn enrich_object_codes(
     let osm_stops_map = objects
         .stop_points
         .iter()
-        .map(|sp| (sp.id.clone(), sp))
+        .map(|sp| (&sp.id, sp))
         .collect::<HashMap<_, _>>();
     let osm_routes_map = match &objects.routes {
-        Some(routes) => routes
-            .iter()
-            .map(|r| (r.id.clone(), r))
-            .collect::<HashMap<_, _>>(),
+        Some(routes) => routes.iter().map(|r| (&r.id, r)).collect::<HashMap<_, _>>(),
         None => {
             bail!(
                 "no routes found in osm for file {}",
@@ -123,7 +120,6 @@ pub fn enrich_object_codes(
                     "osm_company".to_string(),
                     corresponding_osm_line.operator.clone(),
                 ));
-                //                dbg!(&line.codes);
                 let routes_of_line = osm_routes_map
                     .iter()
                     .filter_map(|(id, route)| {
@@ -136,19 +132,17 @@ pub fn enrich_object_codes(
                     .collect::<Vec<_>>();
                 let vjs_idx: BTreeSet<Idx<VehicleJourney>> =
                     model.get_corresponding_from_idx(model.lines.get_idx(&line.id).unwrap());
-                let vjs: HashMap<Idx<VehicleJourney>, VehicleJourney> = vjs_idx
+                let vjs: HashMap<Idx<VehicleJourney>, &VehicleJourney> = vjs_idx
                     .iter()
-                    .map(|vj_idx| (*vj_idx, model.vehicle_journeys[*vj_idx].clone()))
+                    .map(|vj_idx| (*vj_idx, &model.vehicle_journeys[*vj_idx]))
                     .collect();
-                let mut vj_patterns: HashSet<(Vec<Idx<NtfsStopPoint>>, String, String)> =
+                let mut vj_patterns: HashSet<(Vec<Idx<NtfsStopPoint>>, &str, &str)> =
                     HashSet::new();
                 for vj in vjs.values() {
                     vj_patterns.insert((
                         vj.stop_times.iter().map(|st| st.stop_point_idx).collect(),
-                        model.stop_points[vj.stop_times.last().unwrap().stop_point_idx]
-                            .name
-                            .clone(),
-                        vj.route_id.clone(),
+                        &model.stop_points[vj.stop_times.last().unwrap().stop_point_idx].name,
+                        &vj.route_id,
                     ));
                 }
                 for route in routes_of_line {
@@ -169,8 +163,8 @@ pub fn enrich_object_codes(
                         ntfs_route
                             .codes
                             .insert(("osm_route_id".to_string(), route.id.clone()));
-                        for route_point in route_points.iter() {
-                            for stop_point_idx in stop_points_idx.iter() {
+                        for route_point in &route_points {
+                            for stop_point_idx in stop_points_idx {
                                 let ntfs_stop_point = ntfs_stop_points.index_mut(*stop_point_idx);
                                 if compare_almost_equal(&ntfs_stop_point.name, &route_point.name) {
                                     map_ntfs_to_osm_points
