@@ -11,5 +11,6 @@ COPY --from=builder /home/rust/src/target/x86_64-unknown-linux-musl/release/extr
 COPY --from=builder /home/rust/src/target/x86_64-unknown-linux-musl/release/improve-stop-positions .
 COPY --from=builder /home/rust/src/target/x86_64-unknown-linux-musl/release/merge-pois .
 COPY --from=builder /home/rust/src/target/x86_64-unknown-linux-musl/release/sytral2navitia-pois .
+COPY --from=builder /home/rust/src/target/x86_64-unknown-linux-musl/release/map-ntfs-with-osm .
 VOLUME /app/input
 VOLUME /app/output
