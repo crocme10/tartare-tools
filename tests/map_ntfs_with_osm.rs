@@ -34,7 +34,7 @@ fn test_map_no_force() {
             false,
         )
         .unwrap();
-        navitia_model::ntfs::write(&enriched_model, path).unwrap();
+        navitia_model::ntfs::write(&enriched_model, path, get_test_datetime()).unwrap();
         compare_output_dir_with_expected(
             &path,
             Some(vec!["object_codes.txt"]),
@@ -57,7 +57,7 @@ fn test_map_force() {
             true,
         )
         .unwrap();
-        navitia_model::ntfs::write(&enriched_model, path).unwrap();
+        navitia_model::ntfs::write(&enriched_model, path, get_test_datetime()).unwrap();
         compare_output_dir_with_expected(
             &path,
             Some(vec!["object_codes.txt"]),

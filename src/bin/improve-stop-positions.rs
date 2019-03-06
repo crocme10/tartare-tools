@@ -14,6 +14,7 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
+use chrono::NaiveDateTime;
 use log::info;
 use navitia_model::{ntfs, Model};
 use std::path::PathBuf;
@@ -42,6 +43,15 @@ struct Opt {
     // The min distance in meters to update the coordinates
     #[structopt(long, short = "d", default_value = "20")]
     min_distance: f64,
+
+    /// current datetime
+    #[structopt(
+        short = "x",
+        long,
+        parse(try_from_str),
+        raw(default_value = "&navitia_model::CURRENT_DATETIME")
+    )]
+    current_datetime: NaiveDateTime,
 }
 
 fn run() -> Result<()> {
@@ -52,7 +62,7 @@ fn run() -> Result<()> {
     let mut collections = model.into_collections();
     improve_stop_positions::improve_with_pbf(&opt.pbf, &mut collections, opt.min_distance)?;
     let model = Model::new(collections)?;
-    navitia_model::ntfs::write(&model, opt.output)?;
+    navitia_model::ntfs::write(&model, opt.output, opt.current_datetime)?;
 
     Ok(())
 }

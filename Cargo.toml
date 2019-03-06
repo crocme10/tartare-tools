@@ -5,7 +5,7 @@ authors = ["David Quintanel <david.quintanel@gmail.com>", "Nicolas Bérard <nico
 edition="2018"
 
 [dependencies]
-navitia_model = { git = "https://github.com/CanalTP/navitia_model", tag = "v0.2.0" }
+navitia_model = { git = "https://github.com/CanalTP/navitia_model", tag = "v0.3.0" }
 osm_transit_extractor = { git = "https://github.com/CanalTP/osm-transit-extractor", tag = "v0.1.2" }
 geo = { git = "https://github.com/georust/geo" }
 structopt = "0.2.10"
@@ -20,4 +20,5 @@ serde = "1.0.84"
 serde_derive = "1.0.84"
 osmpbfreader = "0.11"
 unidecode = "0.3.0"
+chrono = "0.4.0"
 [workspace]
