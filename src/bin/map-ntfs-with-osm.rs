@@ -14,6 +14,7 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
+use chrono::NaiveDateTime;
 use failure::bail;
 use log::info;
 use navitia_model::ntfs;
@@ -48,6 +49,15 @@ struct Opt {
     /// force double matching between ntfs and osm stop_point
     #[structopt(short, long)]
     force_double_stop_point_matching: bool,
+
+    /// current datetime
+    #[structopt(
+        short = "x",
+        long,
+        parse(try_from_str),
+        raw(default_value = "&navitia_model::CURRENT_DATETIME")
+    )]
+    current_datetime: NaiveDateTime,
 }
 
 fn run() -> Result<()> {
@@ -72,7 +82,7 @@ fn run() -> Result<()> {
         ntfs_network_to_osm,
         opt.force_double_stop_point_matching,
     )?;
-    navitia_model::ntfs::write(&enriched_model, opt.output)?;
+    navitia_model::ntfs::write(&enriched_model, opt.output, opt.current_datetime)?;
 
     Ok(())
 }

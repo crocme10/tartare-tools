@@ -32,7 +32,7 @@ fn test_global() {
         )
         .unwrap();
         let model = Model::new(collections).unwrap();
-        ntfs::write(&model, path).unwrap();
+        ntfs::write(&model, path, get_test_datetime()).unwrap();
         compare_output_dir_with_expected(
             &path,
             Some(vec!["stops.txt"]),
