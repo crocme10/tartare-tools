@@ -1,0 +1,6 @@
+object_type,object_id,object_system,object_code
+line,line:1,osm_line_id,relation:11
+route,route:1,osm_route_id,relation:21
+route,route:2,osm_route_id,relation:22
+line,line:2,osm_line_id,relation:12
+route,route:3,osm_route_id,relation:23

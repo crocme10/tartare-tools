@@ -1,0 +1,2 @@
+geometry_id,geometry_wkt
+geo:existing:1,"LINESTRING(10.1 20.2,30.3 40.4)"

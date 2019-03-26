@@ -1,0 +1,4 @@
+stop_id,stop_name,visible,fare_zone_id,stop_lon,stop_lat,location_type,parent_station,stop_timezone,geometry_id,equipment_id
+sa:1,plop,1,,5.392388,43.271531,1,,,,
+sp:1,plop,1,,5.392388,43.271531,0,sa:1,,,
+sp:2,plop,1,,5.392388,43.271531,0,sa:1,,,

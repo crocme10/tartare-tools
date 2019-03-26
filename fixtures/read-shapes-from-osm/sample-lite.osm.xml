@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version="0.6" generator="Osmosis test">
+    <relation id="11" visible="true" version="4" timestamp="2018-10-16T16:43:34Z" user="" uid="0">
+        <member type="relation" ref="21" role=""/>
+        <member type="relation" ref="22" role=""/>
+        <tag k="name" v="Line 1"/>
+        <tag k="network" v="RTM"/>
+        <tag k="route_master" v="bus"/>
+        <tag k="type" v="route_master"/>
+    </relation>
+    <relation id="12" visible="true" version="4" timestamp="2018-10-16T16:43:34Z" user="" uid="0">
+        <tag k="name" v="Line 2"/>
+        <tag k="network" v="RTM"/>
+        <tag k="route_master" v="bus"/>
+        <tag k="type" v="route_master"/>
+    </relation>
+    <relation id="21" visible="true" version="24" timestamp="2018-11-27T08:47:47Z" user="" uid="0">
+        <member type="node" ref="31" role="stop"/>
+        <member type="node" ref="32" role="stop"/>
+        <member type="node" ref="41" role="platform"/>
+        <member type="way" ref="51" role=""/>
+        <member type="way" ref="52" role=""/>
+        <member type="way" ref="53" role=""/>
+        <tag k="evening" v="no"/>
+        <tag k="frequence" v="frequent"/>
+        <tag k="name" v="Route 1"/>
+        <tag k="network" v="RTM"/>
+        <tag k="route" v="bus"/>
+        <tag k="service" v="urban"/>
+        <tag k="type" v="route"/>
+    </relation>
+    <relation id="22" visible="true" version="24" timestamp="2018-11-27T08:47:47Z" user="" uid="0">
+        <member type="node" ref="33" role="stop"/>
+        <member type="node" ref="41" role="platform"/>
+        <member type="node" ref="42" role="platform"/>
+        <member type="way" ref="54" role=""/>
+        <member type="way" ref="55" role=""/>
+        <tag k="evening" v="no"/>
+        <tag k="frequence" v="frequent"/>
+        <tag k="name" v="Route 2"/>
+        <tag k="network" v="RTM"/>
+        <tag k="route" v="bus"/>
+        <tag k="service" v="urban"/>
+        <tag k="type" v="route"/>
+    </relation>
+    <relation id="23" visible="true" version="24" timestamp="2018-11-27T08:47:47Z" user="" uid="0">
+        <member type="way" ref="56" role=""/>
+        <tag k="evening" v="no"/>
+        <tag k="frequence" v="frequent"/>
+        <tag k="name" v="Route 3"/>
+        <tag k="network" v="RTM"/>
+        <tag k="route" v="bus"/>
+        <tag k="service" v="urban"/>
+        <tag k="type" v="route"/>
+    </relation>
+    <way id="51" visible="true" version="4" timestamp="2018-08-04T16:50:33Z" user="" uid="0">
+        <nd ref="101"/>
+        <nd ref="102"/>
+        <nd ref="103"/>
+        <tag k="highway" v="unclassified"/>
+        <tag k="lanes" v="2"/>
+        <tag k="name" v="Way 1"/>
+    </way>
+    <way id="52" visible="true" version="4" timestamp="2018-08-04T16:50:33Z" user="" uid="0">
+        <nd ref="104"/>
+        <nd ref="105"/>
+        <tag k="highway" v="unclassified"/>
+        <tag k="lanes" v="2"/>
+        <tag k="name" v="Way 1"/>
+    </way>
+    <way id="53" visible="true" version="4" timestamp="2018-08-04T16:50:33Z" user="" uid="0">
+        <nd ref="106"/>
+        <nd ref="107"/>
+        <nd ref="108"/>
+        <tag k="highway" v="unclassified"/>
+        <tag k="lanes" v="2"/>
+        <tag k="name" v="Way 1"/>
+    </way>
+    <way id="54" visible="true" version="4" timestamp="2018-08-04T16:50:33Z" user="" uid="0">
+        <nd ref="109"/>
+        <nd ref="110"/>
+        <nd ref="111"/>
+        <tag k="highway" v="unclassified"/>
+        <tag k="lanes" v="2"/>
+        <tag k="name" v="Way 1"/>
+    </way>
+    <way id="55" visible="true" version="4" timestamp="2018-08-04T16:50:33Z" user="" uid="0">
+        <nd ref="112"/>
+        <nd ref="113"/>
+        <tag k="highway" v="unclassified"/>
+        <tag k="lanes" v="2"/>
+        <tag k="name" v="Way 1"/>
+    </way>
+    <way id="56" visible="true" version="4" timestamp="2018-08-04T16:50:33Z" user="" uid="0">
+        <nd ref="109"/>
+        <nd ref="113"/>
+        <tag k="highway" v="unclassified"/>
+        <tag k="lanes" v="2"/>
+        <tag k="name" v="Way 1"/>
+    </way>
+    <node id="101" visible="true" version="2" timestamp="2015-12-02T18:48:21Z" user="" uid="0" lat="43.29" lon="5.44"/>
+    <node id="102" visible="true" version="2" timestamp="2015-12-02T18:48:21Z" user="" uid="0" lat="43.30" lon="5.45"/>
+    <node id="103" visible="true" version="2" timestamp="2015-12-02T18:48:21Z" user="" uid="0" lat="43.31" lon="5.46"/>
+    <node id="104" visible="true" version="2" timestamp="2015-12-02T18:48:21Z" user="" uid="0" lat="43.32" lon="5.47"/>
+    <node id="105" visible="true" version="2" timestamp="2015-12-02T18:48:21Z" user="" uid="0" lat="43.42" lon="5.48"/>
+    <node id="106" visible="true" version="2" timestamp="2015-12-02T18:48:21Z" user="" uid="0" lat="43.43" lon="5.25"/>
+    <node id="107" visible="true" version="2" timestamp="2015-12-02T18:48:21Z" user="" uid="0" lat="43.44" lon="5.35"/>
+    <node id="108" visible="true" version="2" timestamp="2015-12-02T18:48:21Z" user="" uid="0" lat="43.56" lon="5.45"/>
+    <node id="109" visible="true" version="2" timestamp="2015-12-02T18:48:21Z" user="" uid="0" lat="43.56" lon="5.55"/>
+    <node id="110" visible="true" version="2" timestamp="2015-12-02T18:48:21Z" user="" uid="0" lat="43.46" lon="5.65"/>
+    <node id="111" visible="true" version="2" timestamp="2015-12-02T18:48:21Z" user="" uid="0" lat="43.36" lon="5.75"/>
+    <node id="112" visible="true" version="2" timestamp="2015-12-02T18:48:21Z" user="" uid="0" lat="43.26" lon="5.85"/>
+    <node id="113" visible="true" version="2" timestamp="2015-12-02T18:48:21Z" user="" uid="0" lat="43.16" lon="5.95"/>
+</osm>
