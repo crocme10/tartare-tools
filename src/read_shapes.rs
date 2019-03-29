@@ -26,42 +26,27 @@ use osm_transit_extractor::*;
 use std::collections::HashMap;
 use std::path::Path;
 
-macro_rules! skip_fail {
-    ($res:expr) => {{
-        use log::warn;
-        match $res {
-            Ok(val) => val,
-            Err(e) => {
-                warn!("{}", e);
-                continue;
-            }
-        }
-    }};
-}
-
 pub trait WithGeometry {
-    fn set_geometry_id(&mut self, geometry_id: String) -> Result<()>;
+    fn set_geometry_id(&mut self, geometry_id: String);
+    fn geometry_id(&self) -> &Option<String>;
 }
 
 impl WithGeometry for NtfsLine {
-    fn set_geometry_id(&mut self, geometry_id: String) -> Result<()> {
-        if self.geometry_id.is_some() {
-            bail!("geometry already exists for line {:?}", self.id);
-        } else {
-            self.geometry_id = Some(geometry_id);
-            return Ok(());
-        }
+    fn set_geometry_id(&mut self, geometry_id: String) {
+        self.geometry_id = Some(geometry_id);
+    }
+
+    fn geometry_id(&self) -> &Option<String> {
+        &self.geometry_id
     }
 }
 
 impl WithGeometry for NtfsRoute {
-    fn set_geometry_id(&mut self, geometry_id: String) -> Result<()> {
-        if self.geometry_id.is_some() {
-            bail!("geometry already exists for route {:?}", self.id);
-        } else {
-            self.geometry_id = Some(geometry_id);
-            return Ok(());
-        }
+    fn set_geometry_id(&mut self, geometry_id: String) {
+        self.geometry_id = Some(geometry_id);
+    }
+    fn geometry_id(&self) -> &Option<String> {
+        &self.geometry_id
     }
 }
 
@@ -96,19 +81,27 @@ where
             .iter()
             .find(|(key, _)| *key == format!("osm_{}_id", object_type))
         {
-            generated_geo_obj_id = generated_geo_obj_id + 1;
+            generated_geo_obj_id += 1;
             match osm_objects.get(osm_obj_id) {
                 Some(osm_object) => {
                     if osm_object.get_shape().is_empty() {
                         warn!(
-                            "no geometry found in osm for {:?} <-> {:?}",
+                            "no geometry found in osm for ntfs {}: {:?} <-> osm {} : {:?}",
+                            object_type,
                             obj.id(),
-                            osm_object.id()
+                            object_type,
+                            osm_object.id(),
                         );
                         continue;
                     }
                     let geo_id = format!("geo:{}:osm:{}", object_type, generated_geo_obj_id);
-                    skip_fail!(obj.set_geometry_id(geo_id.clone()));
+                    match obj.geometry_id() {
+                        None => obj.set_geometry_id(geo_id.clone()),
+                        Some(_) => {
+                            warn!("geometry already exists for {} {:?}", object_type, obj.id());
+                            continue;
+                        }
+                    }
                     geometries.push(Geometry {
                         id: geo_id,
                         geometry: shape_to_multi_line_string(*osm_object).into(),
