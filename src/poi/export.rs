@@ -58,7 +58,7 @@ pub struct ExportPoi {
         serialize_with = "ser_from_bool",
         deserialize_with = "de_from_u8"
     )]
-    visible: bool,
+    pub visible: bool,
 }
 
 impl From<&objects::Poi> for ExportPoi {
