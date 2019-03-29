@@ -1,0 +1,11 @@
+stop_id,trip_id,stop_sequence,arrival_time,departure_time,boarding_duration,alighting_duration,pickup_type,drop_off_type,datetime_estimated,local_zone_id,stop_headsign,stop_time_id
+sp:1,trip:1,0,11:45:00,11:45:00,0,0,0,1,0,,,
+sp:2,trip:1,0,11:45:00,11:45:00,0,0,0,1,0,,,
+sp:3,trip:2,0,11:45:00,11:45:00,0,0,0,1,0,,,
+sp:4,trip:2,0,11:45:00,11:45:00,0,0,0,1,0,,,
+sp:4,trip:3,0,11:45:00,11:45:00,0,0,0,1,0,,,
+sp:2,trip:3,0,11:45:00,11:45:00,0,0,0,1,0,,,
+sp:1,trip:4,0,11:45:00,11:45:00,0,0,0,1,0,,,
+sp:3,trip:4,0,11:45:00,11:45:00,0,0,0,1,0,,,
+sp:3,trip:5,0,11:45:00,11:45:00,0,0,0,1,0,,,
+sp:1,trip:5,0,11:45:00,11:45:00,0,0,0,1,0,,,

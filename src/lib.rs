@@ -1,4 +1,4 @@
-// Copyright 2017-2018 Kisio Digital and/or its affiliates.
+// Copyright 2017 Kisio Digital and/or its affiliates.
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
@@ -16,6 +16,7 @@
 
 pub mod improve_stop_positions;
 pub mod poi;
+pub mod read_shapes;
 
 pub type Error = failure::Error;
 

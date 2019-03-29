@@ -14,35 +14,51 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
+use chrono::NaiveDateTime;
 use log::info;
+use navitia_model::{ntfs, Model};
 use std::path::PathBuf;
 use structopt::StructOpt;
-use tartare_tools::{
-    poi::{export::export, merge::merge},
-    Result,
-};
+use tartare_tools::{read_shapes, Result};
 
 #[derive(Debug, StructOpt)]
 #[structopt(
-    name = "merge-pois",
-    about = "Merge NAvitia POI files.",
+    name = "read-shapes-from-osm",
+    about = "read shapes from OpenStreetMap.",
     rename_all = "kebab-case"
 )]
 struct Opt {
-    /// Navitia POI files
-    #[structopt(name = "INPUTS", required = true, min_values = 2, parse(from_os_str))]
-    pois: Vec<PathBuf>,
+    /// input directory.
+    #[structopt(short, long, parse(from_os_str), default_value = ".")]
+    input: PathBuf,
 
-    /// Output poi file.
+    /// osm pbf file.
+    #[structopt(short, long, parse(from_os_str))]
+    pbf: PathBuf,
+
+    /// output directory
     #[structopt(short, long, parse(from_os_str))]
     output: PathBuf,
+
+    /// current datetime
+    #[structopt(
+        short = "x",
+        long,
+        parse(try_from_str),
+        raw(default_value = "&navitia_model::CURRENT_DATETIME")
+    )]
+    current_datetime: NaiveDateTime,
 }
 
 fn run() -> Result<()> {
-    info!("Launching merge-pois.");
+    info!("Launching read-shapes-from-osm.");
+
     let opt = Opt::from_args();
-    let model = merge(&opt.pois)?;
-    export(opt.output, &model)?;
+    let model = ntfs::read(opt.input)?;
+    let mut collections = model.into_collections();
+    read_shapes::from_osm(&opt.pbf, &mut collections)?;
+    let model = Model::new(collections)?;
+    navitia_model::ntfs::write(&model, opt.output, opt.current_datetime)?;
 
     Ok(())
 }
