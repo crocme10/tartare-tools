@@ -12,5 +12,6 @@ COPY --from=builder /home/rust/src/target/x86_64-unknown-linux-musl/release/impr
 COPY --from=builder /home/rust/src/target/x86_64-unknown-linux-musl/release/merge-pois .
 COPY --from=builder /home/rust/src/target/x86_64-unknown-linux-musl/release/sytral2navitia-pois .
 COPY --from=builder /home/rust/src/target/x86_64-unknown-linux-musl/release/map-ntfs-with-osm .
+COPY --from=builder /home/rust/src/target/x86_64-unknown-linux-musl/release/read-shapes-from-osm .
 VOLUME /app/input
 VOLUME /app/output
