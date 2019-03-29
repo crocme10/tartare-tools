@@ -69,10 +69,7 @@ fn merge_poi_types(
 }
 
 fn add_props(zip: &mut zip::ZipArchive<File>, pois: &mut HashMap<String, Poi>) -> Result<()> {
-    let pois_file = zip.by_name("poi_properties.txt")?;
-    let mut rdr = csv::ReaderBuilder::new()
-        .delimiter(b';')
-        .from_reader(pois_file);
+    let mut rdr = make_csv_reader_from_zip(zip, "poi_properties.txt")?;
 
     for export_poi_prop in rdr.deserialize() {
         let export_poi_prop: ExportPoiProperty = export_poi_prop?;
@@ -92,10 +89,7 @@ fn add_props(zip: &mut zip::ZipArchive<File>, pois: &mut HashMap<String, Poi>) -
 }
 
 fn merge_pois(zip: &mut zip::ZipArchive<File>, pois: &mut HashMap<String, Poi>) -> Result<()> {
-    let pois_file = zip.by_name("poi.txt")?;
-    let mut rdr = csv::ReaderBuilder::new()
-        .delimiter(b';')
-        .from_reader(pois_file);
+    let mut rdr = make_csv_reader_from_zip(zip, "poi.txt")?;
 
     for export_poi in rdr.deserialize() {
         let export_poi: ExportPoi = export_poi?;
@@ -105,7 +99,7 @@ fn merge_pois(zip: &mut zip::ZipArchive<File>, pois: &mut HashMap<String, Poi>) 
             coord: Coord::new(export_poi.lon, export_poi.lat),
             poi_type_id: export_poi.type_id.to_string(),
             properties: vec![],
-            visible: true,
+            visible: export_poi.visible,
         };
         match pois.entry(export_poi.id.to_string()) {
             Occupied(_) => bail!("POI {} already found", p.id),
