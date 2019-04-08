@@ -52,7 +52,7 @@ pub struct ExportPoi {
     #[serde(rename = "poi_lon")]
     pub lon: f64,
     #[serde(rename = "poi_weight")]
-    pub weight: f64,
+    pub weight: u32,
     #[serde(
         rename = "poi_visible",
         serialize_with = "ser_from_bool",
@@ -69,7 +69,7 @@ impl From<&objects::Poi> for ExportPoi {
             name: poi.name.clone(),
             lat: poi.coord.lat(),
             lon: poi.coord.lon(),
-            weight: 0.,
+            weight: 0,
             visible: poi.visible,
         }
     }
