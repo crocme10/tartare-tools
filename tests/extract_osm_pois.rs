@@ -14,12 +14,12 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-use navitia_model::test_utils::*;
 use osm_utils::poi::PoiConfig;
 use std::fs::File;
 use std::io;
 use tartare_tools::poi::export::export;
 use tartare_tools::poi::osm::extract_pois;
+use transit_model::test_utils::*;
 
 #[test]
 fn test_export_pois() {

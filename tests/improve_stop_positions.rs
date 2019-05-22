@@ -14,10 +14,10 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-use navitia_model::ntfs;
-use navitia_model::test_utils::*;
-use navitia_model::Model;
 use std::path::Path;
+use transit_model::ntfs;
+use transit_model::test_utils::*;
+use transit_model::Model;
 
 #[test]
 fn test_global() {

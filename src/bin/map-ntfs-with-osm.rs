@@ -17,11 +17,11 @@
 use chrono::NaiveDateTime;
 use failure::bail;
 use log::info;
-use navitia_model::ntfs;
 use std::collections::HashMap;
 use std::path::PathBuf;
 use structopt::StructOpt;
 use tartare_tools::{improve_stop_positions, Result};
+use transit_model::ntfs;
 
 #[derive(Debug, StructOpt)]
 #[structopt(
@@ -55,7 +55,7 @@ struct Opt {
         short = "x",
         long,
         parse(try_from_str),
-        raw(default_value = "&navitia_model::CURRENT_DATETIME")
+        raw(default_value = "&transit_model::CURRENT_DATETIME")
     )]
     current_datetime: NaiveDateTime,
 }
@@ -82,7 +82,7 @@ fn run() -> Result<()> {
         ntfs_network_to_osm,
         opt.force_double_stop_point_matching,
     )?;
-    navitia_model::ntfs::write(&enriched_model, opt.output, opt.current_datetime)?;
+    transit_model::ntfs::write(&enriched_model, opt.output, opt.current_datetime)?;
 
     Ok(())
 }

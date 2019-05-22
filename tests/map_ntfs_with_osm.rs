@@ -14,11 +14,11 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-use navitia_model::ntfs;
-use navitia_model::test_utils::*;
 use std::collections::HashMap;
 use std::path::Path;
 use tartare_tools::improve_stop_positions;
+use transit_model::ntfs;
+use transit_model::test_utils::*;
 
 #[test]
 fn test_map_no_force() {
@@ -34,7 +34,7 @@ fn test_map_no_force() {
             false,
         )
         .unwrap();
-        navitia_model::ntfs::write(&enriched_model, path, get_test_datetime()).unwrap();
+        transit_model::ntfs::write(&enriched_model, path, get_test_datetime()).unwrap();
         compare_output_dir_with_expected(
             &path,
             Some(vec!["object_codes.txt"]),
@@ -57,7 +57,7 @@ fn test_map_force() {
             true,
         )
         .unwrap();
-        navitia_model::ntfs::write(&enriched_model, path, get_test_datetime()).unwrap();
+        transit_model::ntfs::write(&enriched_model, path, get_test_datetime()).unwrap();
         compare_output_dir_with_expected(
             &path,
             Some(vec!["object_codes.txt"]),
