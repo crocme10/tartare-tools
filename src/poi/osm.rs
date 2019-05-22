@@ -16,14 +16,16 @@
 
 use crate::{poi::Model, Result};
 use log::info;
-use osm_utils::poi::{extract_pois as extract_osm_pois, PoiConfig};
-use osmpbfreader;
+use osm_utils::{
+    poi::{extract_pois as extract_osm_pois, PoiConfig},
+    OsmPbfReader,
+};
 use std::fs::File;
 use std::path::Path;
 
 pub fn extract_pois<P: AsRef<Path>>(osm_path: P, matcher: PoiConfig) -> Result<Model> {
     info!("Extracting pois from osm");
-    let mut osm_reader = osmpbfreader::OsmPbfReader::new(File::open(osm_path.as_ref())?);
+    let mut osm_reader = OsmPbfReader::new(File::open(osm_path.as_ref())?);
     let pois = extract_osm_pois(&mut osm_reader, &matcher);
 
     Ok(Model {

@@ -20,7 +20,6 @@ use failure::format_err;
 use log::info;
 use navitia_poi_model::objects;
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
-use serde_derive::{Deserialize, Serialize};
 use std::io::Write;
 use std::path::Path;
 

@@ -16,10 +16,10 @@
 
 use chrono::NaiveDateTime;
 use log::info;
-use navitia_model::{ntfs, Model};
 use std::path::PathBuf;
 use structopt::StructOpt;
 use tartare_tools::{read_shapes, Result};
+use transit_model::{ntfs, Model};
 
 #[derive(Debug, StructOpt)]
 #[structopt(
@@ -45,7 +45,7 @@ struct Opt {
         short = "x",
         long,
         parse(try_from_str),
-        raw(default_value = "&navitia_model::CURRENT_DATETIME")
+        raw(default_value = "&transit_model::CURRENT_DATETIME")
     )]
     current_datetime: NaiveDateTime,
 }
@@ -58,7 +58,7 @@ fn run() -> Result<()> {
     let mut collections = model.into_collections();
     read_shapes::from_osm(&opt.pbf, &mut collections)?;
     let model = Model::new(collections)?;
-    navitia_model::ntfs::write(&model, opt.output, opt.current_datetime)?;
+    transit_model::ntfs::write(&model, opt.output, opt.current_datetime)?;
 
     Ok(())
 }

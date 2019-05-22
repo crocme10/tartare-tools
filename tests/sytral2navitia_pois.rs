@@ -14,13 +14,13 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-use navitia_model::test_utils::*;
 use std::collections::HashMap;
 use std::fs::File;
 use std::io;
 use std::path::Path;
 use tartare_tools::poi::export::export;
 use tartare_tools::poi::sytral::extract_pois;
+use transit_model::test_utils::*;
 
 fn cover_all_fixtures() -> HashMap<&'static str, &'static str> {
     let mut map = HashMap::new();

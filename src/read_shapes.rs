@@ -18,13 +18,13 @@ use crate::Result;
 use failure::bail;
 use failure::format_err;
 use log::warn;
-use navitia_model::collection::CollectionWithId;
-use navitia_model::collection::Id as NtfsId;
-use navitia_model::model::Collections;
-use navitia_model::objects::{Codes, Geometry, Line as NtfsLine, Route as NtfsRoute};
 use osm_transit_extractor::*;
 use std::collections::HashMap;
 use std::path::Path;
+use transit_model::collection::CollectionWithId;
+use transit_model::collection::Id as NtfsId;
+use transit_model::model::Collections;
+use transit_model::objects::{Codes, Geometry, Line as NtfsLine, Route as NtfsRoute};
 
 pub trait WithGeometry {
     fn set_geometry_id(&mut self, geometry_id: String);

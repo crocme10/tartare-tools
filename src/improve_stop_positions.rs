@@ -20,12 +20,12 @@ use failure::format_err;
 use geo::algorithm::centroid::Centroid;
 use geo::{MultiPoint, Point};
 use log::info;
-use navitia_model::collection::{CollectionWithId, Idx};
-use navitia_model::model::{Collections, Model};
-use navitia_model::objects::{Coord, StopPoint as NtfsStopPoint, VehicleJourney};
 use osm_transit_extractor::*;
 use std::collections::{BTreeSet, HashMap, HashSet};
 use std::path::Path;
+use transit_model::collection::{CollectionWithId, Idx};
+use transit_model::model::{Collections, Model};
+use transit_model::objects::{Coord, StopPoint as NtfsStopPoint, VehicleJourney};
 use unidecode::unidecode;
 
 fn point_list_to_centroid_coord(point_list: Vec<Point<f64>>) -> Coord {
@@ -267,7 +267,7 @@ pub fn improve_with_pbf(
         }
     }
     for stop_area_id in stop_area_ids_to_update {
-        // @TODO if performance issue, use get_corresponding from navitia_model or find
+        // @TODO if performance issue, use get_corresponding from transit_model or find
         // something else
         let osm_coords: Vec<Point<f64>> = stop_points
             .iter()
