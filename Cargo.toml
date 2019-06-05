@@ -6,7 +6,7 @@ edition="2018"
 
 [dependencies]
 transit_model = "0.4.1"
-osm_transit_extractor = { git = "https://github.com/CanalTP/osm-transit-extractor", tag = "v0.1.4" }
+osm_transit_extractor = { git = "https://github.com/CanalTP/osm-transit-extractor", tag = "v0.1.5" }
 geo = "0.12.1"
 structopt = "0.2.15"
 env_logger = "0.6.1"

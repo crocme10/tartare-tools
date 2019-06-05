@@ -83,12 +83,8 @@ impl PoiConfig {
         }
         let mut poi_type_ids = BTreeSet::<&str>::new();
         for rule in &self.rules {
-            if !poi_type_ids.insert(rule.poi_type_id.as_str()) {
-                bail!(
-                    "poi_type_id {:?} present several times in rules",
-                    rule.poi_type_id
-                );
-            }
+            poi_type_ids.insert(rule.poi_type_id.as_str());
+
             if !ids.contains(rule.poi_type_id.as_str()) {
                 bail!("no poi type associated to rule {:?}", rule.poi_type_id);
             }
@@ -261,22 +257,6 @@ mod tests {
         .unwrap_err();
         from_str(
             r#"{
-            "poi_types": [{"id": "bob", "name": "Bob"}],
-            "rules": [
-                {
-                    "osm_tags_filters": [{"key": "foo", "value": "bar"}],
-                    "poi_type_id": "bob"
-                },
-                {
-                    "osm_tags_filters": [{"key": "foo", "value": "bar"}],
-                    "poi_type_id": "bob"
-                }
-            ]
-        }"#,
-        )
-        .unwrap_err();
-        from_str(
-            r#"{
             "poi_types": [{"id": "bob", "name": "Bob"}, {"id": "bobette", "name": "Bobette"}],
             "rules": [
                 {
@@ -288,6 +268,27 @@ mod tests {
         )
         .unwrap_err();
     }
+
+    #[test]
+    fn check_attach_2_osm_categories_to_1_poi_type() {
+        from_str(
+            r#"{
+            "poi_types": [{"id": "amenity:public_building", "name": "Public building"}],
+            "rules": [
+                {
+                    "osm_tags_filters": [{"key": "building", "value": "public"}],
+                    "poi_type_id": "amenity:public_building"
+                },
+                {
+                    "osm_tags_filters": [{"key": "amenity", "value": "public_building"}],
+                    "poi_type_id": "amenity:public_building"
+                }
+            ]
+        }"#,
+        )
+        .unwrap();
+    }
+
     #[test]
     fn check_with_colon() {
         let json = r#"{
