@@ -8,6 +8,9 @@ repository="https://github.com/CanalTP/tartare-tools"
 edition = "2018"
 
 [dependencies]
-serde_derive = "1.0.91"
-serde = "1.0.91"
-geo = "0.12.1"
+serde = { version = "1.0", features = ["derive"] }
+geo = "0.12"
+csv = "1.0"
+failure = "0.1"
+itertools = "0.8"
+zip = "0.5"

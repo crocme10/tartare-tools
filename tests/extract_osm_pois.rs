@@ -17,7 +17,6 @@
 use osm_utils::poi::PoiConfig;
 use std::fs::File;
 use std::io;
-use tartare_tools::poi::export::export;
 use tartare_tools::poi::osm::extract_pois;
 use transit_model::test_utils::*;
 
@@ -31,7 +30,7 @@ fn test_export_pois() {
         let matcher = PoiConfig::from_reader(r).unwrap();
 
         let model = extract_pois(osm_pbf, matcher).unwrap();
-        export(path.join("pois.zip"), &model).unwrap();
+        model.save_to_path(path.join("pois.zip")).unwrap();
 
         // file extension should be .poi
         let output_file = path.join("pois.poi");

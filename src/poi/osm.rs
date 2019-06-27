@@ -14,8 +14,9 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-use crate::{poi::Model, Result};
+use crate::Result;
 use log::info;
+use navitia_poi_model::objects::Model;
 use osm_utils::{
     poi::{extract_pois as extract_osm_pois, PoiConfig},
     OsmPbfReader,
@@ -30,6 +31,10 @@ pub fn extract_pois<P: AsRef<Path>>(osm_path: P, matcher: PoiConfig) -> Result<M
 
     Ok(Model {
         pois,
-        poi_types: matcher.poi_types,
+        poi_types: matcher
+            .poi_types
+            .into_iter()
+            .map(|poi_type| (poi_type.id.clone(), poi_type))
+            .collect(),
     })
 }

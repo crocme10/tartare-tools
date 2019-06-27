@@ -14,17 +14,17 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-use crate::{poi::Model, Result};
+use crate::Result;
 use csv;
 use failure::bail;
 use failure::format_err;
 use failure::ResultExt;
 use log::info;
 use navitia_poi_model::objects::{
-    Coord, Poi as NavitiaPoi, PoiType as NavitiaPoiType, Property as NavitiaPoiProperty,
+    Coord, Model, Poi as NavitiaPoi, PoiType as NavitiaPoiType, Property as NavitiaPoiProperty,
 };
-use serde_derive::{Deserialize, Serialize};
-use std::collections::{HashMap, HashSet};
+use serde::{Deserialize, Serialize};
+use std::collections::{BTreeMap, HashMap, HashSet};
 use std::path::Path;
 use std::result::Result as StdResult;
 
@@ -36,7 +36,6 @@ fn de_from_comma_float<'de, D>(deserializer: D) -> StdResult<f64, D::Error>
 where
     D: serde::Deserializer<'de>,
 {
-    use serde::Deserialize;
     let s = String::deserialize(deserializer)?;
     s.replace(",", ".")
         .parse::<f64>()
@@ -47,7 +46,6 @@ fn de_non_empty_string<'de, D>(deserializer: D) -> StdResult<String, D::Error>
 where
     D: serde::Deserializer<'de>,
 {
-    use serde::Deserialize;
     let s = String::deserialize(deserializer)?;
     if s.is_empty() {
         Err(serde::de::Error::custom(format_err!(
@@ -102,23 +100,30 @@ struct Poi {
     description: Option<String>,
 }
 
+// FIXME This function is oblivious of the case where an id already exists in the map.
+// It needs to be clear how to handle this case.
 fn add_poi_with_properties(
     sytral_poi: &Poi,
     poi_id: String,
     poi_label: String,
     poi_type: String,
     properties: Vec<NavitiaPoiProperty>,
-    pois: &mut Vec<NavitiaPoi>,
+    pois: &mut BTreeMap<String, NavitiaPoi>,
 ) {
     let visible = !vec!["GAB", "DEP", "BET"].contains(&sytral_poi.poi_type.as_str());
-    pois.push(NavitiaPoi {
-        id: format!("TCL:{}:{}", sytral_poi.poi_type, poi_id),
-        name: poi_label,
-        coord: Coord::new(sytral_poi.coord_x, sytral_poi.coord_y),
-        poi_type_id: poi_type,
-        properties,
-        visible,
-    });
+    let id: String = format!("TCL:{}:{}", sytral_poi.poi_type, poi_id);
+    pois.insert(
+        id.clone(),
+        NavitiaPoi {
+            id,
+            name: poi_label,
+            coord: Coord::new(sytral_poi.coord_x, sytral_poi.coord_y),
+            poi_type_id: poi_type,
+            properties,
+            visible,
+            weight: 0, // This is the weight by default
+        },
+    );
 }
 
 fn get_poi_id_without_collision(
@@ -144,7 +149,7 @@ fn get_poi_id_without_collision(
 
 fn extract_from_main_file<P: AsRef<Path>>(
     dir_path: &P,
-    pois: &mut Vec<NavitiaPoi>,
+    pois: &mut BTreeMap<String, NavitiaPoi>,
     poi_types: &mut HashMap<String, NavitiaPoiType>,
 ) -> Result<()> {
     info!("extract pois from file {}", MAIN_FILE);
@@ -205,7 +210,7 @@ fn extract_from_main_file<P: AsRef<Path>>(
 
 fn extract_from_parcs_relais<P: AsRef<Path>>(
     dir_path: P,
-    pois: &mut Vec<NavitiaPoi>,
+    pois: &mut BTreeMap<String, NavitiaPoi>,
     poi_types: &mut HashMap<String, NavitiaPoiType>,
 ) -> Result<()> {
     info!("extract pois from file {}", PR_FILE);
@@ -288,7 +293,7 @@ fn extract_from_parcs_relais<P: AsRef<Path>>(
 
 fn extract_from_parcs_velos<P: AsRef<Path>>(
     dir_path: P,
-    pois: &mut Vec<NavitiaPoi>,
+    pois: &mut BTreeMap<String, NavitiaPoi>,
     poi_types: &mut HashMap<String, NavitiaPoiType>,
 ) -> Result<()> {
     info!("extract pois from file {}", PV_FILE);
@@ -337,7 +342,7 @@ fn extract_from_parcs_velos<P: AsRef<Path>>(
 
 pub fn extract_pois<P: AsRef<Path>>(sytral_path: P) -> Result<Model> {
     info!("Extracting pois from sytral");
-    let mut pois: Vec<NavitiaPoi> = vec![];
+    let mut pois: BTreeMap<String, NavitiaPoi> = BTreeMap::new();
     let mut poi_types: HashMap<String, NavitiaPoiType> = HashMap::new();
     for required_file in &[MAIN_FILE, PR_FILE, PV_FILE] {
         if !sytral_path.as_ref().join(required_file).exists() {
@@ -347,8 +352,5 @@ pub fn extract_pois<P: AsRef<Path>>(sytral_path: P) -> Result<Model> {
     extract_from_main_file(&sytral_path, &mut pois, &mut poi_types)?;
     extract_from_parcs_relais(&sytral_path, &mut pois, &mut poi_types)?;
     extract_from_parcs_velos(&sytral_path, &mut pois, &mut poi_types)?;
-    Ok(Model {
-        pois,
-        poi_types: poi_types.into_iter().map(|(_, p)| p).collect(),
-    })
+    Ok(Model { pois, poi_types })
 }

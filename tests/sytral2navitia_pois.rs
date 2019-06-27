@@ -18,7 +18,6 @@ use std::collections::HashMap;
 use std::fs::File;
 use std::io;
 use std::path::Path;
-use tartare_tools::poi::export::export;
 use tartare_tools::poi::sytral::extract_pois;
 use transit_model::test_utils::*;
 
@@ -36,7 +35,7 @@ fn test_export_sytral_pois_ok() {
         let input_path = "./fixtures/sytral2navitia-pois/input/OK";
         let poi_model = extract_pois(input_path).unwrap();
         let output_file = path.join("output.poi");
-        export(output_file.clone(), &poi_model).unwrap();
+        poi_model.save_to_path(output_file.clone()).unwrap();
 
         // file extension should be .poi
         assert!(output_file.is_file());

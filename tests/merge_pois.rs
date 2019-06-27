@@ -16,7 +16,6 @@
 
 use std::fs::File;
 use std::io;
-use tartare_tools::poi::export::export;
 use tartare_tools::poi::merge::merge;
 use transit_model::test_utils::*;
 
@@ -26,8 +25,8 @@ fn test_merge_pois() {
         let poi1 = "./fixtures/merge_pois/input/poi1.poi";
         let poi2 = "./fixtures/merge_pois/input/poi2.poi";
 
-        let model = merge(&[poi1, poi2]).unwrap();
-        export(path.join("pois.zip"), &model).unwrap();
+        let model = merge(&mut [poi1, poi2].into_iter()).unwrap();
+        model.save_to_path(path.join("pois.zip")).unwrap();
 
         // file extension should be .poi
         let output_file = path.join("pois.poi");

@@ -17,7 +17,7 @@
 use log::info;
 use std::path::PathBuf;
 use structopt::StructOpt;
-use tartare_tools::{poi::export::export, poi::sytral::extract_pois, Result};
+use tartare_tools::{poi::sytral::extract_pois, Result};
 
 /// Convert Sytral POIs to Navitia POIs
 #[derive(Debug, StructOpt)]
@@ -36,9 +36,7 @@ fn run() -> Result<()> {
     info!("Launching sytral2navitia-pois.");
     let opt = Opt::from_args();
     let poi_model = extract_pois(opt.input)?;
-    export(opt.output, &poi_model)?;
-
-    Ok(())
+    poi_model.save_to_path(opt.output)
 }
 
 fn main() {

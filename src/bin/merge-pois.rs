@@ -17,10 +17,7 @@
 use log::info;
 use std::path::PathBuf;
 use structopt::StructOpt;
-use tartare_tools::{
-    poi::{export::export, merge::merge},
-    Result,
-};
+use tartare_tools::{poi::merge::merge, Result};
 
 #[derive(Debug, StructOpt)]
 #[structopt(
@@ -41,10 +38,8 @@ struct Opt {
 fn run() -> Result<()> {
     info!("Launching merge-pois.");
     let opt = Opt::from_args();
-    let model = merge(&opt.pois)?;
-    export(opt.output, &model)?;
-
-    Ok(())
+    let model = merge(&mut opt.pois.into_iter())?;
+    model.save_to_path(opt.output)
 }
 
 fn main() {

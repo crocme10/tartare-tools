@@ -1,3 +1,6 @@
+#![doc(html_root_url = "https://docs.rs/navitia-poi-model/0.1.0")]
+#![deny(missing_docs, warnings, missing_debug_implementations)]
+//
 // Copyright 2017 Kisio Digital and/or its affiliates.
 //
 // This program is free software: you can redistribute it and/or
@@ -14,4 +17,15 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
+//! Data structures and functions to manipulate Points of Interest (POIs)
+
+mod io;
 pub mod objects;
+
+pub use objects::*;
+
+/// The data type for errors in [navitia-poi-model], just an alias
+pub type Error = failure::Error;
+
+/// The classic alias for result type.
+pub type Result<T> = std::result::Result<T, Error>;

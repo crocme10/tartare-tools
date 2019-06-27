@@ -19,10 +19,7 @@ use log::info;
 use osm_utils::poi::PoiConfig;
 use std::path::PathBuf;
 use structopt::StructOpt;
-use tartare_tools::{
-    poi::{export::export, osm},
-    Result,
-};
+use tartare_tools::{poi::osm, Result};
 
 /// Extract POIs from OSM.
 #[derive(Debug, StructOpt)]
@@ -54,9 +51,7 @@ fn run() -> Result<()> {
     };
 
     let poi_model = osm::extract_pois(opt.input, matcher)?;
-    export(opt.output, &poi_model)?;
-
-    Ok(())
+    poi_model.save_to_path(opt.output)
 }
 
 fn main() {

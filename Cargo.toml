@@ -6,7 +6,7 @@ edition="2018"
 
 [dependencies]
 transit_model = "0.4.1"
-osm_transit_extractor = { git = "https://github.com/CanalTP/osm-transit-extractor", tag = "v0.1.5" }
+osm_transit_extractor = "0.2.0"
 geo = "0.12.1"
 structopt = "0.2.15"
 env_logger = "0.6.1"
@@ -16,8 +16,8 @@ osm-utils = { path = "./osm-utils" }
 navitia-poi-model = { path = "./navitia-poi-model" }
 csv = "1.0.7"
 zip = "0.5.2"
-serde = "1.0.91"
-serde_derive = "1.0.91"
+serde = { version = "1", features = ["derive"] }
 osmpbfreader = "0.13.0"
 unidecode = "0.3.0"
 chrono = "0.4.6"
+itertools = "0.8"

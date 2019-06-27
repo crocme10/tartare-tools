@@ -149,6 +149,7 @@ fn parse_poi(
         poi_type_id: poi_type.id.clone(),
         properties: make_properties(osmobj.tags()),
         visible: true,
+        weight: 0,
     })
 }
 
@@ -157,13 +158,13 @@ fn format_poi_id(osm_type: &str, id: i64) -> String {
 }
 
 /// Extract POIs from an OSM pbf.
-pub fn extract_pois(pbf: &mut OsmPbfReader, matcher: &PoiConfig) -> Vec<objects::Poi> {
+pub fn extract_pois(pbf: &mut OsmPbfReader, matcher: &PoiConfig) -> BTreeMap<String, objects::Poi> {
     let objects = pbf.get_objs_and_deps(|o| matcher.is_poi(o.tags())).unwrap();
     objects
         .iter()
         .filter(|&(_, obj)| matcher.is_poi(obj.tags()))
         .filter_map(|(_, obj)| match parse_poi(obj, &objects, matcher) {
-            Ok(poi) => Some(poi),
+            Ok(poi) => Some((poi.id.clone(), poi)),
             Err(err) => {
                 warn!("Error parsing POI {:?}: {}", obj.id(), err);
                 None
