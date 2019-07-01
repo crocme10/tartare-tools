@@ -28,7 +28,7 @@ where
     I: Iterator<Item = T>,
     T: AsRef<Path>,
 {
-    paths.try_fold(Model::new(), |acc, path| {
+    paths.try_fold(Model::default(), |acc, path| {
         acc.try_merge(Model::try_from_path(path.as_ref())?)
     })
 }
