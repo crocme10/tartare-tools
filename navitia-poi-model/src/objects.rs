@@ -129,7 +129,7 @@ pub struct PoiType {
 }
 
 /// A data structure used for exporting and importing data to and from file.
-#[derive(Debug)]
+#[derive(Debug, Default)]
 pub struct Model {
     /// A list of POIs.
     ///
@@ -144,14 +144,6 @@ pub struct Model {
 }
 
 impl Model {
-    /// Creates a new empty model.
-    pub fn new() -> Self {
-        Model {
-            pois: BTreeMap::new(),
-            poi_types: HashMap::new(),
-        }
-    }
-
     /// Creates a new model based on data found in `path`.
     pub fn try_from_path<P: AsRef<Path>>(path: P) -> Result<Model> {
         io::load_model_from_path(path.as_ref())
