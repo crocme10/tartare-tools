@@ -1,6 +1,6 @@
 [package]
 name = "navitia-poi-model"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["David Quintanel <david.quintanel@gmail.com>", "Nicolas Bérard <nicolas.berard@kisio.org>"]
 license = "AGPL-3.0"
 description = "Navitia's POIs (Point of Interest) model"
