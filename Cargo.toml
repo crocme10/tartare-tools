@@ -1,7 +1,7 @@
 [package]
 name = "tartare-tools"
 version = "0.2.0"
-authors = ["David Quintanel <david.quintanel@gmail.com>", "Nicolas Bérard <nicolas.berard@kisio.org>"]
+authors = ["David Quintanel <david.quintanel@gmail.com>", "Nicolas Bérard <berard.nicolas@gmail.com>"]
 edition="2018"
 
 [dependencies]
