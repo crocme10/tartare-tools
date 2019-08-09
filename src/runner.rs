@@ -14,12 +14,19 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-pub mod improve_stop_positions;
-pub mod poi;
-pub mod read_shapes;
-pub mod runner;
+use crate::Result;
+use structopt::StructOpt;
 
-pub type Error = failure::Error;
-
-/// The corresponding result type used by the crate.
-pub type Result<T> = std::result::Result<T, Error>;
+pub fn launch_run<O, F>(run: F)
+where
+    F: FnOnce(O) -> Result<()>,
+    O: StructOpt,
+{
+    env_logger::init();
+    if let Err(err) = run(O::from_args()) {
+        for cause in err.iter_chain() {
+            eprintln!("{}", cause);
+        }
+        std::process::exit(1);
+    }
+}

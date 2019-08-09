@@ -50,10 +50,9 @@ struct Opt {
     current_datetime: NaiveDateTime,
 }
 
-fn run() -> Result<()> {
+fn run(opt: Opt) -> Result<()> {
     info!("Launching read-shapes-from-osm.");
 
-    let opt = Opt::from_args();
     let model = ntfs::read(opt.input)?;
     let mut collections = model.into_collections();
     read_shapes::from_osm(&opt.pbf, &mut collections)?;
@@ -64,11 +63,5 @@ fn run() -> Result<()> {
 }
 
 fn main() {
-    env_logger::init();
-    if let Err(err) = run() {
-        for cause in err.iter_chain() {
-            eprintln!("{}", cause);
-        }
-        std::process::exit(1);
-    }
+    tartare_tools::runner::launch_run(run);
 }

@@ -35,19 +35,12 @@ struct Opt {
     output: PathBuf,
 }
 
-fn run() -> Result<()> {
+fn run(opt: Opt) -> Result<()> {
     info!("Launching merge-pois.");
-    let opt = Opt::from_args();
     let model = merge(&mut opt.pois.into_iter())?;
     model.save_to_path(opt.output)
 }
 
 fn main() {
-    env_logger::init();
-    if let Err(err) = run() {
-        for cause in err.iter_chain() {
-            eprintln!("{}", cause);
-        }
-        std::process::exit(1);
-    }
+    tartare_tools::runner::launch_run(run);
 }
