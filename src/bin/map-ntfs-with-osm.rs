@@ -60,10 +60,9 @@ struct Opt {
     current_datetime: NaiveDateTime,
 }
 
-fn run() -> Result<()> {
+fn run(opt: Opt) -> Result<()> {
     info!("Launching map-ntfs-with-osm.");
 
-    let opt = Opt::from_args();
     let model = ntfs::read(opt.input)?;
     let mut ntfs_network_to_osm = HashMap::new();
     for network_map in opt.networks.iter() {
@@ -88,11 +87,5 @@ fn run() -> Result<()> {
 }
 
 fn main() {
-    env_logger::init();
-    if let Err(err) = run() {
-        for cause in err.iter_chain() {
-            eprintln!("{}", cause);
-        }
-        std::process::exit(1);
-    }
+    tartare_tools::runner::launch_run(run);
 }
