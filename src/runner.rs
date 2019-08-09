@@ -15,18 +15,50 @@
 // <http://www.gnu.org/licenses/>.
 
 use crate::Result;
+use log::error;
+use slog::slog_o;
+use slog::Drain;
 use structopt::StructOpt;
+
+fn init_logger() -> (slog_scope::GlobalLoggerGuard, ()) {
+    let decorator = slog_term::TermDecorator::new().build();
+    let drain = slog_term::CompactFormat::new(decorator).build().fuse();
+    let mut builder = slog_envlogger::LogBuilder::new(drain).filter(None, slog::FilterLevel::Info);
+    if let Ok(s) = std::env::var("RUST_LOG") {
+        builder = builder.parse(&s);
+    }
+    let drain = slog_async::Async::new(builder.build()).build().fuse();
+    let logger = slog::Logger::root(drain, slog_o!());
+
+    let scope_guard = slog_scope::set_global_logger(logger);
+    let log_guard = slog_stdlog::init().unwrap();
+    (scope_guard, log_guard)
+}
+
+fn wrapper_launch_run<O, F>(run: F) -> Result<()>
+where
+    F: FnOnce(O) -> Result<()>,
+    O: StructOpt,
+{
+    let _log_guard = init_logger();
+    if let Err(err) = run(O::from_args()) {
+        for cause in err.iter_chain() {
+            error!("{}", cause);
+        }
+        return Err(err);
+    }
+
+    Ok(())
+}
 
 pub fn launch_run<O, F>(run: F)
 where
     F: FnOnce(O) -> Result<()>,
     O: StructOpt,
 {
-    env_logger::init();
-    if let Err(err) = run(O::from_args()) {
-        for cause in err.iter_chain() {
-            eprintln!("{}", cause);
-        }
+    // the destruction of the logger
+    // This allows to not loose any messages
+    if wrapper_launch_run(run).is_err() {
         std::process::exit(1);
     }
 }
