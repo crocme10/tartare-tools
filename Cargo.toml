@@ -5,7 +5,7 @@ authors = ["David Quintanel <david.quintanel@gmail.com>", "Nicolas Bérard <bera
 edition="2018"
 
 [dependencies]
-transit_model = "0.5"
+transit_model = { version = "0.7", features = ["proj"] }
 osm_transit_extractor = "0.2.0"
 geo = "0.12.1"
 structopt = "0.2.15"
@@ -21,6 +21,7 @@ osmpbfreader = "0.13.0"
 unidecode = "0.3.0"
 chrono = "0.4.6"
 itertools = "0.8"
+serde_json = "1.0"
 slog = "2.5.2"
 slog-term = "2.4.1"
 slog-scope = "4.1.2"
