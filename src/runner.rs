@@ -15,13 +15,12 @@
 // <http://www.gnu.org/licenses/>.
 
 use crate::Result;
-use log::error;
 use slog::slog_o;
 use slog::Drain;
 use structopt::StructOpt;
 
 fn init_logger() -> (slog_scope::GlobalLoggerGuard, ()) {
-    let decorator = slog_term::TermDecorator::new().build();
+    let decorator = slog_term::TermDecorator::new().stdout().build();
     let drain = slog_term::CompactFormat::new(decorator).build().fuse();
     let mut builder = slog_envlogger::LogBuilder::new(drain).filter(None, slog::FilterLevel::Info);
     if let Ok(s) = std::env::var("RUST_LOG") {
@@ -43,7 +42,7 @@ where
     let _log_guard = init_logger();
     if let Err(err) = run(O::from_args()) {
         for cause in err.iter_chain() {
-            error!("{}", cause);
+            eprintln!("{}", cause);
         }
         return Err(err);
     }
