@@ -17,6 +17,7 @@
 use crate::Result;
 use slog::slog_o;
 use slog::Drain;
+use slog_async::OverflowStrategy;
 use structopt::StructOpt;
 
 fn init_logger() -> (slog_scope::GlobalLoggerGuard, ()) {
@@ -26,7 +27,11 @@ fn init_logger() -> (slog_scope::GlobalLoggerGuard, ()) {
     if let Ok(s) = std::env::var("RUST_LOG") {
         builder = builder.parse(&s);
     }
-    let drain = slog_async::Async::new(builder.build()).build().fuse();
+    let drain = slog_async::Async::new(builder.build())
+        .chan_size(256) // Double the default size
+        .overflow_strategy(OverflowStrategy::Block)
+        .build()
+        .fuse();
     let logger = slog::Logger::root(drain, slog_o!());
 
     let scope_guard = slog_scope::set_global_logger(logger);
