@@ -22,8 +22,8 @@ use transit_model::test_utils::*;
 #[test]
 fn test_merge_pois() {
     test_in_tmp_dir(|path| {
-        let poi1 = "./fixtures/merge_pois/input/poi1.poi";
-        let poi2 = "./fixtures/merge_pois/input/poi2.poi";
+        let poi1 = "./tests/fixtures/merge_pois/input/poi1.poi";
+        let poi2 = "./tests/fixtures/merge_pois/input/poi2.poi";
 
         let model = merge(&mut [poi1, poi2].into_iter()).unwrap();
         model.save_to_path(path.join("pois.zip")).unwrap();
@@ -45,7 +45,7 @@ fn test_merge_pois() {
         compare_output_dir_with_expected(
             &path,
             Some(vec!["poi.txt", "poi_properties.txt", "poi_type.txt"]),
-            "./fixtures/merge_pois/output",
+            "./tests/fixtures/merge_pois/output",
         );
     });
 }

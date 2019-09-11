@@ -22,11 +22,11 @@ use transit_model::Model;
 #[test]
 fn test_read_shapes_from_osm() {
     test_in_tmp_dir(|path| {
-        let input_dir = "./fixtures/read-shapes-from-osm/input/ok";
+        let input_dir = "./tests/fixtures/read-shapes-from-osm/input/ok";
         let model = ntfs::read(input_dir).unwrap();
         let mut collections = model.into_collections();
         tartare_tools::read_shapes::from_osm(
-            Path::new("./fixtures/read-shapes-from-osm/sample-lite.osm.pbf"),
+            Path::new("./tests/fixtures/read-shapes-from-osm/sample-lite.osm.pbf"),
             &mut collections,
         )
         .unwrap();
@@ -35,7 +35,7 @@ fn test_read_shapes_from_osm() {
         compare_output_dir_with_expected(
             &path,
             Some(vec!["lines.txt", "routes.txt", "geometries.txt"]),
-            "./fixtures/read-shapes-from-osm/output",
+            "./tests/fixtures/read-shapes-from-osm/output",
         );
     });
 }
@@ -43,11 +43,11 @@ fn test_read_shapes_from_osm() {
 #[test]
 #[should_panic(expected = "relation relation:unknown not found in osm")]
 fn test_read_shapes_relation_not_found() {
-    let input_dir = "./fixtures/read-shapes-from-osm/input/unknown_relation_osm";
+    let input_dir = "./tests/fixtures/read-shapes-from-osm/input/unknown_relation_osm";
     let model = ntfs::read(input_dir).unwrap();
     let mut collections = model.into_collections();
     tartare_tools::read_shapes::from_osm(
-        Path::new("./fixtures/read-shapes-from-osm/sample-lite.osm.pbf"),
+        Path::new("./tests/fixtures/read-shapes-from-osm/sample-lite.osm.pbf"),
         &mut collections,
     )
     .unwrap();
