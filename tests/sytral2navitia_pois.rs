@@ -74,7 +74,8 @@ fn test_export_sytral_pois_ko_csv_manquant() {
 
 #[test]
 fn test_export_sytral_pois_ko_poi_type_id_manquant() {
-    let input_path = "./tests/fixtures/sytral2navitia-pois/input/sytral_poi_echec2_poi_type_id_manquant";
+    let input_path =
+        "./tests/fixtures/sytral2navitia-pois/input/sytral_poi_echec2_poi_type_id_manquant";
     let poi_model = extract_pois(input_path);
     match poi_model {
         Ok(_) => assert!(false),
