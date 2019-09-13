@@ -42,6 +42,8 @@ struct Opt {
     output: PathBuf,
 
     /// source of bank holidays as a path to a JSON
+    /// available on https://www.gov.uk/bank-holidays/northern-ireland.json,
+    /// https://www.gov.uk/bank-holidays/scotland.json and https://www.gov.uk/bank-holidays/england-and-wales.json
     #[structopt(short, long, parse(from_os_str))]
     bank_holidays: Option<PathBuf>,
 
