@@ -21,10 +21,10 @@ use log::warn;
 use osm_transit_extractor::*;
 use std::collections::HashMap;
 use std::path::Path;
-use transit_model::collection::CollectionWithId;
-use transit_model::collection::Id as NtfsId;
 use transit_model::model::Collections;
 use transit_model::objects::{Codes, Geometry, Line as NtfsLine, Route as NtfsRoute};
+use transit_model_collection::CollectionWithId;
+use transit_model_collection::Id as NtfsId;
 
 pub trait WithGeometry {
     fn set_geometry_id(&mut self, geometry_id: String);

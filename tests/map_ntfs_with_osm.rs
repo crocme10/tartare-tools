@@ -25,10 +25,10 @@ fn test_map_no_force() {
     test_in_tmp_dir(|path| {
         let mut ntfs_network_to_osm = HashMap::new();
         ntfs_network_to_osm.insert("RTM", "RTM");
-        let input_dir = "./fixtures/map-ntfs-with-osm/input";
+        let input_dir = "./tests/fixtures/map-ntfs-with-osm/input";
         let model = ntfs::read(input_dir).unwrap();
         let enriched_model = improve_stop_positions::enrich_object_codes(
-            Path::new("./fixtures/map-ntfs-with-osm/marseille-lite.osm.pbf"),
+            Path::new("./tests/fixtures/map-ntfs-with-osm/marseille-lite.osm.pbf"),
             model,
             ntfs_network_to_osm,
             false,
@@ -38,7 +38,7 @@ fn test_map_no_force() {
         compare_output_dir_with_expected(
             &path,
             Some(vec!["object_codes.txt"]),
-            "./fixtures/map-ntfs-with-osm/output/no_force",
+            "./tests/fixtures/map-ntfs-with-osm/output/no_force",
         );
     });
 }
@@ -48,10 +48,10 @@ fn test_map_force() {
     test_in_tmp_dir(|path| {
         let mut ntfs_network_to_osm = HashMap::new();
         ntfs_network_to_osm.insert("RTM", "RTM");
-        let input_dir = "./fixtures/map-ntfs-with-osm/input";
+        let input_dir = "./tests/fixtures/map-ntfs-with-osm/input";
         let model = ntfs::read(input_dir).unwrap();
         let enriched_model = improve_stop_positions::enrich_object_codes(
-            Path::new("./fixtures/map-ntfs-with-osm/marseille-lite.osm.pbf"),
+            Path::new("./tests/fixtures/map-ntfs-with-osm/marseille-lite.osm.pbf"),
             model,
             ntfs_network_to_osm,
             true,
@@ -61,7 +61,7 @@ fn test_map_force() {
         compare_output_dir_with_expected(
             &path,
             Some(vec!["object_codes.txt"]),
-            "./fixtures/map-ntfs-with-osm/output/force",
+            "./tests/fixtures/map-ntfs-with-osm/output/force",
         );
     });
 }

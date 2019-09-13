@@ -41,6 +41,10 @@ struct Opt {
     #[structopt(short, long, parse(from_os_str))]
     output: PathBuf,
 
+    /// source of bank holidays as a path to a JSON
+    #[structopt(short, long, parse(from_os_str))]
+    bank_holidays: Option<PathBuf>,
+
     /// config file
     #[structopt(short, long, parse(from_os_str))]
     config: Option<PathBuf>,
@@ -69,6 +73,7 @@ fn run(opt: Opt) -> Result<()> {
     let model = transit_model::transxchange::read(
         opt.input,
         opt.naptan,
+        opt.bank_holidays,
         opt.config,
         opt.prefix,
         opt.max_end_date,

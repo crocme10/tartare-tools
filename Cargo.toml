@@ -5,7 +5,8 @@ authors = ["David Quintanel <david.quintanel@gmail.com>", "Nicolas Bérard <bera
 edition="2018"
 
 [dependencies]
-transit_model = { version = "0.7", features = ["proj"] }
+transit_model = { version = "0.8", features = ["proj"] }
+transit_model_collection = "0.1"
 osm_transit_extractor = "0.2.0"
 geo = "0.12.1"
 structopt = "0.2.15"
