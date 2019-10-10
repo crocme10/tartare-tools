@@ -1,11 +1,11 @@
 [package]
 name = "tartare-tools"
-version = "0.2.0"
+version = "0.3.0"
 authors = ["David Quintanel <david.quintanel@gmail.com>", "Nicolas Bérard <berard.nicolas@gmail.com>"]
 edition="2018"
 
 [dependencies]
-transit_model = { version = "0.8", features = ["proj"] }
+transit_model = { version = "0.9", features = ["proj"] }
 transit_model_collection = "0.1"
 osm_transit_extractor = "0.2.0"
 geo = "0.12.1"
