@@ -53,7 +53,7 @@ struct Opt {
         short = "x",
         long,
         parse(try_from_str),
-        raw(default_value = "&transit_model::CURRENT_DATETIME")
+        default_value = &transit_model::CURRENT_DATETIME
     )]
     current_datetime: NaiveDateTime,
 }
