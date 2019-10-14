@@ -17,8 +17,25 @@
 use chrono::NaiveDateTime;
 use log::info;
 use std::path::PathBuf;
-use structopt::StructOpt;
+use structopt::{clap::arg_enum, StructOpt};
 use transit_model::{ntfs, Result};
+
+arg_enum! {
+    #[derive(Debug)]
+    enum Action {
+        Extract,
+        Remove,
+    }
+}
+
+impl Into<ntfs::filter::Action> for Action {
+    fn into(self) -> ntfs::filter::Action {
+        match self {
+            Action::Extract => ntfs::filter::Action::Extract,
+            Action::Remove => ntfs::filter::Action::Remove,
+        }
+    }
+}
 
 #[derive(Debug, StructOpt)]
 #[structopt(
@@ -31,11 +48,8 @@ struct Opt {
     input: PathBuf,
 
     /// Extract or remove networks
-    #[structopt(raw(
-        possible_values = "&ntfs::filter::Action::variants()",
-        case_insensitive = "true"
-    ))]
-    action: ntfs::filter::Action,
+    #[structopt(possible_values = &Action::variants(), case_insensitive = true)]
+    action: Action,
 
     /// Network ids
     #[structopt(short, long)]
@@ -46,7 +60,7 @@ struct Opt {
         short = "x",
         long,
         parse(try_from_str),
-        raw(default_value = "&transit_model::CURRENT_DATETIME")
+        default_value = &transit_model::CURRENT_DATETIME
     )]
     current_datetime: NaiveDateTime,
 
@@ -60,7 +74,7 @@ fn run(opt: Opt) -> Result<()> {
 
     let model = transit_model::ntfs::read(opt.input)?;
     info!("{:?} networks {:?}", opt.action, opt.networks);
-    let model = ntfs::filter::filter(model, opt.action, opt.networks)?;
+    let model = ntfs::filter::filter(model, opt.action.into(), opt.networks)?;
     transit_model::ntfs::write(&model, opt.output, opt.current_datetime)?;
 
     Ok(())
