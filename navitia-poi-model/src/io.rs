@@ -102,27 +102,22 @@ where
     };
     // For poi_properties.txt, it's a bit different: If the file is not
     // present, it does not mean it is an error.
-    match zip.by_name("poi_properties.txt") {
-        Ok(zipper) => {
-            let reader = read_csv(zipper);
-            reader
-                .map(|rec| {
-                    let poi_property: PoiProperty = rec?;
-                    let poi = pois.get_mut(&poi_property.poi_id).ok_or_else(|| {
-                        format_err!(
-                            "in file '{}', cannot find poi '{}' for property insertion",
-                            path.as_ref().display(),
-                            &poi_property.poi_id
-                        )
-                    })?;
-                    poi.properties.push(Property::from(poi_property));
-                    Ok(())
-                })
-                .collect::<Result<()>>()?;
-        }
-        Err(_) => {
-            // Could not find poi_properties.txt... do nothing
-        }
+    if let Ok(zipper) = zip.by_name("poi_properties.txt") {
+        let reader = read_csv(zipper);
+        reader
+            .map(|rec| {
+                let poi_property: PoiProperty = rec?;
+                let poi = pois.get_mut(&poi_property.poi_id).ok_or_else(|| {
+                    format_err!(
+                        "in file '{}', cannot find poi '{}' for property insertion",
+                        path.as_ref().display(),
+                        &poi_property.poi_id
+                    )
+                })?;
+                poi.properties.push(Property::from(poi_property));
+                Ok(())
+            })
+            .collect::<Result<()>>()?;
     }
     Ok(Model { pois, poi_types })
 }
