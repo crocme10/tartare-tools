@@ -107,7 +107,13 @@ where
                         geometry: shape_to_multi_line_string(*osm_object).into(),
                     });
                 }
-                None => bail!("relation {} not found in osm", &osm_obj_id),
+                None => {
+                    warn!(
+                        "relation {} of type {} not found in osm",
+                        &osm_obj_id, object_type
+                    );
+                    continue;
+                }
             }
         }
     }
