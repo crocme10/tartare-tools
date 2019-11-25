@@ -41,7 +41,6 @@ fn test_read_shapes_from_osm() {
 }
 
 #[test]
-#[should_panic(expected = "relation relation:unknown not found in osm")]
 fn test_read_shapes_relation_not_found() {
     let input_dir = "./tests/fixtures/read-shapes-from-osm/input/unknown_relation_osm";
     let model = ntfs::read(input_dir).unwrap();
@@ -51,4 +50,6 @@ fn test_read_shapes_relation_not_found() {
         &mut collections,
     )
     .unwrap();
+    // No new geometry created since the relation is incorrect
+    assert_eq!(0, collections.geometries.len());
 }
