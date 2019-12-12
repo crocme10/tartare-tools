@@ -20,7 +20,7 @@ use std::path::PathBuf;
 use structopt;
 use structopt::StructOpt;
 use transit_model;
-use transit_model::{Model, Result};
+use transit_model::Result;
 
 #[derive(Debug, StructOpt)]
 #[structopt(
@@ -61,15 +61,13 @@ struct Opt {
 fn run(opt: Opt) -> Result<()> {
     info!("Launching merge-stop-areas...");
 
-    let objects = transit_model::ntfs::read(opt.input)?;
-    let mut collections = objects.into_collections();
-    collections = transit_model::merge_stop_areas::merge_stop_areas(
-        collections,
+    let model = transit_model::ntfs::read(opt.input)?;
+    let new_model = transit_model::merge_stop_areas::merge_stop_areas(
+        model,
         opt.rules,
         opt.automatic_max_distance,
         opt.report,
     )?;
-    let new_model = Model::new(collections)?;
 
     transit_model::ntfs::write(&new_model, opt.output, opt.current_datetime)?;
     Ok(())
