@@ -1,2 +1,12 @@
 stop_id,trip_id,stop_sequence,arrival_time,departure_time,boarding_duration,alighting_duration,pickup_type,drop_off_type,datetime_estimated,local_zone_id,stop_headsign,stop_time_id
 sp:01,trip:1,0,16:13:00,16:13:00,0,0,0,0,0,,,
+sp:same_distance,trip:1,0,16:14:00,16:14:00,0,0,0,0,0,,,
+sp:02,trip:1,0,16:15:00,16:15:00,0,0,0,0,0,,,
+sp:min_distance_group,trip:1,0,16:16:00,16:16:00,0,0,0,0,0,,,
+sp:same_distance_group,trip:1,0,16:17:00,16:17:00,0,0,0,0,0,,,
+sp:04,trip:1,0,16:18:00,16:18:00,0,0,0,0,0,,,
+sp:05,trip:1,0,16:19:00,16:19:00,0,0,0,0,0,,,
+sp:06,trip:1,0,16:20:00,16:20:00,0,0,0,0,0,,,
+sp:07,trip:1,0,16:21:00,16:21:00,0,0,0,0,0,,,
+sp:min_distance_ko,trip:1,0,16:22:00,16:22:00,0,0,0,0,0,,,
+sp:09,trip:1,0,16:23:00,16:23:00,0,0,0,0,0,,,
