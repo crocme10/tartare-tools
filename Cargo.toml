@@ -10,7 +10,7 @@ transit_model_collection = "0.1"
 osm_transit_extractor = "0.2"
 geo = "0.12"
 structopt = "0.3"
-log = "0.4"
+log = "=0.4.8" # apparently, with the last version 0.4.10, tartare-tools does not compile. https://github.com/rust-lang/log/issues/372
 failure = "0.1"
 osm-utils = { path = "./osm-utils" }
 navitia-poi-model = { path = "./navitia-poi-model" }
