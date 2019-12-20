@@ -47,10 +47,10 @@ fn sanitize(broken: &str) -> String {
     unidecode(&broken).to_lowercase()
 }
 
-pub fn enrich_object_codes(
+pub fn enrich_object_codes<S: ::std::hash::BuildHasher>(
     osm_pbf_path: &Path,
     model: Model,
-    ntfs_network_to_osm: HashMap<&str, &str>,
+    ntfs_network_to_osm: HashMap<&str, &str, S>,
     force_double_stop_point_matching: bool,
 ) -> Result<Model> {
     for (ntfs_network_id, _) in ntfs_network_to_osm.iter() {
@@ -169,11 +169,11 @@ pub fn enrich_object_codes(
                                 if compare_almost_equal(&ntfs_stop_point.name, &route_point.name) {
                                     map_ntfs_to_osm_points
                                         .entry(ntfs_stop_point.id.clone())
-                                        .or_insert(BTreeSet::new())
+                                        .or_insert_with(BTreeSet::new)
                                         .insert(route_point.id.clone());
                                     map_osm_to_ntfs_points
                                         .entry(route_point.id.clone())
-                                        .or_insert(BTreeSet::new())
+                                        .or_insert_with(BTreeSet::new)
                                         .insert(ntfs_stop_point.id.clone());
                                 }
                             }

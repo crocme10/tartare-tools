@@ -122,6 +122,7 @@ where
     Ok(Model { pois, poi_types })
 }
 
+#[allow(clippy::trivially_copy_pass_by_ref)]
 fn ser_from_bool<S>(v: &bool, serializer: S) -> std::result::Result<S::Ok, S::Error>
 where
     S: Serializer,
