@@ -20,7 +20,7 @@ use slog::Drain;
 use slog_async::OverflowStrategy;
 use structopt::StructOpt;
 
-fn init_logger() -> (slog_scope::GlobalLoggerGuard, ()) {
+fn init_logger() -> slog_scope::GlobalLoggerGuard {
     let decorator = slog_term::TermDecorator::new().stdout().build();
     let drain = slog_term::CompactFormat::new(decorator).build().fuse();
     let mut builder = slog_envlogger::LogBuilder::new(drain).filter(None, slog::FilterLevel::Info);
@@ -35,8 +35,8 @@ fn init_logger() -> (slog_scope::GlobalLoggerGuard, ()) {
     let logger = slog::Logger::root(drain, slog_o!());
 
     let scope_guard = slog_scope::set_global_logger(logger);
-    let log_guard = slog_stdlog::init().unwrap();
-    (scope_guard, log_guard)
+    slog_stdlog::init().unwrap();
+    scope_guard
 }
 
 fn wrapper_launch_run<O, F>(run: F) -> Result<()>

@@ -159,16 +159,14 @@ impl Model {
         let merged_pois = rhs
             .pois
             .into_iter()
-            .try_fold(self.pois, |mut acc, (k, v)| {
-                match acc.entry(k.to_string()) {
-                    BTreeMapEntry::Occupied(entry) => Err(format_err!(
-                        "POI with id {} already in the model",
-                        entry.key()
-                    )),
-                    BTreeMapEntry::Vacant(entry) => {
-                        entry.insert(v);
-                        Ok(acc)
-                    }
+            .try_fold(self.pois, |mut acc, (k, v)| match acc.entry(k) {
+                BTreeMapEntry::Occupied(entry) => Err(format_err!(
+                    "POI with id {} already in the model",
+                    entry.key()
+                )),
+                BTreeMapEntry::Vacant(entry) => {
+                    entry.insert(v);
+                    Ok(acc)
                 }
             })?;
         self.pois = merged_pois;
