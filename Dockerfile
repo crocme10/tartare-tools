@@ -1,4 +1,4 @@
-ARG PROJ_VERSION="6.1.0"
+ARG PROJ_VERSION="6.3.0"
 
 FROM rust:1-slim-stretch as builder
 ARG PROJ_VERSION
