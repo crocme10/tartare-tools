@@ -15,7 +15,7 @@
 // <http://www.gnu.org/licenses/>.
 
 use chrono::{DateTime, FixedOffset};
-use failure::bail;
+use failure::format_err;
 use log::info;
 use std::path::PathBuf;
 use structopt::{clap::arg_enum, StructOpt};
@@ -80,14 +80,15 @@ fn add_filters(
     filters: Vec<String>,
 ) -> Result<()> {
     for f in filters {
-        let mut params = f.split(':');
-        let (property, value) = match (params.next(), params.next(), params.next()) {
-            (Some(p), Some(v), None) => (p, v),
-            _ => bail!(
-                "expected filter should be \"property:value\", \"{}\" given",
-                f
-            ),
-        };
+        let (property, value) = f
+            .find(':')
+            .map(|pos| (&f[0..pos], &f[pos + 1..]))
+            .ok_or_else(|| {
+                format_err!(
+                    "expected filter should be \"property:value\", \"{}\" given",
+                    f
+                )
+            })?;
 
         filter.add(object_type, property, value);
     }
