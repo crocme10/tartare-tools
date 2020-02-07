@@ -104,7 +104,7 @@ fn run(opt: Opt) -> Result<()> {
     add_filters(&mut filter, filter::ObjectType::Network, opt.networks)?;
     add_filters(&mut filter, filter::ObjectType::Line, opt.lines)?;
 
-    let model = filter::filter(model, filter)?;
+    let model = filter::filter(model, &filter)?;
     transit_model::ntfs::write(&model, opt.output, opt.current_datetime)?;
 
     Ok(())
