@@ -2,9 +2,14 @@
 
 more coming soon...
 
-## How to compile
-To convert coordinates, Proj library is used. Rust requires a version 6+, so this library needs to be compiled.
-Run `make install` to run the compilation locally.
+## How to compile Proj version 6
+To convert coordinates, Proj library is used. Rust requires a version 6+.
+
+Debian based distributions (even the latest Ubuntu), the distributed version is 5. Therefore this library needs to be compiled.
+
+
+Make sure you don’t have `libproj-dev` installed and run `make install` to run the compilation locally.
+
 
 ## How to install
 First, add `${HOME}/.cargo/bin` to your `PATH`.
