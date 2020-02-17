@@ -14,7 +14,7 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-use chrono::{NaiveDate, NaiveDateTime};
+use chrono::{DateTime, FixedOffset, NaiveDate};
 use log::info;
 use std::path::PathBuf;
 use structopt;
@@ -62,7 +62,7 @@ struct Opt {
         parse(try_from_str),
         default_value = &transit_model::CURRENT_DATETIME
     )]
-    current_datetime: NaiveDateTime,
+    current_datetime: DateTime<FixedOffset>,
 
     /// limit the data in the future
     #[structopt(short, long, parse(try_from_str))]

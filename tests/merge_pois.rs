@@ -25,7 +25,7 @@ fn test_merge_pois() {
         let poi1 = "./tests/fixtures/merge_pois/input/poi1.poi";
         let poi2 = "./tests/fixtures/merge_pois/input/poi2.poi";
 
-        let model = merge(&mut [poi1, poi2].into_iter()).unwrap();
+        let model = merge(&mut [poi1, poi2].iter()).unwrap();
         model.save_to_path(path.join("pois.zip")).unwrap();
 
         // file extension should be .poi
