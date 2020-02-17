@@ -15,10 +15,11 @@
 // <http://www.gnu.org/licenses/>.
 
 use chrono::{DateTime, FixedOffset};
+use failure::format_err;
 use log::info;
 use std::path::PathBuf;
 use structopt::{clap::arg_enum, StructOpt};
-use transit_model::{ntfs, Result};
+use transit_model::{ntfs::filter, Result};
 
 arg_enum! {
     #[derive(Debug)]
@@ -28,11 +29,11 @@ arg_enum! {
     }
 }
 
-impl Into<ntfs::filter::Action> for Action {
-    fn into(self) -> ntfs::filter::Action {
+impl Into<filter::Action> for Action {
+    fn into(self) -> filter::Action {
         match self {
-            Action::Extract => ntfs::filter::Action::Extract,
-            Action::Remove => ntfs::filter::Action::Remove,
+            Action::Extract => filter::Action::Extract,
+            Action::Remove => filter::Action::Remove,
         }
     }
 }
@@ -40,7 +41,7 @@ impl Into<ntfs::filter::Action> for Action {
 #[derive(Debug, StructOpt)]
 #[structopt(
     name = "filter_ntfs",
-    about = "Remove or extract networks from an NTFS. "
+    about = "Remove or extract objects from an NTFS. "
 )]
 struct Opt {
     /// Input directory
@@ -51,9 +52,13 @@ struct Opt {
     #[structopt(possible_values = &Action::variants(), case_insensitive = true)]
     action: Action,
 
-    /// Network ids
+    /// Network filters
     #[structopt(short, long)]
     networks: Vec<String>,
+
+    /// Line filters
+    #[structopt(short, long)]
+    lines: Vec<String>,
 
     /// Current datetime
     #[structopt(
@@ -69,12 +74,37 @@ struct Opt {
     output: PathBuf,
 }
 
+fn add_filters(
+    filter: &mut filter::Filter,
+    object_type: filter::ObjectType,
+    filters: Vec<String>,
+) -> Result<()> {
+    for f in filters {
+        let (property, value) = f
+            .find(':')
+            .map(|pos| (&f[0..pos], &f[pos + 1..]))
+            .ok_or_else(|| {
+                format_err!(
+                    "expected filter should be \"property:value\", \"{}\" given",
+                    f
+                )
+            })?;
+
+        filter.add(object_type, property, value);
+    }
+    Ok(())
+}
+
 fn run(opt: Opt) -> Result<()> {
     info!("Launching filter-ntfs.");
 
     let model = transit_model::ntfs::read(opt.input)?;
-    info!("{:?} networks {:?}", opt.action, opt.networks);
-    let model = ntfs::filter::filter(model, opt.action.into(), opt.networks)?;
+
+    let mut filter = filter::Filter::new(opt.action.into());
+    add_filters(&mut filter, filter::ObjectType::Network, opt.networks)?;
+    add_filters(&mut filter, filter::ObjectType::Line, opt.lines)?;
+
+    let model = filter::filter(model, &filter)?;
     transit_model::ntfs::write(&model, opt.output, opt.current_datetime)?;
 
     Ok(())
