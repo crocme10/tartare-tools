@@ -11,9 +11,10 @@ RUN echo "deb [arch=amd64] https://kisiodigital.jfrog.io/kisiodigital/debian-loc
 RUN apt update && apt install --yes pkg-config libssl-dev clang proj=${PROJ_VERSION}
 COPY osm-utils osm-utils
 COPY navitia-poi-model navitia-poi-model
+COPY kv12ntfs kv12ntfs
 COPY Cargo.toml .
 COPY src src
-RUN cargo build --release \
+RUN cargo build --workspace --release \
 	&& mkdir /usr/src/bin && for file in ls ./target/release/*; do if test -f $file -a -x $file; then cp $file /usr/src/bin; fi; done \
 	&& cd .. && rm -rf app
 

@@ -20,23 +20,24 @@ use log::info;
 use std::path::PathBuf;
 use structopt;
 use structopt::StructOpt;
-use transit_model;
 use transit_model::Result;
+
+mod kv1;
 
 #[derive(Debug, StructOpt)]
 #[structopt(name = "kv12ntfs", about = "Convert a KV1 to an NTFS.")]
 struct Opt {
     /// input directory.
-    #[structopt(short = "i", long = "input", parse(from_os_str), default_value = ".")]
+    #[structopt(short, long, parse(from_os_str), default_value = ".")]
     input: PathBuf,
 
     /// output directory
-    #[structopt(short = "o", long = "output", parse(from_os_str))]
+    #[structopt(short, long, parse(from_os_str))]
     output: PathBuf,
 
     /// config file
-    #[structopt(short = "c", long = "config", parse(from_os_str))]
-    config_path: Option<PathBuf>,
+    #[structopt(short, long, parse(from_os_str))]
+    config: Option<PathBuf>,
 
     /// prefix
     #[structopt(short = "p", long = "prefix")]
@@ -56,9 +57,9 @@ fn run(opt: Opt) -> Result<()> {
     info!("Launching kv12ntfs...");
 
     let objects = if opt.input.is_file() {
-        transit_model::kv1::read_from_zip(opt.input, opt.config_path, opt.prefix)?
+        kv1::read_from_zip(opt.input, opt.config, opt.prefix)?
     } else if opt.input.is_dir() {
-        transit_model::kv1::read_from_path(opt.input, opt.config_path, opt.prefix)?
+        kv1::read_from_path(opt.input, opt.config, opt.prefix)?
     } else {
         bail!("Invalid input data: must be an existing directory or a ZIP archive");
     };
