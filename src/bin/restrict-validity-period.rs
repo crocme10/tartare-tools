@@ -34,11 +34,11 @@ struct Opt {
     #[structopt(short, long, parse(from_os_str), default_value = ".")]
     input: PathBuf,
 
-    /// start of the validity period
+    /// start of the validity period [included], e.g. 2019-01-01
     #[structopt(short, long)]
     start_validity_date: NaiveDate,
 
-    /// end of the validity period
+    /// end of the validity period [included], e.g. 2019-01-01
     #[structopt(short, long)]
     end_validity_date: NaiveDate,
 
