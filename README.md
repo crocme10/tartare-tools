@@ -1,4 +1,9 @@
-# tartare-tools [![Build Status](https://travis-ci.org/CanalTP/tartare-tools.svg?branch=master)](https://travis-ci.org/CanalTP/tartare-tools)
+# tartare-tools [![Travis Status][travis_badge]][travis] [![Github Actions Status][github_actions_badge]][github_actions]
+
+[travis_badge]: https://img.shields.io/travis/CanalTP/tartare-tools?label=travis
+[travis]: https://travis-ci.org/CanalTP/tartare-tools
+[github_actions_badge]: https://img.shields.io/github/workflow/status/CanalTP/tartare-tools/Continuous%20Integration?label=gh%20actions
+[github_actions]: https://github.com/CanalTP/tartare-tools
 
 more coming soon...
 
