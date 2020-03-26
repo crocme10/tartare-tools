@@ -11,8 +11,8 @@ members = [
 ]
 
 [dependencies]
-transit_model = { version = "0.15", features = ["proj"] }
-transit_model_collection = "0.1"
+transit_model = { version = "0.16", features = ["proj"] }
+typed_index_collection = "1"
 osm_transit_extractor = "0.2"
 geo = "0.12"
 structopt = "0.3"

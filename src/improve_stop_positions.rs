@@ -25,7 +25,7 @@ use std::collections::{BTreeSet, HashMap, HashSet};
 use std::path::Path;
 use transit_model::model::{Collections, Model};
 use transit_model::objects::{Coord, StopPoint as NtfsStopPoint, VehicleJourney};
-use transit_model_collection::{CollectionWithId, Idx};
+use typed_index_collection::{CollectionWithId, Idx};
 use unidecode::unidecode;
 
 fn point_list_to_centroid_coord(point_list: Vec<Point<f64>>) -> Coord {
