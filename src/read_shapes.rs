@@ -23,8 +23,8 @@ use std::collections::HashMap;
 use std::path::Path;
 use transit_model::model::Collections;
 use transit_model::objects::{Codes, Geometry, Line as NtfsLine, Route as NtfsRoute};
-use transit_model_collection::CollectionWithId;
-use transit_model_collection::Id as NtfsId;
+use typed_index_collection::CollectionWithId;
+use typed_index_collection::Id as NtfsId;
 
 pub trait WithGeometry {
     fn set_geometry_id(&mut self, geometry_id: String);
@@ -117,7 +117,7 @@ where
             }
         }
     }
-    CollectionWithId::new(objects)
+    CollectionWithId::new(objects).map_err(|e| format_err!("{}", e))
 }
 
 pub fn from_osm(osm_pbf_path: &Path, collections: &mut Collections) -> Result<()> {
