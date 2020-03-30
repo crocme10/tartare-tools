@@ -56,12 +56,10 @@ struct Opt {
 fn run(opt: Opt) -> Result<()> {
     info!("Launching kv12ntfs...");
 
-    let objects = if opt.input.is_file() {
-        kv1::read_from_zip(opt.input, opt.config, opt.prefix)?
-    } else if opt.input.is_dir() {
-        kv1::read_from_path(opt.input, opt.config, opt.prefix)?
+    let objects = if opt.input.is_dir() {
+        kv1::read(opt.input, opt.config, opt.prefix)?
     } else {
-        bail!("Invalid input data: must be an existing directory or a ZIP archive");
+        bail!("Invalid input data: must be an existing directory");
     };
 
     transit_model::ntfs::write(&objects, opt.output, opt.current_datetime)?;

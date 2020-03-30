@@ -16,12 +16,7 @@
 
 mod read;
 
-use std::{
-    fs::File,
-    io::{Read, Write},
-    path::Path,
-};
-use tempfile::TempDir;
+use std::path::Path;
 use transit_model::{
     model::{Collections, Model},
     read_utils, validity_period, AddPrefix, Result,
@@ -37,7 +32,7 @@ use typed_index_collection::CollectionWithId;
 /// The `prefix` argument is a string that will be prepended to every
 /// identifiers, allowing to namespace the dataset. By default, no
 /// prefix will be added to the identifiers.
-pub fn read_from_path<P: AsRef<Path>, Q: AsRef<Path>>(
+pub fn read<P: AsRef<Path>, Q: AsRef<Path>>(
     path: P,
     config_path: Option<Q>,
     prefix: Option<String>,
@@ -64,40 +59,4 @@ pub fn read_from_path<P: AsRef<Path>, Q: AsRef<Path>>(
 
     collections.calendar_deduplication();
     Model::new(collections)
-}
-
-/// Imports a `Model` from a zip file containing the KV1.
-///
-/// The `config_path` argument allows you to give a path to a file
-/// containing a json representing the contributor and dataset used
-/// for this KV1. If not given, default values will be created.
-///
-/// The `prefix` argument is a string that will be prepended to every
-/// identifiers, allowing to namespace the dataset. By default, no
-/// prefix will be added to the identifiers.
-pub fn read_from_zip<P: AsRef<Path>, Q: AsRef<Path>>(
-    path: P,
-    config_path: Option<Q>,
-    prefix: Option<String>,
-) -> Result<Model> {
-    let file = File::open(path.as_ref())?;
-    let mut archive = zip::ZipArchive::new(file)?;
-    let unzipped_folder = TempDir::new()?;
-    for file_index in 0..archive.len() {
-        let mut file = archive.by_index(file_index)?;
-        if file.is_file() {
-            let unziped_filepath = unzipped_folder.as_ref().join(file.sanitized_name());
-            let mut unziped_file = File::create(unziped_filepath)?;
-            let mut buffer = [0u8; 8];
-            loop {
-                let read_bytes = file.read(&mut buffer)?;
-                if read_bytes != 0 {
-                    unziped_file.write_all(&buffer[0..read_bytes])?;
-                } else {
-                    break;
-                }
-            }
-        }
-    }
-    read_from_path(unzipped_folder, config_path, prefix)
 }
