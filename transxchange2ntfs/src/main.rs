@@ -14,6 +14,8 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
+mod transxchange;
+
 use chrono::{DateTime, FixedOffset, NaiveDate};
 use log::info;
 use std::path::PathBuf;
@@ -72,7 +74,7 @@ struct Opt {
 fn run(opt: Opt) -> Result<()> {
     info!("Launching transxchange2ntfs...");
 
-    let model = transit_model::transxchange::read(
+    let model = transxchange::read(
         opt.input,
         opt.naptan,
         opt.bank_holidays,

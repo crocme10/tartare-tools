@@ -1,6 +1,6 @@
 [package]
-name = "kv12ntfs"
-version = "0.1.0"
+name = "transxchange2ntfs"
+version = "1.0.0"
 authors = ["Kisio Digital <team.coretools@kisio.com>"]
 edition = "2018"
 
@@ -8,15 +8,21 @@ edition = "2018"
 chrono = "0.4"
 csv = "1.0"
 failure = "0.1"
+geo-types = "0.4"
 lazy_static = "1.2"
 log = "0.4"
+minidom = "0.12"
+minidom_ext = "1"
 proj = "0.14"
 serde = { version = "1", features = ["derive"] }
+serde_json = "1"
 skip_error = { version = "1", features = ["log"] }
 structopt = "0.3"
 tartare-tools = { version = "0.3", path = "../" }
-transit_model = "0.17"
+time-parse = "0.1"
+transit_model = { version = "0.17", features = ["proj"] }
 typed_index_collection = "1"
+walkdir = "2.1"
 
 [dev-dependencies]
 assert_cmd = "0.11"
