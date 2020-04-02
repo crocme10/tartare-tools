@@ -8,6 +8,7 @@ edition="2018"
 members = [
   "navitia-poi-model",
   "osm-utils",
+  "kv12ntfs",
 ]
 
 [dependencies]
