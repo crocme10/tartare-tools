@@ -66,7 +66,7 @@ fn test_export_sytral_pois_ko_csv_manquant() {
         let input_path = input_path_prefix.join(suffix);
         let poi_model = extract_pois(input_path);
         match poi_model {
-            Ok(_) => assert!(false),
+            Ok(_) => panic!(),
             Err(e) => assert_eq!(format!("{}", e), format!("missing file {}", file_name)),
         };
     }
@@ -78,7 +78,7 @@ fn test_export_sytral_pois_ko_poi_type_id_manquant() {
         "./tests/fixtures/sytral2navitia-pois/input/sytral_poi_echec2_poi_type_id_manquant";
     let poi_model = extract_pois(input_path);
     match poi_model {
-        Ok(_) => assert!(false),
+        Ok(_) => panic!(),
         Err(e) => assert_eq!(e.iter_chain().map(|err| format!("{}", err)).collect::<Vec<String>>(),
                              vec!["Error reading \"./tests/fixtures/sytral2navitia-pois/input/sytral_poi_echec2_poi_type_id_manquant/POI_TCL.csv\"",
                                   "CSV deserialize error: record 1 (line: 2, byte: 92): empty string not allowed in deserialization"]),
@@ -94,7 +94,7 @@ fn test_export_sytral_pois_ko_poi_id_manquant() {
         let poi_model = extract_pois(input_path);
         assert!(poi_model.is_err());
         match poi_model {
-            Ok(_) => assert!(false),
+            Ok(_) => panic!(),
             Err(e) => assert_eq!(
                 format!("{}", e),
                 format!("poi with undefined id found in file {}", file_name)
@@ -109,7 +109,7 @@ fn test_export_sytral_pois_ko_poi_x_manquant() {
     let poi_model = extract_pois(input_path);
     assert!(poi_model.is_err());
     match poi_model {
-        Ok(_) => assert!(false),
+        Ok(_) => panic!(),
         Err(e) => assert_eq!(e.iter_chain().map(|err| format!("{}", err)).collect::<Vec<String>>(),
                              vec!["Error reading \"./tests/fixtures/sytral2navitia-pois/input/sytral_poi_echec3_poi_x_manquant/POI_TCL.csv\"",
                                   "CSV deserialize error: record 1 (line: 2, byte: 92): cannot parse float from empty string"]),
@@ -122,7 +122,7 @@ fn test_export_sytral_pois_ko_poi_y_manquant() {
     let poi_model = extract_pois(input_path);
     assert!(poi_model.is_err());
     match poi_model {
-        Ok(_) => assert!(false),
+        Ok(_) => panic!(),
         Err(e) => assert_eq!(e.iter_chain().map(|err| format!("{}", err)).collect::<Vec<String>>(),
                              vec!["Error reading \"./tests/fixtures/sytral2navitia-pois/input/sytral_poi_echec3_poi_y_manquant/parcs_velos.csv\"",
                                   "CSV deserialize error: record 2 (line: 3, byte: 160): cannot parse float from empty string"]),
@@ -137,7 +137,7 @@ fn test_export_sytral_poi_id_double() {
         let input_path = input_path_prefix.join(suffix);
         let poi_model = extract_pois(input_path);
         match poi_model {
-            Ok(_) => assert!(false),
+            Ok(_) => panic!(),
             Err(e) => assert_eq!(
                 format!("{}", e),
                 format!(
