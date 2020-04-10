@@ -214,7 +214,7 @@ mod tests {
             );
         }
         assert_eq!(
-            format!("shop:ticket"),
+            "shop:ticket".to_string(),
             c.get_poi_id(&tags(&[("shop", "ticket")])).unwrap()
         );
     }
