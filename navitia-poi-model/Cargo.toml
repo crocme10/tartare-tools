@@ -1,10 +1,10 @@
 [package]
 name = "navitia-poi-model"
 version = "0.2.2"
-authors = ["David Quintanel <david.quintanel@gmail.com>", "Nicolas Bérard <nicolas.berard@kisio.org>"]
+authors = ["Kisio Digital <team.coretools@kisio.com>"]
 license = "AGPL-3.0"
 description = "Navitia's POIs (Point of Interest) model"
-repository="https://github.com/CanalTP/tartare-tools"
+repository = "https://github.com/CanalTP/tartare-tools"
 edition = "2018"
 
 [dependencies]
