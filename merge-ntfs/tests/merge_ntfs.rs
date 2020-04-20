@@ -35,7 +35,9 @@ fn merge_collections_with_collisions() {
         .arg("tests/fixtures/ntfs")
         .assert()
         .failure()
-        .stderr(predicates::str::contains("identifier TGC already exists"));
+        .stderr(predicates::str::contains(
+            "identifier RERACOM1 already exists",
+        ));
 }
 
 #[test]
@@ -286,10 +288,13 @@ fn merge_collections_fares_v2_with_collisions() {
         .arg("tests/fixtures/ntfs")
         .arg("tests/fixtures/merge-ntfs/input_farev2_conflicts")
         .assert()
-        .failure()
-        .stderr(predicates::str::contains(
-            "identifier ticket.1 already exists",
-        ));
+        .success();
+    let output_model = transit_model::ntfs::read(output_dir).unwrap();
+    assert_eq!(4, output_model.tickets.len());
+    assert_eq!(5, output_model.ticket_prices.len());
+    assert_eq!(4, output_model.ticket_uses.len());
+    assert_eq!(8, output_model.ticket_use_perimeters.len());
+    assert_eq!(4, output_model.ticket_use_restrictions.len());
 }
 
 #[test]
