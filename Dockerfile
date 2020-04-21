@@ -13,6 +13,7 @@ COPY kv12ntfs kv12ntfs
 COPY navitia-poi-model navitia-poi-model
 COPY merge-ntfs merge-ntfs
 COPY osm-utils osm-utils
+COPY transxchange2ntfs transxchange2ntfs
 COPY Cargo.toml .
 COPY src src
 RUN cargo build --workspace --release \
