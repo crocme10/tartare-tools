@@ -29,6 +29,8 @@ use transit_model::transfers;
 use transit_model::transfers::TransfersMode;
 use transit_model::Result;
 
+mod merge_collections;
+
 #[derive(Debug, StructOpt)]
 #[structopt(
     name = "merge-ntfs",
@@ -88,7 +90,10 @@ fn run(opt: Opt) -> Result<()> {
         let mut collections = Collections::default();
         for input_directory in opt.input_directories {
             let to_append_model = transit_model::ntfs::read(input_directory)?;
-            collections.try_merge(to_append_model.into_collections())?;
+            collections = merge_collections::try_merge_collections(
+                collections,
+                to_append_model.into_collections(),
+            )?;
         }
 
         if let Some(config_feed_infos) = opt.feed_infos {

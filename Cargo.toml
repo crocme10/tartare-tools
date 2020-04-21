@@ -6,13 +6,14 @@ edition="2018"
 
 [workspace]
 members = [
+  "merge-ntfs",
   "navitia-poi-model",
   "osm-utils",
   "kv12ntfs",
 ]
 
 [dependencies]
-transit_model = { version = "0.16", features = ["proj"] }
+transit_model = { version = "0.17", features = ["proj"] }
 typed_index_collection = "1"
 osm_transit_extractor = "0.2"
 geo = "0.12"
