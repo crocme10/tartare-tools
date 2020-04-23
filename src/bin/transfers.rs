@@ -17,9 +17,7 @@
 use chrono::{DateTime, FixedOffset};
 use log::info;
 use std::path::PathBuf;
-use structopt;
 use structopt::StructOpt;
-use transit_model;
 use transit_model::transfers;
 use transit_model::transfers::TransfersMode;
 use transit_model::Result;

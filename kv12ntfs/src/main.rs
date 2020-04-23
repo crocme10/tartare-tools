@@ -18,7 +18,6 @@ use chrono::{DateTime, FixedOffset};
 use failure::bail;
 use log::info;
 use std::path::PathBuf;
-use structopt;
 use structopt::StructOpt;
 use transit_model::Result;
 
