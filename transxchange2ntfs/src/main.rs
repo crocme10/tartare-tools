@@ -19,7 +19,6 @@ mod transxchange;
 use chrono::{DateTime, FixedOffset, NaiveDate};
 use log::info;
 use std::path::PathBuf;
-use structopt;
 use structopt::StructOpt;
 use transit_model::Result;
 

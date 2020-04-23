@@ -16,9 +16,7 @@
 
 use log::info;
 use std::path::PathBuf;
-use structopt;
 use structopt::StructOpt;
-use transit_model;
 use transit_model::Result;
 
 #[derive(Debug, StructOpt)]

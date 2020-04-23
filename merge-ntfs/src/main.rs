@@ -17,13 +17,10 @@
 use chrono::{DateTime, FixedOffset};
 use failure::bail;
 use log::info;
-use serde_json;
 use std::collections::BTreeMap;
 use std::fs::File;
 use std::path::PathBuf;
-use structopt;
 use structopt::StructOpt;
-use transit_model;
 use transit_model::model::Collections;
 use transit_model::transfers;
 use transit_model::transfers::TransfersMode;

@@ -13,7 +13,6 @@
 // along with this program. If not, see <https://www.gnu.org/licenses/>
 
 use chrono::NaiveDate;
-use csv;
 use failure::{bail, format_err, ResultExt};
 use lazy_static::lazy_static;
 use log::{info, Level as LogLevel};

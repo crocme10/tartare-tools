@@ -15,7 +15,6 @@
 // <http://www.gnu.org/licenses/>.
 
 use crate::Result;
-use csv;
 use failure::bail;
 use failure::format_err;
 use failure::ResultExt;
