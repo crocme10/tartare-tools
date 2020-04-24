@@ -77,3 +77,50 @@ jobs:
       with:
         command: test
         args: --workspace --verbose --all-features
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        bin: 
+        - "apply-rules"
+        - "enrich-with-hellogo-fares"
+        - "extract-osm-pois"
+        - "filter-ntfs"
+        - "improve-stop-positions"
+        - "kv12ntfs"
+        - "map-ntfs-with-osm"
+        - "merge-ntfs"
+        - "merge-pois"
+        - "merge-stop-areas"
+        - "netexidf2ntfs"
+        - "read-shapes-from-osm"
+        - "restrict-validity-period"
+        - "sytral2navitia-pois"
+        - "transfers"
+        - "transxchange2ntfs"
+    steps:
+    - name: Install proj
+      run: |
+        wget --quiet --output-document - "https://kisiodigital.jfrog.io/kisiodigital/api/gpg/key/public" | sudo apt-key add -
+        echo "deb [arch=amd64] https://kisiodigital.jfrog.io/kisiodigital/debian-local stretch main" | sudo tee /etc/apt/sources.list.d/kisio-digital.list
+        sudo apt update
+        sudo apt install --yes libssl-dev clang proj=${PROJ_VERSION}
+    - uses: actions/checkout@master
+    - name: Install Rust stable
+      uses: actions-rs/toolchain@v1
+      with:
+          toolchain: stable
+          profile: minimal
+          override: true
+    - name: Build binaries
+      uses: actions-rs/cargo@v1
+      with:
+        command: build
+        args: --release --workspace --all-features --bin ${{ matrix.bin }}
+    - name: Publish ${{ matrix.bin }} binary
+      uses: actions/upload-artifact@v1
+      with:
+        name: ${{ matrix.bin }}
+        path: target/release/${{ matrix.bin }}
