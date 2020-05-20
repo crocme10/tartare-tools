@@ -111,7 +111,7 @@ the documentation in [common.md](common.md#co2-emissions-and-fallback-modes).
 ### stop_times.txt
 NTFS field | KV1 file | KV1 field | Mapping rule/Comment
 --- | --- | --- | ---
-trip_id | PUJOPASSXX.TMI | *LinePlanningNumber*, *JourneyPatternCode*, *JourneyNumber* | This field is prefixed. Link to the file [trips.txt](#tripstxt). Concatenation of the 3 specified fields separated by a `:`. Ex: "\<prefix\>:2029:9001:23366"
+trip_id | PUJOPASSXX.TMI | *LinePlanningNumber*, *JourneyPatternCode*, *JourneyNumber*, *ScheduleCode* | This field is prefixed. Link to the file [trips.txt](#tripstxt). Concatenation of the 4 specified fields separated by a `:`. Ex: "\<prefix\>:2029:9001:23366:1"
 arrival_time | PUJOPASSXX.TMI | *TargetArrivalTime* |
 departure_time | PUJOPASSXX.TMI | *TargetDepartureTime* |
 stop_id | PUJOPASSXX.TMI | *UserStopCode* | This field is prefixed. Link to the file [stops.txt](#stopstxt).
