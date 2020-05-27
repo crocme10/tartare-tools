@@ -85,116 +85,44 @@ fn merge_collections_ok() {
     assert_eq!(1, collections.grid_periods.len());
     assert_eq!(1, collections.grid_rel_calendar_line.len());
 
-    let mut headsigns = HashMap::<(Idx<VehicleJourney>, u32), String>::new();
-    headsigns.insert(
-        (
-            collections
-                .vehicle_journeys
-                .get_idx("OIF:77100911-1_1420-1")
-                .unwrap(),
-            3,
-        ),
-        "somewhere".into(),
-    );
-    headsigns.insert(
-        (
-            collections
-                .vehicle_journeys
-                .get_idx("OIF:77100911-1_1420-1")
-                .unwrap(),
-            3,
-        ),
-        "somewhere".into(),
-    );
+    let mut headsigns = HashMap::<(String, u32), String>::new();
+    headsigns.insert(("OIF:77100911-1_1420-1".into(), 3), "somewhere".into());
+    headsigns.insert(("OIF:77100911-1_1420-1".into(), 3), "somewhere".into());
     assert_eq!(headsigns, collections.stop_time_headsigns);
 
-    let mut stop_times_ids = HashMap::<(Idx<VehicleJourney>, u32), String>::new();
+    let mut stop_times_ids = HashMap::<(String, u32), String>::new();
     stop_times_ids.insert(
-        (
-            collections
-                .vehicle_journeys
-                .get_idx("OIF:77100911-1_1420-1")
-                .unwrap(),
-            3,
-        ),
+        ("OIF:77100911-1_1420-1".into(), 3),
         "StopTime:OIF:77100911-1_1420-1:1".into(),
     );
     stop_times_ids.insert(
-        (
-            collections
-                .vehicle_journeys
-                .get_idx("OIF:77100911-1_1420-1")
-                .unwrap(),
-            0,
-        ),
+        ("OIF:77100911-1_1420-1".into(), 0),
         "StopTime:OIF:77100911-1_1420-1:0".into(),
     );
     stop_times_ids.insert(
-        (
-            collections
-                .vehicle_journeys
-                .get_idx("OIF:77100911-1_1420-1")
-                .unwrap(),
-            4,
-        ),
+        ("OIF:77100911-1_1420-1".into(), 4),
         "StopTime:OIF:77100911-1_1420-1:2".into(),
     );
     stop_times_ids.insert(
-        (
-            collections
-                .vehicle_journeys
-                .get_idx("OIF:77100915-1_1424-1")
-                .unwrap(),
-            0,
-        ),
+        ("OIF:77100915-1_1424-1".into(), 0),
         "StopTime:OIF:77100915-1_1424-1:0".into(),
     );
     stop_times_ids.insert(
-        (
-            collections
-                .vehicle_journeys
-                .get_idx("OIF:77100921-1_1420-1")
-                .unwrap(),
-            0,
-        ),
+        ("OIF:77100921-1_1420-1".into(), 0),
         "StopTime:OIF:77100921-1_1420-1:0".into(),
     );
     stop_times_ids.insert(
-        (
-            collections
-                .vehicle_journeys
-                .get_idx("OIF:77100925-1_1424-1")
-                .unwrap(),
-            0,
-        ),
+        ("OIF:77100925-1_1424-1".into(), 0),
         "StopTime:OIF:77100925-1_1424-1:0".into(),
     );
-    stop_times_ids.insert(
-        (collections.vehicle_journeys.get_idx("RERAB1").unwrap(), 5),
-        "StopTime:RERAB1-5:1".into(),
-    );
-    stop_times_ids.insert(
-        (collections.vehicle_journeys.get_idx("RERAB1").unwrap(), 8),
-        "StopTime:RERAB1-8:0".into(),
-    );
+    stop_times_ids.insert(("RERAB1".into(), 5), "StopTime:RERAB1-5:1".into());
+    stop_times_ids.insert(("RERAB1".into(), 8), "StopTime:RERAB1-8:0".into());
 
     assert_eq!(stop_times_ids, collections.stop_time_ids);
 
-    let mut stop_time_comments = HashMap::<(Idx<VehicleJourney>, u32), Idx<Comment>>::new();
-    stop_time_comments.insert(
-        (collections.vehicle_journeys.get_idx("RERAB1").unwrap(), 5),
-        collections.comments.get_idx("RERACOM1").unwrap(),
-    );
-    stop_time_comments.insert(
-        (
-            collections
-                .vehicle_journeys
-                .get_idx("OIF:77100911-1_1420-1")
-                .unwrap(),
-            4,
-        ),
-        collections.comments.get_idx("OIFCOM1").unwrap(),
-    );
+    let mut stop_time_comments = HashMap::<(String, u32), String>::new();
+    stop_time_comments.insert(("RERAB1".into(), 5), "RERACOM1".into());
+    stop_time_comments.insert(("OIF:77100911-1_1420-1".into(), 4), "OIFCOM1".into());
     assert_eq!(stop_time_comments, collections.stop_time_comments);
 
     fn get_stop_point_idxs(

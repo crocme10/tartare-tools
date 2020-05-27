@@ -17,7 +17,7 @@
 use std::collections::HashMap;
 use transit_model::{
     model::Collections,
-    objects::{Comment, CommentLinks, VehicleJourney},
+    objects::{Comment, CommentLinks},
     Result,
 };
 use typed_index_collection::{CollectionWithId, Id, Idx};
@@ -152,7 +152,6 @@ pub fn try_merge_collections(
     }
 
     let sp_idx_to_id = idx_to_id(&stop_points);
-    let vj_idx_to_id = idx_to_id(&vehicle_journeys);
     let c_idx_to_id = idx_to_id(&comments);
 
     collections.comments.try_merge(comments)?;
@@ -175,42 +174,9 @@ pub fn try_merge_collections(
     }
     vehicle_journeys = CollectionWithId::new(vjs)?;
     collections.vehicle_journeys.try_merge(vehicle_journeys)?;
-
-    fn update_vj_idx<'a, T: Clone>(
-        map: &'a HashMap<(Idx<VehicleJourney>, u32), T>,
-        vjs: &'a CollectionWithId<VehicleJourney>,
-        vj_idx_to_id: &'a HashMap<Idx<VehicleJourney>, String>,
-    ) -> impl Iterator<Item = ((Idx<VehicleJourney>, u32), T)> + 'a {
-        map.iter()
-            .filter_map(move |((old_vj_idx, sequence), value)| {
-                get_new_idx(*old_vj_idx, vj_idx_to_id, vjs)
-                    .map(|new_vj_idx| ((new_vj_idx, *sequence), value.clone()))
-            })
-    }
-
-    // Update vehicle journey idx
-    collections.stop_time_headsigns.extend(update_vj_idx(
-        &stop_time_headsigns,
-        &collections.vehicle_journeys,
-        &vj_idx_to_id,
-    ));
-
-    collections.stop_time_ids.extend(update_vj_idx(
-        &stop_time_ids,
-        &collections.vehicle_journeys,
-        &vj_idx_to_id,
-    ));
-
-    let mut new_stop_time_comments = HashMap::new();
-    for ((old_vj_idx, sequence), value) in &stop_time_comments {
-        let new_vj_idx =
-            get_new_idx(*old_vj_idx, &vj_idx_to_id, &collections.vehicle_journeys).unwrap();
-        let new_c_idx = get_new_idx(*value, &c_idx_to_id, &collections.comments).unwrap();
-        new_stop_time_comments.insert((new_vj_idx, *sequence), new_c_idx);
-    }
-    collections
-        .stop_time_comments
-        .extend(new_stop_time_comments);
+    collections.stop_time_headsigns.extend(stop_time_headsigns);
+    collections.stop_time_ids.extend(stop_time_ids);
+    collections.stop_time_comments.extend(stop_time_comments);
     collections.calendars.try_merge(calendars)?;
     collections.companies.try_merge(companies)?;
     collections.equipments.try_merge(equipments)?;
