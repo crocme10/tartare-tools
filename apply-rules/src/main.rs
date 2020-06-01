@@ -18,8 +18,9 @@ use chrono::{DateTime, FixedOffset};
 use log::info;
 use std::path::PathBuf;
 use structopt::StructOpt;
-use transit_model::apply_rules;
 use transit_model::Result;
+
+mod apply_rules;
 
 #[derive(Debug, StructOpt)]
 #[structopt(name = "apply_rules", about = "Enrich the data of an NTFS.")]
