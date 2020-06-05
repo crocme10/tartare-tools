@@ -530,7 +530,7 @@ fn read_pujopass<P: AsRef<Path>>(path: P) -> Result<PujoJopaMap> {
             pujopass.line_planning_number.clone(),
             pujopass.journey_number.clone(),
         ))
-        .or_insert_with(|| vec![])
+        .or_insert_with(Vec::new)
         .push(pujopass);
     }
 
