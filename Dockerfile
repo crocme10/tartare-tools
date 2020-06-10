@@ -14,6 +14,7 @@ COPY navitia-poi-model navitia-poi-model
 COPY merge-ntfs merge-ntfs
 COPY osm-utils osm-utils
 COPY transxchange2ntfs transxchange2ntfs
+COPY netexidf2ntfs netexidf2ntfs
 COPY Cargo.toml .
 COPY src src
 RUN cargo build --workspace --release \
