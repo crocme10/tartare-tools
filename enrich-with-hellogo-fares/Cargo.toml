@@ -1,0 +1,25 @@
+[package]
+name = "enrich-with-hellogo-fares"
+version = "0.1.0"
+authors = ["Kisio Digital <team.coretools@kisio.com>"]
+edition = "2018"
+
+[dependencies]
+chrono = "0.4"
+failure = "0.1"
+iso4217 = "0.3"
+log = "0.4"
+minidom = "0.12"
+minidom_ext = "1"
+rust_decimal = "1.0"
+skip_error = { version = "1", features = ["log"] }
+structopt = "0.3"
+tartare-tools = { version = "0.3", path = "../" }
+transit_model = "0.18"
+zip = "0.5"
+
+[dev-dependencies]
+assert_cmd = "0.11"
+pretty_assertions = "0.6"
+rust_decimal_macros = "1.0"
+tempfile = "3"

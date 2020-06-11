@@ -18,8 +18,9 @@ use chrono::{DateTime, FixedOffset};
 use log::info;
 use std::path::PathBuf;
 use structopt::StructOpt;
-use transit_model::hellogo_fares;
 use transit_model::Result;
+
+mod hellogo_fares;
 
 #[derive(Debug, StructOpt)]
 #[structopt(
