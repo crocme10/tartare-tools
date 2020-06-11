@@ -20,6 +20,8 @@ use std::path::PathBuf;
 use structopt::StructOpt;
 use transit_model::Result;
 
+mod netexidf;
+
 #[derive(Debug, StructOpt)]
 #[structopt(name = "netexidf2ntfs", about = "Convert a Netex IDF to an NTFS.")]
 struct Opt {
@@ -52,7 +54,7 @@ struct Opt {
 fn run(opt: Opt) -> Result<()> {
     info!("Launching netexidf2ntfs...");
 
-    let model = transit_model::netex_idf::read(opt.input, opt.config, opt.prefix)?;
+    let model = netexidf::read(opt.input, opt.config, opt.prefix)?;
 
     transit_model::ntfs::write(&model, opt.output, opt.current_datetime)?;
     Ok(())

@@ -11,6 +11,7 @@ members = [
   "navitia-poi-model",
   "osm-utils",
   "transxchange2ntfs",
+  "netexidf2ntfs",
 ]
 
 [dependencies]
