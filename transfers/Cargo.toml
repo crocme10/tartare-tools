@@ -1,0 +1,12 @@
+[package]
+name = "transfers"
+version = "0.1.0"
+authors = ["Kisio Digital <team.coretools@kisio.com>"]
+edition = "2018"
+
+[dependencies]
+chrono = "0.4"
+log = "0.4"
+structopt = "0.3"
+tartare-tools = { version = "0.3", path = "../" }
+transit_model = "0.18"
