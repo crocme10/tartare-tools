@@ -6,6 +6,7 @@ edition="2018"
 
 [workspace]
 members = [
+  "filter-ntfs",
   "kv12ntfs",
   "merge-ntfs",
   "merge-stop-areas",

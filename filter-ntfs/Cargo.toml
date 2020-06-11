@@ -1,0 +1,25 @@
+
+[package]
+name = "filter-ntfs"
+version = "0.1.0"
+authors = ["Kisio Digital <team.coretools@kisio.org>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+chrono = "0.4"
+failure = "0.1"
+lazy_static = "1.2"
+log = "0.4"
+relational_types = "1"
+structopt = "0.3"
+tartare-tools = { version = "0.3", path = "../" }
+transit_model = "0.18"
+typed_index_collection = "1"
+
+[dev-dependencies]
+assert_cmd = "0.11"
+predicates = "1"
+pretty_assertions = "0.6"
+tempfile = "3"
