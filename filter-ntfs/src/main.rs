@@ -19,7 +19,9 @@ use failure::format_err;
 use log::info;
 use std::path::PathBuf;
 use structopt::{clap::arg_enum, StructOpt};
-use transit_model::{ntfs::filter, Result};
+use transit_model::Result;
+
+mod filter;
 
 arg_enum! {
     #[derive(Debug)]
@@ -48,7 +50,7 @@ struct Opt {
     #[structopt(short, long, parse(from_os_str), default_value = ".")]
     input: PathBuf,
 
-    /// Extract or remove networks
+    /// Extract or remove networks and / or lines
     #[structopt(possible_values = &Action::variants(), case_insensitive = true)]
     action: Action,
 
