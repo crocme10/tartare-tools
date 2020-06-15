@@ -8,11 +8,12 @@ edition="2018"
 members = [
   "kv12ntfs",
   "merge-ntfs",
+  "merge-stop-areas",
   "navitia-poi-model",
+  "netexidf2ntfs",
   "osm-utils",
   "transfers",
   "transxchange2ntfs",
-  "netexidf2ntfs",
 ]
 
 [dependencies]
