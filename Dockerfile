@@ -9,15 +9,7 @@ RUN apt update && apt install --yes apt-transport-https gnupg2 wget
 RUN wget --quiet --output-document - "https://kisiodigital.jfrog.io/kisiodigital/api/gpg/key/public" | apt-key add -
 RUN echo "deb [arch=amd64] https://kisiodigital.jfrog.io/kisiodigital/debian-local stretch main" > /etc/apt/sources.list.d/kisio-digital.list
 RUN apt update && apt install --yes pkg-config libssl-dev clang proj=${PROJ_VERSION}
-COPY kv12ntfs kv12ntfs
-COPY navitia-poi-model navitia-poi-model
-COPY merge-ntfs merge-ntfs
-COPY osm-utils osm-utils
-COPY transfers transfers
-COPY transxchange2ntfs transxchange2ntfs
-COPY netexidf2ntfs netexidf2ntfs
-COPY Cargo.toml .
-COPY src src
+COPY . .
 RUN cargo build --workspace --release \
 	&& mkdir /usr/src/bin && for file in ls ./target/release/*; do if test -f $file -a -x $file; then cp $file /usr/src/bin; fi; done \
 	&& cd .. && rm -rf app
