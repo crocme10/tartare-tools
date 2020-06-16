@@ -24,6 +24,7 @@ use std::{
     convert::{From, TryFrom},
     fs,
     io::Read,
+    ops::Deref,
     path::Path,
 };
 use transit_model::{
@@ -60,6 +61,20 @@ impl TryFrom<&Element> for HellogoTicket {
     }
 }
 
+impl Deref for HellogoTicket {
+    type Target = Ticket;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+impl HellogoTicket {
+    fn into_inner(self) -> Ticket {
+        self.0
+    }
+}
+
 struct HellogoTicketPrice(TicketPrice);
 impl TryFrom<(String, Decimal, String, (Date, Date))> for HellogoTicketPrice {
     type Error = failure::Error;
@@ -79,6 +94,20 @@ impl TryFrom<(String, Decimal, String, (Date, Date))> for HellogoTicketPrice {
     }
 }
 
+impl Deref for HellogoTicketPrice {
+    type Target = TicketPrice;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+impl HellogoTicketPrice {
+    fn into_inner(self) -> TicketPrice {
+        self.0
+    }
+}
+
 struct HellogoTicketUse(TicketUse);
 impl From<String> for HellogoTicketUse {
     fn from(ticket_id: String) -> Self {
@@ -94,6 +123,19 @@ impl From<String> for HellogoTicketUse {
     }
 }
 
+impl Deref for HellogoTicketUse {
+    type Target = TicketUse;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+impl HellogoTicketUse {
+    fn into_inner(self) -> TicketUse {
+        self.0
+    }
+}
 struct HellogoTicketUsePerimeter(TicketUsePerimeter);
 impl From<(String, String)> for HellogoTicketUsePerimeter {
     fn from((ticket_use_id, line_id): (String, String)) -> Self {
@@ -107,6 +149,19 @@ impl From<(String, String)> for HellogoTicketUsePerimeter {
     }
 }
 
+impl Deref for HellogoTicketUsePerimeter {
+    type Target = TicketUsePerimeter;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+impl HellogoTicketUsePerimeter {
+    fn into_inner(self) -> TicketUsePerimeter {
+        self.0
+    }
+}
 struct HellogoTicketUseRestriction(TicketUseRestriction);
 impl From<(String, (String, String))> for HellogoTicketUseRestriction {
     fn from((ticket_use_id, (use_origin, use_destination)): (String, (String, String))) -> Self {
@@ -119,7 +174,19 @@ impl From<(String, (String, String))> for HellogoTicketUseRestriction {
         HellogoTicketUseRestriction(ticket_use_restriction)
     }
 }
+impl Deref for HellogoTicketUseRestriction {
+    type Target = TicketUseRestriction;
 
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+impl HellogoTicketUseRestriction {
+    fn into_inner(self) -> TicketUseRestriction {
+        self.0
+    }
+}
 /// For HelloGo fares connector, we need the prefix of the input NTFS.
 /// The prefix will be extracted from the 'contributor_id'
 fn get_prefix(collections: &Collections) -> Option<String> {
@@ -369,7 +436,7 @@ fn load_netex_fares(collections: &mut Collections, root: &Element) -> Result<()>
         let currency = utils::get_currency(fare_frame)?;
         let distance_matrix_elements = utils::get_distance_matrix_elements(fare_frame)?;
         for distance_matrix_element in distance_matrix_elements {
-            let mut ticket = Ticket::try_from(distance_matrix_element)?;
+            let mut ticket = HellogoTicket::try_from(distance_matrix_element)?.into_inner();
             let price = match fare_frame_type {
                 FareFrameType::DirectPriceMatrix => {
                     boarding_fee + calculate_direct_price(distance_matrix_element)?
@@ -382,11 +449,17 @@ fn load_netex_fares(collections: &mut Collections, root: &Element) -> Result<()>
             };
             let price = price
                 .round_dp_with_strategy(rounding_rule, rust_decimal::RoundingStrategy::RoundHalfUp);
-            let mut ticket_price =
-                TicketPrice::try_from((ticket.id.clone(), price, currency.clone(), validity))?;
-            let mut ticket_use = TicketUse::from(ticket.id.clone());
+            let mut ticket_price = HellogoTicketPrice::try_from((
+                ticket.id.clone(),
+                price,
+                currency.clone(),
+                validity,
+            ))?
+            .into_inner();
+            let mut ticket_use = HellogoTicketUse::from(ticket.id.clone()).into_inner();
             let mut ticket_use_perimeter =
-                TicketUsePerimeter::from((ticket_use.id.clone(), line.id.clone()));
+                HellogoTicketUsePerimeter::from((ticket_use.id.clone(), line.id.clone()))
+                    .into_inner();
             let origin_destinations = get_origin_destinations(
                 &*collections,
                 service_frame,
@@ -395,8 +468,11 @@ fn load_netex_fares(collections: &mut Collections, root: &Element) -> Result<()>
             )?;
             if !origin_destinations.is_empty() {
                 for origin_destination in origin_destinations {
-                    let mut ticket_use_restriction =
-                        TicketUseRestriction::from((ticket_use.id.clone(), origin_destination));
+                    let mut ticket_use_restriction = HellogoTicketUseRestriction::from((
+                        ticket_use.id.clone(),
+                        origin_destination,
+                    ))
+                    .into_inner();
                     // `use_origin` and `use_destination` are already
                     // prefixed so we can't use the AddPrefix trait here
                     ticket_use_restriction.ticket_use_id =
@@ -580,7 +656,7 @@ mod tests {
         fn extract_ticket() {
             let xml = r#"<DistanceMatrixElement id="ticket:1" />"#;
             let distance_matrix_element: Element = xml.parse().unwrap();
-            let ticket = Ticket::try_from(&distance_matrix_element).unwrap();
+            let ticket = HellogoTicket::try_from(&distance_matrix_element).unwrap();
             assert_eq!("ticket:1", ticket.id);
             assert_eq!("Ticket Origin-Destination", ticket.name);
             assert_eq!(None, ticket.comment);
@@ -593,7 +669,7 @@ mod tests {
         fn no_id() {
             let xml = r#"<DistanceMatrixElement />"#;
             let distance_matrix_element: Element = xml.parse().unwrap();
-            Ticket::try_from(&distance_matrix_element).unwrap();
+            HellogoTicket::try_from(&distance_matrix_element).unwrap();
         }
 
         #[test]
@@ -603,7 +679,7 @@ mod tests {
         fn incorrect_element_type() {
             let xml = r#"<ticket />"#;
             let ticket: Element = xml.parse().unwrap();
-            Ticket::try_from(&ticket).unwrap();
+            HellogoTicket::try_from(&ticket).unwrap();
         }
     }
 
@@ -620,9 +696,13 @@ mod tests {
             let currency = String::from("EUR");
             let validity_start = NaiveDate::from_ymd(2019, 2, 7);
             let validity_end = NaiveDate::from_ymd(2019, 3, 14);
-            let ticket_price =
-                TicketPrice::try_from((ticket_id, price, currency, (validity_start, validity_end)))
-                    .unwrap();
+            let ticket_price = HellogoTicketPrice::try_from((
+                ticket_id,
+                price,
+                currency,
+                (validity_start, validity_end),
+            ))
+            .unwrap();
             assert_eq!(String::from("ticket:1"), ticket_price.ticket_id);
             assert_eq!(dec!(4.2), ticket_price.price);
             assert_eq!(String::from("EUR"), ticket_price.currency);
@@ -638,8 +718,13 @@ mod tests {
             let currency = String::from("XXX");
             let validity_start = NaiveDate::from_ymd(2019, 2, 7);
             let validity_end = NaiveDate::from_ymd(2019, 3, 14);
-            TicketPrice::try_from((ticket_id, price, currency, (validity_start, validity_end)))
-                .unwrap();
+            HellogoTicketPrice::try_from((
+                ticket_id,
+                price,
+                currency,
+                (validity_start, validity_end),
+            ))
+            .unwrap();
         }
     }
 
@@ -650,7 +735,7 @@ mod tests {
         #[test]
         fn valid_ticket_use() {
             let ticket_id = String::from("ticket:1");
-            let ticket_use = TicketUse::from(ticket_id);
+            let ticket_use = HellogoTicketUse::from(ticket_id);
             assert_eq!(String::from("TU:ticket:1"), ticket_use.id);
             assert_eq!(String::from("ticket:1"), ticket_use.ticket_id);
             assert_eq!(0, ticket_use.max_transfers.unwrap());
@@ -667,7 +752,7 @@ mod tests {
         fn valid_ticket_use() {
             let ticket_use_id = String::from("ticket_use:1");
             let line_id = String::from("line:1");
-            let ticket_use_perimeter = TicketUsePerimeter::from((ticket_use_id, line_id));
+            let ticket_use_perimeter = HellogoTicketUsePerimeter::from((ticket_use_id, line_id));
             assert_eq!(
                 String::from("ticket_use:1"),
                 ticket_use_perimeter.ticket_use_id
@@ -691,7 +776,7 @@ mod tests {
             let origin = String::from("stop_area:1");
             let destination = String::from("stop_area:2");
             let ticket_use_restriction =
-                TicketUseRestriction::from((ticket_use_id, (origin, destination)));
+                HellogoTicketUseRestriction::from((ticket_use_id, (origin, destination)));
             assert_eq!(
                 String::from("ticket_use:1"),
                 ticket_use_restriction.ticket_use_id
