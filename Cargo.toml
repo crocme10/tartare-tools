@@ -6,6 +6,7 @@ edition="2018"
 
 [workspace]
 members = [
+  "apply-rules",
   "enrich-with-hellogo-fares",
   "filter-ntfs",
   "kv12ntfs",
