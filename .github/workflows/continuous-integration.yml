@@ -96,7 +96,6 @@ jobs:
         - "merge-stop-areas"
         - "netexidf2ntfs"
         - "read-shapes-from-osm"
-        - "restrict-validity-period"
         - "sytral2navitia-pois"
         - "transfers"
         - "transxchange2ntfs"
