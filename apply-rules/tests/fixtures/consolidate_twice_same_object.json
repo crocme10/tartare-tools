@@ -1,0 +1,28 @@
+{
+	"networks":[
+		{
+			"properties":{
+				"network_id":"bus_vert",
+				"network_name":"Bus Vert du Calvados",
+				"network_url":"http://les-bus-verts-trop-tops.com",
+				"network_phone":"0123456789",
+				"network_address":"ici"
+			},
+			"grouped_from": [
+				"TGM"
+			]
+		},
+		{
+			"properties":{
+				"network_id":"bus_rouge",
+				"network_name":"Bus Rouge du Calvados",
+				"network_url":"http://les-bus-rouges-trop-tops.com",
+				"network_phone":"0123456789",
+				"network_address":"ici"
+			},
+			"grouped_from": [
+				"TGM"
+			]
+		}
+	]
+}

@@ -1,0 +1,20 @@
+{
+	"networks":[
+		{
+			"properties":{
+				"network_id":"TGM"
+			},
+			"grouped_from": [
+				"TGB"
+			]
+		},
+		{
+			"properties":{
+				"network_id":"TGB"
+			},
+			"grouped_from": [
+				"TGR"
+			]
+		}
+	]
+}

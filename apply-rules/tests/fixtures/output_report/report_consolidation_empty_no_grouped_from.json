@@ -2,7 +2,7 @@
   "errors": [
     {
       "category": "ObjectNotFound",
-      "message": "The rule on the \"TGM\" network was not applied"
+      "message": "The rule on network_id \"TGM\" was not applied"
     }
   ],
   "warnings": []

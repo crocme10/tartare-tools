@@ -2,12 +2,13 @@
   "errors": [
     {
       "category": "ObjectNotFound",
-      "message": "The grouped network \"TGS\" don't exist"
-    },
-    {
-      "category": "ObjectNotFound",
-      "message": "The rule on the \"bus_vert\" network was not applied"
+      "message": "The identifier \"TGS\" doesn't exist, and therefore cannot be regrouped in \"bus_vert\""
     }
   ],
-  "warnings": []
+  "warnings": [
+    {
+      "category": "UnknownPropertyValue",
+      "message": "Object with network_id \"bus_vert\" was created but must be used (through properties_rules) or else it will be deleted"
+    }
+  ]
 }
