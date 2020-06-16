@@ -14,7 +14,7 @@ serde_json = "1"
 skip_error = { version = "1", features = ["log"] }
 structopt = "0.3"
 tartare-tools = { version = "0.3", path = "../" }
-transit_model = "0.18"
+transit_model = "0.19"
 typed_index_collection = "1"
 
 [dev-dependencies]
