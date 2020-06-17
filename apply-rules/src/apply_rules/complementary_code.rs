@@ -17,7 +17,8 @@ use failure::ResultExt;
 use log::info;
 use serde::Deserialize;
 use std::{collections::BTreeSet, path::Path};
-use transit_model::{model::Collections, objects::Codes, report::Report, Result};
+use tartare_tools::report::Report;
+use transit_model::{model::Collections, objects::Codes, Result};
 use typed_index_collection::{CollectionWithId, Id};
 
 #[derive(Deserialize, Debug, Ord, PartialOrd, Eq, PartialEq, Clone, Copy)]

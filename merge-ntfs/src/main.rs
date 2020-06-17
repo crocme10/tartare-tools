@@ -21,9 +21,8 @@ use std::collections::BTreeMap;
 use std::fs::File;
 use std::path::PathBuf;
 use structopt::StructOpt;
+use tartare_tools::transfers::{transfers, TransfersMode};
 use transit_model::model::Collections;
-use transit_model::transfers;
-use transit_model::transfers::rules::TransfersMode;
 use transit_model::Result;
 
 mod merge_collections;
@@ -101,17 +100,13 @@ fn run(opt: Opt) -> Result<()> {
         }
 
         let model = transit_model::Model::new(collections)?;
-        let model = transfers::generates_transfers(
+        let model = transfers(
             model,
             opt.max_distance,
             opt.walking_speed,
             opt.waiting_time,
-        )?;
-        let model = transfers::rules::apply_rules(
-            model,
-            opt.waiting_time,
-            opt.rule_files,
             &TransfersMode::InterContributor,
+            opt.rule_files,
             opt.report,
         )?;
         transit_model::ntfs::write(&model, opt.output, opt.current_datetime)?;

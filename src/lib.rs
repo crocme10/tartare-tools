@@ -17,7 +17,9 @@
 pub mod improve_stop_positions;
 pub mod poi;
 pub mod read_shapes;
+pub mod report;
 pub mod runner;
+pub mod transfers;
 
 pub type Error = failure::Error;
 
