@@ -9,4 +9,4 @@ chrono = "0.4"
 log = "0.4"
 structopt = "0.3"
 tartare-tools = { version = "0.3", path = "../" }
-transit_model = "0.18"
+transit_model = "0.19"
