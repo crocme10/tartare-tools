@@ -39,7 +39,10 @@ slog-scope = "4.1"
 slog-stdlog = "4.0"
 slog-term = "2.4"
 structopt = "0.3"
-transit_model = { version = "0.19", features = ["proj"] }
+transit_model = { version = "0.20", features = ["proj"] }
 typed_index_collection = "1"
 unidecode = "0.3"
 zip = "0.5"
+
+[patch.crates-io]
+transit_model = { path = '../transit_model', features = ["proj"] }

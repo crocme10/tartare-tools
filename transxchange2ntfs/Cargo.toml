@@ -20,7 +20,7 @@ skip_error = { version = "1", features = ["log"] }
 structopt = "0.3"
 tartare-tools = { version = "0.3", path = "../" }
 time-parse = "0.1"
-transit_model = "0.19"
+transit_model = "0.20"
 typed_index_collection = "1"
 walkdir = "2.1"
 

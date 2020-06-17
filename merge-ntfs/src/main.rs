@@ -23,7 +23,7 @@ use std::path::PathBuf;
 use structopt::StructOpt;
 use transit_model::model::Collections;
 use transit_model::transfers;
-use transit_model::transfers::TransfersMode;
+use transit_model::transfers::rules::TransfersMode;
 use transit_model::Result;
 
 mod merge_collections;
@@ -105,6 +105,10 @@ fn run(opt: Opt) -> Result<()> {
             model,
             opt.max_distance,
             opt.walking_speed,
+            opt.waiting_time,
+        )?;
+        let model = transfers::rules::apply_rules(
+            model,
             opt.waiting_time,
             opt.rule_files,
             &TransfersMode::InterContributor,
