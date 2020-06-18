@@ -45,4 +45,4 @@ unidecode = "0.3"
 zip = "0.5"
 
 [patch.crates-io]
-transit_model = { path = '../transit_model', features = ["proj"] }
+transit_model = { git = 'https://github.com/datanel/transit_model', branch = "transfers_separate_rules", features = ["proj"] }

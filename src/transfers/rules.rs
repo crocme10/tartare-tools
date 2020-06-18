@@ -53,7 +53,6 @@ struct Rule {
     transfer_time: Option<u32>,
 }
 
-/// Filter and add/remove transfers.
 pub fn apply_rules<P: AsRef<Path>>(
     model: Model,
     waiting_time: u32,

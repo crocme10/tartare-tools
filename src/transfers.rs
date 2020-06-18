@@ -35,6 +35,11 @@ pub(crate) enum ReportCategory {
 
 impl report::ReportCategory for ReportCategory {}
 
+/// Generates transfers
+///
+/// 1. Generates missing transfers
+/// 2. Filters transfers (intra/inter contributors)
+/// 3. Adds/removes transfers with rules files
 pub fn transfers<P: AsRef<Path>>(
     model: Model,
     max_distance: f64,
