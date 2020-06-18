@@ -1,0 +1,15 @@
+object_type,object_id,object_system,object_code
+route,M1-forward,ntfs_source,M1F
+route,M1-forward,ntfs_source,M1F:2
+route,M1-forward,ntfs_source,M1F:3
+route,M1-forward,ntfs_source,M1F:4
+route,M1-backward,fake_os1,fake_oc1
+route,M1-backward,fake_os1,fake_oc1bis
+route,M1-backward,fake_os2,fake_oc2
+route,M1-backward,fake_os3,fake_oc3
+route,M1-backward,ntfs_source,M1B
+route,M1-backward,ntfs_source,M1B:2
+route,M1-backward,ntfs_source,M1B:3
+route,RERA-forward,ntfs_source,RERAF
+route,RERA-backward,ntfs_source,RERAB
+route,RERA-backward,ntfs_source,RERAB:2

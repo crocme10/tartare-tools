@@ -17,6 +17,7 @@
 mod complementary_code;
 mod object_rule;
 mod property_rule;
+mod route_consolidation;
 
 use log::info;
 use serde::Serialize;
@@ -34,32 +35,38 @@ pub enum ReportCategory {
     OldPropertyValueDoesNotMatch,
     GeometryNotValid,
     NonConvertibleString,
+    ConsolidationNotApplied,
 }
 
 impl report::ReportCategory for ReportCategory {}
 
 /// Applying rules
 ///
+/// - `object_rules_file` Json file containing rules for grouping objects
+/// - `route_consolidation_file` Json file containing rules for routes
 /// - `complementary_code_rules_files` Csv files containing codes to add for certain objects
 /// - `property_rules_files` Csv files containing rules applied on properties
-/// - `object_rules_file` Json file containing rules for grouping objects
 pub fn apply_rules(
     model: Model,
+    object_rules_file: Option<PathBuf>,
+    route_consolidation_file: Option<PathBuf>,
     complementary_code_rules_files: Vec<PathBuf>,
     property_rules_files: Vec<PathBuf>,
-    object_rules_file: Option<PathBuf>,
     report_path: PathBuf,
 ) -> Result<Model> {
+    let mut report = Report::default();
     let object_rule = object_rules_file
         .map(|path| object_rule::ObjectRule::new(path.as_path(), &model))
         .transpose()?;
 
     let mut collections = model.into_collections();
-    let mut report = Report::default();
     if let Some(object_rule) = object_rule {
         info!("Applying object rules");
         object_rule.apply_rules(&mut collections, &mut report)?;
     }
+
+    info!("Applying route consolidation rules");
+    route_consolidation::apply_rules(route_consolidation_file, &mut collections, &mut report)?;
 
     info!("Applying complementary code rules");
     complementary_code::apply_rules(

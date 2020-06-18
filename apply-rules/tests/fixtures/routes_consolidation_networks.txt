@@ -1,0 +1,3 @@
+object_type,object_id
+network,TGR
+network,TGM

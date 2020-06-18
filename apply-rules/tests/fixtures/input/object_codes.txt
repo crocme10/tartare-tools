@@ -1,0 +1,5 @@
+object_type,object_id,object_system,object_code
+route,M1B:2,fake_os1,fake_oc1
+route,M1B:2,fake_os2,fake_oc2
+route,M1B:3,fake_os1,fake_oc1bis
+route,M1B:3,fake_os3,fake_oc3

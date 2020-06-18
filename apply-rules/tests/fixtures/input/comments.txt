@@ -1,0 +1,4 @@
+comment_id,comment_name,comment_type
+com1,text 1,information
+com2,text 2,information
+com3,text 3,information

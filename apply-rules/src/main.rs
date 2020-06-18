@@ -25,31 +25,35 @@ mod apply_rules;
 #[derive(Debug, StructOpt)]
 #[structopt(name = "apply_rules", about = "Enrich the data of an NTFS.")]
 struct Opt {
-    /// input directory.
+    /// Input directory.
     #[structopt(short = "i", long = "input", parse(from_os_str), default_value = ".")]
     input: PathBuf,
 
-    /// complementary code rules files.
+    /// Complementary code rules files.
     #[structopt(short = "c", long = "complementary-code-rules", parse(from_os_str))]
     complementary_code_rules_files: Vec<PathBuf>,
 
-    /// property rules files.
+    /// Property rules files.
     #[structopt(short = "p", long = "property-rules", parse(from_os_str))]
     property_rules_files: Vec<PathBuf>,
 
-    /// network file consolidation.
+    /// Network consolidation configuration.
     #[structopt(short, long = "networks-consolidation", parse(from_os_str))]
     networks_consolidation_file: Option<PathBuf>,
 
-    /// output report file path
+    /// Route consolidation configuration.
+    #[structopt(long = "routes-consolidation", parse(from_os_str))]
+    routes_consolidation_file: Option<PathBuf>,
+
+    /// Output report file path.
     #[structopt(short = "r", long = "report", parse(from_os_str))]
     report: PathBuf,
 
-    /// output directory
+    /// Output directory.
     #[structopt(short = "o", long = "output", parse(from_os_str))]
     output: PathBuf,
 
-    /// current datetime
+    /// Current datetime.
     #[structopt(
         short = "x",
         long,
@@ -64,9 +68,10 @@ fn run(opt: Opt) -> Result<()> {
 
     let model = apply_rules::apply_rules(
         transit_model::ntfs::read(opt.input)?,
+        opt.networks_consolidation_file,
+        opt.routes_consolidation_file,
         opt.complementary_code_rules_files,
         opt.property_rules_files,
-        opt.networks_consolidation_file,
         opt.report,
     )?;
 
