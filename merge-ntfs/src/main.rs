@@ -17,13 +17,10 @@
 use chrono::{DateTime, FixedOffset};
 use failure::bail;
 use log::info;
-use std::collections::BTreeMap;
-use std::fs::File;
-use std::path::PathBuf;
+use std::{collections::BTreeMap, fs::File, path::PathBuf};
 use structopt::StructOpt;
-use tartare_tools::transfers::{transfers, TransfersMode};
-use transit_model::model::Collections;
-use transit_model::Result;
+use transfers::{transfers, TransfersMode};
+use transit_model::{model::Collections, Result};
 
 mod merge_collections;
 

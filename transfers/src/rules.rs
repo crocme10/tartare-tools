@@ -15,7 +15,6 @@
 // <http://www.gnu.org/licenses/>.
 
 use super::ReportCategory;
-use crate::report::Report;
 use failure::ResultExt;
 use log::info;
 use serde::Deserialize;
@@ -24,6 +23,7 @@ use std::{
     fs,
     path::{Path, PathBuf},
 };
+use tartare_tools::report::Report;
 /// transfers rules
 use transit_model::{
     objects::{Contributor, StopPoint, Transfer},

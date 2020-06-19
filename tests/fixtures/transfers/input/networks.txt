@@ -1,3 +1,0 @@
-network_id,network_name
-OIF:101,SAVAC
-ABC:102,Train tartempion

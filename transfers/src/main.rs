@@ -18,7 +18,7 @@ use chrono::{DateTime, FixedOffset};
 use log::info;
 use std::path::PathBuf;
 use structopt::StructOpt;
-use tartare_tools::transfers::{transfers, TransfersMode};
+use transfers::{transfers, TransfersMode};
 use transit_model::Result;
 
 #[derive(Debug, StructOpt)]

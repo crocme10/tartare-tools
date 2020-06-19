@@ -16,10 +16,10 @@
 
 mod rules;
 
-use crate::report;
 pub use rules::TransfersMode;
 use serde::Serialize;
 use std::path::{Path, PathBuf};
+use tartare_tools::report;
 use transit_model::{transfers::generates_transfers, Model, Result};
 
 /// Type of the report
