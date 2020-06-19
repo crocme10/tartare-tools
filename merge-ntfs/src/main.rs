@@ -17,14 +17,10 @@
 use chrono::{DateTime, FixedOffset};
 use failure::bail;
 use log::info;
-use std::collections::BTreeMap;
-use std::fs::File;
-use std::path::PathBuf;
+use std::{collections::BTreeMap, fs::File, path::PathBuf};
 use structopt::StructOpt;
-use transit_model::model::Collections;
-use transit_model::transfers;
-use transit_model::transfers::TransfersMode;
-use transit_model::Result;
+use transfers::{transfers, TransfersMode};
+use transit_model::{model::Collections, Result};
 
 mod merge_collections;
 
@@ -101,13 +97,13 @@ fn run(opt: Opt) -> Result<()> {
         }
 
         let model = transit_model::Model::new(collections)?;
-        let model = transfers::generates_transfers(
+        let model = transfers(
             model,
             opt.max_distance,
             opt.walking_speed,
             opt.waiting_time,
-            opt.rule_files,
             &TransfersMode::InterContributor,
+            opt.rule_files,
             opt.report,
         )?;
         transit_model::ntfs::write(&model, opt.output, opt.current_datetime)?;

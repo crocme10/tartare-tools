@@ -24,12 +24,12 @@ use std::{
     fs::File,
     path::Path,
 };
+use tartare_tools::report::Report;
 use transit_model::{
     model::{Collections, Model},
     objects::{
         CommercialMode, Line, Network, ObjectType as ModelObjectType, PhysicalMode, VehicleJourney,
     },
-    report::Report,
     Result,
 };
 

@@ -18,8 +18,7 @@ use chrono::{DateTime, FixedOffset};
 use log::info;
 use std::path::PathBuf;
 use structopt::StructOpt;
-use transit_model::transfers;
-use transit_model::transfers::TransfersMode;
+use transfers::{transfers, TransfersMode};
 use transit_model::Result;
 
 #[derive(Debug, StructOpt)]
@@ -82,13 +81,13 @@ fn run(opt: Opt) -> Result<()> {
 
     let model = transit_model::ntfs::read(opt.input)?;
 
-    let model = transfers::generates_transfers(
+    let model = transfers(
         model,
         opt.max_distance,
         opt.walking_speed,
         opt.waiting_time,
-        opt.rule_files,
         &TransfersMode::All,
+        opt.rule_files,
         opt.report,
     )?;
 

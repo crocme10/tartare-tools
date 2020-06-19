@@ -24,10 +24,10 @@ use std::{
     path::{self, PathBuf},
     result::Result as StdResult,
 };
+use tartare_tools::report::{self, Report};
 use transit_model::{
     model::{Collections, Model},
     objects::{CommentLinksT, KeysValues, RestrictionType, StopArea},
-    report::{self, Report},
     Result,
 };
 use typed_index_collection::{Collection, CollectionWithId};

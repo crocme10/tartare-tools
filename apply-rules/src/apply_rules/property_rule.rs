@@ -24,10 +24,10 @@ use std::{
     path::Path,
     str::FromStr,
 };
+use tartare_tools::report::Report;
 use transit_model::{
     model::Collections,
     objects::{Availability, Coord, Equipment, Geometry, Line, TripProperty, VehicleJourney},
-    report::Report,
     Result,
 };
 use typed_index_collection::{CollectionWithId, Idx};

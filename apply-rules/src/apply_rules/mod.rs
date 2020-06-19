@@ -22,11 +22,8 @@ use log::info;
 use relational_types::IdxSet;
 use serde::Serialize;
 use std::{collections::HashMap, fs, path::PathBuf};
-use transit_model::{
-    objects::VehicleJourney,
-    report::{self, Report},
-    Model, Result,
-};
+use tartare_tools::report::{self, Report};
+use transit_model::{objects::VehicleJourney, Model, Result};
 
 #[derive(Debug, Serialize, PartialEq)]
 pub enum ReportCategory {
