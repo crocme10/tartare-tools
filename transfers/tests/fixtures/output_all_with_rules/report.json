@@ -1,1 +1,1 @@
-{"errors":[],"warnings":[{"category":"AlreadyDeclared","message":"transfer between stops sp_5 and sp_1 is already declared"},{"category":"OnNonExistentStop","message":"manual transfer references an non-existent stop point (unknwon)"}]}
+{"errors":[],"warnings":[{"category":"AlreadyDeclared","message":"transfer between stops sp_5 and sp_1 is already declared"},{"category":"OnNonExistentStop","message":"manual transfer references a non-existent stop point (unknown)"}]}

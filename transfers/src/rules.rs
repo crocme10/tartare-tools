@@ -206,7 +206,7 @@ fn read_rules<P: AsRef<Path>>(
                 (Some(_), None) => {
                     report.add_warning(
                         format!(
-                            "manual transfer references an non-existent stop point ({})",
+                            "manual transfer references a non-existent stop point ({})",
                             rule.to_stop_id
                         ),
                         ReportCategory::OnNonExistentStop,
@@ -215,7 +215,7 @@ fn read_rules<P: AsRef<Path>>(
                 (None, Some(_)) => {
                     report.add_warning(
                         format!(
-                            "manual transfer references an non-existent stop point ({})",
+                            "manual transfer references a non-existent stop point ({})",
                             rule.from_stop_id
                         ),
                         ReportCategory::OnNonExistentStop,
