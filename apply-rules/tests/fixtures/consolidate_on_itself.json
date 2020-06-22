@@ -1,0 +1,12 @@
+{
+	"networks":[
+		{
+			"properties":{
+				"network_id":"TGM"
+			},
+			"grouped_from": [
+				"TGM"
+			]
+		}
+	]
+}

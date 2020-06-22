@@ -1,17 +1,17 @@
 {
-  "errors": [
+  "errors": [],
+  "warnings": [
     {
-      "category": "ObjectNotFound",
-      "message": "The rule on the \"bus_vert\" network was not applied"
+      "category": "UnknownPropertyValue",
+      "message": "Object with network_id \"bus_vert\" was created but must be used (through properties_rules) or else it will be deleted"
     },
     {
-      "category": "ObjectNotFound",
-      "message": "The rule on the \"TER\" commercial mode was not applied"
+      "category": "UnknownPropertyValue",
+      "message": "Object with commercial_mode_id \"TER\" was created but must be used (through properties_rules) or else it will be deleted"
     },
     {
-      "category": "ObjectNotFound",
-      "message": "The rule on the \"LongDistanceTrain\" physical mode was not applied"
+      "category": "UnknownPropertyValue",
+      "message": "Object with physical_mode_id \"LongDistanceTrain\" was created but must be used (through properties_rules) or else it will be deleted"
     }
-  ],
-  "warnings": []
+  ]
 }

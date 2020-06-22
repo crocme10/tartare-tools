@@ -12,7 +12,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>
 
-use assert_cmd::prelude::*;
+use assert_cmd::{assert::Assert, prelude::*};
 use lazy_static::lazy_static;
 use pretty_assertions::assert_eq;
 use std::{
@@ -53,7 +53,7 @@ fn test_apply_rules(
     fixture_output_dir: &str,
     fixture_report_output: &str,
     mut file_to_compare: Vec<&str>,
-) {
+) -> Assert {
     let output_dir = TempDir::new().expect("create temp dir failed");
     let report_path = output_dir.path().join("report.json");
     let mut command =
@@ -85,9 +85,12 @@ fn test_apply_rules(
     } else {
         command
     };
-    command.assert().success();
-    compare_output_dir_with_expected(&output_dir, Some(file_to_compare), fixture_output_dir);
-    compare_report(report_path, Path::new(fixture_report_output).to_path_buf());
+    let assert = command.assert();
+    if assert.get_output().status.success() {
+        compare_output_dir_with_expected(&output_dir, Some(file_to_compare), fixture_output_dir);
+        compare_report(report_path, Path::new(fixture_report_output).to_path_buf());
+    }
+    assert
 }
 
 #[test]
@@ -99,7 +102,8 @@ fn test_no_property_rules() {
         "./tests/fixtures/output",
         "./tests/fixtures/output_report/report.json",
         FILE_TO_COMPARE.clone(),
-    );
+    )
+    .success();
 }
 
 #[test]
@@ -111,7 +115,8 @@ fn test_apply_complementary_codes() {
         "./tests/fixtures/output_apply_complementary_codes",
         "./tests/fixtures/output_report/report_apply_complementary_codes.json",
         FILE_TO_COMPARE.clone(),
-    );
+    )
+    .success();
 }
 
 #[test]
@@ -123,7 +128,8 @@ fn test_apply_property() {
         "./tests/fixtures/output_apply_property",
         "./tests/fixtures/output_report/report_apply_property.json",
         FILE_TO_COMPARE.clone(),
-    );
+    )
+    .success();
 }
 
 #[test]
@@ -135,11 +141,11 @@ fn test_ntw_consolidation() {
         "./tests/fixtures/output_ntw_consolidation",
         "./tests/fixtures/output_report/report.json",
         vec!["lines.txt", "networks.txt"],
-    );
+    )
+    .success();
 }
 
 #[test]
-#[should_panic]
 fn test_ntw_consolidation_unvalid() {
     test_apply_rules(
         "",
@@ -148,7 +154,9 @@ fn test_ntw_consolidation_unvalid() {
         "",
         "",
         vec![],
-    );
+    )
+    .failure()
+    .stderr(predicates::str::contains(r#"Key "network_id" is required"#));
 }
 
 #[test]
@@ -160,7 +168,8 @@ fn test_ntw_consolidation_with_object_code() {
         "./tests/fixtures/output_consolidation_with_object_code",
         "./tests/fixtures/output_report/report_consolidation_with_object_code.json",
         FILE_TO_COMPARE.clone(),
-    );
+    )
+    .success();
 }
 
 #[test]
@@ -172,7 +181,8 @@ fn test_ntw_consolidation_2_ntw() {
         "./tests/fixtures/output_consolidation_2_ntw",
         "./tests/fixtures/output_report/report.json",
         vec!["lines.txt", "networks.txt"],
-    );
+    )
+    .success();
 }
 
 #[test]
@@ -184,7 +194,8 @@ fn test_ntw_consolidation_2_diff_ntw() {
         "./tests/fixtures/output_consolidation_2_diff_ntw",
         "./tests/fixtures/output_report/report.json",
         vec!["lines.txt", "networks.txt"],
-    );
+    )
+    .success();
 }
 
 #[test]
@@ -196,33 +207,21 @@ fn test_ntw_consolidation_unknown_id() {
         "./tests/fixtures/output",
         "./tests/fixtures/output_report/report_consolidation_unknown_id.json",
         vec!["lines.txt", "networks.txt"],
-    );
+    )
+    .success();
 }
 
 #[test]
-#[should_panic]
-fn test_ntw_consolidation_duplicate_id() {
+fn test_ntw_consolidation_existing_network() {
     test_apply_rules(
         "",
         "",
-        "./tests/fixtures/ntw_consolidation_duplicate_id.json",
-        "",
-        "",
-        vec![],
-    );
-}
-
-#[test]
-#[should_panic]
-fn test_ntw_consolidation_unvalid_network() {
-    test_apply_rules(
-        "",
-        "",
-        "./tests/fixtures/ntw_consolidation_unvalid_network.json",
-        "",
-        "",
-        vec![],
-    );
+        "./tests/fixtures/ntw_consolidation_existing_network.json",
+        "./tests/fixtures/output_existing_network",
+        "./tests/fixtures/output_report/report_consolidation_existing_network.json",
+        vec!["lines.txt", "networks.txt"],
+    )
+    .success();
 }
 
 #[test]
@@ -234,7 +233,8 @@ fn test_ntw_consolidation_no_grouped_from() {
         "./tests/fixtures/output_update_network",
         "./tests/fixtures/output_report/report_consolidation_empty_no_grouped_from.json",
         vec!["lines.txt", "networks.txt"],
-    );
+    )
+    .success();
 }
 
 #[test]
@@ -246,7 +246,8 @@ fn test_ntw_consolidation_empty_grouped_from() {
         "./tests/fixtures/output_update_network",
         "./tests/fixtures/output_report/report_consolidation_empty_no_grouped_from.json",
         vec!["lines.txt", "networks.txt"],
-    );
+    )
+    .success();
 }
 
 #[test]
@@ -258,7 +259,8 @@ fn test_commercial_mode_consolidation() {
         "./tests/fixtures/output_commercial_mode_consolidation",
         "./tests/fixtures/output_report/report.json",
         vec!["lines.txt", "commercial_modes.txt"],
-    );
+    )
+    .success();
 }
 
 #[test]
@@ -270,7 +272,8 @@ fn test_physical_mode_consolidation() {
         "./tests/fixtures/output_physical_mode_consolidation",
         "./tests/fixtures/output_report/report.json",
         vec!["trips.txt", "physical_modes.txt"],
-    );
+    )
+    .success();
 }
 
 #[test]
@@ -288,7 +291,8 @@ fn test_global_consolidation() {
             "trips.txt",
             "physical_modes.txt",
         ],
-    );
+    )
+    .success();
 }
 
 #[test]
@@ -306,5 +310,70 @@ fn test_global_consolidation_with_new_objects() {
             "trips.txt",
             "physical_modes.txt",
         ],
-    );
+    )
+    .success();
+}
+
+#[test]
+fn test_consolidate_on_new_object() {
+    test_apply_rules(
+        "",
+        "",
+        "./tests/fixtures/consolidation_on_new_object.json",
+        "",
+        "",
+        vec![],
+    )
+    .failure()
+    .stderr(predicates::str::contains(
+        "The network_id \"bus_rouge\" is present multiple times in the configuration file which is invalid.",
+    ));
+}
+
+#[test]
+fn test_consolidate_twice_same_object() {
+    test_apply_rules(
+        "",
+        "",
+        "./tests/fixtures/consolidate_twice_same_object.json",
+        "",
+        "",
+        vec![],
+    )
+    .failure()
+    .stderr(predicates::str::contains(
+        "The network_id \"TGM\" is present multiple times in the configuration file which is invalid.",
+    ));
+}
+
+#[test]
+fn test_consolidate_on_itself() {
+    test_apply_rules(
+        "",
+        "",
+        "./tests/fixtures/consolidate_on_itself.json",
+        "",
+        "",
+        vec![],
+    )
+    .failure()
+    .stderr(predicates::str::contains(
+        "The network_id \"TGM\" is present multiple times in the configuration file which is invalid.",
+    ));
+}
+
+#[test]
+fn test_consolidate_regrouped_network() {
+    test_apply_rules(
+        "",
+        "",
+        "./tests/fixtures/consolidate_regrouped_network.json",
+        "",
+        "",
+        vec![],
+    )
+    .failure()
+    .stderr(predicates::str::contains(
+        "The network_id \"TGB\" is present multiple times in the configuration file which is invalid.",
+    ));
 }
