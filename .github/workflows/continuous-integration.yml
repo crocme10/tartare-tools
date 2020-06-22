@@ -1,5 +1,9 @@
 name: Continuous Integration
-on: [push, pull_request]
+on:
+  push:
+    branches:
+    - master
+  pull_request:
 
 env:
   PROJ_VERSION: 6.3.0
@@ -83,7 +87,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        bin: 
+        bin:
         - "apply-rules"
         - "enrich-with-hellogo-fares"
         - "extract-osm-pois"

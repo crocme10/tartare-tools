@@ -1,0 +1,4 @@
+from_stop_id,to_stop_id,min_transfer_time,real_min_transfer_time,equipment_id
+prefix:5340AWB30742,prefix:5340AWB30742,0,50,
+prefix:5340AWB30747,prefix:5340AWB30747,0,50,
+prefix:5340AWB30904,prefix:5340AWB30904,0,50,
