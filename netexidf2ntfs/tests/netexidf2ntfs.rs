@@ -32,6 +32,12 @@ fn test_netexidf2ntfs() {
         .arg("prefix")
         .arg("--current-datetime")
         .arg("2019-04-03T17:19:00+00:00")
+        .arg("--max-distance")
+        .arg("200")
+        .arg("--walking-speed")
+        .arg("0.8")
+        .arg("--waiting-time")
+        .arg("50")
         .assert()
         .success();
     compare_output_dir_with_expected(&output_dir, None, "tests/fixtures/output");

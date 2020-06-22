@@ -1,0 +1,10 @@
+from_stop_id,to_stop_id,min_transfer_time,real_min_transfer_time,equipment_id
+prefix:50013706,prefix:50013706,0,50,
+prefix:50068421,prefix:50068421,0,50,
+prefix:50114580,prefix:50114580,0,50,
+prefix:50144192,prefix:50144192,0,50,
+prefix:50144192,prefix:monomodalStopPlace:57250,0,50,
+prefix:monomodalStopPlace:57250,prefix:50144192,0,50,
+prefix:monomodalStopPlace:57250,prefix:monomodalStopPlace:57250,0,50,
+prefix:with_zder_but_no_stopplace,prefix:with_zder_but_no_stopplace,0,50,
+prefix:with_zder_not_found,prefix:with_zder_not_found,0,50,
