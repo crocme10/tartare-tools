@@ -7,7 +7,7 @@ route,RERAB,unknown_property,La Défense - Nation,My new route name
 route,RERAB,unknown_property,La Défense - Nation,Another new route name
 route,RERAF,route_name,Nation - La Défense,Tartare - Paradise
 route,RERAB,direction_type,old direction_type,new direction_type
-route,M1F,direction_type,,new direction_type
+route,M1F,direction_type,forward,new direction_type
 route,RERAB,destination_id,*,new destination_id
 route,M1F,route_geometry,*,"POINT(2 2)"
 route,M1F:2,route_geometry,*,"POINT(3 3)"
