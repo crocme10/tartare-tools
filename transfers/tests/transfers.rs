@@ -119,7 +119,25 @@ fn test_generates_transfers_with_modification_rules() {
 }
 
 #[test]
-fn test_bainary_generates_all_transfers_with_rules() {
+fn test_binary_generates_all_transfers_with_default_parameters() {
+    let output_dir = TempDir::new().expect("create temp dir failed");
+    Command::cargo_bin("transfers")
+        .expect("Failed to find binary 'transfers'")
+        .arg("--input")
+        .arg("tests/fixtures/input/")
+        .arg("--output")
+        .arg(output_dir.path().to_str().unwrap())
+        .assert()
+        .success();
+    compare_output_dir_with_expected(
+        &output_dir,
+        Some(vec!["transfers.txt"]),
+        "tests/fixtures/output_default",
+    );
+}
+
+#[test]
+fn test_binary_generates_all_transfers_with_rules() {
     let output_dir = TempDir::new().expect("create temp dir failed");
     let report_path = output_dir.path().join("report.json");
     Command::cargo_bin("transfers")
