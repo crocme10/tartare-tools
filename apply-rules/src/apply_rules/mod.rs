@@ -19,11 +19,10 @@ mod object_rule;
 mod property_rule;
 
 use log::info;
-use relational_types::IdxSet;
 use serde::Serialize;
-use std::{collections::HashMap, fs, path::PathBuf};
+use std::{fs, path::PathBuf};
 use tartare_tools::report::{self, Report};
-use transit_model::{objects::VehicleJourney, Model, Result};
+use transit_model::{Model, Result};
 
 #[derive(Debug, Serialize, PartialEq)]
 pub enum ReportCategory {
@@ -55,19 +54,6 @@ pub fn apply_rules(
         .map(|path| object_rule::ObjectRule::new(path.as_path(), &model))
         .transpose()?;
 
-    let vjs_by_line: HashMap<String, IdxSet<VehicleJourney>> = model
-        .lines
-        .iter()
-        .filter_map(|(idx, obj)| {
-            let vjs = model.get_corresponding_from_idx(idx);
-            if vjs.is_empty() {
-                None
-            } else {
-                Some((obj.id.clone(), vjs))
-            }
-        })
-        .collect();
-
     let mut collections = model.into_collections();
     let mut report = Report::default();
     if let Some(object_rule) = object_rule {
@@ -83,12 +69,7 @@ pub fn apply_rules(
     )?;
 
     info!("Applying property rules");
-    property_rule::apply_rules(
-        property_rules_files,
-        &mut collections,
-        &vjs_by_line,
-        &mut report,
-    )?;
+    property_rule::apply_rules(property_rules_files, &mut collections, &mut report)?;
 
     let serialized_report = serde_json::to_string_pretty(&report)?;
     fs::write(report_path, serialized_report)?;
