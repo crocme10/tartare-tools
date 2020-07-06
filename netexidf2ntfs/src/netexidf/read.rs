@@ -145,8 +145,6 @@ mod tests {
         });
         enhance_with_line_comments(&mut collections, &lines_netex_idf);
         let line = collections.lines.get("line_id").unwrap();
-        assert!(line
-            .comment_links
-            .contains(&collections.comments.get_idx("comment_id").unwrap()));
+        assert!(line.comment_links.contains("comment_id"));
     }
 }
