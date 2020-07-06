@@ -1,0 +1,13 @@
+{
+  "errors": [],
+  "warnings": [
+    {
+      "category": "MultipleValue",
+      "message": "Route 'M1-backward' already has an object property for 'fake_opn1'; object property 'fake_opn1:fake_opv1bis' will be ignored"
+    },
+    {
+      "category": "ConsolidationNotApplied",
+      "message": "No route consolidation needed on line id \"M1\" for rule \"line:M1\""
+    }
+  ]
+}

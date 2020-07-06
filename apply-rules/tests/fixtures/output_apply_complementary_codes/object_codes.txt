@@ -5,3 +5,7 @@ line,RERA,OSM,Relation:3195542
 line,RERA,OSM,Relation:3224933
 route,B42F,OSM,Relation:3187722
 route,B42B,OSM,Relation:3187723
+route,M1B:2,fake_os1,fake_oc1
+route,M1B:2,fake_os2,fake_oc2
+route,M1B:3,fake_os3,fake_oc3
+route,M1B:3,fake_os1,fake_oc1bis

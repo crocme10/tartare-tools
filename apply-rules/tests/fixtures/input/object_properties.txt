@@ -1,0 +1,5 @@
+object_type,object_id,object_property_name,object_property_value
+route,M1B:2,fake_opn1,fake_opv1
+route,M1B:2,fake_opn2,fake_opv2
+route,M1B:3,fake_opn1,fake_opv1bis
+route,M1B:3,fake_opn3,fake_opv3

@@ -1,0 +1,18 @@
+{
+  "errors": [
+    {
+      "category": "ObjectNotFound",
+      "message": "The network \"XXX\" doesn't exist"
+    },
+    {
+      "category": "ObjectNotFound",
+      "message": "The line \"YYY\" doesn't exist"
+    }
+  ],
+  "warnings": [
+    {
+      "category": "MultipleValue",
+      "message": "Route 'M1-backward' already has an object property for 'fake_opn1'; object property 'fake_opn1:fake_opv1bis' will be ignored"
+    }
+  ]
+}

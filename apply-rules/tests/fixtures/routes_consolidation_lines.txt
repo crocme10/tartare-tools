@@ -1,0 +1,3 @@
+object_type,object_id
+line,RERA
+line,M1
