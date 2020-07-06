@@ -17,6 +17,7 @@ use failure::{bail, format_err, ResultExt};
 use lazy_static::lazy_static;
 use log::{info, Level as LogLevel};
 use proj::Proj;
+use relational_types::OneToMany;
 use serde::Deserialize;
 use skip_error::skip_error_and_log;
 use std::{
@@ -708,8 +709,14 @@ fn route_name_by_direction<'a>(routes: &[&'a Route], direction_type: &str) -> Op
 
 fn make_lines(collections: &mut Collections, lines: &CollectionWithId<Kv1Line>) -> Result<()> {
     info!("Generating lines");
-    // Needs to generate the route names here because `Line` are generated from `Route`
-    collections.enhance_route_names();
+    // Needs to generate the route names now because `Line` is generated
+    // from `Route` (and therefore, `line_name` from `route_name`)
+    let routes_to_vehicle_journeys = OneToMany::new(
+        &collections.routes,
+        &collections.vehicle_journeys,
+        "routes_to_vehicle_journeys",
+    )?;
+    collections.enhance_route_names(&routes_to_vehicle_journeys);
     for l in lines.values() {
         let commercial_mode_id = MODES
             .get::<str>(&l.transport_type)
