@@ -1,11 +1,9 @@
-# tartare-tools [![Travis Status][travis_badge]][travis] [![Github Actions Status][github_actions_badge]][github_actions]
+# tartare-tools
 
-[travis_badge]: https://img.shields.io/travis/CanalTP/tartare-tools?label=travis
-[travis]: https://travis-ci.org/CanalTP/tartare-tools
-[github_actions_badge]: https://img.shields.io/github/workflow/status/CanalTP/tartare-tools/Continuous%20Integration?label=gh%20actions
-[github_actions]: https://github.com/CanalTP/tartare-tools
+[![Github Actions Status][github_actions_badge]][github_actions]
 
-more coming soon...
+[github_actions_badge]: https://img.shields.io/github/workflow/status/CanalTP/tartare-tools/Continuous%20Integration?logo=github&style=flat-square
+[github_actions]: https://github.com/CanalTP/tartare-tools/actions?query=workflow%3A%22Continuous+Integration%22
 
 ## How to compile Proj version 6
 To convert coordinates, Proj library is used. Rust requires a version 6+.
