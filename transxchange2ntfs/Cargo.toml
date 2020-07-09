@@ -2,7 +2,14 @@
 name = "transxchange2ntfs"
 version = "1.0.0"
 authors = ["Kisio Digital <team.coretools@kisio.com>"]
+description = "Converts TransXChange into NTFS"
+license = "proprietary"
 edition = "2018"
+readme = "README.md"
+repository = "https://github.com/CanalTP/tartare-tools.git"
+keywords = ["data", "ntfs", "transit", "transxchange"]
+categories = ["data-structures", "parser-implementations"]
+
 
 [dependencies]
 chrono = "0.4"

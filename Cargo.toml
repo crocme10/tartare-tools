@@ -2,7 +2,13 @@
 name = "tartare-tools"
 version = "0.3.0"
 authors = ["Kisio Digital <team.coretools@kisio.com>"]
-edition="2018"
+description = "Transit data management library and binaries"
+license = "proprietary"
+edition = "2018"
+readme = "README.md"
+repository = "https://github.com/CanalTP/tartare-tools.git"
+keywords = ["data", "kv1", "netex", "ntfs", "osm", "poi", "transit", "transxchange"]
+categories = ["data-structures", "encoding", "parser-implementations"]
 
 [workspace]
 members = [

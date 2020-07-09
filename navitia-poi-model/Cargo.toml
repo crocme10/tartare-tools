@@ -2,10 +2,13 @@
 name = "navitia-poi-model"
 version = "0.2.2"
 authors = ["Kisio Digital <team.coretools@kisio.com>"]
-license = "AGPL-3.0"
 description = "Navitia's POIs (Point of Interest) model"
-repository = "https://github.com/CanalTP/tartare-tools"
+license = "proprietary"
 edition = "2018"
+readme = "README.md"
+repository = "https://github.com/CanalTP/tartare-tools.git"
+keywords = ["data", "osm", "transit"]
+categories = ["data-structures", "parser-implementations"]
 
 [dependencies]
 csv = "1.0"
