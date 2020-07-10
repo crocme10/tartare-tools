@@ -16,7 +16,7 @@ serde = { version = "1", features = ["derive"] }
 skip_error = { version = "1", features = ["log"] }
 structopt = "0.3"
 tartare-tools = { version = "0.3", path = "../" }
-transit_model = "0.21"
+transit_model = "0.22"
 typed_index_collection = "1"
 
 [dev-dependencies]

@@ -15,7 +15,7 @@ rust_decimal = "1.0"
 skip_error = { version = "1", features = ["log"] }
 structopt = "0.3"
 tartare-tools = { version = "0.3", path = "../" }
-transit_model = "0.21"
+transit_model = "0.22"
 zip = "0.5"
 
 [dev-dependencies]

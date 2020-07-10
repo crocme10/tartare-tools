@@ -1,4 +1,4 @@
 route_id,route_name,direction_type,line_id,geometry_id,destination_id
-route:1,METRO LA FOURRAGERE-LES CAILLOLS HOPITAL,backward,line:1,geo:route:osm:1,
-route:2,METRO LA ROSE-LA FEVE,backward,line:2,geo:route:osm:2,
-route:3,METRO LA ROSE-LA FEVE,forward,line:2,geo:existing:1,
+route:1,METRO LA FOURRAGERE-LES CAILLOLS HOPITAL,backward,line:1,geo:route:osm:1,sa:1
+route:2,METRO LA ROSE-LA FEVE,backward,line:2,geo:route:osm:2,sa:1
+route:3,METRO LA ROSE-LA FEVE,forward,line:2,geo:existing:1,sa:1
