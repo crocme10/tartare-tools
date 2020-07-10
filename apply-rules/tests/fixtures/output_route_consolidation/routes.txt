@@ -1,9 +1,9 @@
 route_id,route_name,direction_type,line_id,geometry_id,destination_id
-B42F,Gare de Lyon - Montparnasse,forward,B42,route:B42F,
-B42F:2,K - L,forward,B42,route:B42F:2,
-B42F:3,M - N,forward,B42,route:B42F:3,
-B42F:4,N - M,forward,B42,route:B42F:4,
-B42B,Montparnasse - Gare de Lyon,backward,B42,,
+B42F,Gare de Lyon - Montparnasse,forward,B42,route:B42F,MTP
+B42F:2,K - L,forward,B42,route:B42F:2,MTP
+B42F:3,M - N,forward,B42,route:B42F:3,MTP
+B42F:4,N - M,forward,B42,route:B42F:4,MTP
+B42B,Montparnasse - Gare de Lyon,backward,B42,,MTP
 M1-backward,Châtelet - Châtelet,backward,M1,,CHA
 M1-forward,Châtelet - Châtelet,forward,M1,,CHA
 RERA-backward,La Défense - La Défense,backward,RERA,,DEF

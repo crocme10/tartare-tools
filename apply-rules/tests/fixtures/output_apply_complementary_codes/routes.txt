@@ -1,16 +1,16 @@
 route_id,route_name,direction_type,line_id,geometry_id,destination_id
-M1F,Nation - Charles de Gaulle,forward,M1,route:M1F,
-M1F:2,A - B,forward,M1,,
-M1F:3,C - D,forward,M1,,
-M1F:4,E - F,forward,M1,route:M1F:4,
-M1B,Charles de Gaulle - Nation,backward,M1,route:M1B,
-M1B:2,G - H,backward,M1,,
-M1B:3,I - J,backward,M1,,
-B42F,Gare de Lyon - Montparnasse,forward,B42,route:B42F,
-B42F:2,K - L,forward,B42,route:B42F:2,
-B42F:3,M - N,forward,B42,route:B42F:3,
-B42F:4,N - M,forward,B42,route:B42F:4,
-B42B,Montparnasse - Gare de Lyon,backward,B42,,
-RERAF,Nation - La Défense,forward,RERA,,
-RERAB,La Défense - Nation,backward,RERA,,
-RERAB:2,G - L,backward,RERA,,
+M1F,Nation - Charles de Gaulle,forward,M1,route:M1F,CHA
+M1F:2,A - B,forward,M1,,CHA
+M1F:3,C - D,forward,M1,,CHA
+M1F:4,E - F,forward,M1,route:M1F:4,CHA
+M1B,Charles de Gaulle - Nation,backward,M1,route:M1B,GDL
+M1B:2,G - H,backward,M1,,CHA
+M1B:3,I - J,backward,M1,,CHA
+B42F,Gare de Lyon - Montparnasse,forward,B42,route:B42F,MTP
+B42F:2,K - L,forward,B42,route:B42F:2,MTP
+B42F:3,M - N,forward,B42,route:B42F:3,MTP
+B42F:4,N - M,forward,B42,route:B42F:4,MTP
+B42B,Montparnasse - Gare de Lyon,backward,B42,,MTP
+RERAF,Nation - La Défense,forward,RERA,,DEF
+RERAB,La Défense - Nation,backward,RERA,,NAT
+RERAB:2,G - L,backward,RERA,,DEF
