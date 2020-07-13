@@ -2,7 +2,13 @@
 name = "merge-ntfs"
 version = "0.1.0"
 authors = ["Kisio Digital <team.coretools@kisio.com>"]
+description = "Merge NTFS together"
+license = "proprietary"
 edition = "2018"
+readme = "README.md"
+repository = "https://github.com/CanalTP/tartare-tools.git"
+keywords = ["data", "ntfs", "transit"]
+categories = ["data-structures", "parser-implementations"]
 
 [dependencies]
 chrono = "0.4"

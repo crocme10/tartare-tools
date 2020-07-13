@@ -2,7 +2,13 @@
 name = "osm-utils"
 version = "0.2.0"
 authors = ["Kisio Digital <team.coretools@kisio.com>"]
+description = "Manipulate OSM data for public transport"
+license = "proprietary"
 edition = "2018"
+readme = "README.md"
+repository = "https://github.com/CanalTP/tartare-tools.git"
+keywords = ["data", "osm", "transit"]
+categories = ["data-structures", "parser-implementations"]
 
 [dependencies]
 failure = "0.1.3"

@@ -21,10 +21,7 @@ jobs:
           profile: minimal
           components: rustfmt
     - name: Run cargo fmt
-      uses: actions-rs/cargo@v1
-      with:
-        command: fmt
-        args: --all -- --check
+      run: make format
 
   clippy:
     name: Analyzing code with Clippy
@@ -44,10 +41,7 @@ jobs:
           profile: minimal
           components: clippy
     - name: Run cargo clippy
-      uses: actions-rs/cargo@v1
-      with:
-        command: clippy
-        args: --workspace --all-features --all-targets -- -D warnings
+      run: make lint
 
   tests:
     name: Tests
@@ -77,10 +71,7 @@ jobs:
           profile: minimal
           override: true
     - name: Run tests with all features
-      uses: actions-rs/cargo@v1
-      with:
-        command: test
-        args: --workspace --verbose --all-features
+      run: make test
 
   release:
     name: Release
