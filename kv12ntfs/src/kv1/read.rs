@@ -841,7 +841,10 @@ fn read_ntcassgn<P: AsRef<Path>>(
         let notice_assignment: NoticeAssignment =
             notice_assignment.with_context(|_| format!("Error reading {:?}", filepath))?;
 
-        if let Some(comment_idx) = collections.comments.get_idx(&notice_assignment.notice_code) {
+        if collections
+            .comments
+            .contains_id(&notice_assignment.notice_code)
+        {
             if let Some(pujopasses) = map_pujopass.get(&(
                 notice_assignment.line_planning_number,
                 notice_assignment.journey_number,
@@ -852,7 +855,7 @@ fn read_ntcassgn<P: AsRef<Path>>(
                         .get_mut(&pujopass.vehiclejourney_id())
                         .unwrap()
                         .comment_links
-                        .insert(comment_idx);
+                        .insert(notice_assignment.notice_code.clone());
                 }
             }
         }

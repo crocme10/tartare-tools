@@ -15,11 +15,7 @@
 // <http://www.gnu.org/licenses/>.
 
 use std::collections::HashMap;
-use transit_model::{
-    model::Collections,
-    objects::{Comment, CommentLinks},
-    Result,
-};
+use transit_model::{model::Collections, Result};
 use typed_index_collection::{CollectionWithId, Id, Idx};
 
 /// Merge the `Collections` parameter into the current `Collections` by consecutively merging
@@ -38,8 +34,8 @@ pub fn try_merge_collections(
         mut vehicle_journeys,
         frequencies,
         mut physical_modes,
-        mut stop_areas,
-        mut stop_points,
+        stop_areas,
+        stop_points,
         calendars,
         companies,
         comments,
@@ -133,30 +129,9 @@ pub fn try_merge_collections(
             .collect()
     }
 
-    // update comment idx of collection
-    fn update_comment_idx<T: CommentLinks + Id<T>>(
-        collection: &mut CollectionWithId<T>,
-        c_idx_to_id: &HashMap<Idx<Comment>, String>,
-        comments: &CollectionWithId<Comment>,
-    ) {
-        let mut objs = collection.take();
-        for obj in &mut objs {
-            *obj.comment_links_mut() = obj
-                .comment_links()
-                .iter()
-                .filter_map(|c_idx| get_new_idx(*c_idx, c_idx_to_id, comments))
-                .collect();
-        }
-
-        *collection = CollectionWithId::new(objs).unwrap();
-    }
-
     let sp_idx_to_id = idx_to_id(&stop_points);
-    let c_idx_to_id = idx_to_id(&comments);
 
     collections.comments.try_merge(comments)?;
-    update_comment_idx(&mut stop_points, &c_idx_to_id, &collections.comments);
-    update_comment_idx(&mut stop_areas, &c_idx_to_id, &collections.comments);
 
     collections.stop_points.try_merge(stop_points)?;
     collections.stop_areas.try_merge(stop_areas)?;

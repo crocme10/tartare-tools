@@ -18,7 +18,7 @@ use pretty_assertions::assert_eq;
 use std::{collections::HashMap, process::Command};
 use tempfile::TempDir;
 use transit_model::{
-    objects::{Comment, CommentLinks, StopPoint, VehicleJourney},
+    objects::{CommentLinks, StopPoint, VehicleJourney},
     test_utils::*,
 };
 use typed_index_collection::{CollectionWithId, Idx};
@@ -173,14 +173,13 @@ fn merge_collections_ok() {
     assert_eq!(0, collections.geometries.len());
     assert_eq!(0, collections.admin_stations.len());
 
-    fn assert_comment_idx<T: CommentLinks>(
+    fn assert_comment_ids<T: CommentLinks>(
         collection: &CollectionWithId<T>,
         obj_id: &str,
-        comments: &CollectionWithId<Comment>,
         comment_id: &str,
     ) {
         assert_eq!(
-            &comments.get_idx(comment_id).unwrap(),
+            comment_id,
             collection
                 .get(obj_id)
                 .unwrap()
@@ -191,18 +190,8 @@ fn merge_collections_ok() {
         );
     }
 
-    assert_comment_idx(
-        &collections.stop_points,
-        "OIF:SP:10:10",
-        &collections.comments,
-        "OIFCOM2",
-    );
-    assert_comment_idx(
-        &collections.stop_areas,
-        "OIF:SA:10:1002",
-        &collections.comments,
-        "OIFCOM3",
-    );
+    assert_comment_ids(&collections.stop_points, "OIF:SP:10:10", "OIFCOM2");
+    assert_comment_ids(&collections.stop_areas, "OIF:SA:10:1002", "OIFCOM3");
 }
 
 #[test]

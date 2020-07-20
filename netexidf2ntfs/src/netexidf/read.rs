@@ -89,15 +89,14 @@ fn enhance_with_line_comments(
             line.comment_links = line_netex_idf
                 .comment_ids
                 .iter()
-                .filter_map(
-                    |comment_id| match collections.comments.get_idx(comment_id) {
-                        Some(comment_idx) => Some(comment_idx),
-                        None => {
-                            warn!("The comment with ID {} doesn't exist", comment_id);
-                            None
-                        }
-                    },
-                )
+                .filter_map(|comment_id| {
+                    if collections.comments.contains_id(comment_id) {
+                        Some(comment_id.to_string())
+                    } else {
+                        warn!("The comment with ID {} doesn't exist", comment_id);
+                        None
+                    }
+                })
                 .collect();
         }
     }
@@ -146,8 +145,6 @@ mod tests {
         });
         enhance_with_line_comments(&mut collections, &lines_netex_idf);
         let line = collections.lines.get("line_id").unwrap();
-        assert!(line
-            .comment_links
-            .contains(&collections.comments.get_idx("comment_id").unwrap()));
+        assert!(line.comment_links.contains("comment_id"));
     }
 }

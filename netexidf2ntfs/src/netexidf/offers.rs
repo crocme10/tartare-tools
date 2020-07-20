@@ -858,15 +858,14 @@ where
                 notice_assignment_element.only_child("NoticeRef")
             })
             .filter_map(|notice_ref_element| notice_ref_element.attribute::<String>("ref"))
-            .filter_map(
-                |notice_ref| match collections.comments.get_idx(&notice_ref) {
-                    Some(comment_idx) => Some(comment_idx),
-                    None => {
-                        warn!("The comment with ID {} doesn't exist", notice_ref);
-                        None
-                    }
-                },
-            )
+            .filter(|notice_ref| {
+                if collections.comments.contains_id(&notice_ref) {
+                    true
+                } else {
+                    warn!("The comment with ID {} doesn't exist", notice_ref);
+                    false
+                }
+            })
             .collect();
         let trip_property_id = line_netex_idf.trip_property_id.clone();
         let mut codes = KeysValues::default();
@@ -1447,9 +1446,7 @@ mod tests {
                 "Trip Short Name",
                 vehicle_journey.short_name.as_ref().unwrap()
             );
-            assert!(vehicle_journey
-                .comment_links
-                .contains(&collections.comments.get_idx("comment_id").unwrap()));
+            assert!(vehicle_journey.comment_links.contains("comment_id"));
             let stop_time = &vehicle_journey.stop_times[0];
             assert_eq!(0, stop_time.sequence);
             assert_eq!(Time::new(6, 0, 0), stop_time.arrival_time);
