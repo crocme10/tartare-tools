@@ -240,7 +240,7 @@ impl From<&Element> for OperatingProfile {
             .unwrap_or_default();
         let bank_holidays = operating_profile
             .try_only_child("BankHolidayOperation")
-            .and_then(|bank_holiday_operation| {
+            .map(|bank_holiday_operation| {
                 let include = bank_holiday_operation
                     .try_only_child("DaysOfOperation")
                     .map(OperatingProfile::bank_holidays)
@@ -249,7 +249,7 @@ impl From<&Element> for OperatingProfile {
                     .try_only_child("DaysOfNonOperation")
                     .map(OperatingProfile::bank_holidays)
                     .unwrap_or_default();
-                Ok(IncludeExclude { include, exclude })
+                IncludeExclude { include, exclude }
             })
             .unwrap_or_default();
         Self {
