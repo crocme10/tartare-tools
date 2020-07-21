@@ -23,7 +23,7 @@ use std::path::Path;
 use transit_model::{
     model::{Collections, Model},
     objects::Dataset,
-    AddPrefix, Result,
+    AddPrefix, PrefixConfiguration, Result,
 };
 use typed_index_collection::CollectionWithId;
 use walkdir::WalkDir;
@@ -72,7 +72,9 @@ where
     enhance_with_line_comments(&mut collections, &lines_netex_idf);
 
     if let Some(prefix) = prefix {
-        collections.add_prefix_with_sep(prefix.as_str(), ":");
+        let mut prefix_conf = PrefixConfiguration::default();
+        prefix_conf.set_data_prefix(prefix);
+        collections.prefix(&prefix_conf);
     }
 
     collections.calendar_deduplication();

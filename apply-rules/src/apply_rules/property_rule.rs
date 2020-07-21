@@ -27,7 +27,7 @@ use tartare_tools::report::Report;
 use transit_model::{
     model::Collections,
     objects::{Availability, Coord, Equipment, Geometry, Line, TripProperty, VehicleJourney},
-    Result,
+    PrefixConfiguration, Result,
 };
 use typed_index_collection::CollectionWithId;
 use wkt::{self, conversion::try_into_geometry};
@@ -760,34 +760,49 @@ lazy_static! {
 }
 
 // To pool
-fn get_prefix(collections: &Collections) -> Option<String> {
+fn get_prefix(collections: &Collections) -> PrefixConfiguration {
     collections
-        .contributors
+        .datasets
         .values()
+        // Take any dataset, no reason to chose one in particular
         .next()
-        .map(|contributor| &contributor.id)
-        .and_then(|contributor_id| {
-            contributor_id
-                .find(':')
-                .map(|index| contributor_id[..index].to_string())
+        .map(|dataset| &dataset.id)
+        .map(|id| id.split(':').collect::<Vec<_>>())
+        .map(|split| {
+            let mut prefix_conf = PrefixConfiguration::default();
+            if split.len() == 1 {
+                // If the original `dataset_id` doesn't contain ':', then no
+                // `data_prefix` was present.
+                prefix_conf.set_dataset_id(split[0]);
+            } else {
+                // If the original `dataset_id` contains ':', the first part
+                // must be the `data_prefix` and we assume the last part is the
+                // `dataset_id`. This should work fine for the following cases:
+                // - `IDFM:a1b2c3d4e5f6g7h8`
+                // - `IDFM:RATP:a1b2c3d4e5f6g7h8`
+                prefix_conf.set_data_prefix(split[0]);
+                prefix_conf.set_dataset_id(split[split.len() - 1]);
+            }
+            prefix_conf
         })
+        .unwrap_or_default()
 }
 
 fn get_id_or_create_equipment(
     equipment: Equipment,
     collection_equipments: &mut CollectionWithId<Equipment>,
-    prefix: &str,
+    prefix_conf: &PrefixConfiguration,
 ) -> String {
     fn generate_equipment_id(
         collection_equipments: &mut CollectionWithId<Equipment>,
-        prefix: &str,
+        prefix_conf: &PrefixConfiguration,
     ) -> String {
         let mut inc = 0;
         let mut available = false;
         let mut equipment_id = String::new();
         while !available {
             inc += 1;
-            equipment_id = format!("{}{}", prefix, inc);
+            equipment_id = prefix_conf.referential_prefix(inc.to_string().as_str());
             if collection_equipments.get(&equipment_id).is_none() {
                 available = true;
             }
@@ -806,7 +821,7 @@ fn get_id_or_create_equipment(
         return similar_equipments[0].id.clone();
     }
 
-    let equipment_id = generate_equipment_id(collection_equipments, prefix);
+    let equipment_id = generate_equipment_id(collection_equipments, prefix_conf);
 
     collection_equipments
         .push(Equipment {
@@ -821,7 +836,7 @@ fn update_stop_points_equipments(
     sp_equipments_properties: BTreeMap<String, Vec<PropertyRule>>,
     report: &mut Report<ReportCategory>,
     collections: &mut Collections,
-    prefix: &str,
+    prefix_conf: &PrefixConfiguration,
 ) {
     let any_prop = "*".to_string();
 
@@ -898,7 +913,7 @@ fn update_stop_points_equipments(
             sp.equipment_id = Some(get_id_or_create_equipment(
                 sp_equipment,
                 &mut collections.equipments,
-                prefix,
+                prefix_conf,
             ));
         }
     }
@@ -907,18 +922,18 @@ fn update_stop_points_equipments(
 fn get_id_or_create_trip_property(
     trip_property: TripProperty,
     collection_trip_properties: &mut CollectionWithId<TripProperty>,
-    prefix: &str,
+    prefix_conf: &PrefixConfiguration,
 ) -> String {
     fn generate_trip_property_id(
         collection_trip_properties: &mut CollectionWithId<TripProperty>,
-        prefix: &str,
+        prefix_conf: &PrefixConfiguration,
     ) -> String {
         let mut inc = 0;
         let mut available = false;
         let mut trip_property_id = String::new();
         while !available {
             inc += 1;
-            trip_property_id = format!("{}{}", prefix, inc);
+            trip_property_id = prefix_conf.schedule_prefix(inc.to_string().as_str());
             if collection_trip_properties.get(&trip_property_id).is_none() {
                 available = true;
             }
@@ -937,7 +952,7 @@ fn get_id_or_create_trip_property(
         return similar_trip_properties[0].id.clone();
     }
 
-    let trip_property_id = generate_trip_property_id(collection_trip_properties, prefix);
+    let trip_property_id = generate_trip_property_id(collection_trip_properties, prefix_conf);
 
     collection_trip_properties
         .push(TripProperty {
@@ -952,7 +967,7 @@ fn update_lines_trips_properties(
     lines_trips_properties: BTreeMap<String, Vec<PropertyRule>>,
     report: &mut Report<ReportCategory>,
     collections: &mut Collections,
-    prefix: &str,
+    prefix_conf: &PrefixConfiguration,
 ) {
     let any_prop = "*".to_string();
     for (line_id, trip_properties) in lines_trips_properties {
@@ -1005,7 +1020,7 @@ fn update_lines_trips_properties(
                 vj.trip_property_id = Some(get_id_or_create_trip_property(
                     vj_property,
                     &mut collections.trip_properties,
-                    prefix,
+                    prefix_conf,
                 ));
             }
         }
@@ -1022,9 +1037,7 @@ pub(crate) fn apply_rules<P: AsRef<Path>>(
     let lines = collections.lines.clone();
     let mut lines_trips_properties: BTreeMap<String, Vec<PropertyRule>> = BTreeMap::default();
     let mut sp_equipments_properties: BTreeMap<String, Vec<PropertyRule>> = BTreeMap::default();
-    let prefix_with_colon = get_prefix(&collections)
-        .map(|prefix| prefix + ":")
-        .unwrap_or_else(String::new);
+    let prefix_conf = get_prefix(&collections);
 
     for mut p in properties {
         let mut obj_found = true;
@@ -1081,13 +1094,13 @@ pub(crate) fn apply_rules<P: AsRef<Path>>(
         sp_equipments_properties,
         &mut report,
         &mut collections,
-        &prefix_with_colon,
+        &prefix_conf,
     );
     update_lines_trips_properties(
         lines_trips_properties,
         &mut report,
         &mut collections,
-        &prefix_with_colon,
+        &prefix_conf,
     );
     Ok(())
 }
@@ -1122,5 +1135,39 @@ mod tests {
             r#"{"errors":[],"warnings":[{"category":"ObjectNotFound","message":"object_type=line, object_id=line_id: geometry geometry_id not found"}]}"#,
             report_string.as_str()
         );
+    }
+
+    mod get_prefix {
+        use super::*;
+        use pretty_assertions::assert_eq;
+        use transit_model::objects::Dataset;
+
+        fn schedule_prefix_from_dataset_id(dataset_id: &str, id: &str) -> String {
+            let mut collections = Collections::default();
+            collections.datasets = CollectionWithId::from(Dataset {
+                id: dataset_id.to_string(),
+                ..Default::default()
+            });
+            let prefix_conf = get_prefix(&collections);
+            prefix_conf.schedule_prefix(id)
+        }
+
+        #[test]
+        fn no_data_prefix() {
+            let prefixed_id = schedule_prefix_from_dataset_id("a1b2c3d4e5f6g7h8", "foo");
+            assert_eq!("a1b2c3:foo", prefixed_id);
+        }
+
+        #[test]
+        fn with_data_prefix() {
+            let prefixed_id = schedule_prefix_from_dataset_id("IDFM:a1b2c3d4e5f6g7h8", "foo");
+            assert_eq!("IDFM:a1b2c3:foo", prefixed_id);
+        }
+
+        #[test]
+        fn with_multiple_data_prefix() {
+            let prefixed_id = schedule_prefix_from_dataset_id("IDFM:RATP:a1b2c3d4e5f6g7h8", "foo");
+            assert_eq!("IDFM:a1b2c3:foo", prefixed_id);
+        }
     }
 }
