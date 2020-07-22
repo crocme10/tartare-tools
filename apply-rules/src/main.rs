@@ -37,9 +37,9 @@ struct Opt {
     #[structopt(short = "p", long = "property-rules", parse(from_os_str))]
     property_rules_files: Vec<PathBuf>,
 
-    /// Network consolidation configuration.
-    #[structopt(short, long = "networks-consolidation", parse(from_os_str))]
-    networks_consolidation_file: Option<PathBuf>,
+    /// Object rules file.
+    #[structopt(long = "object-rules", parse(from_os_str))]
+    object_rules_file: Option<PathBuf>,
 
     /// Route consolidation configuration.
     #[structopt(long = "routes-consolidation", parse(from_os_str))]
@@ -68,7 +68,7 @@ fn run(opt: Opt) -> Result<()> {
 
     let model = apply_rules::apply_rules(
         transit_model::ntfs::read(opt.input)?,
-        opt.networks_consolidation_file,
+        opt.object_rules_file,
         opt.routes_consolidation_file,
         opt.complementary_code_rules_files,
         opt.property_rules_files,
