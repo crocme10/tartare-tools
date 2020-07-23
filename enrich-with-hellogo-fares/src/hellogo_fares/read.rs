@@ -35,7 +35,7 @@ use transit_model::{
         Date, ObjectType, PerimeterAction, RestrictionType, StopPoint, Ticket, TicketPrice,
         TicketUse, TicketUsePerimeter, TicketUseRestriction,
     },
-    AddPrefix, Result,
+    AddPrefix, PrefixConfiguration, Result,
 };
 use zip::read::ZipArchive;
 
@@ -299,7 +299,7 @@ fn get_origin_destinations(
     collections: &Collections,
     service_frame: &Element,
     distance_matrix_element: &Element,
-    prefix_with_colon: &str,
+    prefix_conf: &PrefixConfiguration,
 ) -> Result<Vec<(String, String)>> {
     fn get_ref(distance_matrix_element: &Element, element_name: &str) -> Result<String> {
         distance_matrix_element
@@ -363,23 +363,23 @@ fn get_origin_destinations(
     fn get_stop_point_from_collections<'a>(
         collections: &'a Collections,
         stop_point_id: &str,
-        prefix_with_colon: &str,
+        prefix_conf: &PrefixConfiguration,
     ) -> Option<&'a StopPoint> {
         collections
             .stop_points
-            .get(&format!("{}{}", prefix_with_colon, stop_point_id))
+            .get(&prefix_conf.referential_prefix(stop_point_id))
     }
     let start_stop_area_ids: BTreeSet<_> = start_stop_point_ids
         .iter()
         .flat_map(|stop_point_id| {
-            get_stop_point_from_collections(collections, stop_point_id, prefix_with_colon)
+            get_stop_point_from_collections(collections, stop_point_id, prefix_conf)
         })
         .map(|stop_point| stop_point.stop_area_id.clone())
         .collect();
     let end_stop_area_ids: BTreeSet<_> = end_stop_point_ids
         .iter()
         .flat_map(|stop_point_id| {
-            get_stop_point_from_collections(collections, stop_point_id, prefix_with_colon)
+            get_stop_point_from_collections(collections, stop_point_id, prefix_conf)
         })
         .map(|stop_point| stop_point.stop_area_id.clone())
         .collect();
@@ -395,9 +395,13 @@ fn get_origin_destinations(
 }
 
 fn load_netex_fares(collections: &mut Collections, root: &Element) -> Result<()> {
-    let prefix_with_colon = get_prefix(&collections)
-        .map(|prefix| prefix + ":")
-        .unwrap_or_else(String::new);
+    let prefix_conf = get_prefix(&collections)
+        .map(|prefix| {
+            let mut prefix_conf = PrefixConfiguration::default();
+            prefix_conf.set_data_prefix(prefix);
+            prefix_conf
+        })
+        .unwrap_or_else(PrefixConfiguration::default);
     let frames = netex_utils::parse_frames_by_type(
         root.try_only_child("dataObjects")
             .map_err(|e| format_err!("{}", e))?
@@ -419,10 +423,8 @@ fn load_netex_fares(collections: &mut Collections, root: &Element) -> Result<()>
             continue;
         }
         let line_id = get_line_id(fare_frame, service_frame)?;
-        let line = if let Some(line) = collections
-            .lines
-            .get(&format!("{}{}", &prefix_with_colon, line_id))
-        {
+        let line_id = prefix_conf.referential_prefix(line_id.as_str());
+        let line = if let Some(line) = collections.lines.get(&line_id) {
             line
         } else {
             warn!("Failed to find line ID '{}' in the existing NTFS", line_id);
@@ -464,7 +466,7 @@ fn load_netex_fares(collections: &mut Collections, root: &Element) -> Result<()>
                 &*collections,
                 service_frame,
                 distance_matrix_element,
-                &prefix_with_colon,
+                &prefix_conf,
             )?;
             if !origin_destinations.is_empty() {
                 for origin_destination in origin_destinations {
@@ -475,22 +477,22 @@ fn load_netex_fares(collections: &mut Collections, root: &Element) -> Result<()>
                     .into_inner();
                     // `use_origin` and `use_destination` are already
                     // prefixed so we can't use the AddPrefix trait here
-                    ticket_use_restriction.ticket_use_id =
-                        prefix_with_colon.clone() + &ticket_use_restriction.ticket_use_id;
+                    ticket_use_restriction.ticket_use_id = prefix_conf
+                        .referential_prefix(&ticket_use_restriction.ticket_use_id.as_str());
                     collections
                         .ticket_use_restrictions
                         .push(ticket_use_restriction);
                 }
-                ticket.add_prefix(&prefix_with_colon);
+                ticket.prefix(&prefix_conf);
                 collections.tickets.push(ticket)?;
-                ticket_use.add_prefix(&prefix_with_colon);
+                ticket_use.prefix(&prefix_conf);
                 collections.ticket_uses.push(ticket_use)?;
-                ticket_price.add_prefix(&prefix_with_colon);
+                ticket_price.prefix(&prefix_conf);
                 collections.ticket_prices.push(ticket_price);
                 // `object_id` is already prefixed so we can't use the
                 // AddPrefix trait here
                 ticket_use_perimeter.ticket_use_id =
-                    prefix_with_colon.clone() + &ticket_use_perimeter.ticket_use_id;
+                    prefix_conf.referential_prefix(ticket_use_perimeter.ticket_use_id.as_str());
                 collections.ticket_use_perimeters.push(ticket_use_perimeter);
             }
         }
@@ -1063,6 +1065,12 @@ mod tests {
                 <EndStopPointRef ref="syn:ssp:2" />
             </DistanceMatrixElement>"#;
 
+        fn prefix_configuration() -> PrefixConfiguration {
+            let mut prefix_conf = PrefixConfiguration::default();
+            prefix_conf.set_data_prefix("NTM");
+            prefix_conf
+        }
+
         fn init_collections() -> Collections {
             let mut collections = Collections::default();
             let sa1 = StopArea {
@@ -1110,7 +1118,7 @@ mod tests {
                 &collections,
                 &service_frame,
                 &distance_matrix_element,
-                PREFIX_WITH_COLON,
+                &prefix_configuration(),
             )
             .unwrap();
             assert_eq!(2, ticket_use_restrictions.len());
@@ -1150,7 +1158,7 @@ mod tests {
                 &collections,
                 &service_frame,
                 &distance_matrix_element,
-                PREFIX_WITH_COLON,
+                &prefix_configuration(),
             )
             .unwrap();
         }
@@ -1172,7 +1180,7 @@ mod tests {
                 &collections,
                 &service_frame,
                 &distance_matrix_element,
-                PREFIX_WITH_COLON,
+                &prefix_configuration(),
             )
             .unwrap();
         }
@@ -1190,7 +1198,7 @@ mod tests {
                 &collections,
                 &service_frame,
                 &distance_matrix_element,
-                PREFIX_WITH_COLON,
+                &prefix_configuration(),
             )
             .unwrap();
         }
@@ -1219,7 +1227,7 @@ mod tests {
                 &collections,
                 &service_frame,
                 &distance_matrix_element,
-                PREFIX_WITH_COLON,
+                &prefix_configuration(),
             )
             .unwrap();
         }
@@ -1242,7 +1250,7 @@ mod tests {
                 &collections,
                 &service_frame,
                 &distance_matrix_element,
-                PREFIX_WITH_COLON,
+                &prefix_configuration(),
             )
             .unwrap();
         }
@@ -1271,7 +1279,7 @@ mod tests {
                 &collections,
                 &service_frame,
                 &distance_matrix_element,
-                PREFIX_WITH_COLON,
+                &prefix_configuration(),
             )
             .unwrap();
         }
@@ -1299,7 +1307,7 @@ mod tests {
                 &collections,
                 &service_frame,
                 &distance_matrix_element,
-                PREFIX_WITH_COLON,
+                &prefix_configuration(),
             )
             .unwrap();
             assert_eq!(0, origin_destinations.len());
@@ -1335,7 +1343,7 @@ mod tests {
                 &collections,
                 &service_frame,
                 &distance_matrix_element,
-                PREFIX_WITH_COLON,
+                &prefix_configuration(),
             )
             .unwrap();
             assert_eq!(0, origin_destinations.len());

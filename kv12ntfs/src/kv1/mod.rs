@@ -19,7 +19,7 @@ mod read;
 use std::path::Path;
 use transit_model::{
     model::{Collections, Model},
-    read_utils, validity_period, AddPrefix, Result,
+    read_utils, validity_period, AddPrefix, PrefixConfiguration, Result,
 };
 use typed_index_collection::CollectionWithId;
 
@@ -54,7 +54,9 @@ pub fn read<P: AsRef<Path>, Q: AsRef<Path>>(
 
     //add prefixes
     if let Some(prefix) = prefix {
-        collections.add_prefix_with_sep(prefix.as_str(), ":");
+        let mut prefix_conf = PrefixConfiguration::default();
+        prefix_conf.set_data_prefix(prefix);
+        collections.prefix(&prefix_conf);
     }
 
     collections.calendar_deduplication();
