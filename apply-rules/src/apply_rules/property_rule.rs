@@ -26,7 +26,10 @@ use std::{
 use tartare_tools::report::Report;
 use transit_model::{
     model::Collections,
-    objects::{Availability, Coord, Equipment, Geometry, Line, TripProperty, VehicleJourney},
+    objects::{
+        Availability, Comment, CommentType, Coord, Equipment, Geometry, Line, TripProperty,
+        VehicleJourney,
+    },
     PrefixConfiguration, Result,
 };
 use typed_index_collection::CollectionWithId;
@@ -139,8 +142,9 @@ fn read_property_rules_files<P: AsRef<Path>>(
             let is_valid_property = || PROPERTY_UPDATER.contains_key(&(*object_type, property_name));
             let is_physical_mode_property_for_line = || (*object_type, property_name) == (ObjectType::Line, &"physical_mode_id".to_string());
             let is_trip_property_for_line = || *object_type == ObjectType::Line && LINE_TRIP_PROPERTIES.contains(&property_name.as_str());
+            let is_comment_property_for_line = || (*object_type, property_name) == (ObjectType::Line, &"comment".to_string());
             let is_equipment_property_for_stop_point = || *object_type == ObjectType::StopPoint && STOP_POINT_EQUIPMENTS.contains(&property_name.as_str());
-            if !(is_valid_property() || is_physical_mode_property_for_line() || is_trip_property_for_line() || is_equipment_property_for_stop_point()) {
+            if !(is_valid_property() || is_physical_mode_property_for_line() || is_trip_property_for_line() || is_comment_property_for_line() || is_equipment_property_for_stop_point()) {
                 report.add_warning(
                     format!(
                         "object_type={}, object_id={}: unknown property_name {} defined",
@@ -260,6 +264,60 @@ fn update_object_id<T>(
         }
     } else {
         property_old_value_do_not_match(report, p);
+    }
+}
+
+fn generate_object_id<T>(
+    collection: &mut CollectionWithId<T>,
+    prefix_conf: &PrefixConfiguration,
+    schedule_prefix: bool,
+) -> String {
+    let mut inc = 0;
+    let mut available = false;
+    let mut id = String::new();
+    while !available {
+        inc += 1;
+        if schedule_prefix {
+            id = prefix_conf.schedule_prefix(inc.to_string().as_str());
+        } else {
+            id = prefix_conf.referential_prefix(inc.to_string().as_str());
+        }
+
+        if collection.get(&id).is_none() {
+            available = true;
+        }
+    }
+    id
+}
+
+fn add_comment_on_line(
+    p: &PropertyRule,
+    collections: &mut Collections,
+    report: &mut Report<ReportCategory>,
+    prefix_conf: &PrefixConfiguration,
+) -> bool {
+    match collections.lines.get_mut(&p.object_id) {
+        Some(mut line) => {
+            if p.property_old_value == Some("*".to_string()) {
+                let comment_id = generate_object_id(&mut collections.comments, prefix_conf, true);
+                collections
+                    .comments
+                    .push(Comment {
+                        id: comment_id.clone(),
+                        comment_type: CommentType::Information,
+                        label: None,
+                        name: p.property_value.clone(),
+                        url: None,
+                    })
+                    .unwrap();
+                line.comment_links.clear();
+                line.comment_links.insert(comment_id);
+            } else {
+                property_old_value_do_not_match(report, p);
+            }
+            true
+        }
+        None => false,
     }
 }
 
@@ -793,23 +851,6 @@ fn get_id_or_create_equipment(
     collection_equipments: &mut CollectionWithId<Equipment>,
     prefix_conf: &PrefixConfiguration,
 ) -> String {
-    fn generate_equipment_id(
-        collection_equipments: &mut CollectionWithId<Equipment>,
-        prefix_conf: &PrefixConfiguration,
-    ) -> String {
-        let mut inc = 0;
-        let mut available = false;
-        let mut equipment_id = String::new();
-        while !available {
-            inc += 1;
-            equipment_id = prefix_conf.referential_prefix(inc.to_string().as_str());
-            if collection_equipments.get(&equipment_id).is_none() {
-                available = true;
-            }
-        }
-        equipment_id
-    }
-
     let similar_equipments: Vec<&Equipment> = collection_equipments
         .values()
         .filter(|eq| eq.is_similar(&equipment))
@@ -821,7 +862,7 @@ fn get_id_or_create_equipment(
         return similar_equipments[0].id.clone();
     }
 
-    let equipment_id = generate_equipment_id(collection_equipments, prefix_conf);
+    let equipment_id = generate_object_id(collection_equipments, prefix_conf, false);
 
     collection_equipments
         .push(Equipment {
@@ -924,23 +965,6 @@ fn get_id_or_create_trip_property(
     collection_trip_properties: &mut CollectionWithId<TripProperty>,
     prefix_conf: &PrefixConfiguration,
 ) -> String {
-    fn generate_trip_property_id(
-        collection_trip_properties: &mut CollectionWithId<TripProperty>,
-        prefix_conf: &PrefixConfiguration,
-    ) -> String {
-        let mut inc = 0;
-        let mut available = false;
-        let mut trip_property_id = String::new();
-        while !available {
-            inc += 1;
-            trip_property_id = prefix_conf.schedule_prefix(inc.to_string().as_str());
-            if collection_trip_properties.get(&trip_property_id).is_none() {
-                available = true;
-            }
-        }
-        trip_property_id
-    }
-
     let similar_trip_properties: Vec<&TripProperty> = collection_trip_properties
         .values()
         .filter(|tp| tp.is_similar(&trip_property))
@@ -952,7 +976,7 @@ fn get_id_or_create_trip_property(
         return similar_trip_properties[0].id.clone();
     }
 
-    let trip_property_id = generate_trip_property_id(collection_trip_properties, prefix_conf);
+    let trip_property_id = generate_object_id(collection_trip_properties, prefix_conf, true);
 
     collection_trip_properties
         .push(TripProperty {
@@ -1040,43 +1064,49 @@ pub(crate) fn apply_rules<P: AsRef<Path>>(
     let prefix_conf = get_prefix(&collections);
 
     for mut p in properties {
-        let mut obj_found = true;
-        if let Some(func) = PROPERTY_UPDATER.get(&(p.object_type, &p.property_name.clone())) {
-            obj_found = func(&mut collections, &mut p, &mut report);
-        } else if (p.object_type, p.property_name.as_ref())
-            == (ObjectType::Line, "physical_mode_id")
-        {
-            obj_found = lines.get(&p.object_id).map_or(false, |obj| {
-                update_physical_mode(&p, &obj, &mut report, &mut collections);
-                true
-            });
-        } else if p.object_type == ObjectType::StopPoint
-            && STOP_POINT_EQUIPMENTS.contains(&p.property_name.as_str())
-        {
-            obj_found = match collections.stop_points.get(&p.object_id) {
-                Some(sp) => {
-                    sp_equipments_properties
-                        .entry(sp.id.clone())
-                        .or_insert_with(Vec::new)
-                        .push(p.clone());
-                    true
+        let obj_found =
+            if let Some(func) = PROPERTY_UPDATER.get(&(p.object_type, &p.property_name.clone())) {
+                func(&mut collections, &mut p, &mut report)
+            } else {
+                match (p.object_type, p.property_name.as_ref()) {
+                    (ObjectType::Line, "physical_mode_id") => {
+                        lines.get(&p.object_id).map_or(false, |obj| {
+                            update_physical_mode(&p, &obj, &mut report, &mut collections);
+                            true
+                        })
+                    }
+                    (ObjectType::Line, "comment") => {
+                        add_comment_on_line(&p, &mut collections, report, &prefix_conf)
+                    }
+                    (ObjectType::Line, _) => {
+                        LINE_TRIP_PROPERTIES.contains(&p.property_name.as_str())
+                            && match lines.get(&p.object_id) {
+                                Some(line) => {
+                                    lines_trips_properties
+                                        .entry(line.id.clone())
+                                        .or_insert_with(Vec::new)
+                                        .push(p.clone());
+                                    true
+                                }
+                                _ => false,
+                            }
+                    }
+                    (ObjectType::StopPoint, _) => {
+                        STOP_POINT_EQUIPMENTS.contains(&p.property_name.as_str())
+                            && match collections.stop_points.get(&p.object_id) {
+                                Some(sp) => {
+                                    sp_equipments_properties
+                                        .entry(sp.id.clone())
+                                        .or_insert_with(Vec::new)
+                                        .push(p.clone());
+                                    true
+                                }
+                                _ => false,
+                            }
+                    }
+                    _ => false,
                 }
-                _ => false,
             };
-        } else if p.object_type == ObjectType::Line
-            && LINE_TRIP_PROPERTIES.contains(&p.property_name.as_str())
-        {
-            obj_found = match lines.get(&p.object_id) {
-                Some(line) => {
-                    lines_trips_properties
-                        .entry(line.id.clone())
-                        .or_insert_with(Vec::new)
-                        .push(p.clone());
-                    true
-                }
-                _ => false,
-            };
-        }
 
         if !obj_found {
             report.add_warning(
