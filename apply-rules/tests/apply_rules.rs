@@ -60,7 +60,7 @@ fn compare_report(report_path: PathBuf, fixture_report_output: PathBuf) {
 fn test_apply_rules(
     cc_rules_dir: &str,
     p_rules_dir: &str,
-    n_consolidation: &str,
+    o_rules: &str,
     r_consolidation: &str,
     fixture_output_dir: &str,
     fixture_report_output: &str,
@@ -90,10 +90,8 @@ fn test_apply_rules(
     } else {
         command
     };
-    let command = if !n_consolidation.is_empty() {
-        command
-            .arg("--networks-consolidation")
-            .arg(Path::new(n_consolidation))
+    let command = if !o_rules.is_empty() {
+        command.arg("--object-rules").arg(Path::new(o_rules))
     } else {
         command
     };
