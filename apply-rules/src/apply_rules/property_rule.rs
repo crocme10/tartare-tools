@@ -1155,7 +1155,7 @@ mod tests {
         #[test]
         fn no_data_prefix() {
             let prefixed_id = schedule_prefix_from_dataset_id("a1b2c3d4e5f6g7h8", "foo");
-            assert_eq!("a1b2c3:foo", prefixed_id);
+            assert_eq!("foo", prefixed_id);
         }
 
         #[test]
