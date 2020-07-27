@@ -1,0 +1,6 @@
+object_id,object_type,comment_id
+M1,line,1
+M1B,route,com1
+M1B,route,com2
+B42B,route,com2
+B42B,route,com3

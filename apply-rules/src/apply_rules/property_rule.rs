@@ -277,15 +277,12 @@ fn generate_object_id<T>(
     let mut id = String::new();
     while !available {
         inc += 1;
-        if schedule_prefix {
-            id = prefix_conf.schedule_prefix(inc.to_string().as_str());
+        id = if schedule_prefix {
+            prefix_conf.schedule_prefix(inc.to_string().as_str())
         } else {
-            id = prefix_conf.referential_prefix(inc.to_string().as_str());
-        }
-
-        if collection.get(&id).is_none() {
-            available = true;
-        }
+            prefix_conf.referential_prefix(inc.to_string().as_str())
+        };
+        available = !collection.contains_id(&id);
     }
     id
 }

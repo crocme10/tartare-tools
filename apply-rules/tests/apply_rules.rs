@@ -140,6 +140,10 @@ fn test_apply_complementary_codes() {
 
 #[test]
 fn test_apply_property() {
+    let mut file_to_compare = FILE_TO_COMPARE.clone();
+    file_to_compare.push("comments.txt");
+    file_to_compare.push("comment_links.txt");
+
     test_apply_rules(
         "./tests/fixtures/complementary_codes_rules.txt",
         "./tests/fixtures/property_rules.txt",
@@ -147,7 +151,7 @@ fn test_apply_property() {
         "",
         "./tests/fixtures/output_apply_property",
         "./tests/fixtures/output_report/report_apply_property.json",
-        FILE_TO_COMPARE.clone(),
+        file_to_compare,
     )
     .success();
 }
