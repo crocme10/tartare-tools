@@ -15,11 +15,43 @@
 // <http://www.gnu.org/licenses/>.
 
 use std::collections::HashMap;
-use transit_model::{model::Collections, Result};
+use transit_model::{model::Collections, objects::PhysicalMode, Result};
 use typed_index_collection::{CollectionWithId, Id, Idx};
 
+fn merge_physical_modes(
+    physical_modes: &mut CollectionWithId<PhysicalMode>,
+    mut extend: CollectionWithId<PhysicalMode>,
+) {
+    for physical_mode in extend.take() {
+        if physical_modes.contains_id(&physical_mode.id) {
+            // We already check the ID is present, unwrap is safe
+            let mut existing_physical_mode = physical_modes.get_mut(&physical_mode.id).unwrap();
+            existing_physical_mode.co2_emission = match (
+                existing_physical_mode.co2_emission,
+                physical_mode.co2_emission,
+            ) {
+                (Some(e), Some(n)) => Some(e.max(n)),
+                (Some(e), None) => Some(e),
+                (None, Some(n)) => Some(n),
+                (None, None) => None,
+            }
+        } else {
+            // We already check the ID is not present, unwrap is safe
+            physical_modes.push(physical_mode).unwrap();
+        }
+    }
+}
+
 /// Merge the `Collections` parameter into the current `Collections` by consecutively merging
-/// each collections representing the model.  Fails in case of id collision.
+/// each collections representing the model. Here are the merging rules:
+/// - Ignore duplicate identifiers for:
+///   * companies
+///   * lines
+///   * modes (physical and commercial)
+///   * networks
+///   * operators
+///   * routes
+///   * stops (stop point, stop area, zone, entrance/exit, generic node, and boarding area)
 pub fn try_merge_collections(
     mut collections: Collections,
     extend: Collections,
@@ -33,9 +65,10 @@ pub fn try_merge_collections(
         routes,
         mut vehicle_journeys,
         frequencies,
-        mut physical_modes,
+        physical_modes,
         stop_areas,
         stop_points,
+        stop_locations,
         calendars,
         companies,
         comments,
@@ -63,40 +96,21 @@ pub fn try_merge_collections(
         grid_rel_calendar_line,
         ..
     } = extend;
-    collections.contributors.try_merge(contributors)?;
-    collections.datasets.try_merge(datasets)?;
-    collections.networks.try_merge(networks)?;
+    collections.contributors.merge(contributors);
+    collections.datasets.merge(datasets);
+    collections.companies.merge(companies);
+    collections.networks.merge(networks);
     collections.commercial_modes.merge(commercial_modes);
-    collections.lines.try_merge(lines)?;
-    collections.routes.try_merge(routes)?;
+    collections.lines.merge(lines);
+    collections.routes.merge(routes);
+    merge_physical_modes(&mut collections.physical_modes, physical_modes);
     collections.frequencies.merge(frequencies);
-    for physical_mode in physical_modes.take() {
-        if collections.physical_modes.contains_id(&physical_mode.id) {
-            // We already check the ID is present, unwrap is safe
-            let mut existing_physical_mode = collections
-                .physical_modes
-                .get_mut(&physical_mode.id)
-                .unwrap();
-            existing_physical_mode.co2_emission = match (
-                existing_physical_mode.co2_emission,
-                physical_mode.co2_emission,
-            ) {
-                (Some(e), Some(n)) => Some(e.max(n)),
-                (Some(e), None) => Some(e),
-                (None, Some(n)) => Some(n),
-                (None, None) => None,
-            }
-        } else {
-            // We already check the ID is not present, unwrap is safe
-            collections.physical_modes.push(physical_mode).unwrap();
-        }
-    }
 
     collections.prices_v1.merge(prices_v1);
     collections.od_fares_v1.merge(od_fares_v1);
     collections.fares_v1.merge(fares_v1);
-    collections.tickets.try_merge(tickets)?;
-    collections.ticket_uses.try_merge(ticket_uses)?;
+    collections.tickets.merge(tickets);
+    collections.ticket_uses.merge(ticket_uses);
     collections.ticket_prices.merge(ticket_prices);
     collections
         .ticket_use_perimeters
@@ -106,7 +120,7 @@ pub fn try_merge_collections(
         .merge(ticket_use_restrictions);
     collections.pathways.merge(pathways);
     collections.levels.merge(levels);
-    collections.grid_calendars.try_merge(grid_calendars)?;
+    collections.grid_calendars.merge(grid_calendars);
     collections.grid_exception_dates.merge(grid_exception_dates);
     collections.grid_periods.merge(grid_periods);
     collections
@@ -133,8 +147,9 @@ pub fn try_merge_collections(
 
     collections.comments.try_merge(comments)?;
 
-    collections.stop_points.try_merge(stop_points)?;
-    collections.stop_areas.try_merge(stop_areas)?;
+    collections.stop_points.merge(stop_points);
+    collections.stop_areas.merge(stop_areas);
+    collections.stop_locations.merge(stop_locations);
 
     // Update stop point idx in new stop times
     let mut vjs = vehicle_journeys.take();
@@ -153,8 +168,7 @@ pub fn try_merge_collections(
     collections.stop_time_ids.extend(stop_time_ids);
     collections.stop_time_comments.extend(stop_time_comments);
     collections.calendars.try_merge(calendars)?;
-    collections.companies.try_merge(companies)?;
-    collections.equipments.try_merge(equipments)?;
+    collections.equipments.merge(equipments);
     collections.transfers.merge(transfers);
     collections.trip_properties.try_merge(trip_properties)?;
     collections.geometries.try_merge(geometries)?;
@@ -169,53 +183,38 @@ mod tests {
 
     mod physical_mode {
         use super::*;
-        use transit_model::{model::BUS_PHYSICAL_MODE, objects::PhysicalMode};
 
         #[test]
         fn physical_mode_co2_emission_max() {
-            let physical_mode1 = PhysicalMode {
-                id: String::from(BUS_PHYSICAL_MODE),
+            let mut physical_modes = CollectionWithId::from(PhysicalMode {
+                id: String::from("Bus"),
                 name: String::from("Bus"),
                 co2_emission: Some(21f32),
-            };
-            let physical_mode2 = PhysicalMode {
-                id: String::from(BUS_PHYSICAL_MODE),
+            });
+            let extend = CollectionWithId::from(PhysicalMode {
+                id: String::from("Bus"),
                 name: String::from("Bus"),
                 co2_emission: Some(42f32),
-            };
-            let mut collections = Collections::default();
-            collections.physical_modes.push(physical_mode1).unwrap();
-            let mut collections_to_merge = Collections::default();
-            collections_to_merge
-                .physical_modes
-                .push(physical_mode2)
-                .unwrap();
-            let collections = try_merge_collections(collections, collections_to_merge).unwrap();
-            let bus_mode = collections.physical_modes.get(BUS_PHYSICAL_MODE).unwrap();
+            });
+            merge_physical_modes(&mut physical_modes, extend);
+            let bus_mode = physical_modes.get("Bus").unwrap();
             assert_relative_eq!(42f32, bus_mode.co2_emission.unwrap());
         }
 
         #[test]
         fn physical_mode_co2_emission_one_missing() {
-            let physical_mode1 = PhysicalMode {
-                id: String::from(BUS_PHYSICAL_MODE),
+            let mut physical_modes = CollectionWithId::from(PhysicalMode {
+                id: String::from("Bus"),
                 name: String::from("Bus"),
                 co2_emission: None,
-            };
-            let physical_mode2 = PhysicalMode {
-                id: String::from(BUS_PHYSICAL_MODE),
+            });
+            let extend = CollectionWithId::from(PhysicalMode {
+                id: String::from("Bus"),
                 name: String::from("Bus"),
                 co2_emission: Some(42f32),
-            };
-            let mut collections = Collections::default();
-            collections.physical_modes.push(physical_mode1).unwrap();
-            let mut collections_to_merge = Collections::default();
-            collections_to_merge
-                .physical_modes
-                .push(physical_mode2)
-                .unwrap();
-            let collections = try_merge_collections(collections, collections_to_merge).unwrap();
-            let bus_mode = collections.physical_modes.get(BUS_PHYSICAL_MODE).unwrap();
+            });
+            merge_physical_modes(&mut physical_modes, extend);
+            let bus_mode = physical_modes.get("Bus").unwrap();
             assert_relative_eq!(42f32, bus_mode.co2_emission.unwrap());
         }
     }
