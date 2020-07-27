@@ -91,7 +91,7 @@ pub fn enrich_object_codes<S: ::std::hash::BuildHasher>(
         })
         .filter(|&sp| {
             sp.all_osm_tags.contains("public_transport", "plateform")
-                || (sp.all_osm_tags.contains("highway", "bus_stop"))
+                || sp.all_osm_tags.contains("highway", "bus_stop")
         })
         .map(|sp| (&sp.id, sp))
         .collect::<HashMap<_, _>>();
