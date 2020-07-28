@@ -24,7 +24,7 @@ use osm_transit_extractor::*;
 use std::collections::{BTreeSet, HashMap, HashSet};
 use std::path::Path;
 use transit_model::model::{Collections, Model};
-use transit_model::objects::{Coord, StopPoint as NtfsStopPoint, VehicleJourney};
+use transit_model::objects::{Coord, StopPoint as NtfsStopPoint};
 use typed_index_collection::{CollectionWithId, Idx};
 use unidecode::unidecode;
 
@@ -82,6 +82,17 @@ pub fn enrich_object_codes<S: ::std::hash::BuildHasher>(
     let osm_stops_map = objects
         .stop_points
         .iter()
+        .filter(|&sp| {
+            sp.id
+                .split(':')
+                .next()
+                .map(|obj_type| obj_type == "node")
+                .unwrap_or_default()
+        })
+        .filter(|&sp| {
+            sp.all_osm_tags.contains("public_transport", "plateform")
+                || sp.all_osm_tags.contains("highway", "bus_stop")
+        })
         .map(|sp| (&sp.id, sp))
         .collect::<HashMap<_, _>>();
     let osm_routes_map = match &objects.routes {
@@ -96,8 +107,8 @@ pub fn enrich_object_codes<S: ::std::hash::BuildHasher>(
     let mut map_ntfs_to_osm_points: StopPointMap = HashMap::new();
     let mut map_osm_to_ntfs_points: StopPointMap = HashMap::new();
     for line in ntfs_lines.iter_mut() {
-        let osm_network_of_line = match ntfs_network_to_osm.get(&line.network_id as &str) {
-            Some(osm_network) => osm_network,
+        let osm_network_of_line = match ntfs_network_to_osm.get(line.network_id.as_str()) {
+            Some(&osm_network) => osm_network,
             None => continue,
         };
         if let Some(code) = &line.code {
@@ -122,7 +133,7 @@ pub fn enrich_object_codes<S: ::std::hash::BuildHasher>(
                 ));
                 let routes_of_line = osm_routes_map
                     .iter()
-                    .filter_map(|(id, route)| {
+                    .filter_map(|(&id, &route)| {
                         if corresponding_osm_line.routes_id.contains(id) {
                             Some(route)
                         } else {
@@ -130,26 +141,24 @@ pub fn enrich_object_codes<S: ::std::hash::BuildHasher>(
                         }
                     })
                     .collect::<Vec<_>>();
-                let vjs_idx: BTreeSet<Idx<VehicleJourney>> =
-                    model.get_corresponding_from_idx(model.lines.get_idx(&line.id).unwrap());
-                let vjs: HashMap<Idx<VehicleJourney>, &VehicleJourney> = vjs_idx
+                let vj_patterns: HashSet<(Vec<Idx<NtfsStopPoint>>, &str, &str)> = model
+                    .get_corresponding_from_idx(model.lines.get_idx(&line.id).unwrap())
                     .iter()
-                    .map(|vj_idx| (*vj_idx, &model.vehicle_journeys[*vj_idx]))
-                    .collect();
-                let mut vj_patterns: HashSet<(Vec<Idx<NtfsStopPoint>>, &str, &str)> =
-                    HashSet::new();
-                for vj in vjs.values() {
-                    vj_patterns.insert((
-                        vj.stop_times.iter().map(|st| st.stop_point_idx).collect(),
-                        &model.stop_points[vj.stop_times.last().unwrap().stop_point_idx].name,
-                        &vj.route_id,
-                    ));
-                }
+                    .map(|vj_idx| &model.vehicle_journeys[*vj_idx])
+                    .fold(HashSet::new(), |mut acc, vj| {
+                        acc.insert((
+                            vj.stop_times.iter().map(|st| st.stop_point_idx).collect(),
+                            &model.stop_points[vj.stop_times.last().unwrap().stop_point_idx].name,
+                            &vj.route_id,
+                        ));
+                        acc
+                    });
+
                 for route in routes_of_line {
                     let route_points = route
-                        .ordered_stops_id
+                        .ordered_route_points
                         .iter()
-                        .filter_map(|stop_id| osm_stops_map.get(stop_id))
+                        .filter_map(|r| osm_stops_map.get(&r.stop_point_id))
                         .collect::<Vec<_>>();
                     let corresponding_vj_patterns = vj_patterns
                         .iter()
@@ -163,7 +172,7 @@ pub fn enrich_object_codes<S: ::std::hash::BuildHasher>(
                         ntfs_route
                             .codes
                             .insert(("osm_route_id".to_string(), route.id.clone()));
-                        for route_point in &route_points {
+                        for &&route_point in &route_points {
                             for stop_point_idx in stop_points_idx {
                                 let ntfs_stop_point = ntfs_stop_points.index_mut(*stop_point_idx);
                                 if compare_almost_equal(&ntfs_stop_point.name, &route_point.name) {
