@@ -431,7 +431,8 @@ fn find_duplicate_calendar<'a>(
 
 // Get Wait or Run time from ISO 8601 duration
 fn parse_duration_in_seconds(duration_iso8601: &str) -> Result<Time> {
-    let std_duration = time_parse::duration::parse_nom(duration_iso8601)?;
+    let std_duration =
+        time_parse::duration::parse_nom(duration_iso8601).map_err(|err| format_err!("{}", err))?;
     let duration_seconds = Duration::from_std(std_duration)?.num_seconds();
     let time = Time::new(0, 0, u32::try_from(duration_seconds)?);
     Ok(time)

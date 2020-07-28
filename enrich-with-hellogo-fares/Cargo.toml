@@ -21,11 +21,11 @@ rust_decimal = "1.0"
 skip_error = { version = "1", features = ["log"] }
 structopt = "0.3"
 tartare-tools = { version = "0.3", path = "../" }
-transit_model = "0.25"
+transit_model = "0.26"
 zip = "0.5"
 
 [dev-dependencies]
-assert_cmd = "0.11"
+assert_cmd = "1"
 pretty_assertions = "0.6"
 rust_decimal_macros = "1.0"
 tempfile = "3"
