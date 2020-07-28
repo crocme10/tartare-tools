@@ -1,6 +1,6 @@
 [package]
 name = "navitia-poi-model"
-version = "0.2.2"
+version = "0.3.0"
 authors = ["Kisio Digital <team.coretools@kisio.com>"]
 description = "Navitia's POIs (Point of Interest) model"
 license = "proprietary"
