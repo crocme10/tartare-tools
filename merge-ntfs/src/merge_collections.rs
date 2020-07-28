@@ -14,7 +14,7 @@
 // along with this program.  If not, see
 // <http://www.gnu.org/licenses/>.
 
-use crate::fuse::Fuse;
+use crate::unify::Unify;
 use std::collections::HashMap;
 use transit_model::{model::Collections, objects::PhysicalMode, Result};
 use typed_index_collection::{CollectionWithId, Id, Idx};
@@ -100,10 +100,10 @@ pub fn try_merge_collections(
     collections.contributors.merge(contributors);
     collections.datasets.merge(datasets);
     collections.companies.merge(companies);
-    collections.networks.fuse(networks);
+    collections.networks.unify(networks);
     collections.commercial_modes.merge(commercial_modes);
-    collections.lines.fuse(lines);
-    collections.routes.fuse(routes);
+    collections.lines.unify(lines);
+    collections.routes.unify(routes);
     merge_physical_modes(&mut collections.physical_modes, physical_modes);
     collections.frequencies.merge(frequencies);
 
@@ -148,9 +148,9 @@ pub fn try_merge_collections(
 
     collections.comments.try_merge(comments)?;
 
-    collections.stop_points.fuse(stop_points);
-    collections.stop_areas.fuse(stop_areas);
-    collections.stop_locations.fuse(stop_locations);
+    collections.stop_points.unify(stop_points);
+    collections.stop_areas.unify(stop_areas);
+    collections.stop_locations.unify(stop_locations);
 
     // Update stop point idx in new stop times
     let mut vjs = vehicle_journeys.take();

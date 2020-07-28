@@ -22,8 +22,8 @@ use structopt::StructOpt;
 use transfers::{transfers, TransfersMode};
 use transit_model::{model::Collections, Result};
 
-mod fuse;
 mod merge_collections;
+mod unify;
 
 #[derive(Debug, StructOpt)]
 #[structopt(

@@ -21,24 +21,24 @@ use transit_model::objects::{
 use typed_index_collection::{Collection, CollectionWithId, Id};
 
 /// Trait to merge objects of same type together.
-pub trait Fuse {
+pub trait Unify {
     /// Take an object of same type to merge it with `self`.
-    fn fuse(&mut self, other: Self);
+    fn unify(&mut self, other: Self);
 }
 
-impl<T> Fuse for Collection<T> {
-    fn fuse(&mut self, other: Self) {
+impl<T> Unify for Collection<T> {
+    fn unify(&mut self, other: Self) {
         for object in other {
             self.push(object);
         }
     }
 }
 
-impl<T: Id<T> + Fuse> Fuse for CollectionWithId<T> {
-    fn fuse(&mut self, other: Self) {
+impl<T: Id<T> + Unify> Unify for CollectionWithId<T> {
+    fn unify(&mut self, other: Self) {
         for object in other {
             if let Some(idx) = self.get_idx(object.id()) {
-                self.index_mut(idx).fuse(object);
+                self.index_mut(idx).unify(object);
             } else {
                 self.push(object).unwrap();
             }
@@ -46,27 +46,27 @@ impl<T: Id<T> + Fuse> Fuse for CollectionWithId<T> {
     }
 }
 
-impl Fuse for KeysValues {
-    fn fuse(&mut self, other: Self) {
+impl Unify for KeysValues {
+    fn unify(&mut self, other: Self) {
         self.extend(other);
     }
 }
 
-impl Fuse for CommentLinksT {
-    fn fuse(&mut self, other: Self) {
+impl Unify for CommentLinksT {
+    fn unify(&mut self, other: Self) {
         self.extend(other);
     }
 }
 
-impl Fuse for Network {
-    fn fuse(&mut self, other: Self) {
-        self.codes.fuse(other.codes);
+impl Unify for Network {
+    fn unify(&mut self, other: Self) {
+        self.codes.unify(other.codes);
     }
 }
 
-// Cannot use `.fuse` for object properties, because we do not want to keep
+// Cannot use `.unify` for object properties, because we do not want to keep
 // duplicate keys (even if value is different).
-fn object_properties_fuse(object_properties: &mut KeysValues, other_properties: KeysValues) {
+fn object_properties_unify(object_properties: &mut KeysValues, other_properties: KeysValues) {
     let keys: BTreeSet<String> = object_properties.iter().map(|(k, _)| k).cloned().collect();
     for (k, v) in other_properties {
         if !keys.contains(&k) {
@@ -75,41 +75,41 @@ fn object_properties_fuse(object_properties: &mut KeysValues, other_properties: 
     }
 }
 
-impl Fuse for Line {
-    fn fuse(&mut self, other: Self) {
-        self.codes.fuse(other.codes);
-        self.comment_links.fuse(other.comment_links);
-        object_properties_fuse(&mut self.object_properties, other.object_properties);
+impl Unify for Line {
+    fn unify(&mut self, other: Self) {
+        self.codes.unify(other.codes);
+        self.comment_links.unify(other.comment_links);
+        object_properties_unify(&mut self.object_properties, other.object_properties);
     }
 }
 
-impl Fuse for Route {
-    fn fuse(&mut self, other: Self) {
-        self.codes.fuse(other.codes);
-        self.comment_links.fuse(other.comment_links);
-        object_properties_fuse(&mut self.object_properties, other.object_properties);
+impl Unify for Route {
+    fn unify(&mut self, other: Self) {
+        self.codes.unify(other.codes);
+        self.comment_links.unify(other.comment_links);
+        object_properties_unify(&mut self.object_properties, other.object_properties);
     }
 }
 
-impl Fuse for StopPoint {
-    fn fuse(&mut self, other: Self) {
-        self.codes.fuse(other.codes);
-        self.comment_links.fuse(other.comment_links);
-        object_properties_fuse(&mut self.object_properties, other.object_properties);
+impl Unify for StopPoint {
+    fn unify(&mut self, other: Self) {
+        self.codes.unify(other.codes);
+        self.comment_links.unify(other.comment_links);
+        object_properties_unify(&mut self.object_properties, other.object_properties);
     }
 }
 
-impl Fuse for StopArea {
-    fn fuse(&mut self, other: Self) {
-        self.codes.fuse(other.codes);
-        self.comment_links.fuse(other.comment_links);
-        object_properties_fuse(&mut self.object_properties, other.object_properties);
+impl Unify for StopArea {
+    fn unify(&mut self, other: Self) {
+        self.codes.unify(other.codes);
+        self.comment_links.unify(other.comment_links);
+        object_properties_unify(&mut self.object_properties, other.object_properties);
     }
 }
 
-impl Fuse for StopLocation {
-    fn fuse(&mut self, other: Self) {
-        self.comment_links.fuse(other.comment_links);
+impl Unify for StopLocation {
+    fn unify(&mut self, other: Self) {
+        self.comment_links.unify(other.comment_links);
     }
 }
 
@@ -131,8 +131,8 @@ mod tests {
             self.id = id;
         }
     }
-    impl Fuse for Object {
-        fn fuse(&mut self, other: Self) {
+    impl Unify for Object {
+        fn unify(&mut self, other: Self) {
             // Only keep the name of `other` if source's name is empty
             if self.name.is_empty() {
                 self.name = other.name;
@@ -141,7 +141,7 @@ mod tests {
     }
 
     #[test]
-    fn fuse_collection() {
+    fn unify_collection() {
         let mut collection1 = Collection::default();
         collection1.push(Object {
             id: "object_1".to_string(),
@@ -156,7 +156,7 @@ mod tests {
             id: "object_1".to_string(),
             name: "Object 1".to_string(),
         });
-        collection1.fuse(collection2);
+        collection1.unify(collection2);
         let mut values = collection1.values();
         let object = values.next().unwrap();
         assert_eq!("Object 1", object.name);
@@ -168,7 +168,7 @@ mod tests {
     }
 
     #[test]
-    fn fuse_collection_with_id() {
+    fn unify_collection_with_id() {
         let mut collection1 = CollectionWithId::new(vec![
             Object {
                 id: "object_1".to_string(),
@@ -191,7 +191,7 @@ mod tests {
             },
         ])
         .unwrap();
-        collection1.fuse(collection2);
+        collection1.unify(collection2);
         let mut values = collection1.values();
         let object = values.next().unwrap();
         assert_eq!("Object 1", object.name);
