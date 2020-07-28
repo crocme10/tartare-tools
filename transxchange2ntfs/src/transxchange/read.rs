@@ -41,7 +41,6 @@ use walkdir::WalkDir;
 // An XML tag that doesn't exist or a XML tag whose content is empty,
 // should be considered the same
 const UNDEFINED: &str = "";
-const EUROPE_LONDON_TIMEZONE: &str = "Europe/London";
 const DEFAULT_MODE: &str = "Bus";
 
 lazy_static! {
@@ -168,7 +167,6 @@ fn load_network(transxchange: &Element) -> Result<Network> {
         .unwrap_or_else(|_| String::from(UNDEFINED))
         .trim()
         .to_string();
-    let timezone = Some(String::from(EUROPE_LONDON_TIMEZONE));
     let url = operator.only_child("WebSite").map(Element::text);
     let phone = operator
         .only_child("ContactTelephoneNumber")
@@ -176,7 +174,7 @@ fn load_network(transxchange: &Element) -> Result<Network> {
     let network = Network {
         id,
         name,
-        timezone,
+        timezone: Some(TzExt(chrono_tz::Europe::London)),
         url,
         phone,
         ..Default::default()
