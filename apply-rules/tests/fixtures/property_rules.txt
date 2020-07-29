@@ -72,3 +72,6 @@ line,RERA,comment,comment_id,"comment on line RERA"
 network,TGB,network_timezone,,Europe/Paris
 network,TGR,network_timezone,Europe/Paris,Europe/London
 network,bus_vert,network_timezone,,Europe/Toulouse
+stop_point,CDGR,stop_timezone,,Europe/Paris
+stop_point,NATR,stop_timezone,Europe/Paris,Europe/London
+stop_point,DEFR,stop_timezone,,Europe/Toulouse

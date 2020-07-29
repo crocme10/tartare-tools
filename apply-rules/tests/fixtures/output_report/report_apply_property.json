@@ -40,6 +40,9 @@
     {
       "category": "OldPropertyValueDoesNotMatch",
       "message": "object_type=line, object_id=RERA, property_name=comment: property_old_value does not match the value found in the data"
+    },
+    {
+      "category": "OldPropertyValueDoesNotMatch",
       "message": "object_type=network, object_id=TGR, property_name=network_timezone: property_old_value does not match the value found in the data"
     },
     {
@@ -87,12 +90,20 @@
       "message": "object_type=stop_point, object_id=DEFR: invalid geometry"
     },
     {
+      "category": "NonConvertibleString",
+      "message": "object_type=stop_point, object_id=DEFR, property_name=stop_timezone: property_value should be a valid timezone"
+    },
+    {
       "category": "GeometryNotValid",
       "message": "object_type=stop_point, object_id=GDLR: invalid geometry"
     },
     {
       "category": "OldPropertyValueDoesNotMatch",
       "message": "object_type=stop_point, object_id=NATR, property_name=stop_position: property_old_value does not match the value found in the data"
+    },
+    {
+      "category": "OldPropertyValueDoesNotMatch",
+      "message": "object_type=stop_point, object_id=NATR, property_name=stop_timezone: property_old_value does not match the value found in the data"
     },
     {
       "category": "OldPropertyValueDoesNotMatch",

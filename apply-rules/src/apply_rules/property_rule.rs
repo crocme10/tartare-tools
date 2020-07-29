@@ -762,6 +762,22 @@ lazy_static! {
             }),
         );
         m.insert(
+            (ObjectType::StopPoint, "stop_timezone"),
+            Box::new(|c, p, r| {
+                c.stop_points
+                    .get_mut(&p.object_id)
+                    .map_or(false, |mut obj| {
+                        update_stringable_option(
+                            p,
+                            &mut obj.timezone,
+                            r,
+                            "property_value should be a valid timezone",
+                        );
+                        true
+                    })
+            }),
+        );
+        m.insert(
             (ObjectType::StopArea, "stop_position"),
             Box::new(|c, p, r| {
                 c.stop_areas.get_mut(&p.object_id).map_or(false, |mut obj| {
