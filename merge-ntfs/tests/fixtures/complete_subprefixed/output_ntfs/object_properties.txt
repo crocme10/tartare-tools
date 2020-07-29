@@ -1,0 +1,11 @@
+object_type,object_id,object_property_name,object_property_value
+line,ME:line1,prop,val
+line,ME:line3,prop3,val3
+route,ME:route2,another prop,some value
+route,ME:route3,another prop,some value
+trip,ME:9eg2e5:trip:3-0,realtime_system,SIRI_STIF
+trip,ME:9eg2e5:trip:4-0,realtime_system,SIRI_STIF
+trip,ME:4bf028:trip:3-0,realtime_system,SIRI_STIF
+trip,ME:4bf028:trip:4-0,realtime_system,SIRI_STIF
+route,ME:route1,prop,val1
+route,ME:route1,prop2,val2
