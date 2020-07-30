@@ -859,7 +859,7 @@ fn get_id_or_create_equipment(
         return similar_equipments[0].id.clone();
     }
 
-    let equipment_id = generate_object_id(collection_equipments, prefix_conf, false);
+    let equipment_id = generate_object_id(collection_equipments, prefix_conf, true);
 
     collection_equipments
         .push(Equipment {
