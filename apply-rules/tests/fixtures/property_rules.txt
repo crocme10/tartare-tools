@@ -67,3 +67,5 @@ line,M1,wheelchair_accessible,*,1
 line,M1,air_conditioned,0,1
 line,RERA,bike_accepted,*,1
 line,RERA,air_conditioned,*,3
+line,M1,comment,*,"comment on line M1"
+line,RERA,comment,comment_id,"comment on line RERA"

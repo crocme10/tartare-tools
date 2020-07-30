@@ -38,6 +38,10 @@
       "message": "object_type=line, object_id=M1, property_name=physical_mode_id, property_old_value=unknown: physical mode not found"
     },
     {
+      "category": "OldPropertyValueDoesNotMatch",
+      "message": "object_type=line, object_id=RERA, property_name=comment: property_old_value does not match the value found in the data"
+    },
+    {
       "category": "GeometryNotValid",
       "message": "object_type=route, object_id=B42B: invalid geometry"
     },
