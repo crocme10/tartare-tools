@@ -1,7 +1,7 @@
 poi_id;poi_type_id;poi_name;poi_lat;poi_lon;poi_weight;poi_visible
 osm:node:218117881;amenity:parking;Parking Hôtel de Ville;48.8569549;2.3497208;0;1
-osm:relation:3374016;amenity:parking;Parking;48.56570881560559;2.4864026588586916;0;1
-osm:relation:3814560;amenity:parking;Parking;48.51065893639578;2.605270914556398;0;1
+osm:relation:3374016;amenity:parking;Parking;48.565709849481365;2.4864027117896907;0;1
+osm:relation:3814560;amenity:parking;Parking;48.51065820503151;2.60527087527839;0;1
 osm:way:138211520;amenity:parking;Parking;45.193509999999996;5.7665532;0;1
 osm:way:184311152;amenity:parking;Parking;45.1931254;5.7667556;0;1
 osm:way:186519358;parking_relais;Parc-Relais Porte de Bordeaux;44.8326363;-0.5979819;0;1
