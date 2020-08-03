@@ -1,0 +1,12 @@
+object_id,object_type,comment_id
+ME:4bf028:trip:4-2,trip,ME:4bf028:3
+ME:4bf028:trip:5-0-2,stop_time,ME:4bf028:4
+ME:9eg2e5:trip:4-2,trip,ME:9eg2e5:3
+ME:9eg2e5:trip:5-0-2,stop_time,ME:9eg2e5:4
+ME:stop:11,stop_point,ME:4bf028:2
+ME:stop:11,stop_point,ME:9eg2e5:2
+ME:stoparea:1,stop_area,ME:4bf028:1
+ME:stoparea:1,stop_area,ME:9eg2e5:1
+ME:9eg2e5:trip:4-2,trip,ME:9eg2e5:5
+ME:stop:22,stop_point,ME:9eg2e5:5
+ME:stoparea:1,stop_area,ME:9eg2e5:5

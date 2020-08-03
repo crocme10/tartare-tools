@@ -342,3 +342,46 @@ fn merge_collections_fares_v2_with_ntfs_only_farev1() {
         "./tests/fixtures/merge-ntfs/output_merge_fares_only_one_farev2",
     );
 }
+
+#[test]
+fn merge_intra_contributor() {
+    let output_dir = TempDir::new().expect("create temp dir failed");
+    Command::cargo_bin("merge-ntfs")
+        .expect("Failed to find binary 'merge-ntfs'")
+        .arg("--output")
+        .arg(output_dir.path().to_str().unwrap())
+        // Input folders
+        .arg("tests/fixtures/complete_subprefixed/input_ntfs1")
+        .arg("tests/fixtures/complete_subprefixed/input_ntfs2")
+        .assert()
+        .success();
+    compare_output_dir_with_expected(
+        &output_dir,
+        Some(vec![
+            "calendar.txt",
+            "comment_links.txt",
+            "comments.txt",
+            "commercial_modes.txt",
+            "companies.txt",
+            "contributors.txt",
+            "datasets.txt",
+            "equipments.txt",
+            "frequencies.txt",
+            "geometries.txt",
+            "levels.txt",
+            "lines.txt",
+            "networks.txt",
+            "object_codes.txt",
+            "object_properties.txt",
+            "pathways.txt",
+            "physical_modes.txt",
+            "routes.txt",
+            "stops.txt",
+            "stop_times.txt",
+            "transfers.txt",
+            "trip_properties.txt",
+            "trips.txt",
+        ]),
+        "./tests/fixtures/complete_subprefixed/output_ntfs",
+    );
+}

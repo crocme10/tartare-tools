@@ -1,0 +1,3 @@
+line_id,line_code,line_name,forward_line_name,backward_line_name,line_color,line_text_color,line_sort_order,network_id,commercial_mode_id,geometry_id,line_opening_time,line_closing_time
+ME:line1,Line 1,My Line 1,,,,,,ME:ntw1,Metro,ME:9eg2e5:geo3,10:00:00,21:47:00
+ME:line3,Line 3,My Line 3,Forward text,Backaward text,,,,ME:ntw3,KeoLine,ME:9eg2e5:geo5,,

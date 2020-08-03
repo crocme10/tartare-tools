@@ -98,12 +98,17 @@ fn run(opt: Opt) -> Result<()> {
         }
 
         let model = transit_model::Model::new(collections)?;
+        let transfer_mode = if model.contributors.len() == 1 {
+            TransfersMode::IntraContributor
+        } else {
+            TransfersMode::InterContributor
+        };
         let model = transfers(
             model,
             opt.max_distance,
             opt.walking_speed,
             opt.waiting_time,
-            &TransfersMode::InterContributor,
+            &transfer_mode,
             opt.rule_files,
             opt.report,
         )?;

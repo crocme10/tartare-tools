@@ -1,0 +1,15 @@
+stop_id,stop_name,stop_code,visible,fare_zone_id,stop_lon,stop_lat,location_type,parent_station,stop_timezone,geometry_id,equipment_id,level_id,platform_code
+ME:stop:11,SP 11,,1,,2.372987,48.844746,0,ME:stoparea:1,,,ME:9eg2e5:equip0,ME:level1,A
+ME:stop:22,SP 22,,1,,2.372987,48.844746,0,ME:stoparea:1,,,ME:9eg2e5:equip1,,
+ME:stop:31,SP 31,,1,,2.372987,48.844746,0,ME:stoparea:1,,ME:9eg2e5:geo4,,,
+ME:stop:33,SP 33,,1,,2.372987,48.844746,0,ME:stoparea:1,,,,,
+ME:stop:51,SP 51,,1,,2.372987,48.844746,0,ME:stoparea:2,,,,,
+ME:stop:52,SP 52,,1,,2.372987,48.844746,0,ME:stoparea:2,,,,,
+ME:stop:53,SP 53,,1,,2.372987,48.844746,0,ME:stoparea:2,,,,,
+ME:stop:61,SP 61,,1,,2.372987,48.844746,0,ME:stoparea:2,,,,ME:level0,
+ME:stop:71,SP 71,,1,,2.372987,48.844746,0,ME:stoparea:3,,,ME:9eg2e5:equip2,ME:level2,B
+ME:stoparea:1,SA 1,,1,,2.372987,48.844746,1,,,ME:9eg2e5:geo2,,,
+ME:stoparea:2,SA 2,,1,,2.372987,48.844746,1,,,,,,
+ME:stoparea:3,SA 3,,1,,2.372987,48.844746,1,,,,,,
+ME:boarding:3,Boarding 3,,0,,2.37299,48.844749,5,ME:stop:11,,,,ME:level1,
+ME:entrance:3,Entrance 3,,0,,2.372988,48.844747,3,ME:stoparea:1,,,,ME:level0,
