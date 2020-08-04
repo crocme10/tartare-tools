@@ -78,6 +78,7 @@ However, we are open to contributions to help support more of them.
 [PROJ]: https://proj.org
 
 ## Working with `transit_model`
+
 `tartare-tools` is very dependent on `transit_model`. Here are some information
 to work with it.
 
