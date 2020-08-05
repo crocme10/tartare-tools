@@ -19,7 +19,7 @@ use failure::bail;
 use log::info;
 use std::{collections::BTreeMap, fs::File, path::PathBuf};
 use structopt::StructOpt;
-use transfers::{transfers, TransfersMode};
+use transfers::transfers;
 use transit_model::{model::Collections, Result};
 
 mod merge_collections;
@@ -65,6 +65,11 @@ struct Opt {
     #[structopt(long, short = "t", default_value = transit_model::TRANSFER_WAITING_TIME)]
     waiting_time: u32,
 
+    /// Only generates inter contributors transfers
+    /// if false, all transfers intra + inter contributors will be created
+    #[structopt(long)]
+    inter_contributors_transfers_only: bool,
+
     /// current datetime
     #[structopt(
         short = "x",
@@ -98,17 +103,12 @@ fn run(opt: Opt) -> Result<()> {
         }
 
         let model = transit_model::Model::new(collections)?;
-        let transfer_mode = if model.contributors.len() == 1 {
-            TransfersMode::IntraContributor
-        } else {
-            TransfersMode::InterContributor
-        };
         let model = transfers(
             model,
             opt.max_distance,
             opt.walking_speed,
             opt.waiting_time,
-            &transfer_mode,
+            opt.inter_contributors_transfers_only,
             opt.rule_files,
             opt.report,
         )?;

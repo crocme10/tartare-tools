@@ -94,7 +94,13 @@ fn run(opt: Opt) -> Result<()> {
         opt.prefix,
         opt.max_end_date,
     )?;
-    let model = generates_transfers(model, opt.max_distance, opt.walking_speed, opt.waiting_time)?;
+    let model = generates_transfers(
+        model,
+        opt.max_distance,
+        opt.walking_speed,
+        opt.waiting_time,
+        None,
+    )?;
 
     transit_model::ntfs::write(&model, opt.output, opt.current_datetime)?;
     Ok(())

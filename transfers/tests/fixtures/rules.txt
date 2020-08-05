@@ -1,6 +1,6 @@
 from_stop_id,to_stop_id,transfer_time
-sp_3,sp_3,
-sp_2,sp_3,100
-sp_5,sp_1,500
-sp_5,sp_1,500
-unknown,sp_1,890
+OIF:sp_3,OIF:sp_3,
+OIF:sp_2,OIF:sp_3,100
+ABC:sp_5,OIF:sp_1,500
+ABC:sp_5,OIF:sp_1,500
+unknown,OIF:sp_1,890

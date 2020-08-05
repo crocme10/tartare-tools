@@ -18,7 +18,7 @@ use chrono::{DateTime, FixedOffset};
 use log::info;
 use std::path::PathBuf;
 use structopt::StructOpt;
-use transfers::{transfers, TransfersMode};
+use transfers::transfers;
 use transit_model::Result;
 
 #[derive(Debug, StructOpt)]
@@ -66,6 +66,11 @@ struct Opt {
     )]
     waiting_time: u32,
 
+    /// Only generates inter contributors transfers
+    /// if false, all transfers intre + inter contributors will be created
+    #[structopt(long)]
+    inter_contributors_transfers_only: bool,
+
     /// current datetime
     #[structopt(
         short = "x",
@@ -86,7 +91,7 @@ fn run(opt: Opt) -> Result<()> {
         opt.max_distance,
         opt.walking_speed,
         opt.waiting_time,
-        &TransfersMode::All,
+        opt.inter_contributors_transfers_only,
         opt.rule_files,
         opt.report,
     )?;
