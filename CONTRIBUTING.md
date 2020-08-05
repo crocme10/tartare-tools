@@ -123,6 +123,12 @@ you can do the following.
 transit_model = { version = "x.y.z", features = ["proj"], git = "https://github.com/<user>/transit_model.git", branch = "<feature-branch>" }
 ```
 
+Then don't forget to do:
+
+```sh
+cargo update
+```
+
 The advantage of this second solution is that you will be able to open a PR to
 have first feedbacks because the CI will be able to build your branch.
 
