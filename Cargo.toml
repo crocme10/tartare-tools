@@ -49,6 +49,3 @@ transit_model = {version = "0.26", features = ["proj"]}
 typed_index_collection = "1"
 unidecode = "0.3"
 zip = "0.5"
-
-[patch.crates-io]
-transit_model = {version = "0.26", features = ["proj"], git = "https://github.com/pbougue/transit_model.git", branch = "comment_dedup"}
