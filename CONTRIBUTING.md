@@ -78,6 +78,7 @@ However, we are open to contributions to help support more of them.
 [PROJ]: https://proj.org
 
 ## Working with `transit_model`
+
 `tartare-tools` is very dependent on `transit_model`. Here are some information
 to work with it.
 
@@ -120,6 +121,12 @@ you can do the following.
 ```toml
 [patch.crates-io]
 transit_model = { version = "x.y.z", features = ["proj"], git = "https://github.com/<user>/transit_model.git", branch = "<feature-branch>" }
+```
+
+Then don't forget to do:
+
+```sh
+cargo update
 ```
 
 The advantage of this second solution is that you will be able to open a PR to
