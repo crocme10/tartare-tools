@@ -44,7 +44,7 @@ slog-envlogger = "2"
 slog-scope = "4"
 slog-stdlog = "4"
 slog-term = "2"
-structopt = "0"
+structopt = "0.3"
 transit_model = {version = "0.26", features = ["proj"]}
 typed_index_collection = "1"
 unidecode = "0.3"
