@@ -51,6 +51,7 @@ fn merge_collections_ok() {
         // Putting 0 to avoid creation of transfers
         .arg("--max-distance")
         .arg("0.0")
+        .arg("--inter-contributors-transfers-only")
         // Input folders
         .arg("tests/fixtures/ntfs")
         .arg("tests/fixtures/merge-ntfs/input")
@@ -212,6 +213,7 @@ fn merge_collections_with_transfers_ok() {
         .arg("0.785")
         .arg("--waiting-time")
         .arg("60")
+        .arg("--inter-contributors-transfers-only")
         .arg("--report")
         .arg(report_path.to_str().unwrap())
         // Input folders

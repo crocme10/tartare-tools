@@ -68,7 +68,13 @@ fn run(opt: Opt) -> Result<()> {
     info!("Launching netexidf2ntfs...");
 
     let model = netexidf::read(opt.input, opt.config, opt.prefix)?;
-    let model = generates_transfers(model, opt.max_distance, opt.walking_speed, opt.waiting_time)?;
+    let model = generates_transfers(
+        model,
+        opt.max_distance,
+        opt.walking_speed,
+        opt.waiting_time,
+        None,
+    )?;
 
     transit_model::ntfs::write(&model, opt.output, opt.current_datetime)?;
     Ok(())

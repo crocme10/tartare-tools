@@ -56,13 +56,13 @@ struct Rule {
 pub fn apply_rules<P: AsRef<Path>>(
     model: Model,
     waiting_time: u32,
+    only_inter: bool,
     rule_files: Vec<P>,
-    transfers_mode: &TransfersMode,
     report_path: Option<PathBuf>,
 ) -> Result<Model> {
-    let mut transfers_map = filtered_transfers_map(&model, model.transfers.clone(), transfers_mode);
+    let mut transfers_map = transfers_map(&model, model.transfers.clone());
     let mut report = Report::default();
-    let rules = read_rules(rule_files, &model, transfers_mode, &mut report)?;
+    let rules = read_rules(rule_files, &model, only_inter, &mut report)?;
     if !rules.is_empty() {
         remove_unwanted_transfers(&mut transfers_map, &model.stop_points, &rules);
         add_missing_transfers(&mut transfers_map, &model.stop_points, &rules, waiting_time);
@@ -82,22 +82,9 @@ pub fn apply_rules<P: AsRef<Path>>(
     Ok(Model::new(collections)?)
 }
 
-fn filtered_transfers_map(
-    model: &Model,
-    transfers: Collection<Transfer>,
-    transfers_mode: &TransfersMode,
-) -> TransferMap {
+fn transfers_map(model: &Model, transfers: Collection<Transfer>) -> TransferMap {
     transfers
         .into_iter()
-        .filter(|t| {
-            stop_points_need_transfer(
-                model,
-                model.stop_points.get_idx(&t.from_stop_id).unwrap(),
-                model.stop_points.get_idx(&t.to_stop_id).unwrap(),
-                transfers_mode,
-                None,
-            )
-        })
         .map(|t| {
             (
                 (
@@ -110,14 +97,14 @@ fn filtered_transfers_map(
         .collect()
 }
 
-fn stop_points_need_transfer(
+pub fn stop_points_need_transfer(
     model: &Model,
     from_idx: Idx<StopPoint>,
     to_idx: Idx<StopPoint>,
-    transfers_mode: &TransfersMode,
+    only_inter: bool,
     report_opt: Option<&mut Report<ReportCategory>>,
 ) -> bool {
-    if *transfers_mode == TransfersMode::All {
+    if !only_inter {
         return true;
     }
     let from_contributor: BTreeSet<Idx<Contributor>> = model.get_corresponding_from_idx(from_idx);
@@ -148,20 +135,17 @@ fn stop_points_need_transfer(
         return false;
     }
 
-    match *transfers_mode {
-        TransfersMode::All => unreachable!(),
-        TransfersMode::IntraContributor => from_contributor == to_contributor,
-        TransfersMode::InterContributor => from_contributor != to_contributor,
-    }
+    from_contributor != to_contributor
 }
 
 fn read_rules<P: AsRef<Path>>(
     rule_files: Vec<P>,
     model: &Model,
-    transfers_mode: &TransfersMode,
+    only_inter: bool,
     report: &mut Report<ReportCategory>,
 ) -> Result<Vec<Rule>> {
     info!("Reading modificaton rules.");
+
     let mut rules = HashMap::new();
     for rule_path in rule_files {
         let path = rule_path.as_ref();
@@ -175,7 +159,7 @@ fn read_rules<P: AsRef<Path>>(
                 model.stop_points.get_idx(&rule.to_stop_id),
             ) {
                 (Some(from), Some(to)) => {
-                    if stop_points_need_transfer(model, from, to, transfers_mode, Some(report)) {
+                    if stop_points_need_transfer(model, from, to, only_inter, Some(report)) {
                         match rules.entry((from, to)) {
                             Occupied(_) => report.add_warning(
                                 format!(
@@ -189,17 +173,12 @@ fn read_rules<P: AsRef<Path>>(
                             }
                         }
                     } else {
-                        let category = match *transfers_mode {
-                            TransfersMode::IntraContributor => ReportCategory::InterIgnored,
-                            TransfersMode::InterContributor => ReportCategory::IntraIgnored,
-                            TransfersMode::All => ReportCategory::AllIgnored,
-                        };
                         report.add_warning(
                             format!(
                                 "transfer between stops {} and {} is ignored",
                                 rule.from_stop_id, rule.to_stop_id
                             ),
-                            category,
+                            ReportCategory::Ignored,
                         );
                     }
                 }
