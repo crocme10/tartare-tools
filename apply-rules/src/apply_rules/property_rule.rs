@@ -855,17 +855,17 @@ fn get_prefix(collections: &Collections) -> PrefixConfiguration {
         .map(|split| {
             let mut prefix_conf = PrefixConfiguration::default();
             if split.len() == 1 {
-                // If the original `dataset_id` doesn't contain ':', then no
+                // If the original `dataset id` does not contain ':', then no
                 // `data_prefix` was present.
-                prefix_conf.set_dataset_id(split[0]);
+                prefix_conf.set_schedule_subprefix(split[0]);
             } else {
-                // If the original `dataset_id` contains ':', the first part
+                // If the original `dataset id` contains ':', the first part
                 // must be the `data_prefix` and we assume the last part is the
-                // `dataset_id`. This should work fine for the following cases:
+                // `schedule_subprefix`. This should work fine for the following cases:
                 // - `IDFM:a1b2c3d4e5f6g7h8`
                 // - `IDFM:RATP:a1b2c3d4e5f6g7h8`
                 prefix_conf.set_data_prefix(split[0]);
-                prefix_conf.set_dataset_id(split[split.len() - 1]);
+                prefix_conf.set_schedule_subprefix(split[split.len() - 1]);
             }
             prefix_conf
         })
@@ -1211,19 +1211,19 @@ mod tests {
         #[test]
         fn no_data_prefix() {
             let prefixed_id = schedule_prefix_from_dataset_id("a1b2c3d4e5f6g7h8", "foo");
-            assert_eq!("foo", prefixed_id);
+            assert_eq!("a1b2c3d4e5f6g7h8:foo", prefixed_id);
         }
 
         #[test]
         fn with_data_prefix() {
             let prefixed_id = schedule_prefix_from_dataset_id("IDFM:a1b2c3d4e5f6g7h8", "foo");
-            assert_eq!("IDFM:a1b2c3:foo", prefixed_id);
+            assert_eq!("IDFM:a1b2c3d4e5f6g7h8:foo", prefixed_id);
         }
 
         #[test]
         fn with_multiple_data_prefix() {
             let prefixed_id = schedule_prefix_from_dataset_id("IDFM:RATP:a1b2c3d4e5f6g7h8", "foo");
-            assert_eq!("IDFM:a1b2c3:foo", prefixed_id);
+            assert_eq!("IDFM:a1b2c3d4e5f6g7h8:foo", prefixed_id);
         }
     }
 }
