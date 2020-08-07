@@ -59,6 +59,7 @@ Please check documentation attached to each crate:
   [TransXChange] data format into [NTFS] data format.
 
 ## Setup
+
 For setting up `tartare-tools`, please refer to [`README.md` in
 `transit_model`](https://github.com/CanalTP/transit_model/blob/master/README.md)
 which contains all the needed instructions from setting up your Rust environment
@@ -80,3 +81,7 @@ to installing [PROJ].
 [**read-shapes-from-osm**]: https://confluence.kisio.org/x/lYImAg#Tartare-Listedesprocessusdetraitements-ReadShapesFromOSM
 [**sytral2navitia-pois**]: https://confluence.kisio.org/x/lYImAg#Tartare-Listedesprocessusdetraitements-SytralPOIs2NavitiaPOIs(SpécifiqueSytral)
 [TransXChange]: https://confluence.kisio.org/x/LYaiAw
+
+> Copyright (C) Kisio Digital - All Rights Reserved\
+> Unauthorized copying of this whole repository, via any medium is strictly prohibited\
+> Proprietary and confidential
