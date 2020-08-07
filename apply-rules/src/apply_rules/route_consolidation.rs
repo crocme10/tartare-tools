@@ -1,5 +1,3 @@
-// Copyright (C) 2020 Kisio Digital and/or its affiliates.
-
 use crate::apply_rules::ReportCategory;
 use failure::{bail, ResultExt};
 use log::info;
