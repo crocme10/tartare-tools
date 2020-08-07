@@ -24,6 +24,4 @@ mod offers;
 mod read;
 mod stops;
 
-const EUROPE_PARIS_TIMEZONE: &str = "Europe/Paris";
-
 pub use read::read;

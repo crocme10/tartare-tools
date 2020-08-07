@@ -12,6 +12,7 @@ categories = ["data-structures", "parser-implementations"]
 
 [dependencies]
 chrono = "0.4"
+chrono-tz = { version = "0.5", features = ["serde"] }
 csv = "1.0"
 failure = "0.1"
 lazy_static = "1.2"
@@ -22,7 +23,7 @@ serde = { version = "1", features = ["derive"] }
 skip_error = { version = "1", features = ["log"] }
 structopt = "0.3"
 tartare-tools = { version = "0.3", path = "../" }
-transit_model = "0.27"
+transit_model = "0.28"
 typed_index_collection = "1"
 
 [dev-dependencies]
