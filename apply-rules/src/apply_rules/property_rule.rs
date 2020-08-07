@@ -25,6 +25,7 @@ use wkt::{self, conversion::try_into_geometry};
 #[serde(rename_all = "snake_case")]
 enum ObjectType {
     Line,
+    Network,
     Route,
     StopPoint,
     StopArea,
@@ -36,6 +37,7 @@ impl ObjectType {
     fn as_str(self) -> &'static str {
         match self {
             ObjectType::Line => "line",
+            ObjectType::Network => "network",
             ObjectType::Route => "route",
             ObjectType::StopPoint => "stop_point",
             ObjectType::StopArea => "stop_area",
@@ -746,6 +748,22 @@ lazy_static! {
             }),
         );
         m.insert(
+            (ObjectType::StopPoint, "stop_timezone"),
+            Box::new(|c, p, r| {
+                c.stop_points
+                    .get_mut(&p.object_id)
+                    .map_or(false, |mut obj| {
+                        update_stringable_option(
+                            p,
+                            &mut obj.timezone,
+                            r,
+                            "property_value should be a valid timezone",
+                        );
+                        true
+                    })
+            }),
+        );
+        m.insert(
             (ObjectType::StopArea, "stop_position"),
             Box::new(|c, p, r| {
                 c.stop_areas.get_mut(&p.object_id).map_or(false, |mut obj| {
@@ -796,6 +814,20 @@ lazy_static! {
             }),
         );
 
+        m.insert(
+            (ObjectType::Network, "network_timezone"),
+            Box::new(|c, p, r| {
+                c.networks.get_mut(&p.object_id).map_or(false, |mut obj| {
+                    update_stringable_option(
+                        p,
+                        &mut obj.timezone,
+                        r,
+                        "property_value should be a valid timezone",
+                    );
+                    true
+                })
+            }),
+        );
         m
     };
 }
