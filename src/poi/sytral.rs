@@ -262,6 +262,10 @@ fn extract_from_parcs_relais<P: AsRef<Path>>(
             id: poi_type.clone(),
             name: sytral_poi.poi_type_label.clone(),
         });
+        properties.push(NavitiaPoiProperty {
+            key: "park_ride".to_string(),
+            value: "yes".to_string(),
+        });
         add_poi_with_properties(
             &sytral_poi,
             poi_id,
