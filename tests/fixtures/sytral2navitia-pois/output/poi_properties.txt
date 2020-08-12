@@ -1061,7 +1061,7 @@ TCL:GAB:1562;addr:full;1 Square De Verdun
 TCL:GAB:1562;addr:postcode;69260
 TCL:GAB:1562;description;119
 TCL:GAB:1563;addr:city;Francheville
-TCL:GAB:1563;addr:full;36 Rue Grande 
+TCL:GAB:1563;addr:full;36 Rue Grande
 TCL:GAB:1563;addr:postcode;69340
 TCL:GAB:1563;description;108
 TCL:GAB:1564;addr:city;Champagne-Au-Mont-D'Or
@@ -1313,6 +1313,7 @@ TCL:REL:ALP;capacity:disabled;10
 TCL:REL:ALP;network;TCL
 TCL:REL:ALP;opening;Ouvert de 4h30 à 1h00 du lundi au dimanche.
 TCL:REL:ALP;operator;SYTRAL
+TCL:REL:ALP;park_ride;yes
 TCL:REL:ALP;ref;ALP
 TCL:REL:ALP;supervised;yes
 TCL:REL:BELA;capacity;123
@@ -1320,6 +1321,7 @@ TCL:REL:BELA;capacity:disabled;4
 TCL:REL:BELA;network;TCL
 TCL:REL:BELA;opening;Ouvert de 5h00 à 17h30 du lundi au dimanche,  en accès libre en dehors de ces horaires
 TCL:REL:BELA;operator;SYTRAL
+TCL:REL:BELA;park_ride;yes
 TCL:REL:BELA;ref;BELA
 TCL:REL:BELA;supervised;yes
 TCL:REL:BON;capacity;655
@@ -1327,6 +1329,7 @@ TCL:REL:BON;capacity:disabled;20
 TCL:REL:BON;network;TCL
 TCL:REL:BON;opening;Ouvert de 4h30 à 1h00 du lundi au samedi  fermé le dimanche et jours fériés. Niveau 0 en accès libre le dimanche.
 TCL:REL:BON;operator;SYTRAL
+TCL:REL:BON;park_ride;yes
 TCL:REL:BON;ref;BON
 TCL:REL:BON;supervised;yes
 TCL:REL:CUI;capacity;80
@@ -1334,6 +1337,7 @@ TCL:REL:CUI;capacity:disabled;2
 TCL:REL:CUI;network;TCL
 TCL:REL:CUI;opening;Ouvert de 4h30 à 1h00, du lundi au dimanche.
 TCL:REL:CUI;operator;SYTRAL
+TCL:REL:CUI;park_ride;yes
 TCL:REL:CUI;ref;CUI
 TCL:REL:CUI;supervised;no
 TCL:REL:DECC;capacity;108
@@ -1341,6 +1345,7 @@ TCL:REL:DECC;capacity:disabled;3
 TCL:REL:DECC;network;TCL
 TCL:REL:DECC;opening;Ouvert de 4h30 à 1h00, du lundi au dimanche.
 TCL:REL:DECC;operator;SYTRAL
+TCL:REL:DECC;park_ride;yes
 TCL:REL:DECC;ref;DECC
 TCL:REL:DECC;supervised;yes
 TCL:REL:DECG;capacity;57
@@ -1348,6 +1353,7 @@ TCL:REL:DECG;capacity:disabled;2
 TCL:REL:DECG;network;TCL
 TCL:REL:DECG;opening;Ouvert de 4h30 à 1h00, du lundi au dimanche.
 TCL:REL:DECG;operator;SYTRAL
+TCL:REL:DECG;park_ride;yes
 TCL:REL:DECG;ref;DECG
 TCL:REL:DECG;supervised;yes
 TCL:REL:FEY;capacity;80
@@ -1355,6 +1361,7 @@ TCL:REL:FEY;capacity:disabled;no
 TCL:REL:FEY;network;TCL
 TCL:REL:FEY;opening; Ouvert du lundi au dimanche.
 TCL:REL:FEY;operator;SYTRAL
+TCL:REL:FEY;park_ride;yes
 TCL:REL:FEY;ref;FEY
 TCL:REL:FEY;supervised;yes
 TCL:REL:GOR;capacity;680
@@ -1362,6 +1369,7 @@ TCL:REL:GOR;capacity:disabled;19
 TCL:REL:GOR;network;TCL
 TCL:REL:GOR;opening;Ouvert de 4h30 à 1h00, du lundi au samedi. Fermé dimanche et jours fériés.
 TCL:REL:GOR;operator;SYTRAL
+TCL:REL:GOR;park_ride;yes
 TCL:REL:GOR;ref;GOR
 TCL:REL:GOR;supervised;yes
 TCL:REL:GREY;capacity;69
@@ -1369,6 +1377,7 @@ TCL:REL:GREY;capacity:disabled;2
 TCL:REL:GREY;network;TCL
 TCL:REL:GREY;opening;ouvert de 4h30 à 1h00 du lundi au dimanche.
 TCL:REL:GREY;operator;SYTRAL
+TCL:REL:GREY;park_ride;yes
 TCL:REL:GREY;ref;GREY
 TCL:REL:GREY;supervised;no
 TCL:REL:HFVE;capacity;80
@@ -1376,6 +1385,7 @@ TCL:REL:HFVE;capacity:disabled;2
 TCL:REL:HFVE;network;TCL
 TCL:REL:HFVE;opening;Ouvert de 4h30 à 1h00, du lundi au dimanche.
 TCL:REL:HFVE;operator;SYTRAL
+TCL:REL:HFVE;park_ride;yes
 TCL:REL:HFVE;ref;HFVE
 TCL:REL:HFVE;supervised;yes
 TCL:REL:MERP;capacity;416
@@ -1383,6 +1393,7 @@ TCL:REL:MERP;capacity:disabled;10
 TCL:REL:MERP;network;TCL
 TCL:REL:MERP;opening;Ouvert de 4h30 à 01h00 du lundi au dimanche
 TCL:REL:MERP;operator;SYTRAL
+TCL:REL:MERP;park_ride;yes
 TCL:REL:MERP;ref;MERP
 TCL:REL:MERP;supervised;yes
 TCL:REL:MEYG;capacity;107
@@ -1390,6 +1401,7 @@ TCL:REL:MEYG;capacity:disabled;3
 TCL:REL:MEYG;network;TCL
 TCL:REL:MEYG;opening;Ouvert de 4h30 à 1h00, du lundi au dimanche.
 TCL:REL:MEYG;operator;SYTRAL
+TCL:REL:MEYG;park_ride;yes
 TCL:REL:MEYG;ref;MEYG
 TCL:REL:MEYG;supervised;yes
 TCL:REL:MEYP;capacity;590
@@ -1397,6 +1409,7 @@ TCL:REL:MEYP;capacity:disabled;14
 TCL:REL:MEYP;network;TCL
 TCL:REL:MEYP;opening;Ouvert de 4h30 à 1h00  du lundi au vendredi. Fermé le samedi, dimanche et jours fériés.
 TCL:REL:MEYP;operator;SYTRAL
+TCL:REL:MEYP;park_ride;yes
 TCL:REL:MEYP;ref;MEYP
 TCL:REL:MEYP;supervised;yes
 TCL:REL:MEYZ;capacity;450
@@ -1404,6 +1417,7 @@ TCL:REL:MEYZ;capacity:disabled;10
 TCL:REL:MEYZ;network;TCL
 TCL:REL:MEYZ;opening;Ouvert de 4h30 à 1h00, du lundi au dimanche.
 TCL:REL:MEYZ;operator;SYTRAL
+TCL:REL:MEYZ;park_ride;yes
 TCL:REL:MEYZ;ref;MEYZ
 TCL:REL:MEYZ;supervised;yes
 TCL:REL:OULN;capacity;107
@@ -1411,6 +1425,7 @@ TCL:REL:OULN;capacity:disabled;2
 TCL:REL:OULN;network;TCL
 TCL:REL:OULN;opening;Ouvert de 4h30 à 1h00, du lundi au dimanche.
 TCL:REL:OULN;operator;SYTRAL
+TCL:REL:OULN;park_ride;yes
 TCL:REL:OULN;ref;OULN
 TCL:REL:OULN;supervised;yes
 TCL:REL:OULS;capacity;306
@@ -1418,6 +1433,7 @@ TCL:REL:OULS;capacity:disabled;7
 TCL:REL:OULS;network;TCL
 TCL:REL:OULS;opening;Ouvert de 4h30 à 1h00, du lundi au dimanche.
 TCL:REL:OULS;operator;SYTRAL
+TCL:REL:OULS;park_ride;yes
 TCL:REL:OULS;ref;OULS
 TCL:REL:OULS;supervised;yes
 TCL:REL:PAR;capacity;310
@@ -1425,6 +1441,7 @@ TCL:REL:PAR;capacity:disabled;6
 TCL:REL:PAR;network;TCL
 TCL:REL:PAR;opening;Ouvert de 4h30 à 1h00, du lundi au dimanche.
 TCL:REL:PAR;operator;SYTRAL
+TCL:REL:PAR;park_ride;yes
 TCL:REL:PAR;ref;PAR
 TCL:REL:PAR;supervised;yes
 TCL:REL:SOI;capacity;474
@@ -1432,6 +1449,7 @@ TCL:REL:SOI;capacity:disabled;10
 TCL:REL:SOI;network;TCL
 TCL:REL:SOI;opening;Ouvert de 4h30 à 1h00, du lundi au dimanche.
 TCL:REL:SOI;operator;SYTRAL
+TCL:REL:SOI;park_ride;yes
 TCL:REL:SOI;ref;SOI
 TCL:REL:SOI;supervised;yes
 TCL:REL:VAI1;capacity;521
@@ -1439,13 +1457,15 @@ TCL:REL:VAI1;capacity:disabled;10
 TCL:REL:VAI1;network;TCL
 TCL:REL:VAI1;opening;Ouvert de 4h30 à 1h00, du lundi au dimanche.
 TCL:REL:VAI1;operator;SYTRAL
+TCL:REL:VAI1;park_ride;yes
 TCL:REL:VAI1;ref;VAI1
 TCL:REL:VAI1;supervised;yes
 TCL:REL:VAI2;capacity;748
 TCL:REL:VAI2;capacity:disabled;18
 TCL:REL:VAI2;network;TCL
-TCL:REL:VAI2;opening;Ouvert de 4h30 à 1h du lundi au vendredi, fermé les jours fériés.Fermé au mois d'août. 
+TCL:REL:VAI2;opening;Ouvert de 4h30 à 1h du lundi au vendredi, fermé les jours fériés.Fermé au mois d'août.
 TCL:REL:VAI2;operator;SYTRAL
+TCL:REL:VAI2;park_ride;yes
 TCL:REL:VAI2;ref;VAI2
 TCL:REL:VAI2;supervised;yes
 TCL:REL:VEN;capacity;745
@@ -1453,6 +1473,7 @@ TCL:REL:VEN;capacity:disabled;21
 TCL:REL:VEN;network;TCL
 TCL:REL:VEN;opening;Ouvert de 4h30 à 1h00. Du lundi au samedi. Fermé le dimanche et jours fériés.
 TCL:REL:VEN;operator;SYTRAL
+TCL:REL:VEN;park_ride;yes
 TCL:REL:VEN;ref;VEN
 TCL:REL:VEN;supervised;yes
 TCL:RIS:21849;addr:city;Lyon 9eme
