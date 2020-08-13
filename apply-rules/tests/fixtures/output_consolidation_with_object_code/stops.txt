@@ -1,5 +1,5 @@
 stop_id,stop_name,stop_code,visible,fare_zone_id,stop_lon,stop_lat,location_type,parent_station,stop_timezone,geometry_id,equipment_id,level_id,platform_code
-GDLR,Another stop point name,,1,,2.372987,48.844746,0,GDL,,,1,,
+GDLR,Another stop point name,,1,1234,2.372987,48.844746,0,GDL,,,1,,
 GDLM,Gare de Lyon (Metro),,1,,6.7,8.9,0,GDL,,,,,
 NATR,Nation (RER),,1,,2.396497,48.84849,0,NAT,,,1,,
 CDGR,Charles de Gaulle (RER),,1,,2.295354,48.873965,0,CDG,Europe/Paris,,4,,

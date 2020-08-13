@@ -828,6 +828,17 @@ lazy_static! {
                 })
             }),
         );
+        m.insert(
+            (ObjectType::StopPoint, "fare_zone_id"),
+            Box::new(|c, p, r| {
+                c.stop_points
+                    .get_mut(&p.object_id)
+                    .map_or(false, |mut obj| {
+                        update_prop(p, &mut obj.fare_zone_id, r);
+                        true
+                    })
+            }),
+        );
         m
     };
 }
