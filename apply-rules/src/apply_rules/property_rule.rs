@@ -258,18 +258,13 @@ fn update_object_id<T>(
 fn generate_object_id<T>(
     collection: &mut CollectionWithId<T>,
     prefix_conf: &PrefixConfiguration,
-    schedule_prefix: bool,
 ) -> String {
     let mut inc = 0;
     let mut available = false;
     let mut id = String::new();
     while !available {
         inc += 1;
-        id = if schedule_prefix {
-            prefix_conf.schedule_prefix(inc.to_string().as_str())
-        } else {
-            prefix_conf.referential_prefix(inc.to_string().as_str())
-        };
+        id = prefix_conf.schedule_prefix(inc.to_string().as_str());
         available = !collection.contains_id(&id);
     }
     id
@@ -284,7 +279,7 @@ fn add_comment_on_line(
     match collections.lines.get_mut(&p.object_id) {
         Some(mut line) => {
             if p.property_old_value == Some("*".to_string()) {
-                let comment_id = generate_object_id(&mut collections.comments, prefix_conf, true);
+                let comment_id = generate_object_id(&mut collections.comments, prefix_conf);
                 collections
                     .comments
                     .push(Comment {
@@ -854,18 +849,16 @@ fn get_prefix(collections: &Collections) -> PrefixConfiguration {
         .map(|id| id.split(':').collect::<Vec<_>>())
         .map(|split| {
             let mut prefix_conf = PrefixConfiguration::default();
-            if split.len() == 1 {
-                // If the original `dataset_id` doesn't contain ':', then no
-                // `data_prefix` was present.
-                prefix_conf.set_dataset_id(split[0]);
-            } else {
-                // If the original `dataset_id` contains ':', the first part
+            if split.len() > 1 {
+                // If the original `dataset id` contains ':', the first part
                 // must be the `data_prefix` and we assume the last part is the
-                // `dataset_id`. This should work fine for the following cases:
+                // `schedule_subprefix`. This should work fine for the following cases:
                 // - `IDFM:a1b2c3d4e5f6g7h8`
                 // - `IDFM:RATP:a1b2c3d4e5f6g7h8`
                 prefix_conf.set_data_prefix(split[0]);
-                prefix_conf.set_dataset_id(split[split.len() - 1]);
+                let subprefix = split[split.len() - 1];
+                let truncate_index = usize::min(subprefix.len(), 6);
+                prefix_conf.set_schedule_subprefix(&subprefix[0..truncate_index]);
             }
             prefix_conf
         })
@@ -888,7 +881,7 @@ fn get_id_or_create_equipment(
         return similar_equipments[0].id.clone();
     }
 
-    let equipment_id = generate_object_id(collection_equipments, prefix_conf, true);
+    let equipment_id = generate_object_id(collection_equipments, prefix_conf);
 
     collection_equipments
         .push(Equipment {
@@ -1002,7 +995,7 @@ fn get_id_or_create_trip_property(
         return similar_trip_properties[0].id.clone();
     }
 
-    let trip_property_id = generate_object_id(collection_trip_properties, prefix_conf, true);
+    let trip_property_id = generate_object_id(collection_trip_properties, prefix_conf);
 
     collection_trip_properties
         .push(TripProperty {
