@@ -160,7 +160,7 @@ fn load_network(transxchange: &Element) -> Result<Network> {
     let network = Network {
         id,
         name,
-        timezone: Some(TzExt(chrono_tz::Europe::London)),
+        timezone: Some(chrono_tz::Europe::London),
         url,
         phone,
         ..Default::default()

@@ -1,4 +1,5 @@
 use super::{accessibility::*, attribute_with::AttributeWith};
+use chrono_tz::Tz;
 use failure::{bail, format_err, ResultExt};
 use log::{info, warn, Level as LogLevel};
 use minidom::Element;
@@ -10,7 +11,7 @@ use transit_model::{
     model::Collections,
     netex_utils,
     netex_utils::{FrameType, Frames},
-    objects::{CommentLinksT, Coord, Equipment, KeysValues, StopArea, StopPoint, StopType, TzExt},
+    objects::{CommentLinksT, Coord, Equipment, KeysValues, StopArea, StopPoint, StopType},
     Result,
 };
 use typed_index_collection::{impl_id, CollectionWithId};
@@ -26,7 +27,7 @@ pub struct VirtualStopPoint {
     pub visible: bool,
     pub coord: Coord,
     pub stop_area_id: String,
-    pub timezone: Option<TzExt>,
+    pub timezone: Option<Tz>,
     pub geometry_id: Option<String>,
     pub equipment_id: Option<String>,
     pub fare_zone_id: Option<String>,
@@ -278,7 +279,7 @@ fn load_stop_points<'a>(
             visible: true,
             coord: proj.convert(coords).map(Coord::from)?,
             stop_area_id: "default_id".to_string(),
-            timezone: Some(TzExt(chrono_tz::Europe::Paris)),
+            timezone: Some(chrono_tz::Europe::Paris),
             stop_type: StopType::Point,
             fare_zone_id: stop_point_fare_zone_id(quay),
             codes,
