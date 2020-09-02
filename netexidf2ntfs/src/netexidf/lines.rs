@@ -19,7 +19,7 @@ use transit_model::{
     netex_utils,
     netex_utils::{FrameType, Frames},
     objects::{
-        CommercialMode, Company, KeysValues, Line, Network, PhysicalMode, Rgb, TripProperty, TzExt,
+        CommercialMode, Company, KeysValues, Line, Network, PhysicalMode, Rgb, TripProperty,
     },
     Result,
 };
@@ -166,7 +166,7 @@ fn load_netex_lines(
                             let raw_company_id: String =
                                 line.try_only_child("OperatorRef")?.try_attribute("ref")?;
                             codes.insert((String::from("source"), raw_company_id));
-                            let timezone = Some(TzExt(chrono_tz::Europe::Paris));
+                            let timezone = Some(chrono_tz::Europe::Paris);
                             let network = Network {
                                 id: network_id.clone(),
                                 name: company.name.clone(),
@@ -262,7 +262,7 @@ fn make_networks_companies(
             let raw_network_id = network.try_attribute("id")?;
             let id = network.try_attribute_with("id", extract_network_id)?;
             let name = network.try_only_child("Name")?.text().parse()?;
-            let timezone = Some(TzExt(chrono_tz::Europe::Paris));
+            let timezone = Some(chrono_tz::Europe::Paris);
             let mut codes = KeysValues::default();
             codes.insert((String::from("source"), raw_network_id));
             networks.push(Network {
@@ -415,7 +415,7 @@ mod tests {
         assert_eq!("Network1", network.name);
         let network = networks.get("Operator_1").unwrap();
         assert_eq!("Operator1", network.name);
-        assert_eq!(Some(TzExt(chrono_tz::Europe::Paris)), network.timezone);
+        assert_eq!(Some(chrono_tz::Europe::Paris), network.timezone);
         assert!(network
             .codes
             .contains(&(String::from("source"), String::from("FR1:Operator:1:LOC"))));
@@ -462,7 +462,7 @@ mod tests {
         assert_eq!(1, networks.len());
         let network = networks.get("Operator_1").unwrap();
         assert_eq!("Operator1", network.name);
-        assert_eq!(Some(TzExt(chrono_tz::Europe::Paris)), network.timezone);
+        assert_eq!(Some(chrono_tz::Europe::Paris), network.timezone);
         assert!(network
             .codes
             .contains(&(String::from("source"), String::from("FR1:Operator:1:LOC"))));

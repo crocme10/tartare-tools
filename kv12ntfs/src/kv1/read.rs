@@ -432,7 +432,7 @@ fn make_networks_and_companies(
                 name: n_id.to_string(),
                 url: None,
                 codes: BTreeSet::new(),
-                timezone: Some(TzExt(chrono_tz::Europe::Amsterdam)),
+                timezone: Some(chrono_tz::Europe::Amsterdam),
                 lang: None,
                 phone: None,
                 address: None,
