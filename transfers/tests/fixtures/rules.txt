@@ -1,6 +1,10 @@
-from_stop_id,to_stop_id,transfer_time
-OIF:sp_3,OIF:sp_3,
-OIF:sp_2,OIF:sp_3,100
-ABC:sp_5,OIF:sp_1,500
-ABC:sp_5,OIF:sp_1,500
-unknown,OIF:sp_1,890
+from_stop_id,from_stop_type,to_stop_id,to_stop_type,transfer_time,waiting_time
+sa_2,stop_area,sa_2,stop_area,,
+sa_1,stop_area,OIF:sp_2,stop_point,350,50
+OIF:sp_1,stop_point,OIF:sp_2,stop_point,50,20
+OIF:sp_1,stop_point,OIF:sp_3,stop_point,,
+OIF:sp_3,stop_point,OIF:sp_3,stop_point,,
+OIF:sp_2,stop_point,OIF:sp_3,stop_point,100,
+ABC:sp_5,stop_point,OIF:sp_1,stop_point,500,
+ABC:sp_5,stop_point,OIF:sp_1,stop_point,500,
+unknown,stop_point,OIF:sp_1,stop_point,890,

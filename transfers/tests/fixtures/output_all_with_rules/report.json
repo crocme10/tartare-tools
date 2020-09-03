@@ -1,1 +1,0 @@
-{"errors":[],"warnings":[{"category":"AlreadyDeclared","message":"transfer between stops ABC:sp_5 and OIF:sp_1 is already declared"},{"category":"OnNonExistentStop","message":"manual transfer references a non-existent stop point (unknown)"}]}
