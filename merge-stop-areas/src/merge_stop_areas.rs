@@ -8,7 +8,6 @@ use std::collections::{HashMap, HashSet};
 use std::{
     fs,
     path::{self, PathBuf},
-    result::Result as StdResult,
 };
 use tartare_tools::report::{self, Report};
 use transit_model::{
@@ -145,7 +144,7 @@ fn read_rules<P: AsRef<path::Path>>(
             .with_context(|_| format!("Error reading {:?}", rule_path))?;
         let file_rules: Vec<StopAreaMergeRule> = rdr
             .deserialize()
-            .collect::<StdResult<_, _>>()
+            .collect::<Result<_, _>>()
             .with_context(|_| format!("Error reading {:?}", rule_path))?;
         rules.extend(group_rules_from_file_rules(file_rules, report));
     }
