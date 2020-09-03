@@ -25,6 +25,7 @@ members = [
   "navitia-poi-model",
   "netexidf2ntfs",
   "osm-utils",
+  "piv2ntfs",
   "transfers",
   "transxchange2ntfs",
 ]
