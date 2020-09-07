@@ -1,6 +1,6 @@
 [package]
 name = "transfers"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Kisio Digital <team.coretools@kisio.com>"]
 description = "Add transfers to NTFS data"
 license = "proprietary"
@@ -13,6 +13,7 @@ categories = ["data-structures", "parser-implementations"]
 [dependencies]
 chrono = "0.4"
 csv = "1.1.3"
+derivative = "2"
 failure = "0.1"
 log = "0.4"
 serde = { version = "1.0",  features = ["derive"] }

@@ -11,13 +11,13 @@ fn test_generates_all_transfers() {
         let model = transit_model::ntfs::read(input_dir).unwrap();
         let rules: Vec<Box<Path>> = vec![];
 
-        let model = transfers(model, 100.0, 0.785, 120, false, rules, None).unwrap();
+        let model = transfers(model, 500.0, 0.785, 60, false, rules, None).unwrap();
 
         transit_model::ntfs::write(&model, path, get_test_datetime()).unwrap();
         compare_output_dir_with_expected(
             &path,
             Some(vec!["transfers.txt"]),
-            "./tests/fixtures/output_all",
+            "./tests/fixtures/output_default",
         );
     });
 }
@@ -102,7 +102,7 @@ fn test_binary_generates_all_transfers_with_rules() {
     compare_output_dir_with_expected(
         &output_dir,
         Some(vec!["transfers.txt", "report.json"]),
-        "tests/fixtures/output_all_with_rules",
+        "tests/fixtures/output_rules",
     );
 }
 
