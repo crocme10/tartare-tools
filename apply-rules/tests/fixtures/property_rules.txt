@@ -50,9 +50,11 @@ stop_point,CDGR,stop_position,"LINESTRING(3 4,10 50,20 25)","POINT(1 2)"
 stop_point,NATR,stop_position,"POINT(1.53 2)","POINT(1 2)"
 stop_point,DEFR,stop_position,"POINT(2.238964 48.891737)",invalid
 stop_point,CHAM,stop_position,"POINT(2.348145 48.858137)","LINESTRING(3 4,10 50,20 25)"
-stop_point,MTPB,stop_position,"POINT(2.321783 48.842481)","POINT(1.1 2.2)"
+stop_area_with_cascade,MTP,stop_position,"POINT(2.321783 48.842481)","POINT(1.1 2.2)"
 stop_point,GDLM,stop_position,*,"POINT(6.7 8.9)"
 stop_area,GDL,stop_position,"POINT(2.372987 48.844746)","POINT(5.3 8.1)"
+stop_area_with_cascade,DEF,stop_name,Foobar,Barfoo
+stop_area_with_cascade,MTP,stop_name,*,Gare Montparnasse
 commercial_mode,Bus,commercial_mode_name,Bus,ネコバス
 physical_mode,RapidTransit,physical_mode_name,"Rapid Transit",バス
 physical_mode,RapidTransit,co2_emission,*,3.14
