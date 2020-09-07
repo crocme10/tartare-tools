@@ -9,13 +9,12 @@ use navitia_poi_model::objects::{
 use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, HashMap, HashSet};
 use std::path::Path;
-use std::result::Result as StdResult;
 
 pub const MAIN_FILE: &str = "POI_TCL.csv";
 pub const PR_FILE: &str = "parcs_relais.csv";
 pub const PV_FILE: &str = "parcs_velos.csv";
 
-fn de_from_comma_float<'de, D>(deserializer: D) -> StdResult<f64, D::Error>
+fn de_from_comma_float<'de, D>(deserializer: D) -> Result<f64, D::Error>
 where
     D: serde::Deserializer<'de>,
 {
@@ -25,7 +24,7 @@ where
         .map_err(serde::de::Error::custom)
 }
 
-fn de_non_empty_string<'de, D>(deserializer: D) -> StdResult<String, D::Error>
+fn de_non_empty_string<'de, D>(deserializer: D) -> Result<String, D::Error>
 where
     D: serde::Deserializer<'de>,
 {

@@ -10,13 +10,12 @@ use std::{
     collections::{BTreeMap, BTreeSet, HashMap, HashSet},
     fs::File,
     path::Path,
-    result::Result as StdResult,
 };
 use transit_model::{calendars::CalendarDate, model::Collections, objects::*, Result};
 use typed_index_collection::{impl_id, CollectionWithId};
 
 /// Deserialize kv1 string date (Y-m-d) to NaiveDate
-fn de_from_date_string<'de, D>(deserializer: D) -> StdResult<Date, D::Error>
+fn de_from_date_string<'de, D>(deserializer: D) -> Result<Date, D::Error>
 where
     D: serde::Deserializer<'de>,
 {
@@ -396,7 +395,7 @@ fn read_jopa<P: AsRef<Path>>(path: P) -> Result<Vec<Jopa>> {
 
     let jopas = rdr
         .deserialize()
-        .collect::<StdResult<_, _>>()
+        .collect::<Result<_, _>>()
         .with_context(|_| format!("Error reading {:?}", filepath))?;
     Ok(jopas)
 }
@@ -413,7 +412,7 @@ fn read_line<P: AsRef<Path>>(path: P) -> Result<CollectionWithId<Kv1Line>> {
         .from_reader(file);
     let lines = rdr
         .deserialize()
-        .collect::<StdResult<_, _>>()
+        .collect::<Result<_, _>>()
         .with_context(|_| format!("Error reading {:?}", filepath))?;
     Ok(CollectionWithId::new(lines)?)
 }
