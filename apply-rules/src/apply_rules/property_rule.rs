@@ -551,6 +551,26 @@ fn update_position(
         false
     }
 }
+fn update_stop_points_in_cascade<F>(
+    p: &PropertyRule,
+    stop_points: &mut CollectionWithId<StopPoint>,
+    mut update_fn: F,
+) where
+    F: FnMut(&mut PropertyRule, &mut CollectionWithId<StopPoint>, Idx<StopPoint>),
+{
+    let stop_points_idxs: BTreeSet<Idx<StopPoint>> = stop_points
+        .values()
+        .filter(|stop_point| stop_point.stop_area_id == p.object_id)
+        .flat_map(|stop_point| stop_points.get_idx(stop_point.id.as_str()))
+        .collect();
+    let mut stop_point_rule = p.clone();
+    stop_point_rule.object_type = ObjectType::StopPoint;
+    stop_point_rule.property_old_value = Some("*".to_string());
+    for stop_point_idx in stop_points_idxs {
+        stop_point_rule.object_id = stop_points[stop_point_idx].id.clone();
+        update_fn(&mut stop_point_rule, stop_points, stop_point_idx);
+    }
+}
 
 type FnUpdater = Box<
     dyn Fn(&mut Collections, &mut PropertyRule, &mut Report<ReportCategory>) -> bool + Send + Sync,
@@ -751,20 +771,14 @@ lazy_static! {
                     true
                 });
                 if updated {
-                    let stop_points_idxs: BTreeSet<Idx<StopPoint>> = c
-                        .stop_points
-                        .values()
-                        .filter(|stop_point| stop_point.stop_area_id == p.object_id)
-                        .flat_map(|stop_point| c.stop_points.get_idx(&stop_point.id))
-                        .collect();
-                    let mut stop_point_rule = p.clone();
-                    stop_point_rule.object_type = ObjectType::StopPoint;
-                    stop_point_rule.property_old_value = Some("*".to_string());
-                    for stop_point_idx in stop_points_idxs {
-                        stop_point_rule.object_id = c.stop_points[stop_point_idx].id.clone();
-                        let stop_point_name = &mut c.stop_points.index_mut(stop_point_idx).name;
-                        update_prop(&stop_point_rule, stop_point_name, r);
-                    }
+                    update_stop_points_in_cascade(
+                        p,
+                        &mut c.stop_points,
+                        |rule, stop_points, sp_idx| {
+                            let name = &mut stop_points.index_mut(sp_idx).name;
+                            update_prop(rule, name, r);
+                        },
+                    );
                 }
                 obj_found
             }),
@@ -789,20 +803,14 @@ lazy_static! {
                     true
                 });
                 if updated {
-                    let stop_points_idxs: BTreeSet<Idx<StopPoint>> = c
-                        .stop_points
-                        .values()
-                        .filter(|stop_point| stop_point.stop_area_id == p.object_id)
-                        .flat_map(|stop_point| c.stop_points.get_idx(&stop_point.id))
-                        .collect();
-                    let mut stop_point_rule = p.clone();
-                    stop_point_rule.object_type = ObjectType::StopPoint;
-                    stop_point_rule.property_old_value = Some("*".to_string());
-                    for stop_point_idx in stop_points_idxs {
-                        stop_point_rule.object_id = c.stop_points[stop_point_idx].id.clone();
-                        let stop_point_coords = &mut c.stop_points.index_mut(stop_point_idx).coord;
-                        update_position(&mut stop_point_rule, stop_point_coords, r);
-                    }
+                    update_stop_points_in_cascade(
+                        p,
+                        &mut c.stop_points,
+                        |rule, stop_points, sp_idx| {
+                            let coords = &mut stop_points.index_mut(sp_idx).coord;
+                            update_position(rule, coords, r);
+                        },
+                    );
                 }
                 obj_found
             }),
