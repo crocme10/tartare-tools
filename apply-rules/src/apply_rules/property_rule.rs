@@ -13,12 +13,12 @@ use tartare_tools::report::Report;
 use transit_model::{
     model::Collections,
     objects::{
-        Availability, Comment, CommentType, Coord, Equipment, Geometry, Line, TripProperty,
-        VehicleJourney,
+        Availability, Comment, CommentType, Coord, Equipment, Geometry, Line, StopPoint,
+        TripProperty, VehicleJourney,
     },
     PrefixConfiguration, Result,
 };
-use typed_index_collection::CollectionWithId;
+use typed_index_collection::{CollectionWithId, Idx};
 use wkt::{self, conversion::try_into_geometry};
 
 #[derive(Deserialize, Debug, Ord, PartialOrd, Eq, PartialEq, Clone, Copy, Hash)]
@@ -29,6 +29,7 @@ enum ObjectType {
     Route,
     StopPoint,
     StopArea,
+    StopAreaWithCascade,
     PhysicalMode,
     CommercialMode,
 }
@@ -41,6 +42,7 @@ impl ObjectType {
             ObjectType::Route => "route",
             ObjectType::StopPoint => "stop_point",
             ObjectType::StopArea => "stop_area",
+            ObjectType::StopAreaWithCascade => "stop_area_with_cascade",
             ObjectType::PhysicalMode => "physical_mode",
             ObjectType::CommercialMode => "commercial_mode",
         }
@@ -190,12 +192,14 @@ fn update_prop<T: Clone + From<String> + Into<Option<String>>>(
     p: &PropertyRule,
     field: &mut T,
     report: &mut Report<ReportCategory>,
-) {
+) -> bool {
     let any_prop = Some("*".to_string());
     if p.property_old_value == any_prop || p.property_old_value == field.clone().into() {
         *field = T::from(p.property_value.clone());
+        true
     } else {
         property_old_value_do_not_match(report, p);
+        false
     }
 }
 
@@ -518,26 +522,53 @@ fn wkt_to_coord(
     }
 }
 
-fn update_position(p: &mut PropertyRule, field: &mut Coord, report: &mut Report<ReportCategory>) {
+fn update_position(
+    p: &mut PropertyRule,
+    field: &mut Coord,
+    report: &mut Report<ReportCategory>,
+) -> bool {
     if let Some(pov) = p.property_old_value.as_ref() {
         if *pov != "*" {
             let p_old_value_coord = match wkt_to_coord(&pov, report, &p, "property_old_value") {
                 Some(pov_geo) => pov_geo,
-                None => return,
+                None => return false,
             };
 
             if *field != p_old_value_coord {
                 property_old_value_do_not_match(report, p);
-                return;
+                return false;
             }
         }
 
         let p_value_coord = match wkt_to_coord(&p.property_value, report, &p, "property_value") {
             Some(pov_geo) => pov_geo,
-            None => return,
+            None => return false,
         };
 
         *field = p_value_coord;
+        true
+    } else {
+        false
+    }
+}
+fn update_stop_points_in_cascade<F>(
+    p: &PropertyRule,
+    stop_points: &mut CollectionWithId<StopPoint>,
+    mut update_fn: F,
+) where
+    F: FnMut(&mut PropertyRule, &mut CollectionWithId<StopPoint>, Idx<StopPoint>),
+{
+    let stop_points_idxs: BTreeSet<Idx<StopPoint>> = stop_points
+        .values()
+        .filter(|stop_point| stop_point.stop_area_id == p.object_id)
+        .flat_map(|stop_point| stop_points.get_idx(stop_point.id.as_str()))
+        .collect();
+    let mut stop_point_rule = p.clone();
+    stop_point_rule.object_type = ObjectType::StopPoint;
+    stop_point_rule.property_old_value = Some("*".to_string());
+    for stop_point_idx in stop_points_idxs {
+        stop_point_rule.object_id = stop_points[stop_point_idx].id.clone();
+        update_fn(&mut stop_point_rule, stop_points, stop_point_idx);
     }
 }
 
@@ -732,6 +763,27 @@ lazy_static! {
             }),
         );
         m.insert(
+            (ObjectType::StopAreaWithCascade, "stop_name"),
+            Box::new(|c, p, r| {
+                let mut updated = false;
+                let obj_found = c.stop_areas.get_mut(&p.object_id).map_or(false, |mut obj| {
+                    updated = update_prop(p, &mut obj.name, r);
+                    true
+                });
+                if updated {
+                    update_stop_points_in_cascade(
+                        p,
+                        &mut c.stop_points,
+                        |rule, stop_points, sp_idx| {
+                            let name = &mut stop_points.index_mut(sp_idx).name;
+                            update_prop(rule, name, r);
+                        },
+                    );
+                }
+                obj_found
+            }),
+        );
+        m.insert(
             (ObjectType::StopPoint, "stop_position"),
             Box::new(|c, p, r| {
                 c.stop_points
@@ -740,6 +792,27 @@ lazy_static! {
                         update_position(p, &mut obj.coord, r);
                         true
                     })
+            }),
+        );
+        m.insert(
+            (ObjectType::StopAreaWithCascade, "stop_position"),
+            Box::new(|c, p, r| {
+                let mut updated = false;
+                let obj_found = c.stop_areas.get_mut(&p.object_id).map_or(false, |mut obj| {
+                    updated = update_position(p, &mut obj.coord, r);
+                    true
+                });
+                if updated {
+                    update_stop_points_in_cascade(
+                        p,
+                        &mut c.stop_points,
+                        |rule, stop_points, sp_idx| {
+                            let coords = &mut stop_points.index_mut(sp_idx).coord;
+                            update_position(rule, coords, r);
+                        },
+                    );
+                }
+                obj_found
             }),
         );
         m.insert(
