@@ -1,3 +1,3 @@
 network_id,network_name,network_url,network_timezone,network_lang,network_phone,network_address,network_sort_order
-TGB,Bus Network,,Europe/Paris,,,,
+TGB,The Bus Network,https://www.the-bus-network.com,Europe/Paris,,+33123456789,contact@the-bus-network.com,0
 TGR,RER Network,,,,,,

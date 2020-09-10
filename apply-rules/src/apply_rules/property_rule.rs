@@ -883,6 +883,61 @@ lazy_static! {
         );
 
         m.insert(
+            (ObjectType::Network, "network_name"),
+            Box::new(|c, p, r| {
+                c.networks.get_mut(&p.object_id).map_or(false, |mut obj| {
+                    update_prop(p, &mut obj.name, r);
+                    true
+                })
+            }),
+        );
+
+        m.insert(
+            (ObjectType::Network, "network_url"),
+            Box::new(|c, p, r| {
+                c.networks.get_mut(&p.object_id).map_or(false, |mut obj| {
+                    update_prop(p, &mut obj.url, r);
+                    true
+                })
+            }),
+        );
+
+        m.insert(
+            (ObjectType::Network, "network_phone"),
+            Box::new(|c, p, r| {
+                c.networks.get_mut(&p.object_id).map_or(false, |mut obj| {
+                    update_prop(p, &mut obj.phone, r);
+                    true
+                })
+            }),
+        );
+
+        m.insert(
+            (ObjectType::Network, "network_address"),
+            Box::new(|c, p, r| {
+                c.networks.get_mut(&p.object_id).map_or(false, |mut obj| {
+                    update_prop(p, &mut obj.address, r);
+                    true
+                })
+            }),
+        );
+
+        m.insert(
+            (ObjectType::Network, "network_sort_order"),
+            Box::new(|c, p, r| {
+                c.networks.get_mut(&p.object_id).map_or(false, |mut obj| {
+                    update_stringable_option(
+                        p,
+                        &mut obj.sort_order,
+                        r,
+                        "property_value should be an integer",
+                    );
+                    true
+                })
+            }),
+        );
+
+        m.insert(
             (ObjectType::Network, "network_timezone"),
             Box::new(|c, p, r| {
                 c.networks.get_mut(&p.object_id).map_or(false, |mut obj| {
