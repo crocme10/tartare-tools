@@ -16,7 +16,7 @@ use transit_model::{
 use typed_index_collection::{CollectionWithId, Error::*, Id, Idx};
 use walkdir::WalkDir;
 
-/// Deserialize string datetime (Y-m-dTH:M:Sz) to NaiveDateTime
+/// Deserialize string datetime (Y-m-dTH:M:Sz) to DateTime with FixedOffset
 fn de_from_datetime_string<'de, D>(deserializer: D) -> Result<DateTime<FixedOffset>, D::Error>
 where
     D: serde::Deserializer<'de>,
@@ -25,8 +25,24 @@ where
     DateTime::parse_from_rfc3339(&s).map_err(serde::de::Error::custom)
 }
 
+/// Deserialize string. Fail if empty. For required fields
+fn de_non_empty_string<'de, D>(deserializer: D) -> Result<String, D::Error>
+where
+    D: serde::Deserializer<'de>,
+{
+    let s = String::deserialize(deserializer)?;
+    if s.is_empty() {
+        Err(serde::de::Error::custom(
+            "empty string not allowed in required field",
+        ))
+    } else {
+        Ok(s)
+    }
+}
+
 #[derive(Clone, Debug, Deserialize)]
 struct Marque {
+    #[serde(deserialize_with = "de_non_empty_string")]
     code: String,
     libelle: String,
 }
@@ -52,7 +68,7 @@ impl Into<CommercialMode> for Marque {
 
 #[derive(Clone, Debug, Deserialize)]
 struct Ligne {
-    #[serde(rename = "idLigne")]
+    #[serde(rename = "idLigne", deserialize_with = "de_non_empty_string")]
     id: String,
     #[serde(rename = "libelleLigne")]
     name: Option<String>,
@@ -101,6 +117,7 @@ struct Horaire {
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Eq)]
 struct Emplacement {
+    #[serde(deserialize_with = "de_non_empty_string")]
     code: String,
     libelle: Option<String>,
 }
@@ -182,7 +199,7 @@ impl Into<PhysicalMode> for ModeTransport {
                 name: "Bus".to_string(),
                 ..Default::default()
             },
-            ("coach", _, "routier") => PhysicalMode {
+            (_, _, "routier") => PhysicalMode {
                 id: "Coach".to_string(),
                 name: "Autocar".to_string(),
                 ..Default::default()
@@ -228,9 +245,9 @@ impl Into<PhysicalMode> for ModeTransport {
 
 #[derive(Clone, Debug, Deserialize)]
 struct Operateur {
-    #[serde(rename = "codeOperateur")]
+    #[serde(rename = "codeOperateur", deserialize_with = "de_non_empty_string")]
     code_operateur: String,
-    #[serde(rename = "libelleOperateur")]
+    #[serde(rename = "libelleOperateur", deserialize_with = "de_non_empty_string")]
     libelle_operateur: String,
 }
 
@@ -301,9 +318,10 @@ struct VehicleDescription {
     mode_transport: ModeTransport,
     #[serde(rename = "listeArretsDesserte")]
     liste_arrets_desserte: ListeArretsDesserte,
+    #[serde(deserialize_with = "de_non_empty_string")]
     numero: String,
     operateur: Operateur,
-    #[serde(rename = "dateCirculation")]
+    #[serde(rename = "dateCirculation", deserialize_with = "de_non_empty_string")]
     date_circulation: String,
     #[serde(rename = "planTransportSource")]
     plan_transport_source: PlanTransportSource,
@@ -532,10 +550,13 @@ fn manage_vehicle_content(
         ..Default::default()
     };
 
-    vehicle_journey.codes.insert((
-        "source".to_string(),
-        vehicle_description.code_circulation.to_string(),
-    ));
+    if !vehicle_description.code_circulation.is_empty() {
+        vehicle_journey.codes.insert((
+            "source".to_string(),
+            vehicle_description.code_circulation.to_string(),
+        ));
+    }
+
     fill_stop_times(&mut vehicle_journey, &vehicle_description, collections)?;
     collections.vehicle_journeys.push(vehicle_journey)?;
     set_validity_period(vj_date, validity_period);
@@ -568,7 +589,7 @@ pub fn read_daily_transportation_plan(
         .filter(|dir_entry| dir_entry.file_type().is_file())
     {
         let file_path = file.path();
-        info!("Reading {:?}", file_path.file_name().unwrap_or_default());
+        info!("Reading {:?}", file_path);
         let daily_transportation_plan = File::open(file_path)
             .map_err(|e| format_err!("{}", e))
             .and_then(|file| {
