@@ -40,7 +40,7 @@ where
         .filter(|dir_entry| dir_entry.file_type().is_dir())
     {
         info!(
-            "Reading transportation plan in folder {:?}",
+            "Reading daily transportation plan in folder {:?}",
             transportation_plan.path()
         );
         skip_error_and_log!(
