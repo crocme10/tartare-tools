@@ -225,12 +225,12 @@ impl Into<PhysicalMode> for ModeTransport {
                 ..Default::default()
             },
             ("rail", "tramtrain", "ferre") => PhysicalMode {
-                id: "Tram".to_string(),
+                id: "Tramway".to_string(),
                 name: "Tramway".to_string(),
                 ..Default::default()
             },
             ("tram", "tramtrain", "ferre") => PhysicalMode {
-                id: "Tram".to_string(),
+                id: "Tramway".to_string(),
                 name: "Tramway".to_string(),
                 ..Default::default()
             },
@@ -547,6 +547,7 @@ fn manage_vehicle_content(
         company_id,
         service_id,
         dataset_id: dataset.id.clone(),
+        short_name: Some(vehicle_description.numero.clone()),
         ..Default::default()
     };
 

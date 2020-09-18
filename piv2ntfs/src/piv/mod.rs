@@ -2,11 +2,13 @@
 
 mod read;
 
+use chrono::naive::{MAX_DATE, MIN_DATE};
 use log::{info, Level as LogLevel};
 use skip_error::skip_error_and_log;
 use std::path::Path;
 use transit_model::{
     model::{Collections, Model},
+    objects::Dataset,
     AddPrefix, PrefixConfiguration, Result,
 };
 use typed_index_collection::CollectionWithId;
@@ -25,9 +27,16 @@ pub fn read<P>(piv_path: P, config_path: Option<P>, prefix: Option<String>) -> R
 where
     P: AsRef<Path>,
 {
+    fn init_dataset_validity_period(dataset: &mut Dataset) {
+        dataset.start_date = MAX_DATE;
+        dataset.end_date = MIN_DATE;
+    }
+
     let mut collections = Collections::default();
-    let (contributor, dataset, feed_infos) = transit_model::read_utils::read_config(config_path)?;
+    let (contributor, mut dataset, feed_infos) =
+        transit_model::read_utils::read_config(config_path)?;
     collections.contributors = CollectionWithId::from(contributor);
+    init_dataset_validity_period(&mut dataset);
     collections.datasets = CollectionWithId::from(dataset);
     collections.feed_infos = feed_infos;
 
