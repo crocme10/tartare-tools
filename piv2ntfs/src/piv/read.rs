@@ -109,10 +109,27 @@ struct Parcours {
 }
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Eq)]
+enum StatutModificationType {
+    #[serde(rename = "CREATION")]
+    Creation,
+    #[serde(rename = "CREATION_DETOURNEMENT")]
+    CreationDetournement,
+}
+
+#[derive(Clone, Debug, Deserialize, PartialEq, Eq)]
 struct Horaire {
     #[serde(rename = "dateHeure", deserialize_with = "de_from_datetime_string")]
     date_heure: DateTime<FixedOffset>,
-    evenement: Option<Evenement>,
+    #[serde(rename = "statutModification")]
+    statut_modification: Option<StatutModificationType>,
+}
+
+// Indicates if the "Horaire" (Arrival and/or Departure) was created through real time (PTP or OPE source)
+impl Horaire {
+    pub fn is_rt_created(&self) -> bool {
+        self.statut_modification == Some(StatutModificationType::Creation)
+            || self.statut_modification == Some(StatutModificationType::CreationDetournement)
+    }
 }
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Eq)]
@@ -268,48 +285,6 @@ enum PlanTransportSource {
     PTA,
 }
 
-#[derive(Copy, Clone, Debug, Deserialize, PartialEq, Eq)]
-enum EvenementType {
-    #[serde(rename = "NORMAL")]
-    Normal,
-    #[serde(rename = "CREATION")]
-    Creation,
-    #[serde(rename = "MODIFICATION_DESSERTE_AJOUTEE")]
-    ModificationDesserteAjoutee,
-    #[serde(rename = "MODIFICATION_DESSERTE_SUPPRIMEE")]
-    MoficationDesserteSupprimee,
-    #[serde(rename = "MODIFICATION_PROLONGATION")]
-    ModificationProlongation,
-    #[serde(rename = "MODIFICATION_LIMITATION")]
-    ModificationLimitation,
-    #[serde(rename = "MODIFICATION_DETOURNEMENT")]
-    ModificationDetournement,
-    #[serde(rename = "SUPPRESSION")]
-    Suppression,
-    #[serde(rename = "RETARD")]
-    Retard,
-    #[serde(rename = "RETARD_OBSERVE")]
-    RetardObserve,
-    #[serde(rename = "RETARD_PROJETE")]
-    RetardProjete,
-    #[serde(rename = "SUPPRESSION_TOTALE")]
-    SuppressionTotale,
-    #[serde(rename = "SUPPRESSION_PARTIELLE")]
-    SuppressionPartielle,
-    #[serde(rename = "SUPPRESSION_DETOURNEMENT")]
-    SuppressionDetournement,
-}
-
-#[derive(Clone, Debug, Deserialize, PartialEq, Eq)]
-struct Evenement {
-    #[serde(rename = "type")]
-    evenement_type: EvenementType,
-    #[serde(rename = "codeCategorie")]
-    code_categorie: String,
-    #[serde(rename = "libelleCategorie")]
-    libelle_categorie: String,
-}
-
 #[derive(Debug, Deserialize)]
 struct VehicleDescription {
     marque: Marque,
@@ -325,14 +300,14 @@ struct VehicleDescription {
     date_circulation: String,
     #[serde(rename = "planTransportSource")]
     plan_transport_source: PlanTransportSource,
-    #[serde(rename = "evenement")]
-    evenements: Option<Vec<Evenement>>,
     #[serde(rename = "codeCirculation")]
     code_circulation: String,
 }
 
 impl VehicleDescription {
     fn departure_time(&self) -> Option<DateTime<FixedOffset>> {
+        // "Depart" is not filtered (through is_rt_created method)
+        // to keep the initial departure date of the theoretical data (PTA source)
         self.liste_arrets_desserte
             .arrets
             .iter()
@@ -440,6 +415,7 @@ fn fill_stop_times(
         |horaire: &Option<Horaire>| -> Result<Option<Time>, std::num::TryFromIntError> {
             horaire
                 .as_ref()
+                .filter(|horaire| !horaire.is_rt_created())
                 .map(|horaire| {
                     u32::try_from(
                         horaire
