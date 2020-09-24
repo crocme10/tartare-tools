@@ -552,6 +552,42 @@ fn update_validity_period(
     CollectionWithId::new(datasets).map_err(|e| format_err!("{}", e))
 }
 
+fn generate_transfers(collections: &mut Collections) -> Result<()> {
+    for (stop_area_idx, _) in collections.stop_areas.iter() {
+        let stop_area_id = &collections.stop_areas[stop_area_idx].id();
+        let list_stop_points: Vec<&StopPoint> = collections
+            .stop_points
+            .values()
+            .filter(|stop_point| &stop_point.stop_area_id == stop_area_id)
+            .collect();
+        let min_transfer_time = 300;
+        let waiting_time = 120;
+        for from_stop in list_stop_points.iter() {
+            for to_stop in list_stop_points.iter() {
+                let transfer = if from_stop == to_stop {
+                    Transfer {
+                        from_stop_id: from_stop.id.clone(),
+                        to_stop_id: to_stop.id.clone(),
+                        min_transfer_time: None,
+                        real_min_transfer_time: Some(waiting_time),
+                        equipment_id: None,
+                    }
+                } else {
+                    Transfer {
+                        from_stop_id: from_stop.id.clone(),
+                        to_stop_id: to_stop.id.clone(),
+                        min_transfer_time: Some(min_transfer_time),
+                        real_min_transfer_time: Some(min_transfer_time + waiting_time),
+                        equipment_id: None,
+                    }
+                };
+                collections.transfers.push(transfer);
+            }
+        }
+    }
+    Ok(())
+}
+
 pub fn read_daily_transportation_plan(
     daily_folder: &Path,
     collections: &mut Collections,
@@ -589,6 +625,7 @@ pub fn read_daily_transportation_plan(
             }
         }
     }
+    generate_transfers(collections)?;
     collections.datasets = update_validity_period(&mut collections.datasets, &validity_period)?;
     Ok(())
 }
