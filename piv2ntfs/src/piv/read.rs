@@ -47,6 +47,7 @@ where
 struct Marque {
     #[serde(deserialize_with = "de_non_empty_string")]
     code: String,
+    #[serde(deserialize_with = "de_non_empty_string")]
     libelle: String,
 }
 
