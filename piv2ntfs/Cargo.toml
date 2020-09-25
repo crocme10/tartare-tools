@@ -12,6 +12,7 @@ categories = ["data-structures", "parser-implementations"]
 
 [dependencies]
 chrono = "0.4"
+chrono-tz = { version = "0.5" }
 csv = "1.0"
 failure = "0.1"
 lazy_static = "1.2"

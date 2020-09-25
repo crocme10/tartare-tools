@@ -1,7 +1,8 @@
 use chrono::{
     naive::{MAX_DATE, MIN_DATE},
-    DateTime, FixedOffset, NaiveDate, Timelike,
+    DateTime, NaiveDate, Timelike,
 };
+use chrono_tz::{Europe, Tz};
 use failure::format_err;
 use log::{info, Level as LogLevel};
 use serde::Deserialize;
@@ -16,13 +17,15 @@ use transit_model::{
 use typed_index_collection::{CollectionWithId, Error::*, Id, Idx};
 use walkdir::WalkDir;
 
-/// Deserialize string datetime (Y-m-dTH:M:Sz) to DateTime with FixedOffset
-fn de_from_datetime_string<'de, D>(deserializer: D) -> Result<DateTime<FixedOffset>, D::Error>
+/// Deserialize string datetime (Y-m-dTH:M:Sz) and convert it to DateTime with Europe/Paris Timezone
+fn de_from_datetime_string<'de, D>(deserializer: D) -> Result<DateTime<Tz>, D::Error>
 where
     D: serde::Deserializer<'de>,
 {
     let s = String::deserialize(deserializer)?;
-    DateTime::parse_from_rfc3339(&s).map_err(serde::de::Error::custom)
+    DateTime::parse_from_rfc3339(&s)
+        .map(|dt| dt.with_timezone(&Europe::Paris))
+        .map_err(serde::de::Error::custom)
 }
 
 /// Deserialize string. Fail if empty. For required fields
@@ -44,6 +47,7 @@ where
 struct Marque {
     #[serde(deserialize_with = "de_non_empty_string")]
     code: String,
+    #[serde(deserialize_with = "de_non_empty_string")]
     libelle: String,
 }
 
@@ -111,7 +115,7 @@ struct Parcours {
 #[derive(Clone, Debug, Deserialize, PartialEq, Eq)]
 struct Horaire {
     #[serde(rename = "dateHeure", deserialize_with = "de_from_datetime_string")]
-    date_heure: DateTime<FixedOffset>,
+    date_heure: DateTime<Tz>,
     #[serde(rename = "planTransportSource")]
     plan_transport_source: PlanTransportSource,
 }
@@ -291,7 +295,7 @@ struct VehicleDescription {
 }
 
 impl VehicleDescription {
-    fn departure_time(&self) -> Option<DateTime<FixedOffset>> {
+    fn departure_time(&self) -> Option<DateTime<Tz>> {
         self.liste_arrets_desserte
             .arrets
             .iter()
