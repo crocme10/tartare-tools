@@ -145,6 +145,7 @@ impl Into<StopPoint> for Emplacement {
             id: self.code.clone(),
             name: self.libelle.unwrap_or_default(),
             stop_area_id: self.code,
+            visible: true,
             ..Default::default()
         }
     }
@@ -155,6 +156,7 @@ impl Into<StopArea> for Emplacement {
         StopArea {
             id: self.code,
             name: self.libelle.unwrap_or_default(),
+            visible: true,
             ..Default::default()
         }
     }
