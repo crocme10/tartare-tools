@@ -1,0 +1,7 @@
+object_type,object_id,object_system,object_code
+trip,PFX:2020-09-20:848828:1187:Train,source,03cb7d8c2ec871fa313f865bac2cd033
+trip,PFX:2020-09-20:16756:1187:Train,source,2b635ae98f90098ab786c98847298346
+trip,PFX:2020-09-20:9025:0019:LongDistanceTrain,source,176f72d4bed91d109f8f1e8a70cf5892
+trip,PFX:2020-09-21:6665:1187:LongDistanceTrain,source,7a118b5ef3f62b38c083296753722beb
+trip,PFX:2020-09-21:848828:1187:LocalTrain,source,03cb7d8c2ec871fa313f865bac2cd033
+trip,PFX:2020-09-20:6922:1187:LongDistanceTrain,source,02f2595dbdd49c7f53635829450b0e94

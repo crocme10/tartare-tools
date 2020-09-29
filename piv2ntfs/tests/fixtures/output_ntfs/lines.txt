@@ -1,0 +1,6 @@
+line_id,line_code,line_name,forward_line_name,backward_line_name,line_color,line_text_color,line_sort_order,network_id,commercial_mode_id,geometry_id,line_opening_time,line_closing_time
+PFX:Z2,Z-2,Londres Saint-Pancras - Paris Nord Z2,,,,,,PFX:EUROSTAR,EUROSTAR,,00:07:00,02:33:00
+PFX:FR:Line::9F945086-5773-42EF-92D0-CCD63F7C134E:,K3,K3,,,,,,PFX:TER,TER,,06:31:00,08:53:30
+PFX:FR:Line::965C0279-4764-4FEA-B29B-363968EA28CE:,K21,K21,,,,,,PFX:TER,TER,,07:47:00,09:40:00
+PFX:X1,X2,X3,,,,,,PFX:SNCF,SNCF,,17:19:00,20:20:00
+PFX:Line:1840,,,,,,,,PFX:SNCF,SNCF,,18:45:00,20:55:00

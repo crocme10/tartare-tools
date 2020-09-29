@@ -1,0 +1,18 @@
+{
+    "contributor": {
+        "contributor_id": "piv",
+        "contributor_name": "Sncf PIV",
+        "contributor_license": "Private",
+        "contributor_website": "http://www.sncf.com"
+    },
+    "dataset": {
+        "dataset_id": "dsid"
+    },
+    "feed_infos": {
+        "feed_publisher_name": "Sncf PIV",
+        "feed_license": "Private",
+        "feed_license_url": "http://www.sncf.com",
+        "tartare_platform": "dev",
+        "tartare_contributor_id": "piv"
+    }
+}
