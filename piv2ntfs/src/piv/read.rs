@@ -556,7 +556,7 @@ fn generate_transfers(collections: &mut Collections) -> Result<()> {
                     Transfer {
                         from_stop_id: from_stop.id.clone(),
                         to_stop_id: to_stop.id.clone(),
-                        min_transfer_time: None,
+                        min_transfer_time: Some(0),
                         real_min_transfer_time: Some(waiting_time),
                         equipment_id: None,
                     }
