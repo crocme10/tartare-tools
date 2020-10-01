@@ -179,5 +179,183 @@
       "typeEquipement":"TGD",
       "planTransportSource":"PTA",
       "indicateurCourseDeReference":false
-   }
+   },
+   {
+      "___KisioComment":"----------- VJ 'ROUTIER' -----------",
+    "calendrierCirculation": [
+      "2020-09-20"
+    ],
+    "statutCommercial": {
+      "codeStatut": "O",
+      "libelleStatut": "Ouvert à la vente"
+    },
+    "origine": {
+      "code": "87276006"
+    },
+    "destination": {
+      "code": "87313510"
+    },
+    "listeReservations": {
+      "reservation": [
+        {
+          "codeClasse": "OCEB",
+          "libelleClasse": "ASSISE Seconde",
+          "type": "Sans Réservation"
+        }
+      ]
+    },
+    "listeArretsDesserte": {
+      "arret": [
+        {
+          "depart": {
+            "numeroCirculation": "38061",
+            "dateHeure": "2020-09-20T20:40:00+02:00",
+            "dateHeureReelle": "2020-09-20T20:40:00+02:00",
+            "typeAffichage": "HORAIRE",
+            "indicateurAdaptation": false,
+            "planTransportSource": "PTA"
+          },
+          "emplacement": {
+            "code": "87276006"
+          },
+          "rang": 0
+        },
+        {
+          "arrivee": {
+            "numeroCirculation": "38061",
+            "dateHeure": "2020-09-20T20:50:00+02:00",
+            "dateHeureReelle": "2020-09-20T20:50:00+02:00",
+            "typeAffichage": "HORAIRE",
+            "indicateurAdaptation": false,
+            "planTransportSource": "PTA"
+          },
+          "depart": {
+            "numeroCirculation": "38061",
+            "dateHeure": "2020-09-20T20:50:00+02:00",
+            "dateHeureReelle": "2020-09-20T20:50:00+02:00",
+            "typeAffichage": "HORAIRE",
+            "indicateurAdaptation": false,
+            "planTransportSource": "PTA"
+          },
+          "emplacement": {
+            "code": "87276618"
+          },
+          "rang": 1,
+          "dureeStationnement": 0,
+          "dureeStationnementReelle": 0
+        },
+        {
+          "arrivee": {
+            "numeroCirculation": "38061",
+            "dateHeure": "2020-09-20T21:53:00+02:00",
+            "dateHeureReelle": "2020-09-20T21:53:00+02:00",
+            "typeAffichage": "HORAIRE",
+            "indicateurAdaptation": false,
+            "planTransportSource": "PTA"
+          },
+          "emplacement": {
+            "code": "87313510"
+          },
+          "rang": 2
+        }
+      ],
+      "nombreEscales": 1
+    },
+    "operateur": {
+      "codeOperateur": "1187",
+      "libelleOperateur": "SNCF"
+    },
+    "modeTransport": {
+      "codeMode": "coach",
+      "libelleMode": "Car",
+      "codeSousMode": "regionalCoach",
+      "libelleSousMode": "Car",
+      "typeMode": "ROUTIER"
+    },
+    "marque": {
+      "code": "TER",
+      "libelle": "TER"
+    },
+    "parcours": {
+      "route": {
+        "ligne": {
+          "modeTransport": {
+            "codeMode": "rail",
+            "libelleMode": "Ferré",
+            "codeSousMode": "regionalRail",
+            "libelleSousMode": "Train",
+            "typeMode": ""
+          },
+          "listeAutresModesTransport": {
+            "autreModeTransport": [
+              {
+                "codeMode": "coach",
+                "libelleMode": "Car",
+                "codeSousMode": "",
+                "libelleSousMode": "",
+                "typeMode": ""
+              }
+            ]
+          },
+          "operateur": {
+            "codeOperateur": "1187",
+            "idOperateur": "FR:Operator::07B82396-04B1-48F0-84BF-36C7F1B81442:",
+            "libelleOperateur": "SNCF"
+          },
+          "presentation": {
+            "codeCouleur": "#006600",
+            "codeCouleurTexte": "#ffffff"
+          },
+          "marque": {
+            "code": "FR:Branding::afe1e1ba-35ee-4568-b070-0300d082d6da:",
+            "libelle": "REGION HDF"
+          },
+          "groupeLignes": {
+            "reseau": {
+              "code": "FR:Network::D91A79B4-4168-4519-9EF0-DA02D6B446CB:",
+              "libelle": "TER Hauts de France"
+            },
+            "idGroupeLignes": "FR:GroupOfLines::5972D357-4CF0-4954-9DA9-A7F56B634040:",
+            "libelleGroupeLignes": "PROXI"
+          },
+          "niveauService": {
+            "codeNiveauService": "",
+            "libelleNiveauService": ""
+          },
+          "plageTemporelleApplication": {
+            "plageQuotidienne": [
+              {
+                "dateDebut": "2019-11-05",
+                "dateFin": "2243-10-17"
+              }
+            ]
+          },
+          "plageTemporellePublication": {
+            "plageQuotidienne": [
+              {
+                "dateDebut": "2020-06-25",
+                "dateFin": "2243-10-17"
+              }
+            ]
+          },
+          "codeLigne": "P32",
+          "idLigne": "FR:Line::E0C5BF51-53A3-4542-B417-3AFE4D5EA545:",
+          "libelleLigne": "P32",
+          "autreLibelle": "Beauvais - Creil"
+        }
+      }
+    },
+    "relation": {
+      "codeRelation": "HDF28C"
+    },
+    "numero": "38061",
+    "codeCirculation": "703199fbe58ca8f7946ad2279a7c2a07",
+    "dateCirculation": "2020-09-20",
+    "indicateurAdaptation": false,
+    "codeMission": "P32",
+    "dateDerniereModification": "2020-09-06T02:16:20+02:00",
+    "typeEquipement": "CAR",
+    "planTransportSource": "PTA",
+    "indicateurCourseDeReference": true
+  }
 ]

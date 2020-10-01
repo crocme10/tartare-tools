@@ -5,3 +5,4 @@ LocalTrain,Train,30.7
 Bike,Bike,0.0
 BikeSharingService,BikeSharingService,0.0
 Car,Car,184.0
+Coach,Autocar,171.0
