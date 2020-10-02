@@ -580,3 +580,46 @@ pub fn read_daily_transportation_plan(
     collections.datasets = update_validity_period(&mut collections.datasets, &validity_period)?;
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use chrono::TimeZone;
+    use pretty_assertions::assert_eq;
+    use serde::Serialize;
+
+    #[derive(Debug, Deserialize)]
+    struct DateTimeStructWrapper {
+        #[serde(deserialize_with = "de_from_datetime_string")]
+        dt: DateTime<Tz>,
+    }
+
+    #[derive(Debug, Deserialize, Serialize)]
+    struct StringStructWrapper {
+        #[serde(deserialize_with = "de_non_empty_string")]
+        s: String,
+    }
+
+    #[test]
+    fn test_de_from_datetime_string() {
+        let expected_dtz = Europe::Paris.ymd(2020, 10, 2).and_hms(0, 30, 46);
+        let result: Result<DateTimeStructWrapper, _> =
+            serde_json::from_str("{\"dt\":\"2020-10-01T23:30:46+01:00\"}");
+        assert_eq!(expected_dtz, result.unwrap().dt);
+    }
+
+    #[test]
+    fn test_de_non_empty_string_filled() {
+        let result: Result<StringStructWrapper, _> = serde_json::from_str("{\"s\":\"mystring\"}");
+        assert_eq!("mystring".to_string(), result.unwrap().s);
+    }
+
+    #[test]
+    fn test_de_non_empty_string_empty() {
+        let result: Result<StringStructWrapper, _> = serde_json::from_str("{\"s\":\"\"}");
+        assert_eq!(
+            "empty string not allowed in required field at line 1 column 8",
+            result.unwrap_err().to_string()
+        );
+    }
+}
