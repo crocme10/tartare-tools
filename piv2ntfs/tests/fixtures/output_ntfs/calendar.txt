@@ -1,0 +1,3 @@
+service_id,monday,tuesday,wednesday,thursday,friday,saturday,sunday,start_date,end_date
+PFX:20200921,1,0,0,0,0,0,0,20200921,20200921
+PFX:20200920,0,0,0,0,0,0,1,20200920,20200920

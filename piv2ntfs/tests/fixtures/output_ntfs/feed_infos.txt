@@ -1,0 +1,12 @@
+feed_info_param,feed_info_value
+feed_creation_date,20200920
+feed_creation_datetime,2020-09-20T06:00:00+00:00
+feed_creation_time,06:00:00
+feed_end_date,20200921
+feed_license,Private
+feed_license_url,http://www.sncf.com
+feed_publisher_name,Sncf PIV
+feed_start_date,20200920
+ntfs_version,0.11.2
+tartare_contributor_id,piv
+tartare_platform,dev
