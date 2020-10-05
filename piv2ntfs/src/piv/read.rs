@@ -584,42 +584,131 @@ pub fn read_daily_transportation_plan(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use chrono::TimeZone;
-    use pretty_assertions::assert_eq;
-    use serde::Serialize;
 
-    #[derive(Debug, Deserialize)]
-    struct DateTimeStructWrapper {
-        #[serde(deserialize_with = "de_from_datetime_string")]
-        dt: DateTime<Tz>,
+    mod deserializer {
+        use super::*;
+        use chrono::TimeZone;
+        use pretty_assertions::assert_eq;
+
+        #[derive(Debug, Deserialize)]
+        struct DateTimeStructWrapper {
+            #[serde(deserialize_with = "de_from_datetime_string")]
+            dt: DateTime<Tz>,
+        }
+
+        #[derive(Debug, Deserialize)]
+        struct StringStructWrapper {
+            #[serde(deserialize_with = "de_non_empty_string")]
+            s: String,
+        }
+
+        #[test]
+        fn test_de_from_datetime_string() {
+            let expected_dtz = Europe::Paris.ymd(2020, 10, 2).and_hms(0, 30, 46);
+            let result: Result<DateTimeStructWrapper, _> =
+                serde_json::from_str("{\"dt\":\"2020-10-01T23:30:46+01:00\"}");
+            assert_eq!(expected_dtz, result.unwrap().dt);
+        }
+
+        #[test]
+        fn test_de_non_empty_string_filled() {
+            let result: Result<StringStructWrapper, _> =
+                serde_json::from_str("{\"s\":\"mystring\"}");
+            assert_eq!("mystring".to_string(), result.unwrap().s);
+        }
+
+        #[test]
+        fn test_de_non_empty_string_empty() {
+            let result: Result<StringStructWrapper, _> = serde_json::from_str("{\"s\":\"\"}");
+            assert_eq!(
+                "empty string not allowed in required field at line 1 column 8",
+                result.unwrap_err().to_string()
+            );
+        }
     }
 
-    #[derive(Debug, Deserialize, Serialize)]
-    struct StringStructWrapper {
-        #[serde(deserialize_with = "de_non_empty_string")]
-        s: String,
-    }
+    mod vehicle_journey {
+        use super::*;
 
-    #[test]
-    fn test_de_from_datetime_string() {
-        let expected_dtz = Europe::Paris.ymd(2020, 10, 2).and_hms(0, 30, 46);
-        let result: Result<DateTimeStructWrapper, _> =
-            serde_json::from_str("{\"dt\":\"2020-10-01T23:30:46+01:00\"}");
-        assert_eq!(expected_dtz, result.unwrap().dt);
-    }
+        fn init_vehicle_description() -> &'static str {
+            "{
+                \"listeArretsDesserte\":{
+                    \"arret\":[]
+                },
+                \"operateur\":{
+                    \"codeOperateur\":\"CODE_OPERATEUR\",
+                    \"libelleOperateur\":\"LIBELLE_OPERATEUR\"
+                },
+                \"modeTransport\":{
+                    \"codeMode\":\"\",
+                    \"libelleMode\":\"\",
+                    \"codeSousMode\":\"\",
+                    \"libelleSousMode\":\"\",
+                    \"typeMode\":\"\"
+                },
+                \"marque\":{
+                    \"code\":\"CODE_MARQUE\",
+                    \"libelle\":\"LIBELLE_MARQUE\"
+                },
+                \"parcours\":{
+                    \"route\":{
+                        \"ligne\":{
+                            \"idLigne\":\"ID_LIGNE\",
+                            \"libelleLigne\":\"\"
+                        }
+                    }
+                },
+                \"numero\":\"NUMERO_CIRCULATION\",
+                \"codeCirculation\":\"\",
+                \"dateCirculation\":\"DATE_CIRCULATION\",
+                \"planTransportSource\":\"PTA\"
+            }"
+        }
 
-    #[test]
-    fn test_de_non_empty_string_filled() {
-        let result: Result<StringStructWrapper, _> = serde_json::from_str("{\"s\":\"mystring\"}");
-        assert_eq!("mystring".to_string(), result.unwrap().s);
-    }
+        #[test]
+        fn test_vehicle_description_non_empty_code_operateur() {
+            let vj = init_vehicle_description().replace("CODE_OPERATEUR", "");
+            let result: Result<VehicleDescription, _> = serde_json::from_str(&vj);
+            assert_eq!(
+                "empty string not allowed in required field at line 6 column 38",
+                result.unwrap_err().to_string()
+            );
+        }
 
-    #[test]
-    fn test_de_non_empty_string_empty() {
-        let result: Result<StringStructWrapper, _> = serde_json::from_str("{\"s\":\"\"}");
-        assert_eq!(
-            "empty string not allowed in required field at line 1 column 8",
-            result.unwrap_err().to_string()
-        );
+        #[test]
+        fn test_vehicle_description_non_empty_libelle_operateur() {
+            let vj = init_vehicle_description().replace("LIBELLE_OPERATEUR", "");
+            assert!(serde_json::from_str::<VehicleDescription>(&vj).is_err());
+        }
+
+        #[test]
+        fn test_vehicle_description_non_empty_code_marque() {
+            let vj = init_vehicle_description().replace("CODE_MARQUE", "");
+            assert!(serde_json::from_str::<VehicleDescription>(&vj).is_err());
+        }
+
+        #[test]
+        fn test_vehicle_description_non_empty_libelle_marque() {
+            let vj = init_vehicle_description().replace("LIBELLE_MARQUE", "");
+            assert!(serde_json::from_str::<VehicleDescription>(&vj).is_err());
+        }
+
+        #[test]
+        fn test_vehicle_description_non_empty_id_ligne() {
+            let vj = init_vehicle_description().replace("ID_LIGNE", "");
+            assert!(serde_json::from_str::<VehicleDescription>(&vj).is_err());
+        }
+
+        #[test]
+        fn test_vehicle_description_non_empty_numero() {
+            let vj = init_vehicle_description().replace("NUMERO_CIRCULATION", "");
+            assert!(serde_json::from_str::<VehicleDescription>(&vj).is_err());
+        }
+
+        #[test]
+        fn test_vehicle_description_non_empty_date_circulation() {
+            let vj = init_vehicle_description().replace("DATE_CIRCULATION", "");
+            assert!(serde_json::from_str::<VehicleDescription>(&vj).is_err());
+        }
     }
 }
