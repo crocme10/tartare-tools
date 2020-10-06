@@ -104,3 +104,45 @@ where
     collections.calendar_deduplication();
     Model::new(collections)
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use transit_model::objects::StopArea;
+
+    #[test]
+    fn test_generate_transfers() {
+        let mut collections = Collections::default();
+        let sa = StopArea {
+            id: String::from("SA"),
+            ..Default::default()
+        };
+        let sp1 = StopPoint {
+            id: String::from("SP1"),
+            stop_area_id: String::from("SA"),
+            ..Default::default()
+        };
+        let sp2 = StopPoint {
+            id: String::from("SP2"),
+            stop_area_id: String::from("SA"),
+            ..Default::default()
+        };
+        collections.stop_areas.push(sa).unwrap();
+        collections.stop_points.push(sp1).unwrap();
+        collections.stop_points.push(sp2).unwrap();
+        generate_transfers(&mut collections).unwrap();
+
+        assert_eq!(4, collections.transfers.len());
+        let mut transfers = collections.transfers.values();
+        let transfer1 = transfers.next().unwrap();
+        assert_eq!("SP1", transfer1.from_stop_id);
+        assert_eq!("SP1", transfer1.to_stop_id);
+        assert_eq!(0, transfer1.min_transfer_time.unwrap());
+        assert_eq!(120, transfer1.real_min_transfer_time.unwrap());
+        let transfer2 = transfers.next().unwrap();
+        assert_eq!("SP1", transfer2.from_stop_id);
+        assert_eq!("SP2", transfer2.to_stop_id);
+        assert_eq!(300, transfer2.min_transfer_time.unwrap());
+        assert_eq!(420, transfer2.real_min_transfer_time.unwrap());
+    }
+}
