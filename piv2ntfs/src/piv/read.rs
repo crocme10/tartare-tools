@@ -521,6 +521,18 @@ fn manage_vehicle_content(
             vehicle_description.code_circulation.to_string(),
         ));
     }
+    vehicle_journey.codes.insert((
+        "rt_piv".to_string(),
+        format!(
+            "{}:{}:{}:{}:{}:{}",
+            &vehicle_description.date_circulation,
+            &vehicle_description.numero,
+            &vehicle_description.operateur.code_operateur,
+            &vehicle_description.mode_transport.code_mode,
+            &vehicle_description.mode_transport.code_sous_mode,
+            &vehicle_description.mode_transport.type_mode,
+        ),
+    ));
 
     fill_stop_times(&mut vehicle_journey, &vehicle_description, collections)?;
     collections.vehicle_journeys.push(vehicle_journey)?;
