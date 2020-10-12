@@ -1,9 +1,8 @@
 use crate::Result;
-use failure::bail;
 use failure::format_err;
 use geo::algorithm::centroid::Centroid;
 use geo::{MultiPoint, Point};
-use log::info;
+use log::{info, warn};
 use osm_transit_extractor::*;
 use std::collections::{BTreeSet, HashMap, HashSet};
 use std::path::Path;
@@ -39,10 +38,10 @@ pub fn enrich_object_codes<S: ::std::hash::BuildHasher>(
 ) -> Result<Model> {
     for (ntfs_network_id, _) in ntfs_network_to_osm.iter() {
         if model.networks.get(&ntfs_network_id).is_none() {
-            bail!(
-                "ntfs network id {:?} from mapping does not exist in ntfs",
+            warn!(
+                "The network (id={:?}) doesn't exist in the provided NTFS",
                 &ntfs_network_id
-            )
+            );
         }
     }
     let mut parsed_pbf = parse_osm_pbf(
@@ -54,15 +53,33 @@ pub fn enrich_object_codes<S: ::std::hash::BuildHasher>(
     let mut ntfs_lines = model.lines.clone().take();
     let mut ntfs_routes = model.routes.clone();
     let mut ntfs_stop_points = model.stop_points.clone();
-    let osm_lines = match &objects.lines {
-        Some(lines) => lines,
-        None => {
-            bail!(
-                "no lines found in osm for file {}",
-                osm_pbf_path.to_str().unwrap()
-            );
-        }
+
+    //in osm-transit-extractor version "0.4.0" None is never return but an empty vec
+    let osm_lines = if let Some(lines) = objects.lines.as_ref().filter(|v| !v.is_empty()) {
+        lines
+    } else {
+        warn!(
+            "no lines found in osm for file {}",
+            osm_pbf_path.to_str().unwrap()
+        );
+        return Ok(model);
     };
+
+    //in osm-transit-extractor version "0.4.0" None is never return but an empty vec
+    let osm_routes_map = if let Some(osm_routes) = objects.routes.as_ref().filter(|v| !v.is_empty())
+    {
+        osm_routes
+            .iter()
+            .map(|r| (&r.id, r))
+            .collect::<HashMap<_, _>>()
+    } else {
+        warn!(
+            "no routes found in osm for file {}",
+            osm_pbf_path.to_str().unwrap()
+        );
+        return Ok(model);
+    };
+
     let osm_stops_map = objects
         .stop_points
         .iter()
@@ -79,15 +96,6 @@ pub fn enrich_object_codes<S: ::std::hash::BuildHasher>(
         })
         .map(|sp| (&sp.id, sp))
         .collect::<HashMap<_, _>>();
-    let osm_routes_map = match &objects.routes {
-        Some(routes) => routes.iter().map(|r| (&r.id, r)).collect::<HashMap<_, _>>(),
-        None => {
-            bail!(
-                "no routes found in osm for file {}",
-                osm_pbf_path.to_str().unwrap()
-            );
-        }
-    };
     let mut map_ntfs_to_osm_points: StopPointMap = HashMap::new();
     let mut map_osm_to_ntfs_points: StopPointMap = HashMap::new();
     for line in ntfs_lines.iter_mut() {

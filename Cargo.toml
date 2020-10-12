@@ -54,3 +54,6 @@ transit_model = { version = "0.31", features = ["proj"] }
 typed_index_collection = "1"
 unidecode = "0.3"
 zip = "0.5"
+
+[dev-dependencies]
+testing_logger = "0.1"
