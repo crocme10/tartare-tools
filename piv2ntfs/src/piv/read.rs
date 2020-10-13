@@ -141,9 +141,12 @@ impl Into<StopPoint> for Emplacement {
 
 impl Into<StopArea> for Emplacement {
     fn into(self) -> StopArea {
+        let mut codes = BTreeSet::new();
+        codes.insert(("source".to_string(), self.code.clone()));
         StopArea {
             id: self.code,
             name: self.libelle.unwrap_or_default(),
+            codes,
             visible: true,
             ..Default::default()
         }
